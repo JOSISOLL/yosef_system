@@ -5,13 +5,15 @@ const User = require('../models/user')
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
-
+const keypair = require('keypair')
+const RSA_PRIVATE_KEY = keypair().private
 mongoose.connect(db2, err => {
     if(err){
         console.error('Error!' + err)
     }
     else{
         console.log('Connected to the database')
+        // console.log(RSA_PRIVATE_KEY)
     }
 })
 
@@ -28,7 +30,7 @@ router.post('/register', (req, res) => {
         }
         else{
             let payload = { subject: registerdUser._id }
-            let token = jwt.sign(payload, 'secretKey')
+            let token = jwt.sign(payload, RSA_PRIVATE_KEY)
             res.status(200).send({token})
         }
 
@@ -48,9 +50,14 @@ router.post('/login', (req, res) => {
             if(user.password !== userData.password){
                 res.status(401).send('Invalid Password')
             } else {
-                let payload = { subject: user._id }
-                let token = jwt.sign(payload, 'secretKey')
-                res.status(200).send({token})
+                let payload = { algorithm: 'RS256', subject: user._id, expiresIn: 1200 }
+                let token = jwt.sign(payload, RSA_PRIVATE_KEY)
+                res.cookie("SESSIONID", token,{httpOnly: true, secure: true})
+                // res.status(200).send({token})
+                res.status(200).json({
+                    idToken: token,
+                    expiresIn: 60
+                })
             }
         }
     }

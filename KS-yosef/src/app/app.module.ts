@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -13,6 +13,10 @@ import { HeaderComponent } from './header/header.component';
 import { AuthService } from './auth.service';
 import { HistoryService } from './history.service';
 import { AuthGuard } from './auth.guard';
+import { TokenInterceptor } from './token.interceptor';
+import { LoginGuard } from './login.guard';
+
+
 
 
 @NgModule({
@@ -34,7 +38,13 @@ import { AuthGuard } from './auth.guard';
   providers: [
     AuthService,
     HistoryService,
-    AuthGuard
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    LoginGuard
   ],
   bootstrap: [AppComponent]
 })
