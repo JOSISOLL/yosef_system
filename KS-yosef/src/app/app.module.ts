@@ -15,6 +15,8 @@ import { HistoryService } from './history.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptor } from './token.interceptor';
 import { LoginGuard } from './login.guard';
+import { NewCustomerComponent } from './new-customer/new-customer.component';
+
 
 
 
@@ -27,7 +29,8 @@ import { LoginGuard } from './login.guard';
     HomeComponent,
     DashboardComponent,
     NavComponent,
-    HeaderComponent
+    HeaderComponent,
+    NewCustomerComponent
   ],
   imports: [
     BrowserModule,

@@ -50,13 +50,13 @@ router.post('/login', (req, res) => {
             if(user.password !== userData.password){
                 res.status(401).send('Invalid Password')
             } else {
-                let payload = { algorithm: 'RS256', subject: user._id, expiresIn: 1200 }
+                let payload = { algorithm: 'RS256', subject: user._id }
                 let token = jwt.sign(payload, RSA_PRIVATE_KEY)
                 res.cookie("SESSIONID", token,{httpOnly: true, secure: true})
                 // res.status(200).send({token})
                 res.status(200).json({
                     idToken: token,
-                    expiresIn: 60
+                    expiresIn: 43200
                 })
             }
         }
