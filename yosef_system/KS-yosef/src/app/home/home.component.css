@@ -1,0 +1,78 @@
+.options-container{
+    margin-bottom: 50px;
+  
+  }
+  .center-vertical{
+    display: flex;
+    justify-content: center; 
+    flex-direction: column;
+  }
+  .small-button{
+    width: 20px; 
+    height: 20px; 
+    margin: 2px;
+    text-align: center; 
+    vertical-align: center;
+    border-radius: 3px;
+    font-size: 15px;
+    color: white;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+  }
+  .primary{
+    background-color: #00A65A;
+  }
+  .warning{
+    background-color: #F39C12;
+  }
+  .danger{
+    background-color: #DD4B39;
+  }
+  .small-button:hover{
+    cursor: pointer;
+  }
+  .small-button-container{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .modal_table_container{
+    width: 100%;
+  }
+  .modal_table_container > table{
+    
+    width: 100%;
+  }
+  .modal_table_container > table tr:first-child{
+    background-color:#08845D;
+  }
+  .modal_table_container > table tr{
+    height: 30px;
+    padding-top: 3px; 
+    margin-bottom: 3px;
+  }
+  .modal_table_container > table tr>td{
+    background-color: #008D4C;
+    border-bottom: 3px solid #00A65A;
+    border-top: 3px solid #00A65A;
+    
+  }
+  td, th{
+    vertical-align: bottom;
+    text-align: center;
+  }
+  .modal_date_container{
+    background-color: red;
+    display: flex; 
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .my-label-s{
+    font-size: 14 !important;
+    background-color: orange;
+  }
+
+  
+
+  
