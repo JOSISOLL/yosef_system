@@ -40,5 +40,8 @@ export class AuthService {
     return moment(expiresAt)
     
   }
+  getToken(){
+    return localStorage.getItem('id_token')
+  }
 
 }
