@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavComponent } from './nav/nav.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthService } from './auth.service';
+import { ClientService } from './client.service';
 import { HistoryService } from './history.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptor } from './token.interceptor';
@@ -36,11 +37,13 @@ import { NewCustomerComponent } from './new-customer/new-customer.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule, 
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,
     HistoryService,
+    ClientService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
