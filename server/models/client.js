@@ -9,6 +9,6 @@ const userSchema = new Schema(
         remark: String,
         car_type: String,
         person_in_charge: String
-    })``
+    })
 
 module.exports = mongoose.model('client', userSchema, 'client')

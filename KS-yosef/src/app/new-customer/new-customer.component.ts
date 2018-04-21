@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ClientService }  from '../client.service';
 import { Client } from '../models/client';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-customer',
@@ -23,7 +24,8 @@ export class NewCustomerComponent implements OnInit {
   constructor(
 
     private fb: FormBuilder, 
-    private clientService: ClientService
+    private clientService: ClientService, 
+    private router: Router
 
   ) {
 
@@ -60,8 +62,13 @@ export class NewCustomerComponent implements OnInit {
 
     this.clientService.addClient(client).
     subscribe(
-      res => { console.log(res) }, 
+      res => { 
+        console.log(res); 
+        this.router.navigate(['/home']);
+      
+      }, 
       err => { console.log("Error occured")
+
     });
     
 

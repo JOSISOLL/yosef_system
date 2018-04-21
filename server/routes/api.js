@@ -116,18 +116,21 @@ router.get('/garage_history', verifyToken, (req, res) => {
 })
 router.post('/garage/client/add', (req, res) => {
     let clientData = req.body; 
-    let client = Client(client);
-    console.log(clientData);
-    client.save((error, registerdUser) =>{
-        if(error){
-            console.log(error)
-        }
-        else{
-            let payload = { subject: registerdUser._id }
-            let token = jwt.sign(payload, RSA_PRIVATE_KEY)
-            res.status(200).send({token})
-        }
+    console.log("attempting to add client ");
+    res.status(200).send({"success" : true});
 
-    })
+    // let client = Client(client);
+    // console.log(clientData);
+    // client.save((error, registerdUser) =>{
+    //     if(error){
+    //         console.log(error)
+    //     }
+    //     else{
+    //         let payload = { subject: registerdUser._id }
+    //         let token = jwt.sign(payload, RSA_PRIVATE_KEY)
+    //         res.status(200).send({token})
+    //     }
+
+    // })
 })
 module.exports = router
