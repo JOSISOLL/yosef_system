@@ -17,6 +17,9 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptor } from './token.interceptor';
 import { LoginGuard } from './login.guard';
 import { NewCustomerComponent } from './new-customer/new-customer.component';
+import { NewrepairComponent } from './newrepair/newrepair.component';
+import { SideBarNavComponent } from './side-bar-nav/side-bar-nav.component';
+import { HeaderNavComponent } from './header-nav/header-nav.component';
 
 
 
@@ -31,7 +34,10 @@ import { NewCustomerComponent } from './new-customer/new-customer.component';
     DashboardComponent,
     NavComponent,
     HeaderComponent,
-    NewCustomerComponent
+    NewCustomerComponent,
+    NewrepairComponent,
+    SideBarNavComponent,
+    HeaderNavComponent
   ],
   imports: [
     BrowserModule,

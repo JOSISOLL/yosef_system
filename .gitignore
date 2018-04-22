@@ -7,10 +7,10 @@
 /out-tsc
 
 # dependencies
-/KS-yoseph/node_modules
-/server/node_modules
+./KS-yoseph/node_modules
+./server/node_modules
+./KS-yoseph/new_imports/*
 
-/new_imports
 
 # IDEs and editors
 /.idea
