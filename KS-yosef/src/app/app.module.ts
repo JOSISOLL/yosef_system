@@ -20,6 +20,8 @@ import { NewCustomerComponent } from './new-customer/new-customer.component';
 import { NewrepairComponent } from './newrepair/newrepair.component';
 import { SideBarNavComponent } from './side-bar-nav/side-bar-nav.component';
 import { HeaderNavComponent } from './header-nav/header-nav.component';
+import { FooterComponent } from './footer/footer.component';
+import { ControllNavComponent } from './controll-nav/controll-nav.component';
 
 
 
@@ -37,7 +39,9 @@ import { HeaderNavComponent } from './header-nav/header-nav.component';
     NewCustomerComponent,
     NewrepairComponent,
     SideBarNavComponent,
-    HeaderNavComponent
+    HeaderNavComponent,
+    FooterComponent,
+    ControllNavComponent
   ],
   imports: [
     BrowserModule,
