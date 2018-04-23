@@ -8,7 +8,7 @@
         <li class="tm10 "><a routerLink="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a> </li>
         <li class="treeview active"> <a routerLink="/customer" > <i class="fa fa-user"></i> <span>Customer</span></a></li>
         <li class="treeview "> <a href="#"> <i class="fa fa-wrench"></i> <span>Repair Car</span> </a> </li>
-        <li class="treeview "> <a href="#"> <i class="fa fa-calculator"></i> <span>Create Estimate</span></a></li>
+        <li class="treeview "> <a routerLink="/estimate" > <i class="fa fa-calculator"></i> <span>Create Estimate</span></a></li>
         <li class="treeview "> <a href="#"> <i class="fa fa-cart-plus"></i> <span>Delivery Car</span> <i class="fa fa-angle-left pull-right"></i> </a>
           <ul class="treeview-menu">
             <li class=""><a href="#"><i class="fa fa-arrow-circle-right"></i>Car Delivery</a></li>
@@ -96,10 +96,9 @@
         </li>
         <li class="treeview "> <a href="#"> <i class="fa fa-gear"></i> <span>Setting</span> <i class="fa fa-angle-left pull-right"></i> </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#"><i class="fa fa-arrow-circle-right"></i>Car Setting</a></li>
-            <li class=""><a href="#"><i class="fa fa-arrow-circle-right"></i>Parts Manufacturer</a></li>
-            <li class=""><a href="#"><i class="fa fa-arrow-circle-right"></i>Car Color & Door</a></li>
-            <li class=""><a href="#"><i class="fa fa-arrow-circle-right"></i>System Setup</a></li>
+            <li class=""><a routerLink="settings/car"><i class="fa fa-arrow-circle-right"></i>Car Setting</a></li>
+            <li class=""><a routerLink="settings/parts-manufacturer"><i class="fa fa-arrow-circle-right"></i>Parts Manufacturer</a></li>
+            <li class=""><a routerLink="settings/color-and-door"><i class="fa fa-arrow-circle-right"></i>Car Color & Door</a></li>
           </ul>
         </li>
         

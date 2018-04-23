@@ -24,6 +24,10 @@ import { FooterComponent } from './footer/footer.component';
 import { ControllNavComponent } from './controll-nav/controll-nav.component';
 import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
 import { CustomerMainComponent } from './customer-main/customer-main.component';
+import { EstimateComponent } from './estimate/estimate.component';
+import { SettingsCarComponent } from './settings-car/settings-car.component';
+import { SettingsPartsManufacturerComponent } from './settings-parts-manufacturer/settings-parts-manufacturer.component';
+import { SettingsColorDoorComponent } from './settings-color-door/settings-color-door.component';
 
 
 
@@ -45,7 +49,11 @@ import { CustomerMainComponent } from './customer-main/customer-main.component';
     FooterComponent,
     ControllNavComponent,
     DashboardMainComponent,
-    CustomerMainComponent
+    CustomerMainComponent,
+    EstimateComponent,
+    SettingsCarComponent,
+    SettingsPartsManufacturerComponent,
+    SettingsColorDoorComponent
   ],
   imports: [
     BrowserModule,

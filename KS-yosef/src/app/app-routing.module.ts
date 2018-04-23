@@ -9,8 +9,11 @@ import { LoginGuard } from './login.guard';
 import { NewCustomerComponent } from './new-customer/new-customer.component';
 import {NewrepairComponent} from './newrepair/newrepair.component';
 import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
-import { CustomerMainComponent } from './customer-main/customer-main.component'
-
+import { CustomerMainComponent } from './customer-main/customer-main.component';
+import { EstimateComponent } from './estimate/estimate.component'; 
+import { SettingsCarComponent } from './settings-car/settings-car.component';
+import { SettingsPartsManufacturerComponent } from './settings-parts-manufacturer/settings-parts-manufacturer.component';
+import { SettingsColorDoorComponent } from './settings-color-door/settings-color-door.component';
 const routes: Routes = [
   {
     path: '',
@@ -48,6 +51,26 @@ const routes: Routes = [
   {
     path:'customer', 
     component: CustomerMainComponent,
+    canActivate: [AuthGuard]
+  }, 
+  {
+    path:'estimate', 
+    component: EstimateComponent ,
+    canActivate: [AuthGuard]
+  }, 
+  {
+    path:'settings/car', 
+    component: SettingsCarComponent ,
+    canActivate: [AuthGuard]
+  }, 
+  {
+    path:'settings/parts-manufacturer', 
+    component: SettingsPartsManufacturerComponent ,
+    canActivate: [AuthGuard]
+  }, 
+  {
+    path:'settings/color-and-door', 
+    component: SettingsColorDoorComponent ,
     canActivate: [AuthGuard]
   }
 ];
