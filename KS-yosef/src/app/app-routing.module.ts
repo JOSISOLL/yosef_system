@@ -8,6 +8,8 @@ import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
 import { NewCustomerComponent } from './new-customer/new-customer.component';
 import {NewrepairComponent} from './newrepair/newrepair.component';
+import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
+import { CustomerMainComponent } from './customer-main/customer-main.component'
 
 const routes: Routes = [
   {
@@ -36,6 +38,16 @@ const routes: Routes = [
   {
     path: 'new_repair',
     component: NewrepairComponent,
+    canActivate: [AuthGuard]
+  }, 
+  {
+    path: 'dashboard',
+    component: DashboardMainComponent,
+    canActivate: [AuthGuard]
+  }, 
+  {
+    path:'customer', 
+    component: CustomerMainComponent,
     canActivate: [AuthGuard]
   }
 ];

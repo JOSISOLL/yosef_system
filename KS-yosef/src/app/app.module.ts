@@ -22,6 +22,8 @@ import { SideBarNavComponent } from './side-bar-nav/side-bar-nav.component';
 import { HeaderNavComponent } from './header-nav/header-nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { ControllNavComponent } from './controll-nav/controll-nav.component';
+import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
+import { CustomerMainComponent } from './customer-main/customer-main.component';
 
 
 
@@ -41,7 +43,9 @@ import { ControllNavComponent } from './controll-nav/controll-nav.component';
     SideBarNavComponent,
     HeaderNavComponent,
     FooterComponent,
-    ControllNavComponent
+    ControllNavComponent,
+    DashboardMainComponent,
+    CustomerMainComponent
   ],
   imports: [
     BrowserModule,
