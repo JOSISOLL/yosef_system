@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { LoginGuard } from './login.guard';
 import { NewCustomerComponent } from './new-customer/new-customer.component';
+import {NewrepairComponent} from './newrepair/newrepair.component';
 
 const routes: Routes = [
   {
@@ -31,8 +32,12 @@ const routes: Routes = [
     path: 'new_customer',
     component: NewCustomerComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'new_repair',
+    component: NewrepairComponent,
+    canActivate: [AuthGuard]
   }
-
 ];
 
 @NgModule({

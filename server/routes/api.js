@@ -2,11 +2,12 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const router = express.Router()
 const User = require('../models/user')
+const Client = require('../models/client')
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
 const keypair = require('keypair')
-const RSA_PRIVATE_KEY = keypair().private
+const RSA_PRIVATE_KEY = "secret-key"
 mongoose.connect(db2, err => {
     if(err){
         console.error('Error!' + err)
@@ -57,6 +58,7 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
+    console.log("attemting login...");
     let userData = req.body
     
     User.findOne({email: userData.email}, (error, user) => {
@@ -111,5 +113,24 @@ router.get('/garage_history', verifyToken, (req, res) => {
         }
     ]
     res.json(history)
+})
+router.post('/garage/client/add', (req, res) => {
+    let clientData = req.body; 
+    console.log("attempting to add client ");
+    res.status(200).send({"success" : true});
+
+    // let client = Client(client);
+    // console.log(clientData);
+    // client.save((error, registerdUser) =>{
+    //     if(error){
+    //         console.log(error)
+    //     }
+    //     else{
+    //         let payload = { subject: registerdUser._id }
+    //         let token = jwt.sign(payload, RSA_PRIVATE_KEY)
+    //         res.status(200).send({token})
+    //     }
+
+    // })
 })
 module.exports = router

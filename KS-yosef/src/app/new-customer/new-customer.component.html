@@ -1,44 +1,54 @@
 <div class="content-wrapper">
     <!-- Main content -->
     <section class="content">
-        <div class="row pt-5">
+        <div class="row">
+            <form> 
+              <fieldset>
+                <legend> Client Information </legend>
+                First Name: <br> 
+                <input type="text" value="Yohannes"><br>
+                <br>
+                
+              </fieldset>
+            </form>
+          </div>
+        <div class="row pt-5">  
             <div class="col-md-12 mx-auto">
               <div class="card rounded-0">
                 <div class="card-header">
                   <h3 class="mb-0">New Customer</h3>
                 </div>
                 <div class="card-body">
-                  <form class="form">
+                  <form [formGroup]="rForm" class="form" (ngSubmit)="addNewUser(rForm.value)">
                       <div class="form-group col-md-5 float-right">
                         <label><i class="fa fa-calendar"></i> Date:</label>
                         <div class="input-group date">
-                        
-                          <input type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                          <input formControlName="date" type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                         </div>  
                       </div>
                       <div class="form-group col-md-5">
                         <label for=""><i class="fa fa-user"></i>  Customer Name:</label>
-                        <input name="name" type="text" class="form-control rounded-0" required>
+                        <input formControlName="customer_name" name="name" type="text" class="form-control rounded-0" required>
                       </div>
                       <div class="form-group col-md-5 float-right">
                         <label for=""><i class="fa fa-exclamation-triangle"></i>  Reported Problem:</label>
-                        <input name="name" type="text" class="form-control rounded-0" required>
+                        <input formControlName="reported_problem" name="name" type="text" class="form-control rounded-0" required>
                       </div>
                       <div class="form-group col-md-5">
                           <label for=""><i class="fa fa-newspaper"></i>  Plate number:</label>
-                          <input name="name" type="text" class="form-control rounded-0" required>
+                          <input formControlName="plate_number" name="name" type="text" class="form-control rounded-0" required>
                       </div>
                       <div class="form-group col-md-5 float-right">
                           <label for=""><i class="fa fa-car"></i>  Car Type:</label>
-                          <input name="name" type="text" class="form-control rounded-0" required>
+                          <input formControlName="car_type" name="name" type="text" class="form-control rounded-0" required>
                       </div>
                       <div class="form-group col-md-5">
                           <label for=""><i class="fa fa-comment"></i>  Remark:</label>
-                          <input name="name" type="text" class="form-control rounded-0" required>
+                          <input formControlName="remark" name="name" type="text" class="form-control rounded-0" required>
                       </div>
                       <div class="form-group col-md-5">
                           <label for=""><i class="fa fa-wrench"></i>  Person in charge:</label>
-                          <select class="form-control">
+                          <select formControlName="person_in_charge" class="form-control">
                               <option>Employee 1</option>
                               <option>Employee 2</option>
                               <option>Employee 3</option>
@@ -52,8 +62,8 @@
                             <button class="btn btn-primary btn-sm" type="button">Confirm</button>
                           </div> -->
                           <div class="col-md-6">
-                            <button class="btn btn-outline-success float-left" type="button"><i class="fa fa-save"></i> Save</button>
-                            <button class="btn btn-outline-danger float-right" type="button"><i class="fa fa-times"></i> Decline</button>
+                            <button class="btn btn-outline-success float-left" type="submit"><i class="fa fa-save"></i> Save</button>
+                            <button class="btn btn-outline-danger float-right" type="button"><i class="fa fa-times"></i> Clear </button>
                           </div>
                         </div>
                       </div>
