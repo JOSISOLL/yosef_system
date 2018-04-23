@@ -10,7 +10,7 @@
               <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
               <h4><i class="icon fa fa-check"></i> Success!</h4>
                </div>
-            <div align="right" style="margin-bottom:1%;"> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/repaircar/addcar.php" data-original-title="Add Repair Car"><i class="fa fa-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/dashboard.php" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
+            <div align="right" style="margin-bottom:1%;"> <a class="btn btn-success" data-toggle="tooltip" routerLink="/new_customer" data-original-title="Add Repair Car"><i class="fa fa-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/dashboard.php" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
             <div class="box box-success">
               <div class="box-header">
                 <h3 class="box-title"><i class="fa fa-list"></i> Repair Car List</h3>
@@ -94,29 +94,13 @@
                     <div id="nurse_view_16" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
-                          <div class="modal-header orange_header">
-                            <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true"><i class="fa fa-close"></i></span></button>
-                            <h3 class="modal-title">Repair Car Details</h3>
-                          </div>
-                          <div class="modal-body model_view" align="center">&nbsp;
-                            <div><img class="photo_img_round" style="width:100px;height:100px;" src="http://sakosys.com/temp/garage-management-system/img/upload/0E7F96C7-9035-5AE8-0EC6-E52E999F4878.jpg" /></div>
-                            <div class="model_title">Toyota Allion</div>
-                            <div style="color:#fff;font-size:15px;font-weight:bold;">Invoice No: 148627</div>
-                          </div>
                           <div class="modal-body">
-                            <h3 style="text-decoration:underline;">Car Details Infromation</h3>
+                            <h3 style="text-decoration:underline;">Detailed Information</h3>
                             <div class="row">
                               <div class="col-xs-12">
-                                <b>Car Name :</b> Toyota Allion<br/>
-                                <b>Car Repair ID :</b> 148627<br/>
-                                <b>Car Make :</b> Toyota<br/>
-                                <b>Car Model :</b> Allion<br/>
-                                <b>Year :</b> 2009<br/>
-                                <b>Chasis No :</b> 2539666<br/>
-                                <b>Registration No :</b> 25DDD4545454<br/>
-                                <b>VIN No :</b> 25236DDD-9999x<br/>
-                                <b>Note :</b> Nice Thanks<br/>
-                                <b>Added Date :</b> 17/05/2017 12:05:58                      </div>
+                                <b>Customer Name :</b> {{ history.client_name }}<br/>
+                                <b>Phone Number :</b> 148627<br/>
+                                <b>Plate NUmber :</b> Toyota                    </div>
                             </div>
                           </div>				  
                         </div>

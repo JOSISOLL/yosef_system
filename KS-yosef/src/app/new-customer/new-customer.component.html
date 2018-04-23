@@ -1,79 +1,153 @@
-<div class="content-wrapper">
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content">
+    <!-- Content Header (Page header) -->
+    
+    <section class="content-header">
+      <h1><i class="fa fa-wrench"></i> Repair Car</h1>
+      <ol class="breadcrumb">
+        <li><a href="http://sakosys.com/temp/garage-management-system/dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="http://sakosys.com/temp/garage-management-system/repaircar/carlist.php"> Repair car</a></li>
+        <li class="active">Add Repair car</li>
+      </ol>
+    </section>
     <!-- Main content -->
-    <section class="content">
+    <form onSubmit="return validateMe();" action="http://sakosys.com/temp/garage-management-system/repaircar/addcar.php" method="post" enctype="multipart/form-data">
+      <section class="content">
+        <!-- Full Width boxes (Stat box) -->
         <div class="row">
-            <form> 
-              <fieldset>
-                <legend> Client Information </legend>
-                First Name: <br> 
-                <input type="text" value="Yohannes"><br>
-                <br>
-                
-              </fieldset>
-            </form>
-          </div>
-        <div class="row pt-5">  
-            <div class="col-md-12 mx-auto">
-              <div class="card rounded-0">
-                <div class="card-header">
-                  <h3 class="mb-0">New Customer</h3>
-                </div>
-                <div class="card-body">
-                  <form [formGroup]="rForm" class="form" (ngSubmit)="addNewUser(rForm.value)">
-                      <div class="form-group col-md-5 float-right">
-                        <label><i class="fa fa-calendar"></i> Date:</label>
-                        <div class="input-group date">
-                          <input formControlName="date" type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                        </div>  
-                      </div>
-                      <div class="form-group col-md-5">
-                        <label for=""><i class="fa fa-user"></i>  Customer Name:</label>
-                        <input formControlName="customer_name" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5 float-right">
-                        <label for=""><i class="fa fa-exclamation-triangle"></i>  Reported Problem:</label>
-                        <input formControlName="reported_problem" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5">
-                          <label for=""><i class="fa fa-newspaper"></i>  Plate number:</label>
-                          <input formControlName="plate_number" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5 float-right">
-                          <label for=""><i class="fa fa-car"></i>  Car Type:</label>
-                          <input formControlName="car_type" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5">
-                          <label for=""><i class="fa fa-comment"></i>  Remark:</label>
-                          <input formControlName="remark" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5">
-                          <label for=""><i class="fa fa-wrench"></i>  Person in charge:</label>
-                          <select formControlName="person_in_charge" class="form-control">
-                              <option>Employee 1</option>
-                              <option>Employee 2</option>
-                              <option>Employee 3</option>
-                              <option>Employee 4</option>
-                              <option>Employee 5</option>
-                            </select>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="row align-items-center justify-content-center">
-                          <!-- <div class="col-md-4">
-                            <button class="btn btn-primary btn-sm" type="button">Confirm</button>
-                          </div> -->
-                          <div class="col-md-6">
-                            <button class="btn btn-outline-success" type="submit"><i class="fa fa-save"></i> Save</button>
-                            <button class="btn btn-outline-danger pull-right" type="button"><i class="fa fa-times"></i> Clear </button>
-                          </div>
-                        </div>
-                      </div>
-                    
-                      <!-- <button type="button" class="btn btn-outline-success"><i class="far fa-save"></i> Save</button> -->
-                  </form>
+          <div class="col-md-12">
+            <div id="you" class="alert alert-success alert-dismissable" style="display:none">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+          <h4><i class="icon fa fa-check"></i> Success!</h4>
+           </div>
+        
+        <div class="box box-success" id="box_model">
+              <div class="box-body">
+                <div class="form-group col-md-12" style="padding-top:10px;">
+                  <div class="pull-left"> 
+                    <label class="label label-danger" style="font-size:15px;"><i class="fa fa-car"></i> REPAIR CAR ID-491927</label>
+                  </div>
+            <div class="pull-right">
+            <button type="submit" class="btn btn-success btnsp"><i class="fa fa-save fa-2x"></i><br/>
+                    Save Information</button>&emsp;
+                             <a class="btn btn-warning btnsp" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/repaircar/carlist.php" data-original-title="Back"><i class="fa fa-reply  fa-2x"></i><br/>
+                    Back</a> </div>
                 </div>
               </div>
             </div>
+            <div class="box box-success">
+              <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-plus"></i> Add New Repair Car</h3>
+              </div>
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="ddlCustomerList"><span style="color:red;">*</span> Select Customer :</label>
+                  <select class='form-control' id="ddlCustomerList" name="ddlCustomerList">
+                    <option value="">--Select Customer--</option>
+                    <option value="1">Jamal Uddin</option><option value="2">Kamal</option><option value="4">Taraq Sarker</option>              </select>
+                </div>
+                <div class="form-group">
+                  <label for="car_names"><span style="color:red;">*</span> Car Name :</label>
+                  <input type="text" name="car_names" value="" id="car_names" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="ddlMake"><span style="color:red;">*</span> Car Make :</label>
+                  <select class="form-control" onchange="loadYear(this.value);" name="ddlMake" id="ddlMake">
+                    <option value=''>--Select Make--</option>
+                    <option value='38'>Audi</option><option value='34'>BMW</option><option value='35'>BMWs</option><option value='40'>Honda</option><option value='36'>Toyota</option>              </select>
+                </div>
+                <div class="form-group">
+                  <label for="ddl_model"><span style="color:red;">*</span> Car Model :</label>
+                  <select onchange="loadYearData(this.value);" class="form-control" name="ddlModel" id="ddl_model">
+                    <option value="">--Select Model--</option>
+                                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="ddlYear"><span style="color:red;">*</span> Year :</label>
+                  <select class="form-control" name="ddlYear" id="ddlYear">
+                    <option value="">--Select Year--</option>
+                                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="car_chasis_no"><span style="color:red;">*</span> Chasis No :</label>
+                  <input type="text" name="car_chasis_no" value="" id="car_chasis_no" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="registration"><span style="color:red;">*</span> Registration No :</label>
+                  <input type="text" name="registration" value="" id="registration" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="vin"><span style="color:red;">*</span> VIN# :</label>
+                  <input type="text" name="vin" value="" id="vin" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="car_note">Note :</label>
+                  <textarea type="text" name="car_note" value="" id="car_note" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="add_date">Added Date :</label>
+                  <input type="text" name="add_date" value="" id="add_date" class="form-control datepicker" />
+                </div>
+                <!--<div class="form-group">
+                  <label for="c_delivery_date">Delivery Date :</label>
+                  <input type="text" name="c_delivery_date" value="" id="c_delivery_date" class="form-control datepicker" />
+                </div>-->
+                <div class="form-group">
+                  <label for="Prsnttxtarea">Priview :</label>
+                  <img class="form-control" src="http://sakosys.com/temp/garage-management-system/img/no_image.jpg" style="height:100px;width:100px;" id="output"/>
+                  <input type="hidden" name="img_exist" value="" />
+                </div>
+                <div class="form-group"> <span class="btn btn-file btn btn-primary">Upload Image
+                  <input type="file" name="uploaded_file" onchange="loadFile(event)" />
+                  </span> </div>
+              </div>
+              <input type="hidden" value="0" name="repair_car"/>
+          <input type="hidden" name="hfInvoiceId" value="491927" />
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
           </div>
-     
-    </section>
-</div>
+        </div>
+        <!-- /.row -->
+      </section>
+    </form>
+   
+    </div>
+    <!-- /.content-wrapper -->
+    
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs"> <b>Version</b> 1.0 </div>
+      <strong>Copyright &copy; 2014-2015 <a href="http://sakosys.com">sakosys.com</a>.</strong> All rights reserved. </footer>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+     immediately after the control sidebar -->
+    <div class="modal fade" role="dialog" id="user_profile" aria-labelledby="gridSystemModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="gridSystemModalLabel">Update Your Profile</h4>
+          </div>
+          <div class="modal-body">
+                    <div align="center"><img class="photo_img_round" style="width:100px;height:100px;" src="http://sakosys.com/temp/garage-management-system/img/no_image.jpg" /></div>
+            <h4 align="center"></h4>
+            <h4 align="center">Designation:&nbsp;&nbsp;
+                      </h4>
+            <div class="form-group">
+              <label class="control-label">Change Password:&nbsp;&nbsp;</label>
+              <input type="text" class="form-control" id="txtPassword" name="txtPassword" value="">
+            </div>
+            <div style="color:orange;font-weight:bold;text-align:left;font-size:15px;">You can update only your password, if you need more thing to update please conatct with administator.</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Update</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+   
+    
