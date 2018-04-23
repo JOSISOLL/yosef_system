@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('id_token', res.idToken)
         localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()))
         // localStorage.setItem('token', res.token)
-        this._router.navigate(['/home'])
+        this._router.navigate(['/dashboard'])
       },
       err => console.log(err)
 
