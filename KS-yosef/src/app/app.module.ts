@@ -29,6 +29,7 @@ import { SettingsCarComponent } from './settings-car/settings-car.component';
 import { SettingsPartsManufacturerComponent } from './settings-parts-manufacturer/settings-parts-manufacturer.component';
 import { SettingsColorDoorComponent } from './settings-color-door/settings-color-door.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomerService } from './services/customer.service';
 
 
 
@@ -74,7 +75,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       useClass: TokenInterceptor,
       multi: true
     },
-    LoginGuard
+    LoginGuard,
+    CustomerService
   ],
   bootstrap: [AppComponent]
 })
