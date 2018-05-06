@@ -95,21 +95,21 @@ router.get('/garage_history', verifyToken, (req, res) => {
         },
         {
             "_id": "2",
-            "client_name" : "Yoseph Solomon",
-            "client_phone" : "123456789",
-            "plate_number" : "123456"
+            "client_name" : "Josioooo",
+            "client_phone" : "129016789",
+            "plate_number" : "124563"
         },
         {
             "_id": "3",
-            "client_name" : "Yoseph Solomon",
-            "client_phone" : "123456789",
-            "plate_number" : "123456"
+            "client_name" : "Another Customer",
+            "client_phone" : "854923789",
+            "plate_number" : "566756"
         },
         {
             "_id": "4",
-            "client_name" : "Yoseph Solomon",
-            "client_phone" : "123456789",
-            "plate_number" : "123456"
+            "client_name" : "New Customer",
+            "client_phone" : "348112323",
+            "plate_number" : "384729"
         }
     ]
     res.json(history)
