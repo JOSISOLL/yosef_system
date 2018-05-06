@@ -28,6 +28,7 @@ import { EstimateComponent } from './estimate/estimate.component';
 import { SettingsCarComponent } from './settings-car/settings-car.component';
 import { SettingsPartsManufacturerComponent } from './settings-parts-manufacturer/settings-parts-manufacturer.component';
 import { SettingsColorDoorComponent } from './settings-color-door/settings-color-door.component';
+import { CustomerService } from './services/customer.service';
 
 
 
@@ -72,7 +73,8 @@ import { SettingsColorDoorComponent } from './settings-color-door/settings-color
       useClass: TokenInterceptor,
       multi: true
     },
-    LoginGuard
+    LoginGuard,
+    CustomerService
   ],
   bootstrap: [AppComponent]
 })

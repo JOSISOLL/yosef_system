@@ -14,6 +14,7 @@ import { EstimateComponent } from './estimate/estimate.component';
 import { SettingsCarComponent } from './settings-car/settings-car.component';
 import { SettingsPartsManufacturerComponent } from './settings-parts-manufacturer/settings-parts-manufacturer.component';
 import { SettingsColorDoorComponent } from './settings-color-door/settings-color-door.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -34,7 +35,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'new_customer',
+    path: 'customer/add',
     component: NewCustomerComponent,
     canActivate: [AuthGuard]
   },
@@ -72,7 +73,8 @@ const routes: Routes = [
     path:'settings/color-and-door', 
     component: SettingsColorDoorComponent ,
     canActivate: [AuthGuard]
-  }
+  }  
+  
 ];
 
 @NgModule({
