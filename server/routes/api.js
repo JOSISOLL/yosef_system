@@ -133,6 +133,7 @@ router.post('/garage/client/add',verifyToken, (req, res) => {
 
     // })
 })
+<<<<<<< HEAD
 router.get('/clients_get',verifyToken, (req, res) => {
     let clients = [
         {
@@ -174,3 +175,10 @@ router.get('/clients_get',verifyToken, (req, res) => {
 })
 module.exports = router
 
+=======
+router.post("/customer/add", (req, res) => {
+    let data = req.body; 
+    console.log(data);
+})
+module.exports = router
+>>>>>>> 8ce5f246611db74163c6971c79957bef1b500ffb

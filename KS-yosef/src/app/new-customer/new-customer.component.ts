@@ -3,6 +3,8 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, 
 import { ClientService }  from '../client.service';
 import { Client } from '../models/client';
 import { Router } from '@angular/router';
+import { CustomerService } from '../services/customer.service';
+import { Customer } from '../models/customer';
 
 
 @Component({
@@ -20,7 +22,7 @@ export class NewCustomerComponent implements OnInit {
   telWork: FormControl; 
   address: FormControl; 
   
-  constructor() {
+  constructor(private _customerService: CustomerService) {
   }
 
   createControls(){
@@ -48,9 +50,13 @@ export class NewCustomerComponent implements OnInit {
   }
   onSubmit(){
     if(this.myForm.valid){
+      var data = <Customer>this.myForm.value;
       console.log("FORM IS VALID");
       console.log(this.myForm.value);
- 
+      this._customerService.add(data)
+      .subscribe(customer => {
+        console.log("saved data");
+      });
     }
     else{
       console.log("FROM IS INVALID");
