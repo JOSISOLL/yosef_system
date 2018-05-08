@@ -133,4 +133,8 @@ router.post('/garage/client/add', (req, res) => {
 
     // })
 })
+router.post("/customer/add", (req, res) => {
+    let data = req.body; 
+    console.log(data);
+})
 module.exports = router
