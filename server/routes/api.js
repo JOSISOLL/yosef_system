@@ -114,7 +114,7 @@ router.get('/garage_history', verifyToken, (req, res) => {
     ]
     res.json(history)
 })
-router.post('/garage/client/add', (req, res) => {
+router.post('/garage/client/add',verifyToken, (req, res) => {
     let clientData = req.body; 
     console.log("attempting to add client ");
     res.status(200).send({"success" : true});
@@ -133,4 +133,44 @@ router.post('/garage/client/add', (req, res) => {
 
     // })
 })
+router.get('/clients_get',verifyToken, (req, res) => {
+    let clients = [
+        {
+            "name": "Client 1",
+            "email" : "email1@mail.com",
+            "telMobile" : "+251911111111",
+            "telHome" : "+251111111111",
+            "telWork": "+2511111111",
+            "address": "Addis Ababa, Megenagna"
+        },
+        {
+            "name": "Client 2",
+            "email" : "email2@mail.com",
+            "telMobile" : "+251911111112",
+            "telHome" : "+251112221112",
+            "telWork": "+251111111112",
+            "address": "Addis Ababa, Piassa"
+        },
+        {
+            "name": "Client 3",
+            "email" : "email3@mail.com",
+            "telMobile" : "+251911111113",
+            "telHome" : "+251111111113",
+            "telWork": "+251113331113",
+            "address": "Addis Ababa, Kasanchis"
+        },
+        {
+            "name": "Client 4",
+            "email" : "email4@mail.com",
+            "telMobile" : "+251911111114",
+            "telHome" : "+251114441114",
+            "telWork": "+251111111114",
+            "address": "Addis Ababa, Bole"
+        }
+    ]
+    console.log("attempting to get clients data: ")
+    res.json(clients)
+    
+})
 module.exports = router
+

@@ -13,6 +13,7 @@ const httpOptions = {
 @Injectable()
 export class ClientService {
   private _urlClientAdd = "http://localhost:3000/api/garage/client/add";
+  private _urlClientGet = "http://localhost:3000/api/clients_get";
   
 
   constructor(
@@ -24,5 +25,8 @@ export class ClientService {
   }
   private log(message : string){
     //TODO: implementation for notification stil pending
+  }
+  getClients(){
+    return this.http.get<any>(this._urlClientGet)
   }
 }
