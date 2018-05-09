@@ -2,7 +2,7 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const router = express.Router()
 const User = require('../models/user')
-const Client = require('../models/client')
+const Customer = require('../models/customer')
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
@@ -58,7 +58,7 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-    console.log("attemting login...");
+    console.log("attempting login...");
     let userData = req.body
     
     User.findOne({email: userData.email}, (error, user) => {
@@ -114,7 +114,7 @@ router.get('/garage_history', verifyToken, (req, res) => {
     ]
     res.json(history)
 })
-router.post('/garage/client/add',verifyToken, (req, res) => {
+router.post('/garage/client/add', (req, res) => {
     let clientData = req.body; 
     console.log("attempting to add client ");
     res.status(200).send({"success" : true});
@@ -133,48 +133,45 @@ router.post('/garage/client/add',verifyToken, (req, res) => {
 
     // })
 })
-router.get('/clients_get',verifyToken, (req, res) => {
-    let clients = [
-        {
-            "name": "Client 1",
-            "email" : "email1@mail.com",
-            "telMobile" : "+251911111111",
-            "telHome" : "+251111111111",
-            "telWork": "+2511111111",
-            "address": "Addis Ababa, Megenagna"
-        },
-        {
-            "name": "Client 2",
-            "email" : "email2@mail.com",
-            "telMobile" : "+251911111112",
-            "telHome" : "+251112221112",
-            "telWork": "+251111111112",
-            "address": "Addis Ababa, Piassa"
-        },
-        {
-            "name": "Client 3",
-            "email" : "email3@mail.com",
-            "telMobile" : "+251911111113",
-            "telHome" : "+251111111113",
-            "telWork": "+251113331113",
-            "address": "Addis Ababa, Kasanchis"
-        },
-        {
-            "name": "Client 4",
-            "email" : "email4@mail.com",
-            "telMobile" : "+251911111114",
-            "telHome" : "+251114441114",
-            "telWork": "+251111111114",
-            "address": "Addis Ababa, Bole"
+router.get('/clients_get', verifyToken, (req, res) => {
+    Customer.find(function (error, customers){
+        if(error){
+            console.log(error)
+        } else {
+            res.json(customers)
+            console.log("Customer fetched from database")
         }
-    ]
-    console.log("attempting to get clients data: ")
-    res.json(clients)
+    })
+    
     
 })
 
-router.post("/customer/add", (req, res) => {
-    let data = req.body; 
-    console.log(data);
+router.post("/customer/add", verifyToken, (req, res) => {
+    let customerData = req.body; 
+    console.log("attempting customer add...")
+
+    let customer = new Customer(customerData)
+    Customer.findOne({telMobile: customerData.telMobile}, (error, customer_get) => {
+        if(error){
+            console.log(error)
+        } else{
+            if(!customer_get){
+                customer.save((error, addedCustomer) =>{
+                    if(error){
+                        console.log(error)
+                    }
+                    else{
+                        let add_status = "Customer added successfully"
+                        res.status(200).send(addedCustomer)
+                        console.log(add_status)
+                    }
+                })
+            } else {
+                res.status(401).send("Customer with this Mobile number already exists!")
+            }
+        }
+    })
+    
+
 })
 module.exports = router

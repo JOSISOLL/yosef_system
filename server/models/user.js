@@ -5,7 +5,7 @@
      {
          
         email: String,
-         password: String
+        password: String
 
      })
 
