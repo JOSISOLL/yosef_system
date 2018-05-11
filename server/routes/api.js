@@ -133,7 +133,7 @@ router.post('/garage/client/add', (req, res) => {
 
     // })
 })
-router.get('/clients_get', verifyToken, (req, res) => {
+router.get('/clients_get',  (req, res) => {
     Customer.find(function (error, customers){
         if(error){
             console.log(error)
@@ -146,7 +146,7 @@ router.get('/clients_get', verifyToken, (req, res) => {
     
 })
 
-router.post("/customer/add", verifyToken, (req, res) => {
+router.post("/customer/add",  (req, res) => {
     let customerData = req.body; 
     console.log("attempting customer add...")
 

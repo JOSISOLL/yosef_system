@@ -30,6 +30,8 @@ import { SettingsPartsManufacturerComponent } from './settings-parts-manufacture
 import { SettingsColorDoorComponent } from './settings-color-door/settings-color-door.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerService } from './services/customer.service';
+import { AddRepairComponent } from './add-repair/add-repair.component';
+import {RepairService } from './services/repair.service';
 
 
 
@@ -55,7 +57,8 @@ import { CustomerService } from './services/customer.service';
     EstimateComponent,
     SettingsCarComponent,
     SettingsPartsManufacturerComponent,
-    SettingsColorDoorComponent
+    SettingsColorDoorComponent,
+    AddRepairComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { CustomerService } from './services/customer.service';
       multi: true
     },
     LoginGuard,
-    CustomerService
+    CustomerService,
+    RepairService
   ],
   bootstrap: [AppComponent]
 })
