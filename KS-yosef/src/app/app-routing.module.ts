@@ -73,7 +73,7 @@ const routes: Routes = [
     path:'settings/color-and-door', 
     component: SettingsColorDoorComponent ,
     canActivate: [AuthGuard]
-  }  
+  } 
   
 ];
 
