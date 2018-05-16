@@ -28,7 +28,10 @@ import { EstimateComponent } from './estimate/estimate.component';
 import { SettingsCarComponent } from './settings-car/settings-car.component';
 import { SettingsPartsManufacturerComponent } from './settings-parts-manufacturer/settings-parts-manufacturer.component';
 import { SettingsColorDoorComponent } from './settings-color-door/settings-color-door.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerService } from './services/customer.service';
+import { AddRepairComponent } from './add-repair/add-repair.component';
+import {RepairService } from './services/repair.service';
 
 
 
@@ -54,14 +57,16 @@ import { CustomerService } from './services/customer.service';
     EstimateComponent,
     SettingsCarComponent,
     SettingsPartsManufacturerComponent,
-    SettingsColorDoorComponent
+    SettingsColorDoorComponent,
+    AddRepairComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule.forRoot()
   ],
   providers: [
     AuthService,
@@ -74,7 +79,8 @@ import { CustomerService } from './services/customer.service';
       multi: true
     },
     LoginGuard,
-    CustomerService
+    CustomerService,
+    RepairService
   ],
   bootstrap: [AppComponent]
 })

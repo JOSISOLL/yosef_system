@@ -22,6 +22,7 @@ export class NewCustomerComponent implements OnInit {
   telWork: FormControl; 
   address: FormControl; 
   
+  
   constructor(private _customerService: CustomerService) {
   }
 

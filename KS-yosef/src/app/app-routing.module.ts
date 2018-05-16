@@ -14,6 +14,7 @@ import { EstimateComponent } from './estimate/estimate.component';
 import { SettingsCarComponent } from './settings-car/settings-car.component';
 import { SettingsPartsManufacturerComponent } from './settings-parts-manufacturer/settings-parts-manufacturer.component';
 import { SettingsColorDoorComponent } from './settings-color-door/settings-color-door.component';
+import { AddRepairComponent } from './add-repair/add-repair.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'new_repair',
+    path: 'repair',
     component: NewrepairComponent,
     canActivate: [AuthGuard]
   }, 
@@ -73,7 +74,16 @@ const routes: Routes = [
     path:'settings/color-and-door', 
     component: SettingsColorDoorComponent ,
     canActivate: [AuthGuard]
+<<<<<<< HEAD
   } 
+=======
+  },
+  {
+    path: 'repair/add',
+    component: AddRepairComponent,
+    canActivate: [AuthGuard]
+  }  
+>>>>>>> af368ec57dd3232c37fca97dba7f7d547b086fe9
   
 ];
 
