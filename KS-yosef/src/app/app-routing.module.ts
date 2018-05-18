@@ -15,6 +15,9 @@ import { SettingsCarComponent } from './settings-car/settings-car.component';
 import { SettingsPartsManufacturerComponent } from './settings-parts-manufacturer/settings-parts-manufacturer.component';
 import { SettingsColorDoorComponent } from './settings-color-door/settings-color-door.component';
 import { AddRepairComponent } from './add-repair/add-repair.component';
+import { AddPartsComponentComponent } from './add-parts-component/add-parts-component.component';
+import { SupliersPageComponentComponent } from './supliers-page-component/supliers-page-component.component';
+import { AddSupliersPageComponentComponent} from './add-supliers-page-component/add-supliers-page-component.component';
 
 const routes: Routes = [
   {
@@ -74,17 +77,28 @@ const routes: Routes = [
     path:'settings/color-and-door', 
     component: SettingsColorDoorComponent ,
     canActivate: [AuthGuard]
-<<<<<<< HEAD
-  } 
-=======
+  
   },
   {
     path: 'repair/add',
     component: AddRepairComponent,
     canActivate: [AuthGuard]
-  }  
->>>>>>> af368ec57dd3232c37fca97dba7f7d547b086fe9
-  
+  }, 
+  {
+    path: 'parts/add',
+    component: AddPartsComponentComponent,
+    canActivate: [AuthGuard]
+  }, 
+  {
+    path: 'supliers', 
+    component: SupliersPageComponentComponent, 
+    canActivate: [AuthGuard]
+  }, 
+  {
+    path: 'supliers/add', 
+    component: AddSupliersPageComponentComponent, 
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
