@@ -11,14 +11,18 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewrepairComponent implements OnInit {
 
-  garageHistory = []
+  repairs = []
   closeResult: string;
   constructor(private _historyService: HistoryService, private _router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this._historyService.getGarageHistory()
+    this._historyService.getRepairs()
       .subscribe(
-        res => this.garageHistory = res,
+        res => {
+          this.repairs = res
+          console.log(res)
+        
+        },
         err => {
           if (err instanceof HttpErrorResponse){
             if (err.status === 401){
@@ -28,6 +32,7 @@ export class NewrepairComponent implements OnInit {
           }
         }
       )
+      
       
   }
 

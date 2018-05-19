@@ -74,16 +74,12 @@ const routes: Routes = [
     path:'settings/color-and-door', 
     component: SettingsColorDoorComponent ,
     canActivate: [AuthGuard]
-<<<<<<< HEAD
-  } 
-=======
   },
   {
     path: 'repair/add',
     component: AddRepairComponent,
     canActivate: [AuthGuard]
   }  
->>>>>>> af368ec57dd3232c37fca97dba7f7d547b086fe9
   
 ];
 

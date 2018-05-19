@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../client.service';
-import { RepairService } from '../services/repair.service';
+import { RepairService } from '../repair.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -20,7 +20,7 @@ export class AddRepairComponent implements OnInit {
   reportedProblem: FormControl; 
   carType: FormControl; 
   remark: FormControl; 
-  presonInCharge: FormControl; 
+  personInCharge: FormControl; 
   date: FormControl;
 
   clients = []
@@ -32,7 +32,7 @@ export class AddRepairComponent implements OnInit {
     this.reportedProblem = new FormControl();
     this.carType = new FormControl();
     this.remark = new FormControl();
-    this.presonInCharge = new FormControl();
+    this.personInCharge = new FormControl();
     this.date = new FormControl();
   }
   createForm(){
@@ -42,7 +42,7 @@ export class AddRepairComponent implements OnInit {
       reportedProblem: this.reportedProblem, 
       carType: this.carType, 
       remark: this.remark, 
-      presonInCharge: this.presonInCharge,
+      personInCharge: this.personInCharge,
       date: this.date
     })
   }
@@ -67,10 +67,14 @@ export class AddRepairComponent implements OnInit {
       var data = <Repair>this.repairForm.value;
       console.log("FORM IS VALID");
       // console.log(this.repairForm.value);
-      this._repairService.add(data)
-      // .subscribe(customer => {
-      //   console.log("saved data");
-      // });
+      this._repairService.addRepair(data)
+      .subscribe(
+        res => {
+          console.log(res)
+          this._router.navigate(['/repair'])
+        },
+        err => console.log(err)
+      )
     }
     else{
       console.log("FROM IS INVALID");

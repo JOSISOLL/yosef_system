@@ -31,7 +31,7 @@ import { SettingsColorDoorComponent } from './settings-color-door/settings-color
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerService } from './services/customer.service';
 import { AddRepairComponent } from './add-repair/add-repair.component';
-import {RepairService } from './services/repair.service';
+import {RepairService } from './repair.service';
 
 
 

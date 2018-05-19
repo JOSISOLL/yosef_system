@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const router = express.Router()
 const User = require('../models/user')
 const Customer = require('../models/customer')
+const Repair = require('../models/repair')
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
@@ -85,34 +86,16 @@ router.post('/login', (req, res) => {
 
     })
 })
-router.get('/garage_history', verifyToken, (req, res) => {
-    let history = [
-        {
-            "_id": "1",
-            "client_name" : "Yoseph Solomon",
-            "client_phone" : "123456789",
-            "plate_number" : "123456"
-        },
-        {
-            "_id": "2",
-            "client_name" : "Josioooo",
-            "client_phone" : "129016789",
-            "plate_number" : "124563"
-        },
-        {
-            "_id": "3",
-            "client_name" : "Another Customer",
-            "client_phone" : "854923789",
-            "plate_number" : "566756"
-        },
-        {
-            "_id": "4",
-            "client_name" : "New Customer",
-            "client_phone" : "348112323",
-            "plate_number" : "384729"
+router.get('/repair', verifyToken, (req, res) => {
+    console.log("attempting to fetch repairs data list...")
+    Repair.find(function (error, repairs){
+        if(error){
+            console.log(error)
+        } else {
+            res.json(repairs)
+            console.log("Repairs list fetched from database")
         }
-    ]
-    res.json(history)
+    })
 })
 router.post('/garage/client/add', (req, res) => {
     let clientData = req.body; 
@@ -146,7 +129,7 @@ router.get('/clients_get',  (req, res) => {
     
 })
 
-router.post("/customer/add",  (req, res) => {
+router.post("/customer/add", verifyToken, (req, res) => {
     let customerData = req.body; 
     console.log("attempting customer add...")
 
@@ -170,6 +153,37 @@ router.post("/customer/add",  (req, res) => {
                 res.status(401).send("Customer with this Mobile number already exists!")
             }
         }
+    })
+    
+
+})
+// router.post("/repair/add", verifyToken, (req, res) => {
+//     let repairData = req.body
+//     let repair = new Repair(repairData)
+
+//     repair.save((error, addedRepair) => {
+//         console.log("attempting to add new repair to customer : " + req.customer)
+//         if(error){
+//             console.log(error)
+//         } else {
+//             let add_status = "Repair added successfully"
+//             res.status(200).send(addedRepair)
+//             console.log(add_status)
+//         }
+//     })
+// })
+
+router.post("/repair/add", verifyToken, (req, res) => {
+        let repairData = req.body
+    let repair = new Repair(repairData)
+    repair.save((error, addedRepair) =>{
+        if(error){
+            console.log(error)
+        }
+        else{
+            res.status(200).send(addedRepair)
+        }
+
     })
     
 

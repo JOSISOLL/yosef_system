@@ -4,10 +4,10 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class HistoryService {
 
-  _historyUrl = "http://localhost:3000/api/garage_history"
+  _repairsUrl = "http://localhost:3000/api/repair"
   constructor(private http: HttpClient) { }
 
-  getGarageHistory(){
-    return this.http.get<any>(this._historyUrl)
+  getRepairs(){
+    return this.http.get<any>(this._repairsUrl)
   }
 }
