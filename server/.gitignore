@@ -5,6 +5,8 @@
 /dist-server
 /tmp
 /out-tsc
+#mongod database folder
+/data
 
 # dependencies
 ./KS-yoseph/node_modules
