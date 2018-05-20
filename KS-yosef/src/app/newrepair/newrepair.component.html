@@ -28,6 +28,7 @@
                         <th>Plate Number</th>
                         <th>Problem</th>
                         <th>Person In Charge</th>
+                        <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -37,8 +38,8 @@
                             <td data-title="reportedProblem">{{ repair.reportedProblem }} </td>
                             <td data-title="personInCharge" >{{ repair.personInCharge }}</td>
                     <td>
-                    <!-- <a class="btn btn-success" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_16').modal('show');" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" href="" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(16);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a> -->
-                    <!-- <div id="nurse_view_16" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <a class="btn btn-success" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_16').modal('show');" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" href="" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(16);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                    <div id="nurse_view_16" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                      
                         <div class="modal-content">
@@ -56,7 +57,7 @@
                         </div>
                      
                       </div>
-                    </div> -->
+                    </div>
                     <!-- <a class="btn btn-success" (click)="open(content)" data-original-title="View"><i class="fa fa-eye"></i></a>
                     <ng-template #content let-c="close" let-d="dismiss">
                       <div class="modal-header">

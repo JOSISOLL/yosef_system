@@ -8,7 +8,7 @@ const repairSchema = new Schema(
         reportedProblem: String,
         carType: String,
         remark: String,
-        presonInCharge: String,
+        personInCharge: String,
         date: String
     })
 
