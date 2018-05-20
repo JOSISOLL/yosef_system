@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private _historyService: HistoryService, private _router: Router) { }
 
   ngOnInit() {
-    this._historyService.getGarageHistory()
+    this._historyService.getRepairs()
       .subscribe(
         res => this.garageHistory = res,
         err => {

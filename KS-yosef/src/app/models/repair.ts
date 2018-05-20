@@ -4,6 +4,6 @@ export class Repair{
     reportedProblem: string;
     carType: string;
     remark: string;
-    presonInCharge: string;
-    date: string;
+    personInCharge: string;
+    date: String;
 }

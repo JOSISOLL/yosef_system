@@ -99,6 +99,8 @@ const routes: Routes = [
     component: AddSupliersPageComponentComponent, 
     canActivate: [AuthGuard]
   }
+  }  
+  
 ];
 
 @NgModule({
