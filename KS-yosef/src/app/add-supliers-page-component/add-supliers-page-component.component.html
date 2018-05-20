@@ -13,15 +13,13 @@
     <!-- Full Width boxes (Stat box) -->
     <div class="row">
       <div class="col-md-12">
-
+					<form [formGroup]="myForm" (ngSubmit)="onSubmit()" id="fromsuplier" novalidate>
         <div class="box box-success" id="box_model">
           <div class="box-body">
             <div class="form-group col-md-12" style="padding-top:10px;">
               <div class="pull-right">
-                <button type="button" class="btn btn-success btnsp"><i class="fa fa-save fa-2x"></i><br/>
-                Save Information</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-warning btnsp" data-toggle="tooltip"
-                  href="http://sakosys.com/temp/garage-management-system/supplier/supplierlist.php" data-original-title="Back"><i class="fa fa-reply  fa-2x"></i><br/>
-                Back</a> </div>
+                <button type="submit" class="btn btn-success btnsp"><i class="fa fa-save fa-2x"></i><br/> Save Information </button>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="click_backButton" class="btn btn-warning btnsp" data-toggle="tooltip" data-original-title="Back"><i class="fa fa-reply fa-2x"></i><br/> Back</a> </div>
             </div>
           </div>
         </div>
@@ -29,26 +27,27 @@
           <div class="box-header">
             <h3 class="box-title">Supplier Entry Form</h3>
           </div>
-          <form onSubmit="return validateMe();" id="fromsuplier" action="http://sakosys.com/temp/garage-management-system/supplier/addsupplier.php"
-            method="post" enctype="multipart/form-data">
+          
             <div class="box-body">
               <div class="form-group">
                 <label for="txtSName"><span style="color:red;">*</span> Supplier Name :</label>
-                <input type="text" name="txtSName" value="" id="txtSName" class="form-control" />
+								<input formControlName="name" type="text" name="txtSName" value="" id="txtSName" class="form-control" required/>
+								<label *ngIf="name.invalid" style="color:red;"> This is field is required</label>
               </div>
               <div class="form-group">
-                <label for="txtSEmail"><span style="color:red;">*</span> Email :</label>
-                <input type="text" name="txtSEmail" value="" id="txtSEmail" class="form-control" />
+									<label for="txtSName"> Email :</label>
+									<input formControlName="email" type="text" name="txtSEmail" value="" id="txtSEmail" class="form-control" required/>
+									<label *ngIf="email.invalid" style="color:red;"> This is field is required</label>
               </div>
               <div class="form-group">
-                <label for="txtSAddress"><span style="color:red;">*</span> Address :</label>
-                <textarea name="txtSAddress" id="txtSAddress" class="form-control"></textarea>
+								<label for="txtSName"> AddressAddress :</label>
+                <textarea formControlName="address" name="txtSAddress" id="txtSAddress" class="form-control"></textarea>
               </div>
               <div class="form-group">
-                <label for="ddlCountry"><span style="color:red;">*</span> Country :</label>
-                <select name="ddlCountry" onchange="loadStates(this.value);" id="ddlCountry" class="form-control">
-            	<option value="">--Select Country--</option>
-                					<option  value="1">Afghanistan</option>
+                <label for="ddlCountry"> Country :</label>
+                <select formControlName="country" name="ddlCountry"  id="ddlCountry" class="form-control">
+            			<option value="">--Select Country--</option>
+									<option  value="1">Afghanistan</option>
 									<option  value="2">Albania</option>
 									<option  value="3">Algeria</option>
 									<option  value="4">American Samoa</option>
@@ -294,63 +293,36 @@
 									<option  value="244">Yugoslavia</option>
 									<option  value="245">Zambia</option>
 									<option  value="246">Zimbabwe</option>
-				            </select>
-              </div>
-              <div class="form-group">
-                <label for="ddlState"><span style="color:red;">*</span> State :</label>
-                <select name="ddlState" id="ddlState" class="form-control">
-            	<option value="">--Select State--</option>
-				            </select>
+                </select>
               </div>
               <div class="form-group">
                 <label for="txtPhonenumber"><span style="color:red;">*</span> Phone number:</label>
-                <input type="text" name="txtPhonenumber" value="" id="txtPhonenumber" class="form-control" />
+								<input formControlName="phone" type="text" name="txtPhonenumber" value="" id="txtPhonenumber" class="form-control" />
+								<label *ngIf="phone.invalid" style="color:red;"> This is field is required</label>
               </div>
               <div class="form-group">
                 <label for="txtFax">Fax :</label>
-                <input type="text" name="txtFax" value="" id="txtFax" class="form-control" />
+                <input formControlName="fax" type="text" name="txtFax" value="" id="txtFax" class="form-control" />
               </div>
-              <div class="form-group">
-                <label for="txtc"><span style="color:red;">*</span> Post Code :</label>
-                <input type="text" name="txtPostcode" value="" id="txtPostcode" class="form-control" />
-              </div>
+               
               <div class="form-group">
                 <label for="txtWebsite">Website</label>
-                <input type="text" name="txtWebsite" value="" id="txtWebsite" class="form-control" />
+                <input formControlName="website" type="text" name="txtWebsite" value="" id="txtWebsite" class="form-control" />
               </div>
               <div class="form-group">
                 <label for="txtWebsite">Manufacturer List</label><br />
                 <div class="ssbox">
-                  <div class="chkBoxStyle"><input type="checkbox" id="13" name="manufacturer[]" value="13"> <label for="13">555</label>&nbsp;&nbsp;<img
-                      style="float:right;" class="img_small" src="" /></div>
-                  <div class="chkBoxStyle"><input type="checkbox" id="9" name="manufacturer[]" value="9"> <label for="9">Bosch</label>&nbsp;&nbsp;<img
-                      style="float:right;" class="img_small" src="" /></div>
-                  <div class="chkBoxStyle"><input type="checkbox" id="10" name="manufacturer[]" value="10"> <label for="10">Contitech</label>&nbsp;&nbsp;<img
-                      style="float:right;" class="img_small" src="" /></div>
-                  <div class="chkBoxStyle"><input type="checkbox" id="5" name="manufacturer[]" value="5"> <label for="5">Febi</label>&nbsp;&nbsp;<img
-                      style="float:right;" class="img_small" src="" /></div>
+									<div *ngFor="let manufacturer of manufacturers" class="chkBoxStyle"><input (change)="checkBoxChange($event, manufacturer.name )" type="checkbox"> <label for="13">{{ manufacturer.name }}</label>&nbsp;&nbsp;</div>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="txtSPassword"><span style="color:red;">*</span> Password :</label>
-                <input type="password" name="txtSPassword" value="" id="txtSPassword" class="form-control" />
-              </div>
-              <div class="form-group">
-                <label for="Prsnttxtarea">Image :</label>
-                <img class="form-control" src="" style="height:100px;width:100px;" id="output" />
-                <input type="hidden" name="img_exist" value="" />
-              </div>
-              <div class="form-group"> <span class="btn btn-file btn btn-primary">Upload Image
-            <input type="file" name="uploaded_file" onchange="loadFile(event)" />
-            </span> </div>
             </div>
-            <input type="hidden" value="0" name="supplier_id" />
-          </form>
           <!-- /.box-body -->
         </div>
-        <!-- /.box -->
+				<!-- /.box -->
+			</form>
       </div>
     </div>
-    <!-- /.row -->
+		<!-- /.row -->
+	
   </section>
 </div>

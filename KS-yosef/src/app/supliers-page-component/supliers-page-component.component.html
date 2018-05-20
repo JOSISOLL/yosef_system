@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+
   <section class="content-header">
     <h1> Supplier List </h1>
     <ol class="breadcrumb">
@@ -33,7 +33,7 @@
             <table class="table sakotable table-bordered table-striped dt-responsive">
               <thead>
                 <tr>
-                  <th>Image</th>
+                   
                   <th>Name</th>
                   <th>Email</th>
                   <th>Phone Number</th>
@@ -42,13 +42,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><img class="photo_img_round img_size" src=""
-                    /></td>
-                  <td>John Rambo</td>
-                  <td>ramboo@yahoo.com</td>
-                  <td>454545454</td>
-                  <td>777777777</td>
+                <tr *ngFor="let suplier of supliers">
+                  
+                  <td> {{ suplier.name }} </td>
+                  <td> {{ suplier.email}} </td>
+                  <td> {{ suplier.phone}} </td>
+                  <td> {{ suplier.fax }}</td>
                   <td><a class="btn btn-success" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_7').modal('show');" data-original-title="View"><i class="fa fa-eye"></i></a> <a class="btn btn-primary" data-toggle="tooltip"
                       href="http://sakosys.com/temp/garage-management-system/supplier/addsupplier.php?id=7" data-original-title="Edit"><i class="fa fa-pencil"></i></a>                    <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSupplier(7);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                     <div id="nurse_view_7" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -106,4 +105,24 @@
     </div>
     <!-- /.row -->
   </section>
-</div>
+  <div class="modal modal-danger fade" id="modal-danger" style="display:block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Danger Modal</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+

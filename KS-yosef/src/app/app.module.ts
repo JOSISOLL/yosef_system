@@ -35,6 +35,8 @@ import {RepairService } from './services/repair.service';
 import { AddPartsComponentComponent } from './add-parts-component/add-parts-component.component';
 import { SupliersPageComponentComponent } from './supliers-page-component/supliers-page-component.component';
 import { AddSupliersPageComponentComponent } from './add-supliers-page-component/add-supliers-page-component.component';
+import { SuplierService } from './services/suplier.service';
+import { ManufaturerService } from './services/manufaturer.service';
 
 
 
@@ -86,7 +88,9 @@ import { AddSupliersPageComponentComponent } from './add-supliers-page-component
     },
     LoginGuard,
     CustomerService,
-    RepairService
+    RepairService,
+    SuplierService,
+    ManufaturerService
   ],
   bootstrap: [AppComponent]
 })

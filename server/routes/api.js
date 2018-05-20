@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const router = express.Router()
 const User = require('../models/user')
 const Customer = require('../models/customer')
+const Suplier = require('../models/suplier');
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
@@ -38,7 +39,6 @@ function verifyToken(req, res, next){
 }
 
 router.get('/', (req, res) => {
-
     res.send('From API route')
 })
 router.post('/register', (req, res) => {
@@ -119,19 +119,6 @@ router.post('/garage/client/add', (req, res) => {
     console.log("attempting to add client ");
     res.status(200).send({"success" : true});
 
-    // let client = Client(client);
-    // console.log(clientData);
-    // client.save((error, registerdUser) =>{
-    //     if(error){
-    //         console.log(error)
-    //     }
-    //     else{
-    //         let payload = { subject: registerdUser._id }
-    //         let token = jwt.sign(payload, RSA_PRIVATE_KEY)
-    //         res.status(200).send({token})
-    //     }
-
-    // })
 })
 router.get('/clients_get',  (req, res) => {
     Customer.find(function (error, customers){
@@ -174,4 +161,42 @@ router.post("/customer/add",  (req, res) => {
     
 
 })
+router.post("/suplier/add",  (req, res) => {
+    let suplierData = req.body; 
+    console.log("attempting customer add new suplier...")
+    let suplier = new Suplier(suplierData)
+    Suplier.findOne({phone: suplierData.phone}, (error, suplier_get) => {
+        if(error){
+            console.log(error)
+        } else{
+            if(!suplier_get){
+                suplier.save((error, addedSuplier) =>{
+                    if(error){
+                        console.log(error);
+                    }
+                    else{
+                        let add_status = "Suplier added successfully";
+                        res.status(200).send(addedSuplier);
+                        console.log(add_status);
+                    }
+                })
+            } else {
+                res.status(401).send("Suplier with this Mobile number already exists!")
+            }
+        }
+    });
+    
+
+})
+
+router.get("/supliers", (req, res)=>{
+    Suplier.find(function (error, supliers){
+        if(error){
+            console.log(error)
+        } else {
+            res.json(supliers)
+            console.log("supliers fetched from database")
+        }
+    })
+});
 module.exports = router
