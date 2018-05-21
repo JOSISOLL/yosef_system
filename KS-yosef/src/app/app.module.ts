@@ -32,13 +32,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerService } from './services/customer.service';
 import { AddRepairComponent } from './add-repair/add-repair.component';
 
-import {RepairService } from './services/repair.service';
 import { AddPartsComponentComponent } from './add-parts-component/add-parts-component.component';
 import { SupliersPageComponentComponent } from './supliers-page-component/supliers-page-component.component';
 import { AddSupliersPageComponentComponent } from './add-supliers-page-component/add-supliers-page-component.component';
 import { SuplierService } from './services/suplier.service';
 import { ManufaturerService } from './services/manufaturer.service';
 import {RepairService } from './repair.service';
+import { PartsPurchaseComponent } from './parts-purchase/parts-purchase.component';
+import { PurchasePartsComponent } from './purchase-parts/purchase-parts.component';
+import { PartsStockComponent } from './parts-stock/parts-stock.component';
+import { SellPartsListComponent } from './sell-parts-list/sell-parts-list.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,11 @@ import {RepairService } from './repair.service';
     AddRepairComponent,
     AddPartsComponentComponent,
     SupliersPageComponentComponent,
-    AddSupliersPageComponentComponent
+    AddSupliersPageComponentComponent,
+    PartsPurchaseComponent,
+    PurchasePartsComponent,
+    PartsStockComponent,
+    SellPartsListComponent
   ],
   imports: [
     BrowserModule,

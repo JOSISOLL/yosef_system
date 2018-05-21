@@ -18,6 +18,10 @@ import { AddRepairComponent } from './add-repair/add-repair.component';
 import { AddPartsComponentComponent } from './add-parts-component/add-parts-component.component';
 import { SupliersPageComponentComponent } from './supliers-page-component/supliers-page-component.component';
 import { AddSupliersPageComponentComponent} from './add-supliers-page-component/add-supliers-page-component.component';
+import { PartsPurchaseComponent } from './parts-purchase/parts-purchase.component';
+import { PurchasePartsComponent } from './purchase-parts/purchase-parts.component';
+import { PartsStockComponent } from './parts-stock/parts-stock.component';
+import { SellPartsListComponent } from './sell-parts-list/sell-parts-list.component';
 
 const routes: Routes = [
   {
@@ -98,8 +102,27 @@ const routes: Routes = [
     path: 'supliers/add', 
     component: AddSupliersPageComponentComponent, 
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'parts/purchase', 
+    component: PartsPurchaseComponent, 
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'purchase', 
+    component: PurchasePartsComponent, 
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'parts/stock', 
+    component: PartsStockComponent, 
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'sell/partslist', 
+    component: SellPartsListComponent, 
+    canActivate: [AuthGuard]
   }
-  }  
   
 ];
 

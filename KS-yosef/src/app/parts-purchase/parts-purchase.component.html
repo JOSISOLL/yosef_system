@@ -1,0 +1,81 @@
+<section class="content">
+  <!-- Full Width boxes (Stat box) -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+        <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
+         </div>
+      <div id="you" class="alert alert-success alert-dismissable" style="display:none">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+        <h4><i class="icon fa fa-check"></i> Success!</h4>
+         </div>
+      <div align="right" style="margin-bottom:1%;"> <a class="btn btn-success" data-toggle="tooltip" routerLink="/purchase" data-original-title="Add Buy Parts"><i class="fa fa-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
+      <div class="box box-success">
+        <div class="box-header">
+          <h3 class="box-title">Purchase Parts List</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table class="table sakotable table-bordered table-striped dt-responsive">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Part Number</th>
+                <th>Stamp</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Remark</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="label label-default">25/07/2017</span></td>
+                <td><span class="label label-success">294352</span></td>
+                <td><span class="label label-success">294352</span></td>
+                <td><span class="label label-danger">Some Description</span></td>
+                <td><span class="label label-info">1</span></td>
+                <td><span class="label label-primary">LAR</span></td>
+                <td>
+                <a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_purchase.php?invoice_id=294352" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_294352').modal('show');" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/buyparts.php?invoice_id=294352" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(294352);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                  <div id="nurse_view_294352" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                    <div class="modal-header orange_header">
+                      <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true"><i class="fa fa-close"></i></span></button>
+                      <h3 class="modal-title">Parts Details</h3>
+                    </div>
+                    <div class="modal-body model_view" align="center">&nbsp;
+                      <div><img class="photo_img_round" style="width:100px;height:100px;" src="http://sakosys.com/temp/garage-management-system/img/upload/24E138EA-89EE-A3A8-2BB2-87A09485D2C0.png" /></div>
+                      <div class="model_title">Audi Engine 2014</div>
+                    </div>
+            <div class="modal-body">
+                      <h3 style="text-decoration:underline;">Parts Purchase Infromation</h3>
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <b>Parts Name :</b> Audi Engine 2014<br/>
+              <b>Supplier Name :</b> Long Che<br/>
+              <b>Manufacturer Name :</b> <span class="label label-success">Febi</span><br/>
+              <b>Buy Price :</b> $5000.50<br/>
+              <b>Quantity :</b> <span class="label label-success">1</span><br/>
+              <b>Part no :</b> 896586<br/>
+              <b>Condition :</b> <span class="label label-danger">new</span><br/>
+              <b>Added Date :</b> 25/07/2017                      </div>
+                      </div>
+                    </div>				  
+                  </div>
+                </div>
+              </div>
+              </td>
+              </tr>          
+            </tbody>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div>
+</section>  
