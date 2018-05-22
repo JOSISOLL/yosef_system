@@ -30,13 +30,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><span class="label label-default">25/07/2017</span></td>
-                <td><span class="label label-success">294352</span></td>
-                <td><span class="label label-success">294352</span></td>
-                <td><span class="label label-danger">Some Description</span></td>
-                <td><span class="label label-info">1</span></td>
-                <td><span class="label label-primary">LAR</span></td>
+              <tr *ngFor="let part of parts">
+                <td><span class="label label-default">{{ part.purchaseDate | date }}</span></td>
+                <td><span class="label label-success">{{ part.partNumber}}</span></td>
+                <td><span class="label label-success">{{part.stamp}}</span></td>
+                <td><span class="label label-danger">{{part.description}}</span></td>
+                <td><span class="label label-info">{{part.quantity}}</span></td>
+                <td><span class="label label-primary">{{part.remark}}</span></td>
                 <td>
                 <a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_purchase.php?invoice_id=294352" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_294352').modal('show');" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/buyparts.php?invoice_id=294352" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(294352);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                   <div id="nurse_view_294352" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

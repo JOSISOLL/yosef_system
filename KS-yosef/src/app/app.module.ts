@@ -42,6 +42,7 @@ import { PartsPurchaseComponent } from './parts-purchase/parts-purchase.componen
 import { PurchasePartsComponent } from './purchase-parts/purchase-parts.component';
 import { PartsStockComponent } from './parts-stock/parts-stock.component';
 import { SellPartsListComponent } from './sell-parts-list/sell-parts-list.component';
+import { PartsService } from './services/parts.service';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { SellPartsListComponent } from './sell-parts-list/sell-parts-list.compon
     CustomerService,
     RepairService,
     SuplierService,
-    ManufaturerService
+    ManufaturerService,
+    PartsService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-<form >
+<form [formGroup]="partsForm" (ngSubmit)="onSubmit()" novalidate >
 <section class="content">
   <!-- Full Width boxes (Stat box) -->
   <div class="row">
@@ -8,9 +8,10 @@
           <div class="form-group col-md-12" style="padding-top:10px;">
             <div class="pull-left">
               <label class="label label-danger" style="font-size:15px;">INVOICE ID - {{invoice_id}}</label>
+              <input type="hidden" [ngModel]="invoice_id" formControlName="invoiceId" class="form-control"/>
             </div>
             <div class="pull-right">
-              <button type="button"  class="btn btn-success"><i class="fa fa-save"></i><br/></button>
+              <button type="submit"  class="btn btn-success"><i class="fa fa-save"></i><br/></button>
               <a class="btn btn-warning" data-toggle="tooltip" routerLink="/parts/purchase" data-original-title="Back"><i class="fa fa-reply"></i><br/></a> 
             </div>
           </div>
@@ -42,49 +43,49 @@
           <h3 class="box-title">Purchase Parts Form</h3>
         </div>
         <div class="box-body">
-          <div class="form-group col-md-12">
+          <div class="form-group col-md-4">
             <label for="part_number"><span style="color:red;">*</span> Part Number :</label>
-            <input type="text" name="part_number" value="" id="part_number" class="form-control" required/>
+            <input type="text" formControlName="partNumber" value="" id="part_number" class="form-control" required/>
           </div>
           <div class="form-group col-md-4">
             <label for="stamp"><span style="color:red;">*</span> Stamp :</label>
-            <input type="text" name="stamp" value="" id="stamp" class="form-control" required/>
+            <input type="text" formControlName="stamp" value="" id="stamp" class="form-control" required/>
           </div>
           <div class="form-group col-md-4">
+              <label for="parts_quantity"><span style="color:red;">*</span> Quantity :</label>
+              <input type="text" formControlName="quantity" value="" id="quantity" class="form-control ppcal allownumberonly" required/>
+          </div>
+          <div class="form-group col-md-12">
             <label for="description"><span style="color:red;">*</span> Description :</label>
-            <input type="text" name="description" value="" id="description" class="form-control" required/>
+            <textarea  formControlName="description" id="description" class="form-control" rows="5" required></textarea>
           </div>
           <div class="form-group col-md-4">
-            <label for="buy_prie"><span style="color:red;">*</span> Buy Price(Per pcs) :</label>
-            <div class="input-group"> <span class="input-group-addon">$</span>
-              <input type="text" placeholder="Buying Price" value="" name="buy_price" id="buy_price" class="form-control allownumberonly ppcal" required/>
-            </div>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="parts_quantity"><span style="color:red;">*</span> Quantity :</label>
-            <input type="text" name="parts_quantity" value="" id="parts_quantity" class="form-control ppcal allownumberonly" required/>
+              <label for="buy_prie"><span style="color:red;">*</span> Buy Price(Per pcs) :</label>
+              <div class="input-group"> <span class="input-group-addon">$</span>
+                <input type="text" placeholder="Buying Price" value="" formControlName="buyPrice" id="buyPrice" class="form-control allownumberonly ppcal" required/>
+              </div>
           </div>
           <div class="form-group col-md-4">
             <label for="parts_sell_price"><span style="color:red;">*</span> Sell Price (Per pcs) :</label>
             <div class="input-group"> <span class="input-group-addon">$</span>
-              <input type="text" placeholder="Selling Price" value="0.00" name="parts_sell_price" id="parts_sell_price" class="form-control allownumberonly" required/>
+              <input type="text" placeholder="Selling Price" value="0.00" formControlName="sellPrice" id="sellPrice" class="form-control allownumberonly" required/>
             </div>
           </div>
           <div class="form-group col-md-4">
             <label for="remark"><span style="color:red;">*</span> Remark :</label>
-            <input type="text" name="remark" value="" id="remark" class="form-control" required/>
+            <input type="text" formControlName="remark" value="" id="remark" class="form-control" required/>
           </div>
           <div class="form-group col-md-4">
             <label for="make"><span style="color:red;">*</span> Make :</label>
-            <input type="text" name="make" value="" id="make" class="form-control" required/>
+            <input type="text" formControlName="make" value="" id="make" class="form-control" required/>
           </div>
           <div class="form-group col-md-4">
-            <label for="type"><span style="color:red;">*</span> Type :</label>
-            <input type="text" name="type" value="" id="type" class="form-control" required/>
+            <label for="shelfNumber"><span style="color:red;">*</span> Shelf Number :</label>
+            <input type="text" formControlName="shelfNumber" value="" id="shelfNumber" class="form-control" required/>
           </div>
           <div class="form-group col-md-4">
             <label for="parts_add_date">Purchase Date :</label>
-            <input type="text" name="parts_add_date" value="20/05/2018" id="parts_add_date" class="form-control datepicker" />
+            <input type="date" formControlName="purchaseDate" [ngModel]="date" id="purchaseDate" class="form-control" />
           </div>
           <!-- <div class="form-group col-md-4">
             <label for="parts_warranty">Parts Warranty :</label>
@@ -117,7 +118,6 @@
             <input type="file" name="uploaded_file" onchange="loadFile(event)" />
             </span> </div> -->
         </div>
-        <input type="hidden" value="{{invoice_id}}" name="invoice_id"/>
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
