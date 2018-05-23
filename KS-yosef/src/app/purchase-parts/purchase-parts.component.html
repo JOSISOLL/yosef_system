@@ -59,31 +59,35 @@
             <label for="description"><span style="color:red;">*</span> Description :</label>
             <textarea  formControlName="description" id="description" class="form-control" rows="5" required></textarea>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
+              <label for="supplier"><span style="color:red;">*</span> Supplier </label>
+              <input type="text" placeholder="Supplier Name" value="" formControlName="supplier" id="supplier" class="form-control" required/>
+          </div>
+          <div class="form-group col-md-3">
               <label for="buy_prie"><span style="color:red;">*</span> Buy Price(Per pcs) :</label>
               <div class="input-group"> <span class="input-group-addon">$</span>
                 <input type="text" placeholder="Buying Price" value="" formControlName="buyPrice" id="buyPrice" class="form-control allownumberonly ppcal" required/>
               </div>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="parts_sell_price"><span style="color:red;">*</span> Sell Price (Per pcs) :</label>
             <div class="input-group"> <span class="input-group-addon">$</span>
               <input type="text" placeholder="Selling Price" value="0.00" formControlName="sellPrice" id="sellPrice" class="form-control allownumberonly" required/>
             </div>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="remark"><span style="color:red;">*</span> Remark :</label>
             <input type="text" formControlName="remark" value="" id="remark" class="form-control" required/>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="make"><span style="color:red;">*</span> Make :</label>
             <input type="text" formControlName="make" value="" id="make" class="form-control" required/>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="shelfNumber"><span style="color:red;">*</span> Shelf Number :</label>
             <input type="text" formControlName="shelfNumber" value="" id="shelfNumber" class="form-control" required/>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="parts_add_date">Purchase Date :</label>
             <input type="date" formControlName="purchaseDate" [ngModel]="date" id="purchaseDate" class="form-control" />
           </div>

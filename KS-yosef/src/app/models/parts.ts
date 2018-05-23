@@ -3,6 +3,7 @@ export class Parts{
     partNumber: string; 
     stamp: string; 
     description: string;
+    supplier: string;
     buyPrice: number;
     quantity: number;
     sellPrice: number;

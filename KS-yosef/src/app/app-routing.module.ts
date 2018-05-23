@@ -22,6 +22,7 @@ import { PartsPurchaseComponent } from './parts-purchase/parts-purchase.componen
 import { PurchasePartsComponent } from './purchase-parts/purchase-parts.component';
 import { PartsStockComponent } from './parts-stock/parts-stock.component';
 import { SellPartsListComponent } from './sell-parts-list/sell-parts-list.component';
+import { PurchaseInvoiceComponent } from './purchase-invoice/purchase-invoice.component';
 
 const routes: Routes = [
   {
@@ -121,6 +122,11 @@ const routes: Routes = [
   {
     path: 'sell/partslist', 
     component: SellPartsListComponent, 
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'purchase/invoice', 
+    component: PurchaseInvoiceComponent, 
     canActivate: [AuthGuard]
   }
   

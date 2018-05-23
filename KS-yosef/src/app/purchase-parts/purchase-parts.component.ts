@@ -17,6 +17,7 @@ export class PurchasePartsComponent implements OnInit {
   partNumber: FormControl; 
   stamp: FormControl; 
   description: FormControl;
+  supplier: FormControl;
   buyPrice: FormControl;
   quantity: FormControl;
   sellPrice: FormControl;
@@ -33,6 +34,7 @@ export class PurchasePartsComponent implements OnInit {
     this.invoiceId = new FormControl('', Validators.required);
     this.partNumber = new FormControl('', Validators.required);
     this.stamp = new FormControl('', Validators.required);
+    this.supplier = new FormControl('', Validators.required);
     this.description = new FormControl();
     this.buyPrice = new FormControl();
     this.quantity = new FormControl('', Validators.required);
@@ -49,6 +51,7 @@ export class PurchasePartsComponent implements OnInit {
       partNumber: this.partNumber,
       stamp: this.stamp,
       description: this.description,
+      supplier: this.supplier,
       buyPrice: this.buyPrice,
       quantity: this.quantity,
       sellPrice: this.sellPrice,
