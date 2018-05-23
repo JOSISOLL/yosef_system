@@ -31,13 +31,25 @@ import { SettingsColorDoorComponent } from './settings-color-door/settings-color
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerService } from './services/customer.service';
 import { AddRepairComponent } from './add-repair/add-repair.component';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a7ac868526399087d6c57558e78bb2551be1016
 import { AddPartsComponentComponent } from './add-parts-component/add-parts-component.component';
 import { SupliersPageComponentComponent } from './supliers-page-component/supliers-page-component.component';
 import { AddSupliersPageComponentComponent } from './add-supliers-page-component/add-supliers-page-component.component';
 import { SuplierService } from './services/suplier.service';
 import { ManufaturerService } from './services/manufaturer.service';
 import {RepairService } from './repair.service';
+<<<<<<< HEAD
 import { LabelBoxComponent } from './label-box/label-box.component';
+=======
+import { PartsPurchaseComponent } from './parts-purchase/parts-purchase.component';
+import { PurchasePartsComponent } from './purchase-parts/purchase-parts.component';
+import { PartsStockComponent } from './parts-stock/parts-stock.component';
+import { SellPartsListComponent } from './sell-parts-list/sell-parts-list.component';
+import { PartsService } from './services/parts.service';
+>>>>>>> 7a7ac868526399087d6c57558e78bb2551be1016
 
 @NgModule({
   declarations: [
@@ -64,7 +76,14 @@ import { LabelBoxComponent } from './label-box/label-box.component';
     AddPartsComponentComponent,
     SupliersPageComponentComponent,
     AddSupliersPageComponentComponent,
+<<<<<<< HEAD
     LabelBoxComponent
+=======
+    PartsPurchaseComponent,
+    PurchasePartsComponent,
+    PartsStockComponent,
+    SellPartsListComponent
+>>>>>>> 7a7ac868526399087d6c57558e78bb2551be1016
   ],
   imports: [
     BrowserModule,
@@ -88,7 +107,8 @@ import { LabelBoxComponent } from './label-box/label-box.component';
     CustomerService,
     RepairService,
     SuplierService,
-    ManufaturerService
+    ManufaturerService,
+    PartsService
   ],
   bootstrap: [AppComponent]
 })

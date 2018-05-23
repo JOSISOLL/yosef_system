@@ -10,6 +10,7 @@ const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
 const keypair = require('keypair')
 const RSA_PRIVATE_KEY = "secret-key"
+const Purchase = require('../models/parts')
 mongoose.connect(db2, err => {
     if(err){
         console.error('Error!' + err)
@@ -182,21 +183,7 @@ router.get("/supliers", (req, res)=>{
         }
     })
 });
-// router.post("/repair/add", verifyToken, (req, res) => {
-//     let repairData = req.body
-//     let repair = new Repair(repairData)
 
-//     repair.save((error, addedRepair) => {
-//         console.log("attempting to add new repair to customer : " + req.customer)
-//         if(error){
-//             console.log(error)
-//         } else {
-//             let add_status = "Repair added successfully"
-//             res.status(200).send(addedRepair)
-//             console.log(add_status)
-//         }
-//     })
-// })
 
 router.post("/repair/add", verifyToken, (req, res) => {
         let repairData = req.body
@@ -213,4 +200,29 @@ router.post("/repair/add", verifyToken, (req, res) => {
     
 
 })
+router.post("/parts/purchase", verifyToken, (req, res) => {
+    let purchaseData = req.body
+    let purchase = new Purchase(purchaseData)
+    purchase.save((error, partPurchased) =>{
+        if(error){
+        console.log(error)
+        } else {
+            res.status(200).send(partPurchased)
+        }
+    })
+})
+
+router.get("/purchases", (req, res)=>{
+    Purchase.find(function (error, purchases){
+        if(error){
+            console.log(error)
+        } else {
+            res.json(purchases)
+            console.log("purchases fetched from database")
+        }
+    })
+});
+
+
+
 module.exports = router

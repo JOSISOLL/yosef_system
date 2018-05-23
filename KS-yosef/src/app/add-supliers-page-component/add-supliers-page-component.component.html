@@ -1,29 +1,17 @@
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <h1> Add New Supplier </h1>
-    <ol class="breadcrumb">
-      <li><a href="http://sakosys.com/temp/garage-management-system/dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Supplier</li>
-      <li class="active">Add Supplier</li>
-    </ol>
-  </section>
-  <!-- Main content -->
-  <section class="content">
-    <!-- Full Width boxes (Stat box) -->
-    <div class="row">
-      <div class="col-md-12">
-					<form [formGroup]="myForm" (ngSubmit)="onSubmit()" id="fromsuplier" novalidate>
+<section class="content">
+	<!-- Full Width boxes (Stat box) -->
+	<div class="row">
+		<div class="col-md-12">
+			<form [formGroup]="myForm" (ngSubmit)="onSubmit()" id="fromsuplier" novalidate>
         <div class="box box-success" id="box_model">
           <div class="box-body">
             <div class="form-group col-md-12" style="padding-top:10px;">
-              <div class="pull-right">
-                <button type="submit" class="btn btn-success btnsp"><i class="fa fa-save fa-2x"></i><br/> Save Information </button>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a (click)="click_backButton" class="btn btn-warning btnsp" data-toggle="tooltip" data-original-title="Back"><i class="fa fa-reply fa-2x"></i><br/> Back</a> </div>
+              <div align="right" style="margin-bottom:1%;"> <button class="btn btn-success" type="submit"  ><i class="fa fa-save"></i></button>	&nbsp;<a class="btn btn-warning"  routerLink="/supliers" title="" data-toggle="tooltip" data-original-title="Back"><i class="fa fa-reply"></i></a> 
+							</div>
             </div>
           </div>
         </div>
-        <div class="box box-success">
+			<div class="box box-success">
           <div class="box-header">
             <h3 class="box-title">Supplier Entry Form</h3>
           </div>
@@ -320,9 +308,8 @@
         </div>
 				<!-- /.box -->
 			</form>
-      </div>
-    </div>
-		<!-- /.row -->
+		</div>
+	</div>
+	<!-- /.row -->
 	
-  </section>
-</div>
+</section>
