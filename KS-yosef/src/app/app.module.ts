@@ -31,14 +31,13 @@ import { SettingsColorDoorComponent } from './settings-color-door/settings-color
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerService } from './services/customer.service';
 import { AddRepairComponent } from './add-repair/add-repair.component';
-
-import {RepairService } from './services/repair.service';
 import { AddPartsComponentComponent } from './add-parts-component/add-parts-component.component';
 import { SupliersPageComponentComponent } from './supliers-page-component/supliers-page-component.component';
 import { AddSupliersPageComponentComponent } from './add-supliers-page-component/add-supliers-page-component.component';
 import { SuplierService } from './services/suplier.service';
 import { ManufaturerService } from './services/manufaturer.service';
 import {RepairService } from './repair.service';
+import { LabelBoxComponent } from './label-box/label-box.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +63,8 @@ import {RepairService } from './repair.service';
     AddRepairComponent,
     AddPartsComponentComponent,
     SupliersPageComponentComponent,
-    AddSupliersPageComponentComponent
+    AddSupliersPageComponentComponent,
+    LabelBoxComponent
   ],
   imports: [
     BrowserModule,

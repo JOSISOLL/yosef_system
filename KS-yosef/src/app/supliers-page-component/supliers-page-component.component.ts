@@ -4,6 +4,9 @@ import { SuplierService } from '../services/suplier.service';
 import { HttpErrorResponse} from '@angular/common/http'
 import { Router } from '@angular/router';
 
+declare var jquery: any; 
+declare var $ :any;
+
 
 @Component({
   selector: 'app-supliers-page-component',
@@ -13,10 +16,17 @@ import { Router } from '@angular/router';
 })
 export class SupliersPageComponentComponent implements OnInit {
   supliers: Suplier[];
+  viewSelectedSuplier : Suplier; 
+  mock_data: any[] = [
+    "SAMPLE-1", 
+    "SAMPLE-2", 
+    "SAMPLE-3"
+  ];
   constructor(private _suplerServie: SuplierService, private _router:Router) { }
   
   ngOnInit() {
     this.getAllSupliers();
+    
   }
 
   getAllSupliers(){
@@ -30,6 +40,17 @@ export class SupliersPageComponentComponent implements OnInit {
         }
       }
     )
+  }
+
+  setViewContent(data: Suplier){
+    this.viewSelectedSuplier = data;
+
+    $("#modal-view-suplier").modal("show");
+    console.log(this.viewSelectedSuplier);
+  }
+  setEditContent(data: Suplier){
+    this.viewSelectedSuplier = data; 
+    $("#modal-edit-suplier").modal("show"); 
   }
 
 
