@@ -1,0 +1,97 @@
+<section class="content">
+  <!-- Full Width boxes (Stat box) -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+        <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
+         </div>
+      <div id="you" class="alert alert-success alert-dismissable" style="display:none">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+        <h4><i class="icon fa fa-check"></i> Success!</h4>
+         </div>
+      <div class="box box-success">
+        <div class="box-header">
+          <h3 class="box-title">Sold Parts List</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table class="table sakotable table-bordered table-striped dt-responsive">
+            <thead>
+              <tr>
+                <th>Invoice No</th>
+          <th>Buyer Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Quantity</th>
+          <th>Total Price</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                          <tr>
+                <td><span class="label label-success">127471</span></td>
+                <td>John</td>
+                <td>jooo@yahoo.com</td>
+                <td>1212121</td>
+          <td><span class="label label-danger">2</span></td>
+          <td><span class="label label-info">$5512.00</span></td>
+          <td><span class="label label-primary">22/03/2018</span></td>                     
+                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=127471" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=17" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(17);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                  </td>
+              </tr>
+                          <tr>
+                <td><span class="label label-success">240506</span></td>
+                <td>Spider Man</td>
+                <td>eliza@yahoo.com</td>
+                <td>01911762147</td>
+          <td><span class="label label-danger">1</span></td>
+          <td><span class="label label-info">$100.00</span></td>
+          <td><span class="label label-primary">20/03/2018</span></td>                     
+                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=240506" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=15" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(15);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                  </td>
+              </tr>
+                          <tr>
+                <td><span class="label label-success">861052</span></td>
+                <td>Elizia</td>
+                <td>eliza@yahoo.com</td>
+                <td>01911762147</td>
+          <td><span class="label label-danger">2</span></td>
+          <td><span class="label label-info">$555.75</span></td>
+          <td><span class="label label-primary">18/06/2017</span></td>                     
+                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=861052" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=13" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(13);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                  </td>
+              </tr>
+                          <tr>
+                <td><span class="label label-success">226865</span></td>
+                <td>Elizia</td>
+                <td>eliza@yahoo.com</td>
+                <td>01911762147</td>
+          <td><span class="label label-danger">2</span></td>
+          <td><span class="label label-info">$564.52</span></td>
+          <td><span class="label label-primary">18/06/2017</span></td>                     
+                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=226865" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=14" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(14);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                  </td>
+              </tr>
+                          <tr>
+                <td><span class="label label-success">262363</span></td>
+                <td>John Rambo</td>
+                <td>john@yahoo.com</td>
+                <td>01111111112</td>
+          <td><span class="label label-danger">1</span></td>
+          <td><span class="label label-info">$35.00</span></td>
+          <td><span class="label label-primary">18/04/2017</span></td>                     
+                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=262363" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=16" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(16);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                  </td>
+              </tr>
+                        </tbody>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  

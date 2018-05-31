@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HistoryService } from '../history.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-newrepair',
@@ -10,13 +11,18 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class NewrepairComponent implements OnInit {
 
-  garageHistory = []
-  constructor(private _historyService: HistoryService, private _router: Router) { }
+  repairs = []
+  closeResult: string;
+  constructor(private _historyService: HistoryService, private _router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this._historyService.getGarageHistory()
+    this._historyService.getRepairs()
       .subscribe(
-        res => this.garageHistory = res,
+        res => {
+          this.repairs = res
+          console.log(res)
+        
+        },
         err => {
           if (err instanceof HttpErrorResponse){
             if (err.status === 401){
@@ -27,20 +33,25 @@ export class NewrepairComponent implements OnInit {
         }
       )
       
+      
   }
- 
-  // deleteCustomer(Id){
-  //   var iAnswer = confirm("Are you sure you want to delete this Car ?");
-  //   if(iAnswer){
-  //     window.location = 'http://sakosys.com/temp/garage-management-system/repaircar/carlist.php?id=' + Id;
-  //     }
+
+  // open(content) {
+  //   this.modalService.open(content).result.then((result) => {
+  //     this.closeResult = `Closed with: ${result}`;
+  //   }, (reason) => {
+  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  //   });
+  // }
+
+  // private getDismissReason(reason: any): string {
+  //   if (reason === ModalDismissReasons.ESC) {
+  //     return 'by pressing ESC';
+  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  //     return 'by clicking on a backdrop';
+  //   } else {
+  //     return  `with: ${reason}`;
   //   }
-              
-  //   $( document ).ready(function() {
-  //     setTimeout(function() {
-  //       $("#me").hide(300);
-  //       $("#you").hide(300);
-  //       }, 3000);
-  //     });
+  // }
 
 }

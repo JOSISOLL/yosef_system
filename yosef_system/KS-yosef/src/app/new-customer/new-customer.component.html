@@ -1,79 +1,58 @@
-<div class="content-wrapper">
-    <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <form> 
-              <fieldset>
-                <legend> Client Information </legend>
-                First Name: <br> 
-                <input type="text" value="Yohannes"><br>
-                <br>
-                
-              </fieldset>
-            </form>
-          </div>
-        <div class="row pt-5">  
-            <div class="col-md-12 mx-auto">
-              <div class="card rounded-0">
-                <div class="card-header">
-                  <h3 class="mb-0">New Customer</h3>
-                </div>
-                <div class="card-body">
-                  <form [formGroup]="rForm" class="form" (ngSubmit)="addNewUser(rForm.value)">
-                      <div class="form-group col-md-5 float-right">
-                        <label><i class="fa fa-calendar"></i> Date:</label>
-                        <div class="input-group date">
-                          <input formControlName="date" type="text" class="form-control pull-right" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                        </div>  
-                      </div>
-                      <div class="form-group col-md-5">
-                        <label for=""><i class="fa fa-user"></i>  Customer Name:</label>
-                        <input formControlName="customer_name" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5 float-right">
-                        <label for=""><i class="fa fa-exclamation-triangle"></i>  Reported Problem:</label>
-                        <input formControlName="reported_problem" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5">
-                          <label for=""><i class="fa fa-newspaper"></i>  Plate number:</label>
-                          <input formControlName="plate_number" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5 float-right">
-                          <label for=""><i class="fa fa-car"></i>  Car Type:</label>
-                          <input formControlName="car_type" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5">
-                          <label for=""><i class="fa fa-comment"></i>  Remark:</label>
-                          <input formControlName="remark" name="name" type="text" class="form-control rounded-0" required>
-                      </div>
-                      <div class="form-group col-md-5">
-                          <label for=""><i class="fa fa-wrench"></i>  Person in charge:</label>
-                          <select formControlName="person_in_charge" class="form-control">
-                              <option>Employee 1</option>
-                              <option>Employee 2</option>
-                              <option>Employee 3</option>
-                              <option>Employee 4</option>
-                              <option>Employee 5</option>
-                            </select>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="row align-items-center justify-content-center">
-                          <!-- <div class="col-md-4">
-                            <button class="btn btn-primary btn-sm" type="button">Confirm</button>
-                          </div> -->
-                          <div class="col-md-6">
-                            <button class="btn btn-outline-success" type="submit"><i class="fa fa-save"></i> Save</button>
-                            <button class="btn btn-outline-danger pull-right" type="button"><i class="fa fa-times"></i> Clear </button>
-                          </div>
-                        </div>
-                      </div>
-                    
-                      <!-- <button type="button" class="btn btn-outline-success"><i class="far fa-save"></i> Save</button> -->
-                  </form>
-                </div>
-              </div>
+<form  [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
+ <section class="content">
+   <div class="row">
+     <div class="col-md-12">
+      <div align="right" style="margin-bottom:1%;"> <button class="btn btn-success" type="submit"  ><i class="fa fa-save"></i></button>	&nbsp;<a class="btn btn-warning"  routerLink="/customer" title="" data-toggle="tooltip" data-original-title="Back"><i class="fa fa-reply"></i></a> 
+      </div>
+       <div class="box box-success">
+         <div class="box-header">
+           <h3 class="box-tit le"><i class="fa fa-plus"></i> Customer Form</h3>
+         </div>
+         <div class="box-body">
+           <div class="form-group">
+             <label for="txtCName"><span style="color:red;">*</span> Name :</label>
+             <input formControlName="name" type="text"   value="" id="txtCName" class="form-control" required />
+             <label *ngIf="name.invalid" style="color:red;"> This is field is required</label>
             </div>
+           <div class="form-group">
+             <label for="txtCEmail"> Email :</label>
+             <input formControlName="email" type="text"   value="" id="txtCEmail" class="form-control" />
+             <label  *ngIf="email.invalid" style="color:red;"> Wrong format</label>
+           </div>
+           <div class="form-group">
+            <label for="txtCMobile"><span style="color:red;">*</span> Mobile Tel :</label>
+            <input formControlName="telMobile" type="text"   value="" id="txtCMobile" class="form-control" required/>
+            <label  *ngIf="telMobile.invalid" style="color:red;"> This is field is required</label>
           </div>
-     
-    </section>
-</div>
+          <div class="form-group">
+            <label for="txtCHomeTel">  Home Tel :</label>
+            <input formControlName="telHome" type="text"   value="" id="txtCHomeTel" class="form-control" />
+            <label  *ngIf="telHome.invalid" style="color:red;"> Invalid Format. Eg: +251113483322</label>
+          </div>
+           <div class="form-group">
+             <label for="txtCWorkTel">  Work Tel :</label>
+             <input formControlName="telWork" type="text"   value="" id="txtCWorkTel" class="form-control" />
+             <label  *ngIf="telWork.invalid" style="color:red;"> Invalid Format. Eg: +251113483322 </label>
+           </div>
+           <div class="form-group">
+            <label for="txtCAddress">  Address :</label>
+            <textarea formControlName="address"   id="txtCAddress" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="Prsnttxtarea">Priview :</label>
+            <img class="form-control" src="" style="height:100px;width:100px;" id="output" />
+            <input type="hidden"   value="" />
+          </div>
+          <div class="form-group"> <span class="btn btn-file btn btn-primary">Upload Image
+            <input type="file"   />
+            </span> 
+          </div>
+        </div>
+        <input type="hidden" value="0" />
+         <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+     </div>
+   </div>
+ </section>
+</form>

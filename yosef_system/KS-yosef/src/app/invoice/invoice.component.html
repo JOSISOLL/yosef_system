@@ -1,0 +1,211 @@
+<div class="invoice-wrap">
+  <div class="container" width="800px" id="invoice" >
+    <div class="row">
+      <div class="col-xs-12 heading">
+        INVOICE
+      </div>
+    </div>
+    <!-- <div class="row branding">
+      <div class="col-xs-6">
+        <div class="invoice-number-container">
+          <label for="invoice-number">Invoice #</label><input type="text" id="invoice-number" ng-model="invoice.invoice_number" />
+        </div>
+      </div>
+      <div class="col-xs-6 logo-container">
+        <input type="file" id="imgInp" />
+        <img ng-hide="logoRemoved" id="company_logo"  alt="your image" width="300" />
+        <div>
+          <div class="noPrint" ng-hide="printMode">
+            <a ng-click="editLogo()" href >Edit Logo</a>
+            <a ng-click="toggleLogo()" id="remove_logo" href >{{ logoRemoved ? 'Show' : 'Hide' }} logo</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="row infos">
+      <div class="col-xs-6">
+        <div class="input-container"><input type="text" ng-model="invoice.customer_info.name"/></div>
+        <div class="input-container"><input type="text" ng-model="invoice.customer_info.web_link"/></div>
+        <div class="input-container"><input type="text" ng-model="invoice.customer_info.address1"/></div>
+        <div class="input-container"><input type="text" ng-model="invoice.customer_info.postal"/></div>
+        <div class="input-container" data-ng-hide='printMode'>
+          <select ng-model="invoice.currency">
+            <option  *ngFor="let currency of availableCurrencies" value="{{currency.symbol}}">{{currency.name}}</option>
+          </select>
+        </div>
+      </div>
+    
+      <div class="col-xs-6 right">
+        <div class="input-container"><input type="text" ng-model="invoice.company_info.name"/></div>
+        <div class="input-container"><input type="text" ng-model="invoice.company_info.web_link"/></div>
+        <div class="input-container"><input type="text" ng-model="invoice.company_info.address1"/></div>
+        <div class="input-container"><input type="text" ng-model="invoice.company_info.address2"/></div>
+        <div class="input-container"><input type="text" ng-model="invoice.company_info.postal"/></div>
+      </div>
+    </div> -->
+    <div class="items-table">
+      <div class="row header">
+        <div class="col-xs-1">&nbsp;</div>
+        <div class="col-xs-3">Part Number</div>
+        <!-- <div class="col-xs-3">Stamp</div> -->
+        <div class="col-xs-2">Quantity</div>
+        <div class="col-xs-3">Cost {{currencySymbol}}</div>
+        <div class="col-xs-3 text-right">Total</div>
+      </div>
+      <div class="row invoice-item" *ngFor="let item of items" ng-animate="'slide-down'">
+        <div *ngIf="editing && item.id === count" class="col-xs-1 remove-item-container">
+          <a ng-hide="printMode" (click)="revert()" class="btn btn-danger">[X]</a>
+        </div>
+        <div *ngIf="count && item.id != count" class="col-xs-1 remove-item-container">
+            <a ng-hide="printMode" (click)="remove()" class="btn btn-danger">[X]</a>
+          </div>
+       
+          <!-- <div *ngIf="item.name != 'null'; else elseBlock1" class="col-xs-5 input-container">
+              {{ item.name }}
+          </div>
+          <div class="col-xs-2 input-container">
+            <input ng-model="item.qty" value="1" size="4" ng-required ng-validate="integer" placeholder="Quantity" />
+          </div>
+          <div class="col-xs-2 input-container">
+            <input ng-model="item.cost" value="0.00" ng-required ng-validate="number" size="6" placeholder="Cost" />
+          </div>
+          <div class="col-xs-2 text-right input-container">
+            {{item.cost * item.qty | currency: currencySymbol}}
+          </div> -->
+
+
+
+
+        <span class="col-xs-3 input-container" *ngIf="item.name != 'null'; else elseBlock1" >{{ item.name }}</span>
+        <span class="col-xs-2 input-container" *ngIf="item.quantity != -1; else elseBlock2" >{{ item.quantity }}</span>
+        <span class="col-xs-3 input-container" *ngIf="item.rate != -1; else elseBlock3" >ETB {{ item.rate | number : '1.2-2' }}</span>
+        <span class="col-xs-3 input-container" *ngIf="item.rate != -1 || item.quantity != -1; else elseBlock4" >ETB {{ item.quantity * item.rate | number : '1.2-2' }}</span>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+          <ng-template #elseBlock1 class="col-xs-4 text-right input-container">
+            <input [(ngModel)]="name" name="name"  placeholder="Part Number" value="Item" required>
+          </ng-template>
+          <!-- <div class="col-xs-3 input-container">
+            <input [(ngModel)]="quantity" name="quantity"  placeholder="Quantity" value="0" required>
+          </div> -->
+          <ng-template #elseBlock2 class="col-xs-3 text-right input-container">
+            <input [(ngModel)]="quantity" name="quantity"  placeholder="Quantity" value="0" required>
+          </ng-template>
+          <ng-template #elseBlock3 class="col-xs-3 text-right input-container">
+            <input [(ngModel)]="rate" name="rate"  placeholder="Enter price" value="0" required>
+          </ng-template>
+          <ng-template #elseBlock4 class="col-xs-1 text-right input-container">
+            {{quantity * rate || 0}}
+          </ng-template>
+          <div class="btn">
+            
+              <button *ngIf="editing && item.id === count" class="btn btn-primary float-right" >Add</button>
+              
+              <!-- <button *ngIf="editing && item.id === count" (click)="revert()" class="float-right" >Cancel</button> -->
+            </div>
+      </form>
+      </div>
+      <div class="row invoice-item">
+        <div class="col-xs-12 add-item-container" ng-hide="printMode">
+          <button class="btn btn-primary" (click)="addItem($event)" [disabled]="editing">[+]</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-10 text-right">Sub Total</div>
+        <div class="col-xs-2 text-right">{{subTotal | number : '1.2-2'}}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-10 text-right">Tax: </div>
+        <div class="col-xs-2 text-right">{{ tax }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-10 text-right">Grand Total:</div>
+        <div class="col-xs-2 text-right">{{(tax * subTotal) + subTotal | number : '1.2-2'}}</div>
+      </div>
+    </div>
+    <!-- <div class="row noPrint actions">
+      <a href="javascript:window.print();" class="btn btn-primary" ng-show="printMode" ng-click="printInfo()">Print</a>
+      <a href="#" class="btn btn-primary" ng-click="clearLocalStorage()">Reset</a>
+      <a href="#" class="btn btn-primary" ng-hide="printMode" ng-click="printMode = true;">Turn On Print Mode</a>
+      <a href="#" class="btn btn-primary" ng-show="printMode" ng-click="printMode = false;">Turn Off Print Mode</a>
+      <button class="btn btn-submit" *ngIf="editing && item.id === count">Add</a>
+      <button class="btn btn-danger" *ngIf="editing && item.id === count" (click)="revert()">Cancel</a>
+    </div> -->
+  </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="container">
+    
+    <div id="header">
+      <span>Invoice App</span>
+    </div>
+  
+  <div id="listArea">
+    <div *ngFor="let item of items" class="list-item">
+      
+        
+        <span *ngIf="item.name != 'null'; else elseBlock1" class="title">{{ item.name }}</span>
+        <span *ngIf="item.quantity != -1; else elseBlock2" class="quantity">{{ item.quantity }}</span>
+        <span *ngIf="item.rate != -1; else elseBlock3" class="rate">ETB {{ item.rate | number : '1.2-2' }}</span>
+        <span *ngIf="item.rate != -1 || item.quantity != -1; else elseBlock4" class="total">ETB {{ item.quantity * item.rate | number : '1.2-2' }}</span>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+          <ng-template #elseBlock1>
+            
+                <input [(ngModel)]="name" name="name"  placeholder="Item name" value="Item" required>
+            
+          </ng-template>
+  
+  
+          <ng-template #elseBlock2>
+            
+              <input [(ngModel)]="quantity" name="quantity"  placeholder="Quantity" value="0" required>
+            
+          </ng-template>
+  
+  
+          <ng-template #elseBlock3>
+            
+              <input [(ngModel)]="rate" name="rate"  placeholder="Enter price" value="0" required>
+            
+          </ng-template>
+  
+  
+          <ng-template #elseBlock4>
+            
+              <input  placeholder="Total cost" value="{{quantity * rate || 0}}">
+            
+          </ng-template>
+  
+          <div class="btn">
+            
+            <button *ngIf="editing && item.id === count" >Add</button>
+            
+            <button *ngIf="editing && item.id === count" (click)="revert()" >Cancel</button>
+          </div>
+        </form>
+  </div>
+  </div>
+  
+  <div id="fab">
+    <button (click)="addItem($event)" [disabled]="editing">
+      <svg fill="#FFFFFF" height="48" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+          <path d="M0 0h24v24H0z" fill="none"/>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="footer">
+    <div>
+      Grand Total = {{grandTotal}}
+    </div>
+  </div>
+  </div> -->
+  
+
+
+

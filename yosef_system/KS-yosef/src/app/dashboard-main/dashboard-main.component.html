@@ -1,0 +1,201 @@
+<div class="row">
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>150</h3>
+
+        <p>PARTS IN STOCK</p>
+      </div>
+      <div class="icon">
+        <!-- <i class="ion ion-bag"></i> -->
+        <img height="80" width="80" src="assets/images/car_parts.png">
+      </div>
+      <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+        <p>CUSTOMERS</p>
+      </div>
+      <div class="icon">
+        <!-- <i class="ion ion-stats-bars"></i> -->
+        <img height="80" width="80" src="assets/images/customer.png">
+      </div>
+      <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3>44</h3>
+
+        <p>CARS IN STOCK</p>
+      </div>
+      <div class="icon">
+        <!-- <i class="ion ion-person-add"></i> -->
+        <img height="80" width="80" src="assets/images/car.png">
+      </div>
+      <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-xs-6">
+    <!-- small box -->
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3>65</h3>
+
+        <p>MECHANICS</p>
+      </div>
+      <div class="icon">
+        <!-- <i class="ion ion-pie-graph"></i> -->
+        <img height="80" width="80" src="assets/images/mechanic.png">
+      </div>
+      <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+</div>
+<!-- /.row -->
+<!-- Main row -->
+<div class="row">
+  <div class="col-md-8">
+    <div class="box box-success">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-car"></i> Monthly Car Repair Report</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-center"> <strong>Car Repair: 1 Jan, 2018 - 31 December, 2018</strong> </p>
+            <div class="chart">
+              <canvas id="salesChart" style="height: 180px;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-footer no-padding">
+        <ul class="nav nav-pills nav-stacked">
+          <li><a><b>Total Car Repair Year 2018</b><span class="pull-right label label-success" style="font-size:12px;"><b>1</b></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="box box-success">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-wrench"></i> Monthly Parts Sold Report</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="row">
+          <div class="col-lg-12 col-xs-12 col-md-12">
+            <div class="chart-responsive">
+              <canvas id="pieChart" height="120"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-footer no-padding">
+        <ul class="nav nav-pills nav-stacked">
+          <li><a><b>Total Parts Sold Year 2018</b><span class="pull-right label label-success" style="font-size:12px;"><b>3</b></span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="box box-success">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-car"></i> Monthly Car Sold Report</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="row">
+          <div class="col-lg-12 col-xs-12 col-md-12">
+            <div class="chart-responsive">
+              <canvas id="pieChart2" height="120"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box-footer no-padding">
+        <ul class="nav nav-pills nav-stacked">
+          <li><a><b>Total Car Sold Year 2018</b><span class="pull-right label label-success" style="font-size:12px;"><b>1</b></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-success">
+      <div class="box-header with-border">
+        <h3 class="box-title">Latest 10 Repair List</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+          <table class="table no-margin">
+            <thead>
+              <tr>
+                <th>Car ID</th>
+                <th>Estimate No</th>
+                <th>Customer Name</th>
+                <th>Car Name</th>
+                <th>Delivered</th>
+              </tr>
+            </thead>
+            <tbody>
+                                              <tr>
+                <td><label class="label label-success">157378</label></td>
+                <td><label class="label label-success">464210</label></td>
+                <td>Jamal Uddin</td>
+                <td>Toyota Allion</td>
+                <td><label class="label label-danger">26/02/2017</label></td>
+              </tr>
+                                              <tr>
+                <td><label class="label label-success">157378</label></td>
+                <td><label class="label label-success">330521</label></td>
+                <td>Jamal Uddin</td>
+                <td>Toyota Allion</td>
+                <td><label class="label label-danger">29/01/2017</label></td>
+              </tr>
+                                              <tr>
+                <td><label class="label label-success">148627</label></td>
+                <td><label class="label label-success">403493</label></td>
+                <td>Taraq Sarker</td>
+                <td>Toyota Allion</td>
+                <td><label class="label label-danger">25/01/2017</label></td>
+              </tr>
+                                              <tr>
+                <td><label class="label label-success">148627</label></td>
+                <td><label class="label label-success">128650</label></td>
+                <td>Taraq Sarker</td>
+                <td>Toyota Allion</td>
+                <td><label class="label label-danger">19/06/2017</label></td>
+              </tr>
+                                              <tr>
+                <td><label class="label label-success">148627</label></td>
+                <td><label class="label label-success">255198</label></td>
+                <td>Taraq Sarker</td>
+                <td>Toyota Allion</td>
+                <td><label class="label label-danger">22/03/2018</label></td>
+              </tr>
+                                            </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer clearfix"><a href="http://sakosys.com/temp/garage-management-system/delivery/deliverylist.php" class="btn btn-sm btn-success btn-flat pull-right"><b><i class="fa fa-list"></i> &nbsp;View All List</b></a> </div>
+      <!-- /.box-footer -->
+    </div>
+  </div>
+</div>

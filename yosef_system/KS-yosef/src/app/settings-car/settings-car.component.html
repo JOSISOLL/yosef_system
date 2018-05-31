@@ -1,0 +1,180 @@
+<div class="row">
+  <div class="col-md-12">
+    <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+      <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
+    </div>
+    <div id="you" class="alert alert-success alert-dismissable" style="display:none">
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+      <h4><i class="icon fa fa-check"></i> Success!</h4>
+    </div>
+    <div align="right" style="margin-bottom:1%;"> 
+      <a class="btn btn-success" title="" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/setting/carsetting.php" data-original-title="Refresh Page"><i class="fa fa-refresh"></i></a> 
+    </div>
+    <div class="box box-success">
+      <form method="post" enctype="multipart/form-data">
+        <div class="box-body">
+          <div class="box-header">
+            <h3 class="box-title">Add Make</h3>
+          </div>
+          <div class="form-group col-md-10">
+            <input type="text" placeholder="Make Name" value="" name="txtMakeName" id="txtMakeName" class="form-control" required/>
+          </div>
+          <div class="form-group col-md-2">
+            <input type="submit" name="submit" class="btn btn-success" value="Save Make"/>
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <div>
+            <table class="table sakotable table-bordered table-striped dt-responsive">
+              <thead>
+                <tr>
+                  <th>Make</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Audi</td>
+                  <td>
+                    <a class="btn btn-success" data-toggle="tooltip" href="#" data-original-title="Add your Car">
+                      <i class="fa fa-edit"></i>
+                    </a> 
+                    <a class="btn btn-danger" data-toggle="tooltip" href="#" data-original-title="Delete">
+                      <i class="fa fa-trash-o"></i>
+                    </a>
+                  </td>
+                </tr>
+                 
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <input type="hidden" value="make" name="form_token"/>
+        <input type="hidden" value="0" name="submit_token"/>
+      </form>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <div class="box box-success" id="box_model">
+      <form method="post" enctype="multipart/form-data">
+        <div class="box-body">
+          <div class="box-header">
+            <h3 class="box-title">Add Model</h3>
+          </div>
+          <div class="form-group col-md-4">
+            <select class="form-control" name="ddlMake" required>
+              <option value=''>--Select Make--</option>
+              <option value='38'>Audi</option>
+              <option value='34'>BMW</option>
+              <option value='35'>BMWs</option>
+              <option value='40'>Honda</option>
+              <option value='36'>Toyota</option>            
+            </select>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="text" placeholder="Model Name" name="txtModelName" id="txtModelName" value="" class="form-control" required/>
+          </div>
+          <div class="form-group col-md-4">
+            <input type="submit" name="submit" class="btn btn-success" value="Save Model"/>
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <div>
+            <table class="table sakotable table-bordered table-striped dt-responsive">
+              <thead>
+                <tr>
+                  <th>Make Name</th>
+                  <th>Model Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>Audi</td>
+                    <td>A5</td>
+                    <td>
+                      <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/setting/carsetting.php?moid=17#box_model" data-original-title="Add your Car">
+                        <i class="fa fa-edit"></i>
+                      </a> 
+                      <a class="btn btn-danger" data-toggle="tooltip" href="#" data-original-title="Delete">
+                        <i class="fa fa-trash-o"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <input type="hidden" value="model" name="form_token"/>
+        <input type="hidden" value="0" name="submit_token"/>
+      </form>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <div class="box box-success" id="box_year">
+      <form method="post" enctype="multipart/form-data">
+        <div class="box-body">
+          <div class="box-header">
+            <h3 class="box-title">Add Year</h3>
+          </div>
+          <div class="form-group col-md-3">
+            <select onchange="loadYear(this.value);" class="form-control" name="ddlMake" required>
+              <option value="">--Select Make--</option>
+              <option value='38'>Audi</option><option value='34'>BMW</option><option value='35'>BMWs</option><option value='40'>Honda</option><option value='36'>Toyota</option>            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <select class="form-control" name="ddlModel" id="ddl_model" required>
+              <option value="">--Select Model--</option>
+                          </select>
+          </div>
+          <div class="form-group col-md-3">
+            <input type="text" placeholder="Year Name" value="" name="txtYear" id="txtYear" class="form-control" required/>
+          </div>
+          <div class="form-group col-md-3">
+            <input type="submit" name="submit" class="btn btn-success" value="Save Year" />
+            <input type="hidden" value="0" name="submit_token"/>
+          </div>
+          <br>
+          <br>
+      <br>
+          <br>
+          <div>
+            <table class="table sakotable table-bordered table-striped dt-responsive">
+              <thead>
+                <tr>
+                  <th>Make Name</th>
+                  <th>Model Name</th>
+                  <th>Year</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Audi</td>
+                  <td>A5</td>
+                  <td>2010</td>
+                  <td>
+                    <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/setting/carsetting.php?yid=15#box_year" data-original-title="Add your Car">
+                      <i class="fa fa-edit"></i>
+                    </a> 
+                    <a class="btn btn-danger" data-toggle="tooltip" data-original-title="Delete">
+                      <i class="fa fa-trash-o"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <input type="hidden" value="year" name="form_token"/>
+      </form>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  </div>

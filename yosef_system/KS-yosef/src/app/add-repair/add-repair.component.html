@@ -1,0 +1,57 @@
+<form [formGroup]="repairForm" (ngSubmit)="onSubmit()" novalidate>
+   <section class="content">
+      <!-- Full Width boxes (Stat box) -->
+    <div class="row">
+      <div class="col-md-12">
+        <div align="right" style="margin-bottom:1%;"> <button class="btn btn-success" type="submit"  ><i class="fa fa-save"></i></button>	&nbsp;<a class="btn btn-warning"  routerLink="/repair" title="" data-toggle="tooltip" data-original-title="Back"><i class="fa fa-reply"></i></a> 
+      </div>
+      <div class="box box-success">
+        <div class="box-header">
+          <h3 class="box-title"><i class="fa fa-plus"></i> Add New Repair Car</h3>
+        </div>
+          <div class="box-body">
+            <div class="form-group">
+              <label for="ddlCustomerList"><span style="color:red;">*</span> Select Customer :</label>
+              <select class='form-control' formControlName="customer" id="customerList" name="customerList">
+                <option value="">--Select Customer--</option>
+                <option  *ngFor="let client of clients" value="{{client.name}}">{{client.name}}</option>
+              </select>
+              <label *ngIf="customer.invalid" style="color:red;"> This is field is required</label>
+            </div>
+            <div class="form-group">
+              <label for="plateNumber"><span style="color:red;">*</span> Plate Number :</label>
+              <input formControlName="plateNumber" type="text"   value="" id="plateNumber" class="form-control" required />
+            </div>
+            <div class="form-group">
+            <label for="reportedProblem"><span style="color:red;">*</span> Reported Problem :</label>
+            <input formControlName="reportedProblem" type="text"   value="" id="reportedProblem" class="form-control" required />
+           </div>
+           <div class="form-group">
+            <label for="carType"><span style="color:red;">*</span> Car Type :</label>
+            <input formControlName="carType" type="text"   value="" id="carType" class="form-control" required />
+           </div>
+           <div class="form-group">
+            <label for="remark"><span style="color:red;">*</span> Remark :</label>
+            <input formControlName="remark" type="text"   value="" id="remark" class="form-control" required />
+           </div>
+           <div class="form-group">
+            <label for="personInCharge"><span style="color:red;">*</span> Person In Charge :</label>
+            <input formControlName="personInCharge" type="text"   value="" id="personInCharge" class="form-control" required />
+           </div>
+           <div class="form-group">
+            <label for="date"><span style="color:red;">*</span> Date :</label>
+            <input formControlName="date" type="text"   value="" id="date" class="form-control" required />
+           </div>
+        </div>
+          <!-- <input type="hidden" value="0" name="repair_car"/>
+          <input type="hidden" name="hfInvoiceId" value="221875" /> -->
+            <!-- /.box-body -->
+        </div>
+          <!-- /.box -->
+      </div>
+    </div>
+      <!-- /.row -->
+  </section>
+</form>
+
+  

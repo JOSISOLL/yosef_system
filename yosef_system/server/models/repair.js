@@ -1,14 +1,19 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const userSchema = new Schema(
+
+const repairSchema = new Schema(
     {
-        client_name : String,
-        plate_number : String,
-        date: String,
-        reported_problem: String, 
+        customer: String,
+        plateNumber: String, 
+        reportedProblem: String,
+        carType: String,
         remark: String,
-        car_type: String,
-        person_in_charge: String
+        personInCharge: String,
+        date: String
     })
 
-module.exports = mongoose.model('client', userSchema, 'client')
+module.exports = mongoose.model('repair', repairSchema, 'repair')
+
+
+
+
