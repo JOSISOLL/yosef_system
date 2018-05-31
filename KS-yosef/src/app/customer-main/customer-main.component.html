@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+      <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
+      Deleted Customer Information Successfully. </div>
+    <div id="you" class="alert alert-success alert-dismissable" style="display:none">
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+      <h4><i class="icon fa fa-check"></i> Success!</h4>
+       </div>
+    <div align="right" style="margin-bottom:1%;"> <a class="btn btn-success" data-toggle="tooltip" routerLink="/customer/add"  data-original-title="Add Customer"><i class="fa fa-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
+    <div class="box box-success">
+      <div class="box-header">
+        <h3 class="box-title"><i class="fa fa-list"></i> Customer List</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <table class="table sakotable table-bordered table-striped dt-responsive">
+          <thead>
+            <tr>
+              <!-- <th>Image</th> -->
+              <th>Name</th>
+              <th>Email</th>
+              <th>Mobile Tel</th>
+              <th>Home Tel</th>
+              <th>Work Tel</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let client of clients">
+              <!-- <td><img class="photo_img_round" style="width:50px;height:50px;" src="http://sakosys.com/temp/garage-management-system/img/upload/C78DAC15-6C6D-FF9B-14DE-EA3459D78F7E.jpg" /></td> -->
+              <td>{{ client.name }}</td>
+              <td>{{ client.email }}</td>
+              <td>{{ client.telMobile }}</td>
+              <td>{{ client.telHome }}</td>
+              <td>{{ client.telWork }}</td>
+              <td>{{ client.address }}</td>
+              <td><a class="btn btn-warning" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/repaircar/addcar.php?cid=1" data-original-title="Add your Car"><i class="fa fa-car"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_1').modal('show');" data-original-title="View"><i class="fa fa-eye"></i></a> <a class="btn btn-primary" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/customer/addcustomer.php?id=1" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(1);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                <div id="nurse_view_1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header orange_header">
+                        <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true"><i class="fa fa-close"></i></span></button>
+                        <h3 class="modal-title">Customer Details</h3>
+                      </div>
+                      <div class="modal-body model_view" align="center">&nbsp;
+                        <div><img class="photo_img_round" style="width:100px;height:100px;" src="http://sakosys.com/temp/garage-management-system/img/upload/C78DAC15-6C6D-FF9B-14DE-EA3459D78F7E.jpg" /></div>
+                        <div class="model_title">{{ client.name }}</div>
+                      </div>
+                      <div class="modal-body">
+                        <h3 style="text-decoration:underline;">Details Infromation</h3>
+                        <div class="row">
+                          <div class="col-xs-12"> <b>Name :</b>{{ client.name }}<br/>
+                            <b>Email :</b> {{  client.email }}<br/>
+                            <b>Address :</b> {{ client.address}}<br/>
+                            <b>Home Tel :</b> {{ client.telHome }} <br/>
+                            <b>Work Tel :</b> {{ client.telWork }}<br/>
+                            <b>Mobile Tel :</b> {{ client.telMobile }} </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                </div></td>
+            </tr>
+                       
+            
+            </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
