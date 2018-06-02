@@ -36,36 +36,13 @@
               <td>{{ client.telHome }}</td>
               <td>{{ client.telWork }}</td>
               <td>{{ client.address }}</td>
-              <td><a class="btn btn-warning" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/repaircar/addcar.php?cid=1" data-original-title="Add your Car"><i class="fa fa-car"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_1').modal('show');" data-original-title="View"><i class="fa fa-eye"></i></a> <a class="btn btn-primary" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/customer/addcustomer.php?id=1" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(1);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-                <div id="nurse_view_1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header orange_header">
-                        <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true"><i class="fa fa-close"></i></span></button>
-                        <h3 class="modal-title">Customer Details</h3>
-                      </div>
-                      <div class="modal-body model_view" align="center">&nbsp;
-                        <div><img class="photo_img_round" style="width:100px;height:100px;" src="http://sakosys.com/temp/garage-management-system/img/upload/C78DAC15-6C6D-FF9B-14DE-EA3459D78F7E.jpg" /></div>
-                        <div class="model_title">{{ client.name }}</div>
-                      </div>
-                      <div class="modal-body">
-                        <h3 style="text-decoration:underline;">Details Infromation</h3>
-                        <div class="row">
-                          <div class="col-xs-12"> <b>Name :</b>{{ client.name }}<br/>
-                            <b>Email :</b> {{  client.email }}<br/>
-                            <b>Address :</b> {{ client.address}}<br/>
-                            <b>Home Tel :</b> {{ client.telHome }} <br/>
-                            <b>Work Tel :</b> {{ client.telWork }}<br/>
-                            <b>Mobile Tel :</b> {{ client.telMobile }} </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
-                  </div>
-                </div></td>
+              <td>
+                <a class="btn btn-warning" data-toggle="tooltip" data-original-title="Add your Car"><i class="fa fa-car"></i></a> 
+                <a class="btn btn-success" data-toggle="tooltip" (click)="btn_showClientInfoClick(client)" data-original-title="View"><i class="fa fa-eye"></i></a> 
+                <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editClientClick()" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deleteClientClick()"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+              </td>
             </tr>
-                       
-            
             </tbody>
         </table>
       </div>
@@ -75,3 +52,111 @@
   </div>
   <!-- /.col -->
 </div>
+<div class="modal modal-success fade" id="modal-view">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Success Modal</h4>
+      </div>
+       
+      <div class="modal-body">
+        <div class="col-sm-12">
+            <table class="table table-user-information">
+              <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{selectedClient?.name}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{selectedClient?.email}}</td>
+                </tr>
+                <tr>
+                    <td>Mobile Tel</td>
+                    <td>{{selectedClient?.telMobile}}</td>
+                </tr>
+                <tr>
+                    <td>Home Tel</td>
+                    <td>{{selectedClient?.telHome}}</td>
+                </tr>
+                <tr>
+                    <td>Work Tel</td>
+                    <td>{{selectedClient?.telWork}}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>{{selectedClient?.address}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="modal modal-info fade" id="modal-edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Info Modal</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div><div class="modal modal-info fade" id="modal-edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Info Modal</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <div class="modal modal-danger fade" id="modal-delete">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Danger Modal</h4>
+          </div>
+          <div class="modal-body">
+            <p>One fine body&hellip;</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline">Save changes</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
