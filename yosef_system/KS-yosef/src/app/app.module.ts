@@ -47,6 +47,7 @@ import { SellPartsListComponent } from './sell-parts-list/sell-parts-list.compon
 import { PartsService } from './services/parts.service';
 
 import { PurchaseInvoiceComponent } from './purchase-invoice/purchase-invoice.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { PurchaseInvoiceComponent } from './purchase-invoice/purchase-invoice.co
     PartsStockComponent,
     SellPartsListComponent,
     PurchaseInvoiceComponent,
-    SellPartsListComponent
+    SellPartsListComponent,
+    InvoiceComponent
 
   ],
   imports: [

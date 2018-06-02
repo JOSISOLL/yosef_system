@@ -13,11 +13,13 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^5.2.0",
+    "@angular/cdk": "^6.1.0",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
-    "@angular/core": "^5.2.0",
+    "@angular/core": "^5.2.11",
     "@angular/forms": "^5.2.0",
     "@angular/http": "^5.2.0",
+    "@angular/material": "^6.1.0",
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
@@ -27,7 +29,7 @@
     "hydrogen": "^0.2.0",
     "moment": "^2.22.0",
     "ng-http-interceptor": "^4.0.0",
-    "npm": "^5.8.0",
+    "npm": "^5.10.0",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

@@ -4,6 +4,8 @@ import { Parts } from '../models/parts';
 import { HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
 
+declare var jquery: any; 
+declare var $ :any;
 
 @Component({
   selector: 'app-parts-purchase',
@@ -13,6 +15,7 @@ import { Router } from '@angular/router';
 export class PartsPurchaseComponent implements OnInit {
 
   parts : Parts[]
+  selectedPart : Parts;
   constructor(private _partsService: PartsService, private _router:Router) { }
 
   ngOnInit() {
@@ -31,6 +34,16 @@ export class PartsPurchaseComponent implements OnInit {
         }
       }
     )
+  }
+
+  setViewContent(data : Parts){
+    this.selectedPart = data;
+    $("#modal-view-part").modal("show");
+    console.log(this.selectedPart)
+  }
+  editPurchase(data: Parts) {
+    this.selectedPart = data
+    console.log(this.selectedPart)
   }
 
 

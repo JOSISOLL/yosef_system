@@ -3,6 +3,9 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, 
 import { Parts } from "../models/parts";
 import { PartsService } from "../services/parts.service";
 import { Router } from "@angular/router"
+import { Suplier } from '../models/suplier';
+import { SuplierService } from '../services/suplier.service';
+import { HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-purchase-parts',
@@ -10,6 +13,8 @@ import { Router } from "@angular/router"
   styleUrls: ['./purchase-parts.component.css']
 })
 export class PurchasePartsComponent implements OnInit {
+
+  supliers: Suplier[];
 
   partsForm: FormGroup;
   
@@ -26,7 +31,7 @@ export class PurchasePartsComponent implements OnInit {
   shelfNumber: FormControl;
   purchaseDate: FormControl;
 
-  constructor(private _partsService: PartsService, private _router: Router) { }
+  constructor(private _partsService: PartsService, private _router: Router,private _suplerServie: SuplierService) { }
 
   invoice_id : Number;
   date : String;
@@ -69,6 +74,7 @@ export class PurchasePartsComponent implements OnInit {
     // console.log(this.date)
     this.createControls();
     this.createForm();
+    this.getAllSupliers();
 
 
   }
@@ -94,5 +100,17 @@ export class PurchasePartsComponent implements OnInit {
   randomInt(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
  }
+ getAllSupliers(){
+  this._suplerServie.getSupliers().subscribe(
+    res => this.supliers = res, 
+    err => {
+      if (err instanceof HttpErrorResponse){
+        if (err.status === 401){
+          this._router.navigate(['/login']);
+        }
+      }
+    }
+  )
+}
 
 }

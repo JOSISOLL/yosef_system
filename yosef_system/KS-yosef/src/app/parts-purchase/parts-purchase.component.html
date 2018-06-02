@@ -1,0 +1,105 @@
+<section class="content">
+  <!-- Full Width boxes (Stat box) -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+        <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
+         </div>
+      <div id="you" class="alert alert-success alert-dismissable" style="display:none">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+        <h4><i class="icon fa fa-check"></i> Success!</h4>
+         </div>
+      <div align="right" style="margin-bottom:1%;"> <a class="btn btn-success" data-toggle="tooltip" routerLink="/purchase" data-original-title="Add Buy Parts"><i class="fa fa-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
+      <div class="box box-success">
+        <div class="box-header">
+          <h3 class="box-title">Purchase Parts List</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table class="table sakotable table-bordered table-striped dt-responsive">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Part Number</th>
+                <th>Stamp</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Remark</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let part of parts">
+                <td><span class="label label-default">{{ part.purchaseDate | date }}</span></td>
+                <td><span class="label label-success">{{ part.partNumber}}</span></td>
+                <td><span class="label label-success">{{part.stamp}}</span></td>
+                <td><span class="label label-danger">{{part.description}}</span></td>
+                <td><span class="label label-info">{{part.quantity}}</span></td>
+                <td><span class="label label-primary">{{part.remark}}</span></td>
+                <td>
+                <a class="btn btn-info" data-toggle="tooltip" href="" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(part)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(part)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(294352);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+              </td>
+              </tr>          
+            </tbody>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div>
+</section>  
+<div id="modal-view-part" class="modal" tabindex="-1" >
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span class="label label-danger" aria-hidden="true">&times;</span>
+            </button>
+        <h3 class="modal-title">Purchase Details</h3>
+      </div>
+      <div class="modal-body"> 
+        <div class="container-fluid">
+          <b><h3>Part Details</h3></b>
+          <hr>
+          <div class="row">
+            <div class="col-md-6"><b>Part Number : </b><span class="label label-info">{{ selectedPart.partNumber }}</span></div>
+            <div class="col-md-6"><b>Stamp : </b> {{ selectedPart.stamp }}<br/></div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6"><b>Supplier : </b> {{ selectedPart.supplier }}</div>
+            <div class="col-md-6"><b>Buy Price : </b> {{ selectedPart.buyPrice }} ETB</div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6"><b>Quantity : </b> {{ selectedPart.quantity }}<br/></div>
+            <div class="col-md-6"><b>Sell Price : </b> {{ selectedPart.sellPrice }} ETB</div>
+          </div>
+          <hr>
+          <hr>
+          <b><h3>More Info</h3></b>
+          <hr>
+          <div class="row">
+            <div class="col-md-12"><b>Description : </b> {{ selectedPart.description }}</div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6"><b>Remark : </b> {{ selectedPart.remark }}</div>
+            <div class="col-md-6"><b>Make : </b> {{ selectedPart.make }}</div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6"><b>Shelf Number : </b> {{ selectedPart.shelfNumber }}</div>
+            <div class="col-md-6"><b>Purchase Date: </b> {{ selectedPart.purchaseDate }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="label label-danger">Close</span></button>
+      </div>
+    </div>
+  </div>
+</div>

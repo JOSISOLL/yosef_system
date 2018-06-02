@@ -61,7 +61,11 @@
           </div>
           <div class="form-group col-md-3">
               <label for="supplier"><span style="color:red;">*</span> Supplier </label>
-              <input type="text" placeholder="Supplier Name" value="" formControlName="supplier" id="supplier" class="form-control" required/>
+              <select class='form-control' formControlName="supplier" id="supplierList" name="supplierList">
+                  <option value="">--Select Supplier--</option>
+                  <option  *ngFor="let suplier of supliers" value="{{suplier.name}}">{{suplier.name}}</option>
+                </select>
+              <!-- <input type="text" placeholder="Supplier Name" value="" formControlName="suplier" id="supplier" class="form-control" required/> -->
           </div>
           <div class="form-group col-md-3">
               <label for="buy_prie"><span style="color:red;">*</span> Buy Price(Per pcs) :</label>
