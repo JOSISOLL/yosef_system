@@ -10,7 +10,6 @@ const customerSchema = new Schema(
         telWork: String,
         address: String
     })
-
 module.exports = mongoose.model('customer', customerSchema, 'customer')
 
 

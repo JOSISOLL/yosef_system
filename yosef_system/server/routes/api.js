@@ -104,6 +104,36 @@ router.post('/garage/client/add', (req, res) => {
     res.status(200).send({"success" : true});
 
 })
+router.put('/garage/client/update', (req, res) => {
+    let clientData = req.body; 
+    console.log("client_id  " + clientData.id);
+    Customer.findByIdAndUpdate(clientData.id, 
+        {
+            name: clientData.name, 
+            email: clientData.email, 
+            telMobile: clientData.telMobile, 
+            telHome: clientData.telHome, 
+            telWork: clientData.telWork, 
+            address: clientData.address
+        }, {new: true}, function(err, model){
+            console.log("update executed...");
+            console.log(model);
+        });
+    // let result = Customer.findByIdAndUpdate(o_id, 
+    //     {
+    //         name: clientData.name, 
+    //         email: clientData.email, 
+    //         telMobile: clientData.telMobile, 
+    //         telHome: clientData.telHome, 
+    //         telWork: clientData.telWork, 
+    //         address: clientData.address
+    //     }); 
+    // console.log("attempting to edit client");
+    // console.log(clientData);
+    // console.log("result"); 
+    // console.log(result);
+    res.status(200).send({"success": true}); 
+});
 router.get('/clients_get',  (req, res) => {
     Customer.find(function (error, customers){
         if(error){
@@ -113,7 +143,6 @@ router.get('/clients_get',  (req, res) => {
             console.log("Customer fetched from database")
         }
     })
-    
     
 })
 
