@@ -40,7 +40,7 @@
                 <a class="btn btn-warning" data-toggle="tooltip" data-original-title="Add your Car"><i class="fa fa-car"></i></a> 
                 <a class="btn btn-success" data-toggle="tooltip" (click)="btn_showClientInfoClick(client)" data-original-title="View"><i class="fa fa-eye"></i></a> 
                 <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editClientClick(client)" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
-                <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deleteClientClick()"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deleteClientClick(client)"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>
             </tr>
           </tbody>
@@ -192,14 +192,14 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Danger Modal</h4>
+            <h4 class="modal-title">Delete Record?</h4>
           </div>
           <div class="modal-body">
-            <p>One fine body&hellip;</p>
+            <p>Are you sure you want to remove this record?</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-outline">Save changes</button>
+            <button type="button" (click)="deleteCustomer()" class="btn btn-outline">Delete</button>
           </div>
         </div>
         <!-- /.modal-content -->

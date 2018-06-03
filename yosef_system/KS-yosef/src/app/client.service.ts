@@ -16,6 +16,7 @@ export class ClientService {
   private _urlClientAdd = "http://localhost:3000/api/garage/client/add";
   private _urlClientGet = "http://localhost:3000/api/clients_get";
   private _urlClientUpdate = "http://localhost:3000/api/garage/client/update"; 
+  private _urlClientDelete = "http://localhost:3000/api/garage/client/delete";
 
   constructor(
     private http : HttpClient, 
@@ -24,7 +25,7 @@ export class ClientService {
   addClient(client : Client): Observable<Client>{
     return this.http.post<Client>(this._urlClientAdd, client, httpOptions);
   }
-  private log(message : string){
+  private log(mesage : string){
     //TODO: implementation for notification stil pending
   }
   getClients(){
@@ -32,6 +33,11 @@ export class ClientService {
   }
   updateClient(client: Customer): Observable<Client>{
     return this.http.put<Client>(this._urlClientUpdate, client, httpOptions);
+  }
+  deleteCustomer(customer: Customer): Observable<Customer>{
+    console.log("TAG: client.service.ts");
+    console.log(customer);
+    return this.http.delete<Customer>(`${this._urlClientDelete}/${customer.id}`, httpOptions); 
   }
   
 }

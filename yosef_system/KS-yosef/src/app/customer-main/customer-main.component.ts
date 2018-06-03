@@ -81,9 +81,25 @@ export class CustomerMainComponent implements OnInit {
     $('#modal-edit').modal('show'); 
     console.log("show edit client clicked");
   }
-  btn_deleteClientClick(){
+  btn_deleteClientClick(client){
+    console.log("TAG: customer-main.component.ts");
+    console.log(client);
+    this.selectedClient = client;
+    this.selectedClient.id = client._id;
     $('#modal-delete').modal('show');
     console.log("show delete client clicked"); 
+  }
+  deleteCustomer(){
+    
+
+    this._clientService.deleteCustomer(this.selectedClient)
+    .subscribe(result => {
+      console.log("successfully deleted!");
+      let selectedIndex = this.clients.indexOf(this.selectedClient);
+      console.log("selected index: " + selectedIndex);
+      delete this.clients[selectedIndex];
+      $('#modal-delete').modal('hide');
+    });
   }
   saveUpdates(){
     console.log("submit clicked..");
@@ -135,6 +151,8 @@ export class CustomerMainComponent implements OnInit {
       address: this.address
     });
   }
+
+  
 
 
 }

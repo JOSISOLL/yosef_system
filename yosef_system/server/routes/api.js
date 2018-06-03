@@ -118,6 +118,7 @@ router.put('/garage/client/update', (req, res) => {
         }, {new: true}, function(err, model){
             console.log("update executed...");
             console.log(model);
+
         });
     // let result = Customer.findByIdAndUpdate(o_id, 
     //     {
@@ -134,6 +135,14 @@ router.put('/garage/client/update', (req, res) => {
     // console.log(result);
     res.status(200).send({"success": true}); 
 });
+// TODO: send the appropriate response code if the requested record is not found!
+router.delete('/garage/client/delete/:id', (req, res) => {
+    console.log("id: " + req.params.id);
+    Customer.findByIdAndRemove(req.params.id, function(err, res){
+        res.status(200).send({status: true}); 
+    });
+    //res.status(404).send({status: false, response: "REQUESTED RECORD NOT FOUND!"});
+});
 router.get('/clients_get',  (req, res) => {
     Customer.find(function (error, customers){
         if(error){
@@ -142,10 +151,8 @@ router.get('/clients_get',  (req, res) => {
             res.json(customers)
             console.log("Customer fetched from database")
         }
-    })
-    
-})
-
+    }); 
+});
 router.post("/customer/add", verifyToken, (req, res) => {
     let customerData = req.body; 
     console.log("attempting customer add...")
