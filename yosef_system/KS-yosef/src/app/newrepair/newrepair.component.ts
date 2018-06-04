@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Repair } from '../models/repair';
+import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 declare var  jquery: any; 
 declare var $:any;
 
@@ -17,9 +19,24 @@ export class NewrepairComponent implements OnInit {
   repairs = []
   closeResult: string;
   selectedRepair: Repair;
+
+
+  myForm: FormGroup; 
+  id: FormControl; 
+  customer: FormControl; 
+  plateNumber: FormControl; 
+  reportedProblem: FormControl; 
+  carType: FormControl; 
+  remark: FormControl; 
+  personInCharge: FormControl; 
+  date: FormControl;
+
+
   constructor(private _historyService: HistoryService, private _router: Router, private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.createControls(); 
+    this.createEditForm(); 
     this._historyService.getRepairs()
       .subscribe(
         res => {
@@ -46,6 +63,18 @@ export class NewrepairComponent implements OnInit {
     
   }
   btn_editRepairClick(repair: Repair){
+    this.selectedRepair = repair; 
+    this.myForm.setValue({
+      id: repair._id,
+      customer: repair.customer, 
+      plateNumber: repair.plateNumber, 
+      reportedProblem: repair.reportedProblem, 
+      carType: repair.carType, 
+      remark: repair.remark, 
+      personInCharge: repair.personInCharge,
+      date: repair.date
+    });
+    $("#modal-edit").modal('show'); 
     console.log("edit repair clicked...");
   }
   btn_deleteRepairClick(repair: Repair){
@@ -68,5 +97,50 @@ export class NewrepairComponent implements OnInit {
   //     return  `with: ${reason}`;
   //   }
   // }
+  //TODO: setup validation
+  createControls(){
+    this.id = new FormControl(); 
+    this.customer = new FormControl();
+    this.plateNumber = new FormControl(); 
+    this.reportedProblem = new FormControl(); 
+    this.carType = new FormControl(); 
+    this.remark  = new FormControl(); 
+    this.personInCharge = new FormControl(); 
+    this.date = new FormControl(); 
+  }
+  createEditForm(){
+    this.myForm = new FormGroup({
+      id: this.id, 
+      customer: this.customer, 
+      plateNumber: this.plateNumber, 
+      reportedProblem: this.reportedProblem, 
+      carType: this.carType, 
+      remark: this.remark, 
+      personInCharge: this.personInCharge, 
+      date: this.date
+    });
+
+  }
+  saveUpdates(){
+    if(this.myForm.valid){
+      var data = <Repair> this.myForm.value; 
+      console.log('form data..');
+      console.log(data);
+      this._historyService.updateRepair(data)
+      .subscribe(res =>{
+        
+        this.selectedRepair.customer = data.customer; 
+        this.selectedRepair.plateNumber = data.plateNumber; 
+        this.selectedRepair.reportedProblem = data.reportedProblem;
+        this.selectedRepair.carType = data.carType; 
+        this.selectedRepair.remark = data.remark; 
+        this.selectedRepair.personInCharge = data.personInCharge; 
+        this.selectedRepair.date = data.date; 
+        $('#modal-edit').modal('hide'); 
+      });
+    }
+  }
+  
+
 
 }

@@ -233,9 +233,48 @@ router.post("/repair/add", verifyToken, (req, res) => {
         }
 
     })
-    
+}); 
+router.put('/repair/update', (req, res) => {
+    console.log("attempting to update repair");
+    let repairData = req.body; 
+    console.log("client_id  " + repairData.id);
+    Repair.findByIdAndUpdate(repairData.id, 
+        {
+            customer: repairData.customer, 
+            plateNumber: repairData.plateNumber, 
+            reportedProblem: repairData.reportedProblem, 
+            carType: repairData.carType, 
+            remark: repairData.remark, 
+            personInCharge: repairData.personInCharge, 
+            date: repairData.date
+        }, {new: true}, function(err, model){
+            console.log("update executed...");
+            console.log(model);
+        });
+    // let result = Customer.findByIdAndUpdate(o_id, 
+    //     {
+    //         name: clientData.name, 
+    //         email: clientData.email, 
+    //         telMobile: clientData.telMobile, 
+    //         telHome: clientData.telHome, 
+    //         telWork: clientData.telWork, 
+    //         address: clientData.address
+    //     }); 
+    // console.log("attempting to edit client");
+    // console.log(clientData);
+    // console.log("result"); 
+    // console.log(result);
+    res.status(200).send({"success": true}); 
 
-})
+});
+router.delete('/repair/delete/:id', (req, res) => {
+
+    Repair.findByIdAndRemove(req.params.id, function(err, res){
+        res.status(200).send({status: true}); 
+    });
+
+}); 
+    
 router.post("/parts/purchase", verifyToken, (req, res) => {
     let purchaseData = req.body
     let purchase = new Purchase(purchaseData)

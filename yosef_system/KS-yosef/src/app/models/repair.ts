@@ -1,4 +1,5 @@
 export class Repair{
+    _id: string;
     customer: string; 
     plateNumber: string; 
     reportedProblem: string;
