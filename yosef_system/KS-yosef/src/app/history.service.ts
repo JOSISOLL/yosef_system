@@ -15,6 +15,7 @@ export class HistoryService {
 
   private _repairsUrl = "http://localhost:3000/api/repair";
   private _urlUpdateRepair = "http://localhost:3000/api/repair/update";
+  private _urlDeleteRepair = "http://localhost:3000/api/repair/delete";
   
   constructor(private http: HttpClient) { }
 
@@ -23,6 +24,9 @@ export class HistoryService {
   }
   updateRepair(repair: Repair){
     return this.http.put<Repair>(this._urlUpdateRepair, repair, httpOptions); 
+  }
+  deleteRepair(repair: Repair){
+    return this.http.delete<Repair>(`${this._urlDeleteRepair}/${repair._id}`, httpOptions);
   }
   
 }

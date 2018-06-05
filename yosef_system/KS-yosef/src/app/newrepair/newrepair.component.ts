@@ -53,8 +53,6 @@ export class NewrepairComponent implements OnInit {
           }
         }
       )
-      
-      
   }
   btn_showRepairInfoClick(repair: Repair){
     console.log("show repair button clicked...");
@@ -78,7 +76,9 @@ export class NewrepairComponent implements OnInit {
     console.log("edit repair clicked...");
   }
   btn_deleteRepairClick(repair: Repair){
+    this.selectedRepair = repair;
     console.log("delete repair clicked...");
+    $("#modal-delete").modal('show'); 
   }
   // open(content) {
   //   this.modalService.open(content).result.then((result) => {
@@ -139,6 +139,13 @@ export class NewrepairComponent implements OnInit {
         $('#modal-edit').modal('hide'); 
       });
     }
+  }
+  deleteRepair(){
+    this._historyService.deleteRepair(this.selectedRepair)
+    .subscribe(result => {
+      console.log("successfully deleted!");
+      $('#modal-delete').modal('hide');
+    });
   }
   
 

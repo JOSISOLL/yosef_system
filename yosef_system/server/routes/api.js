@@ -11,6 +11,7 @@ const db2 = "mongodb://localhost:27017/ks_yosefdb"
 const keypair = require('keypair')
 const RSA_PRIVATE_KEY = "secret-key"
 const Purchase = require('../models/parts')
+const api_imp = require('./api_imp');
 mongoose.connect(db2, err => {
     if(err){
         console.error('Error!' + err)
@@ -60,6 +61,7 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
+
     console.log("attempting login...");
     let userData = req.body
     
@@ -136,6 +138,7 @@ router.put('/garage/client/update', (req, res) => {
     res.status(200).send({"success": true}); 
 });
 // TODO: send the appropriate response code if the requested record is not found!
+
 router.delete('/garage/client/delete/:id', (req, res) => {
     console.log("id: " + req.params.id);
     Customer.findByIdAndRemove(req.params.id, function(err, res){
@@ -251,30 +254,22 @@ router.put('/repair/update', (req, res) => {
             console.log("update executed...");
             console.log(model);
         });
-    // let result = Customer.findByIdAndUpdate(o_id, 
-    //     {
-    //         name: clientData.name, 
-    //         email: clientData.email, 
-    //         telMobile: clientData.telMobile, 
-    //         telHome: clientData.telHome, 
-    //         telWork: clientData.telWork, 
-    //         address: clientData.address
-    //     }); 
-    // console.log("attempting to edit client");
-    // console.log(clientData);
-    // console.log("result"); 
-    // console.log(result);
     res.status(200).send({"success": true}); 
-
 });
+// TODO: set the appropriate response code for unknown record.
 router.delete('/repair/delete/:id', (req, res) => {
-
-    Repair.findByIdAndRemove(req.params.id, function(err, res){
-        res.status(200).send({status: true}); 
+    console.log("id: " + req.params.id);
+    await Repair.findByIdAndRemove(req.params.id, function(err, res){
+        if(err){
+            return res.status(404).send({status: false});
+        }
+        else{
+            return res.status(200).send({status: true});    
+        }
     });
+    res.status(200).send({status: true});
+});
 
-}); 
-    
 router.post("/parts/purchase", verifyToken, (req, res) => {
     let purchaseData = req.body
     let purchase = new Purchase(purchaseData)
