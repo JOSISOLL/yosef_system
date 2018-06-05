@@ -259,7 +259,7 @@ router.put('/repair/update', (req, res) => {
 // TODO: set the appropriate response code for unknown record.
 router.delete('/repair/delete/:id', (req, res) => {
     console.log("id: " + req.params.id);
-    await Repair.findByIdAndRemove(req.params.id, function(err, res){
+    Repair.findByIdAndRemove(req.params.id, function(err, res){
         if(err){
             return res.status(404).send({status: false});
         }
