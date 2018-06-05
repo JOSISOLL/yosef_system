@@ -28,6 +28,7 @@
                         <th>Plate Number</th>
                         <th>Problem</th>
                         <th>Person In Charge</th>
+                        <th>Date</th>
                         <th>Actions</th>
                     </tr>
                   </thead>
@@ -37,17 +38,18 @@
                             <td data-title="plateNumber">{{ repair.plateNumber }}</td>
                             <td data-title="reportedProblem">{{ repair.reportedProblem }} </td>
                             <td data-title="personInCharge" >{{ repair.personInCharge }}</td>
+                            <td data-title="personInCharge" >{{ repair.date }}</td>
                     <td>
-                    <a class="btn btn-success" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_16').modal('show');" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" href="" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(16);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                    <a class="btn btn-success" data-toggle="tooltip" (click)="btn_showRepairInfoClick(repair)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" href="" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(16);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                     <div id="nurse_view_16" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
+                      <!-- <div class="modal-dialog">
                      
                         <div class="modal-content">
                           <div class="modal-body">
                             <h3 style="text-decoration:underline;">Customer Details Infromation</h3>
                             <div class="row">
                               <div class="col-xs-12"> 
-                                <b>Customer Name :</b> {{ history.client_name }}<br/>
+                                <b>Customer Name :</b> {{ repair.customer }}<br/>
                                 <b>Customer Email :</b> taraq@yahoo.com<br/>
                                 <b>Customer Telephone :</b> {{ history.client_phone }}<br/>
                                 <b>Plate Number :</b> {{ history.plate_number }}<br/>          
@@ -56,7 +58,7 @@
                           </div>				  
                         </div>
                      
-                      </div>
+                      </div> -->
                     </div>
                     <!-- <a class="btn btn-success" (click)="open(content)" data-original-title="View"><i class="fa fa-eye"></i></a>
                     <ng-template #content let-c="close" let-d="dismiss">
@@ -88,4 +90,58 @@
         </div>
 </section>
             
-        
+    
+
+<div class="modal modal-success fade" id="modal-view">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Success Modal</h4>
+        </div>
+         
+        <div class="modal-body">
+          <div class="col-sm-12">
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                      <td>Name</td>
+                      <td>{{selectedRepair?.customer}}</td>
+                  </tr>
+                  <tr>
+                      <td>Plate Number</td>
+                      <td>{{selectedRepair?.plateNumber}}</td>
+                  </tr>
+                  <tr>
+                      <td>Reported Problem</td>
+                      <td>{{selectedRepair?.reportedProblem}}</td>
+                  </tr>
+                  <tr>
+                      <td>Car Type</td>
+                      <td>{{selectedRepair?.carType}}</td>
+                  </tr>
+                  <tr>
+                      <td>Remark</td>
+                      <td>{{selectedRepair?.remark}}</td>
+                  </tr>
+                  <tr>
+                      <td>Person In Charge</td>
+                      <td>{{selectedRepair?.personInCharge}}</td>
+                  </tr>
+                  <tr>
+                      <td>Date</td>
+                      <td>{{selectedRepair?.date}}</td>
+                  </tr>
+                </tbody>
+              </table>  
+          </div>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>

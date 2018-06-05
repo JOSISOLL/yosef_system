@@ -14,7 +14,7 @@ import { Repair } from '../models/repair';
 export class AddRepairComponent implements OnInit {
 
   repairForm: FormGroup;
-
+  
   customer: FormControl; 
   plateNumber: FormControl; 
   reportedProblem: FormControl; 
