@@ -20,7 +20,7 @@ declare var $:any;
 
 export class NewrepairComponent implements OnInit {
   repairs = []
-  selectedRepair: any = null;
+  
   closeResult: string;
   selectedRepair: Repair;
 
