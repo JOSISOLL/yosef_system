@@ -58,15 +58,6 @@ export class NewrepairComponent implements OnInit {
         }
       )
   }
-<<<<<<< HEAD
-
-  btn_showRepairInfoClick(repair){
-    this.selectedRepair = repair;
-    $("#modal-view").modal("show");
-    console.log("show repair button clicked");
-    // console.log(repair);
-  }
-=======
   btn_showRepairInfoClick(repair: Repair){
     console.log("show repair button clicked...");
     this.selectedRepair =repair;
@@ -161,7 +152,6 @@ export class NewrepairComponent implements OnInit {
     });
   }
   
->>>>>>> 1d8630d1e55f28535a26e55ba34dfe68ef96b1cb
 
 
 }
