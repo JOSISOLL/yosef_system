@@ -25,7 +25,7 @@
                 <th>Stamp</th>
                 <th>Description</th>
                 <th>Quantity</th>
-                <th>Remark</th>
+                <th>Self</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -36,7 +36,7 @@
                 <td><span class="label label-success">{{part.stamp}}</span></td>
                 <td><span class="label label-danger">{{part.description}}</span></td>
                 <td><span class="label label-info">{{part.quantity}}</span></td>
-                <td><span class="label label-primary">{{part.remark}}</span></td>
+                <td><span class="label label-primary">{{part.shelfNumber}}</span></td>
                 <td>
                 <a class="btn btn-info" data-toggle="tooltip" href="" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(part)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(part)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(294352);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>
@@ -71,12 +71,12 @@
           <hr>
           <div class="row">
             <div class="col-md-6"><b>Supplier : </b> {{ selectedPart.supplier }}</div>
-            <div class="col-md-6"><b>Buy Price : </b> {{ selectedPart.buyPrice }} ETB</div>
+            <div class="col-md-6"><b>Buy Price : </b> {{ selectedPart.price }} ETB</div>
           </div>
           <hr>
           <div class="row">
             <div class="col-md-6"><b>Quantity : </b> {{ selectedPart.quantity }}<br/></div>
-            <div class="col-md-6"><b>Sell Price : </b> {{ selectedPart.sellPrice }} ETB</div>
+            
           </div>
           <hr>
           <hr>
@@ -85,11 +85,11 @@
           <div class="row">
             <div class="col-md-12"><b>Description : </b> {{ selectedPart.description }}</div>
           </div>
-          <hr>
+          <!-- <hr>
           <div class="row">
             <div class="col-md-6"><b>Remark : </b> {{ selectedPart.remark }}</div>
             <div class="col-md-6"><b>Make : </b> {{ selectedPart.make }}</div>
-          </div>
+          </div> -->
           <hr>
           <div class="row">
             <div class="col-md-6"><b>Shelf Number : </b> {{ selectedPart.shelfNumber }}</div>

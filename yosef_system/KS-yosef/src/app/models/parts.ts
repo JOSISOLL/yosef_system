@@ -4,11 +4,8 @@ export class Parts{
     stamp: string; 
     description: string;
     supplier: string;
-    buyPrice: number;
+    price: number;
     quantity: number;
-    sellPrice: number;
-    remark: string;
-    make: string;
     shelfNumber: string;
     purchaseDate: string;
 }

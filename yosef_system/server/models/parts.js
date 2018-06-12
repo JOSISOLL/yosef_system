@@ -6,13 +6,13 @@ const partsSchema = new Schema(
         invoiceId: Number,
         partNumber: String, 
         stamp: String,
-        buyPrice: Number,
+        price: Number,
         description: String,
         supplier: String,
         quantity: Number,
-        sellPrice: Number,
-        remark: String,
-        make: String,
+        // sellPrice: Number,
+        // remark: String,
+        // make: String,
         shelfNumber: String,
         purchaseDate: String
     })

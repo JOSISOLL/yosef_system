@@ -10,7 +10,7 @@ const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
 const keypair = require('keypair')
 const RSA_PRIVATE_KEY = "secret-key"
-const Purchase = require('../models/parts')
+const Purchase = require('../models/purchase')
 const api_imp = require('./api_imp');
 mongoose.connect(db2, err => {
     if(err){
@@ -270,16 +270,19 @@ router.delete('/repair/delete/:id', (req, res) => {
     res.status(200).send({status: true});
 });
 
-router.post("/parts/purchase", verifyToken, (req, res) => {
+router.post("/parts/purchase", (req, res) => {
     let purchaseData = req.body
-    let purchase = new Purchase(purchaseData)
-    purchase.save((error, partPurchased) =>{
-        if(error){
-        console.log(error)
-        } else {
-            res.status(200).send(partPurchased)
-        }
-    })
+    console.log("Attempting to add purchase data")
+    console.log(req.body)
+    res.status(200).send("Works fine")
+    // let purchase = new Purchase(purchaseData)
+    // purchase.save((error, partPurchased) =>{
+    //     if(error){
+    //     console.log(error)
+    //     } else {
+    //         res.status(200).send(partPurchased)
+    //     }
+    // })
 })
 
 router.get("/purchases", (req, res)=>{
