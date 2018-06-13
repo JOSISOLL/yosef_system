@@ -271,27 +271,28 @@ router.delete('/repair/delete/:id', (req, res) => {
 });
 
 router.post("/parts/purchase", (req, res) => {
-    let purchaseData = req.body
-    console.log("Attempting to add purchase data")
-    console.log(req.body)
-    res.status(200).send("Works fine")
-    // let purchase = new Purchase(purchaseData)
-    // purchase.save((error, partPurchased) =>{
-    //     if(error){
-    //     console.log(error)
-    //     } else {
-    //         res.status(200).send(partPurchased)
-    //     }
-    // })
+    let purchaseData = req.body;
+    console.log("Attempting to add purchase data");
+    console.log(purchaseData);
+    let purchase = new Purchase(purchaseData)
+    // res.status(200).send("Works fine");
+    purchase.save((error, purchasedData) =>{
+        if(error){
+            // res.json({status: 500, error: err});
+            console.log(error)
+        } else {
+            res.status(200).send(purchasedData)
+        }
+    })
 })
 
 router.get("/purchases", (req, res)=>{
     Purchase.find(function (error, purchases){
         if(error){
-            console.log(error)
+            console.log(error);
         } else {
-            res.json(purchases)
-            console.log("purchases fetched from database")
+            res.json(purchases);
+            console.log("purchases fetched from database");
         }
     })
 });

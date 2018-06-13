@@ -10,11 +10,11 @@
           <div class="form-group col-md-12" style="padding-top:10px;">
             <div class="pull-left">
               <label class="label label-danger" style="font-size:15px;">INVOICE ID - {{invoice_id}}</label>
-              <label class="label label-danger" style="font-size:15px;">GRAND TOTAL - {{grandTotal}}</label>
+              <!-- <label class="label label-danger" style="font-size:15px;">GRAND TOTAL - {{grandTotal}}</label> -->
               <!-- <input type="hidden" [ngModel]="invoice_id" formControlName="invoiceId" class="form-control"/> -->
             </div>
             <div class="pull-right">
-                <button type="submit" (click)=Submit(parts)  class="btn btn-success"><i class="fa fa-save"></i><br/></button>
+                <button type="submit" (click)=Submit(parts)  class="btn btn-success" [disabled]="saved"><i class="fa fa-save"></i><br/></button>
                 <a class="btn btn-warning" data-toggle="tooltip" routerLink="/parts/purchase" data-original-title="Back"><i class="fa fa-reply"></i><br/></a> 
               </div>
           </div>
@@ -22,9 +22,9 @@
         </div>
       </div>
 
-      <div id="fab" >
+      <!-- <div id="fab" >
         <button class="btn btn-info" (click)="addItem($event)" [disabled]="editing"><i class="fa fa-plus"></i></button>
-      </div>
+      </div> -->
 
 
       <div class="row">
@@ -41,7 +41,7 @@
                   <th>Price</th>
                   <th>Supplier</th>
                   <th>Shelf</th>
-                  <th>Date</th>
+                  <!-- <th>Date</th> -->
                   <th>Action</th>
                 </tr>
               </thead>
@@ -53,18 +53,29 @@
                       <td><span *ngIf="part.price != -1; else elseBlock6" class="label label-default">{{ part.price }}</span></td>
                       <td><span *ngIf="part.supplier != ''; else elseBlock5" class="label label-default">{{ part.supplier }}</span></td>
                       <td><span *ngIf="part.shelfNumber != 'null'; else elseBlock7" class="label label-default">{{ part.shelfNumber }}</span></td>
-                      <td><span *ngIf="part.purchaseDate != 'null'; else elseBlock8" class="label label-default">{{ part.purchaseDate | date }}</span></td>
+                      <!-- <td><span *ngIf="part.purchaseDate != 'null'; else elseBlock8" class="label label-default">{{ part.purchaseDate | date }}</span></td> -->
                       <td>
                         <span *ngIf="part.partNumber != 'null'; else elseBlock1">
                           <a class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                         </span>
                       </td>
               </tbody>
+              <tr>
+                <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <!-- <td></td> -->
+                  <td>Total : </td>
+                  <td>{{ grandTotal | number : '1.2-2'}} ETB</td>
+                </tr>
               </table>
-              <span *ngIf="!editing && parts.length >= 1">
-                  <a class="btn btn-primary pull-right" href="javascript:window.print();" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></a>
-                </span>
             </div>
+            <button type="button" (click)="addItem($event)" [disabled]="editing" class="btn btn-primary pull-left">Add item</button>
+            <span *ngIf="!editing && parts.length >= 1" class="pull-right">
+              <a class="btn btn-primary pull-right" href="javascript:window.print();" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></a>
+            </span>
             </div>
           </div>
           <div *ngFor="let part of parts" class="list-part">

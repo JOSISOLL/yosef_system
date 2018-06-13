@@ -23,6 +23,7 @@ export class PurchasePartsComponent implements OnInit {
   purchase : Purchase = {};
   editing : boolean;
   count: number;
+  saved : boolean; 
   grandTotal: number;
 
   // partsForm: FormGroup;
@@ -73,6 +74,8 @@ export class PurchasePartsComponent implements OnInit {
     this.editing = false;
     this.count = 0;
     this.grandTotal = 0;
+    this.saved = false
+
     // this.createControls();
     // this.createForm();
     this.getAllSupliers();
@@ -126,8 +129,20 @@ Submit(parts : Parts[]){
   // console.log(this.invoice_id)
   this.purchase.purchaseId = this.invoice_id;
   this.purchase.parts = parts
+  this.purchase.grandTotal = this.grandTotal
+  
   console.log(this.purchase)
   this._partsService.purchase(this.purchase)
+  .subscribe(
+    res => {
+      console.log(res);
+      this.saved = true
+      this._router.navigate(['/purchase'])
+    },
+    err => {
+      console.log(err)
+    }
+  )
 }
 
 randomInt(min, max){
