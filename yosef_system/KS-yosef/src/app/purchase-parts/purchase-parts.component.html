@@ -151,8 +151,8 @@
                   <input type="date" formControlName="purchaseDate" [ngModel]="date" name="purchaseDate" class="form-control" />
                 </ng-template> -->
                 <div class="btn pull-right">
-                    <button *ngIf="editing && part.invoiceId === count" type="submit" class="btn btn-success"><i class="fa fa-plus"></i><br/></button>
-                    <button *ngIf="editing && part.invoiceId === count" (click)="revert()" class="btn btn-danger"><i class="fa fa-ban"></i><br/></button>
+                    <button *ngIf="editing && part.itemPId === count" type="submit" class="btn btn-success"><i class="fa fa-plus"></i><br/></button>
+                    <button *ngIf="editing && part.itemPId === count" (click)="revert()" class="btn btn-danger"><i class="fa fa-ban"></i><br/></button>
                 </div>
                 <ng-template class="form-group col-md-4" #elseBlock1>
                     <label for="part_number"><span style="color:red;">*</span> Part Number :</label>

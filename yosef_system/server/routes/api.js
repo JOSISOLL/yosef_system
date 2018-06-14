@@ -5,6 +5,7 @@ const User = require('../models/user')
 const Customer = require('../models/customer')
 const Suplier = require('../models/suplier');
 const Repair = require('../models/repair')
+const Parts = require('../models/parts')
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
@@ -296,6 +297,65 @@ router.get("/purchases", (req, res)=>{
         }
     })
 });
+router.get("/parts/stock", (req, res)=>{
+    Parts.find(function (error, stock){
+        if(error){
+            console.log(error);
+        } else {
+            res.json(stock);
+            console.log("Parts stock fetched from database");
+        }
+    })
+})
+router.post("/parts/stock", (req, res) => {
+    let partsData = req.body;
+    Parts.findOne({partNumber: partsData.partNumber}, (error, part) => {
+        if (error){
+            console.log(error);
+        } else {
+            if(!part){
+                let parts = new Parts(partsData)
+                parts.save((err, addedPart) =>{
+                    if(err){
+                        console.log(err)
+                    } else {
+                        console.log("New part added with new PART NUMBER");
+                        res.status(200).send(addedPart);
+                    }
+                })
+            } else {
+                if(part.stamp !== partsData.stamp){
+                    let parts = new Parts(partsData)
+                    parts.save((err, addedPart) =>{
+                        if(err){
+                            console.log(err);
+                        } else {
+                            console.log("Already existing part added with a new STAMP.");
+                            res.status(200).send(addedPart);
+                        }
+                    })
+                } else {
+                    let parts = new Parts(partsData)
+                    let availableQty = part.quantity;
+                    let totalQuantity = availableQty + partsData.quantity
+                    Parts.findByIdAndUpdate(part.id,{
+                        quantity : totalQuantity
+                    },{new: true}, function(err, updatedPart){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            console.log("Quantity for existing part updated!")
+                            console.log(updatedPart)
+                            res.status(200).send(updatedPart)
+                        }
+                    })
+
+                }
+            }
+
+        }
+    })
+})
 
 
 

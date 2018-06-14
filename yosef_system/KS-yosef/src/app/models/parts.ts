@@ -1,5 +1,5 @@
 export class Parts{
-    invoiceId: number;
+    itemPId: number;
     partNumber: string; 
     stamp: string; 
     description: string;

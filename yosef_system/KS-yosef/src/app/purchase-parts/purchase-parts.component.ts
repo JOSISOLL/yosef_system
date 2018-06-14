@@ -111,7 +111,7 @@ onSubmit(partsForm : NgForm){
     } else {
       this.editing = false;
       this.parts[this.count - 1] = {
-        invoiceId: this.count - 1, 
+        itemPId: this.count - 1, 
         partNumber: partsForm.value.partNumber,
         stamp: partsForm.value.partNumber,
         quantity: partsForm.value.quantity,
@@ -131,13 +131,24 @@ Submit(parts : Parts[]){
   this.purchase.parts = parts
   this.purchase.grandTotal = this.grandTotal
   
-  console.log(this.purchase)
+  // console.log(this.purchase)
+  for(let data of this.purchase.parts){
+    console.log(data)
+    this._partsService.partsStock(data)
+    .subscribe (
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err)
+      })
+  }
   this._partsService.purchase(this.purchase)
   .subscribe(
     res => {
       console.log(res);
       this.saved = true
-      this._router.navigate(['/purchase'])
+      this._router.navigate(['/parts/purchase'])
     },
     err => {
       console.log(err)
@@ -165,7 +176,7 @@ addItem($event){
   this.count += 1
   this.editing = true;
   this.parts.push({
-    invoiceId: this.count,
+    itemPId: this.count,
     partNumber: "null",
     stamp: "null",
     quantity: -1,
