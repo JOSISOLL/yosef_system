@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PartsService } from '../services/parts.service';
 import { Parts } from '../models/parts';
+import { Purchase } from '../models/purchase';
 import { HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -14,8 +15,9 @@ declare var $ :any;
 })
 export class PartsPurchaseComponent implements OnInit {
 
-  parts : Parts[]
-  selectedPart : Parts;
+  purchases : Purchase[]
+  selectedPurchase : Purchase;
+  selectedPart : Parts[]
   constructor(private _partsService: PartsService, private _router:Router) { }
 
   ngOnInit() {
@@ -25,7 +27,7 @@ export class PartsPurchaseComponent implements OnInit {
   getPurchases(){
     this._partsService.getPurchase()
     .subscribe(
-      res => this.parts = res,
+      res => this.purchases = res,
       err => {
         if (err instanceof HttpErrorResponse){
           if (err.status === 401){
@@ -36,15 +38,34 @@ export class PartsPurchaseComponent implements OnInit {
     )
   }
 
-  setViewContent(data : Parts){
-    this.selectedPart = data;
-    $("#modal-view-part").modal("show");
-    console.log(this.selectedPart)
+  setViewContent(data : Purchase){
+    this.selectedPurchase = data;
+    this.selectedPart = this.selectedPurchase.parts;
+    console.log("View purchase clicked");
+    console.log(this.selectedPurchase);
+    $("#modal-view").modal('show');
+    
   }
-  editPurchase(data: Parts) {
-    this.selectedPart = data
-    console.log(this.selectedPart)
+  editPurchase(data: Purchase) {
+    this.selectedPurchase = data;
+    console.log("Edit purchase clicked");
+    console.log(this.selectedPurchase);
   }
-
-
+  btn_deletePurchaseClick(purchase: Purchase){
+    this.selectedPurchase = purchase;
+    console.log("delete part clicked...");
+    console.log(this.selectedPurchase);
+    $("#modal-delete").modal('show');
+    // $("#modal-delete").modal('show'); 
+  }
+  deletePart(){
+    console.log("I'm about to delete " + this.selectedPurchase);
+    this._partsService.deletePurchase(this.selectedPurchase)
+    .subscribe(res => {
+      console.log("Delete Successful!");
+      $('#modal-delete').modal('hide');
+      // this._router.navigate(['/parts/purchase'])
+      this.ngOnInit()
+    });
+  }
 }

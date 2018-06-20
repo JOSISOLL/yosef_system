@@ -6,8 +6,8 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Repair } from '../models/repair';
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-declare var  jquery: any; 
-declare var $:any;
+// declare var  jquery: any; 
+// declare var $:any;
 
 declare var  jquery: any; 
 declare var $:any;

@@ -10,7 +10,7 @@
         <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
         <h4><i class="icon fa fa-check"></i> Success!</h4>
          </div>
-      <div align="right" style="margin-bottom:1%;"><a class="btn btn-warning" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/dashboard.php" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
+      <div align="right" style="margin-bottom:1%;"><a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
       <div class="box box-success">
         <div class="box-header">
           <h3 class="box-title">Parts Stock List</h3>
@@ -42,34 +42,7 @@
                 <td><span class="label label-primary">{{part.shelfNumber}}</span></td>
                 <td><span class="label label-success">{{part.supplier}}</span></td>
               <td>
-                <a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/buyparts.php?pid=7" data-original-title="Purchase or Load Parts Quantity"><i class="fa fa-cart-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" href="javascript:;" onClick="$('#nurse_view_7').modal('show');" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/editpartsstock.php?id=7" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteCustomer(7);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-              <div id="nurse_view_7" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header orange_header">
-                      <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true"><i class="fa fa-close"></i></span></button>
-                      <h3 class="modal-title">Parts Details</h3>
-                    </div>
-                    <div class="modal-body model_view" align="center">&nbsp;
-                      <div><img class="photo_img_round" style="width:100px;height:100px;" src="http://sakosys.com/temp/garage-management-system/img/upload/24E138EA-89EE-A3A8-2BB2-87A09485D2C0.png" /></div>
-                      <div class="model_title">Audi Engine 2014</div>
-                    </div>
-                    <div class="modal-body">
-                      <h3 style="text-decoration:underline;">Parts Details Infromation</h3>
-                      <div class="row">
-                        <div class="col-xs-12">
-                          <b>Parts Name :</b> Audi Engine 2014<br/>
-                          <b>Supplier Name :</b> Long Che<br/>
-                          <b>Manufacturer :</b> <span class="label label-info">Febi</span><br/>
-                          <b>Quantity :</b> <span class="label label-danger">0</span><br/>
-                          <b>Model no :</b> 896586<br/>
-                          <b>Condition :</b> <span class="label label-success">new</span>
-                        </div>
-                      </div>
-                    </div>				  
-                  </div>
-                </div>
-              </div>
+                <a class="btn btn-info" data-toggle="tooltip" data-original-title="Purchase or Load Parts Quantity"><i class="fa fa-cart-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip"  (click)="btn_showPartInfoClick(part)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editPartClick(part)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePartClick(part)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>
               
             </tbody>
@@ -82,3 +55,161 @@
     <!-- /.col -->
   </div>
 </section>  
+<div class="modal modal-success fade" id="modal-view">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Parts in Stock Detail</h4>
+        </div>
+         
+        <div class="modal-body">
+          <div class="col-sm-12">
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                      <td>Part Number</td>
+                      <td>{{selectedPart?.partNumber}}</td>
+                  </tr>
+                  <tr>
+                      <td>Stamp</td>
+                      <td>{{selectedPart?.stamp}}</td>
+                  </tr>
+                  <tr>
+                      <td>Description</td>
+                      <td>{{selectedPart?.description}}</td>
+                  </tr>
+                  <tr>
+                      <td>Supplier</td>
+                      <td>{{selectedPart?.supplier}}</td>
+                  </tr>
+                  <tr>
+                      <td>Price</td>
+                      <td>{{selectedPart?.price | number : '1.2-2'}}</td>
+                  </tr>
+                  <tr>
+                      <td>Available Quantity</td>
+                      <td>{{selectedPart?.quantity | number : '1.0-0'}}</td>
+                  </tr>
+                  <tr>
+                      <td>Shelf Number</td>
+                      <td>{{selectedPart?.shelfNumber}}</td>
+                  </tr>
+                  <tr>
+                    <td>Last Purchased Date</td>
+                    <td>{{selectedPart?.purchaseDate | date}}</td>
+                  </tr>
+  
+                </tbody>
+              </table>  
+          </div>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <!-- Edit Modal -->
+<div class="modal modal-info fade" id="modal-edit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit Part</h4>
+      </div>
+      <form [formGroup]="myForm" (ngSubmit)="saveUpdates()" novalidate>
+        <input type="hidden" formControlName="id"/>
+        <input type="hidden" formControlName="itemPId"/>
+        <div class="modal-body">
+          <div class="col-sm-12">
+            <table>
+                <tbody>
+                
+                  <tr>
+                      <td>Part Number</td>
+                      <td>
+                        <input class="form-control" formControlName="partNumber" type="text"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Stamp</td>
+                      <td>
+                        <input class="form-control" formControlName="stamp" type="text"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Description</td>
+                      <td>
+                        <input class="form-control" formControlName="description"  type="text"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Supplier</td>
+                      <td>
+                        <input class="form-control" formControlName="supplier"  type="text"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Quantity</td>
+                      <td>
+                        <input class="form-control" formControlName="quantity"  type="number"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Price</td>
+                      <td>
+                        <input class="form-control" formControlName="price"  type="number"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Shelf Number</td>
+                      <td>
+                        <input class="form-control" formControlName="shelfNumber"  type="text"/>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>Date</td>
+                    <td>
+                      <input class="form-control" formControlName="purchaseDate"  type="text"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-outline">Save changes</button>
+        </div>
+    </form> 
+</div>
+</div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal modal-danger fade" id="modal-delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Delete Part</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure to delete this record?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button (click)="deletePart()" type="button" class="btn btn-outline">Delete</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>

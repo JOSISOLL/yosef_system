@@ -10,6 +10,9 @@ export class PartsService {
   _purchaseUrl = "http://localhost:3000/api/parts/purchase"
   _purchasesUrl = "http://localhost:3000/api/purchases"
    _partsStockUrl = "http://localhost:3000/api/parts/stock"
+   _updateStockPartsUrl = "http://localhost:3000/api/stock/update"
+   _deleteStockPartsUrl = "http://localhost:3000/api/stock/delete"
+   _deletePurchaseUrl = "http://localhost:3000/api/purchase/delete"
   constructor(private http: HttpClient) { }
   
   // purchase(part): Observable<Parts>
@@ -26,9 +29,18 @@ export class PartsService {
   getStock(){
     return this.http.get<any>(this._partsStockUrl)
   }
+  updateStock(part : Parts){
+    return this.http.put<Parts>(this._updateStockPartsUrl, part)
+  }
+  deleteStock(part: Parts){
+    return this.http.delete<Parts>(`${this._deleteStockPartsUrl}/${part._id}`);
+  }
   purchase(purchase) : Observable<Purchase>
   {
     return this.http.post<Purchase>(this._purchaseUrl, purchase)
+  }
+  deletePurchase(purchase: Purchase){
+    return this.http.delete<Purchase>(`${this._deletePurchaseUrl}/${purchase._id}`);
   }
 
 }

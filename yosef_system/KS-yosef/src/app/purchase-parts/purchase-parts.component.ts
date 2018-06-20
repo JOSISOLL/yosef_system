@@ -113,7 +113,7 @@ onSubmit(partsForm : NgForm){
       this.parts[this.count - 1] = {
         itemPId: this.count - 1, 
         partNumber: partsForm.value.partNumber,
-        stamp: partsForm.value.partNumber,
+        stamp: partsForm.value.stamp,
         quantity: partsForm.value.quantity,
         description: partsForm.value.description,
         supplier: partsForm.value.supplier,

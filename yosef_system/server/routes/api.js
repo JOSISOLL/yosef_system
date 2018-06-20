@@ -356,7 +356,69 @@ router.post("/parts/stock", (req, res) => {
         }
     })
 })
+router.put('/stock/update', (req, res) => {
+    console.log("attempting to update Stock");
+    let partData = req.body; 
+    // console.log("Part_id  " + partData.id);
+    Parts.findByIdAndUpdate(partData.id, 
+        {
+            itemPId : partData.itemPId,
+            partNumber : partData.partNumber,
+            stamp : partData.stamp,
+            description : partData.description,
+            supplier : partData.supplier,
+            price : partData.price,
+            quantity : partData.quantity,
+            shelfNumber : partData.shelfNumber,
+            purchaseDate : partData.purchaseDate
+        }, {new: true}, function(err, model){
+            if(err){
+                console.log(err)
+            } else{
+            console.log("Part information updated successfully");
+            console.log(model);}
+        });
+    res.status(200).send({"success": true}); 
+});
+router.delete('/stock/delete/:id', (req, res) => {
+    Parts.findOneAndRemove({_id : req.params.id}, function (err,data){
+        if(err){
+            console.log(err)
+        } else {
+            if(!data){
+                status = "This part doesn't exist in the stock."
+                res.status(401).send({status: status})
 
+            }else{
+                console.log(data)
+                res.status(200).send({status : true})
+            }
+            
+        }
+    } )
+    
+
+})
+router.delete('/purchase/delete/:id', (req, res) => {
+    Purchase.findOneAndRemove({_id : req.params.id}, function (err,data){
+        if(err){
+            console.log(err)
+        } else {
+            if(!data){
+                status = "This purchase doesn't exist in the stock."
+                res.status(401).send({status: status})
+
+            }else{
+                console.log("Delete successfull!")
+                console.log(data)
+                res.status(200).send({status : true})
+            }
+            
+        }
+    } )
+    
+
+})
 
 
 module.exports = router
