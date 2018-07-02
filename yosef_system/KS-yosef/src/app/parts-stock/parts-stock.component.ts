@@ -15,7 +15,7 @@ declare var $:any;
 })
 export class PartsStockComponent implements OnInit {
 
-  parts : Parts
+  parts = []
   selectedPart : Parts
   
   myForm : FormGroup;
@@ -64,7 +64,7 @@ export class PartsStockComponent implements OnInit {
     $("#modal-view").modal('show'); 
     
   }
-  btn_editPartClick(part: Parts){
+  btn_editPartClick(part: any){
     this.selectedPart = part;
     console.log(this.selectedPart) 
     this.myForm.setValue({
@@ -129,6 +129,11 @@ export class PartsStockComponent implements OnInit {
         $('#modal-edit').modal('hide')
       });
     }
+  }
+  btn_addToCartClick(part: Parts){
+    this.selectedPart = part;
+    console.log("Add to cart clicked...")
+    
   }
   btn_deletePartClick(part: Parts){
     this.selectedPart = part;

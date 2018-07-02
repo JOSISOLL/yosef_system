@@ -32,14 +32,14 @@ export class PartsService {
   updateStock(part : Parts){
     return this.http.put<Parts>(this._updateStockPartsUrl, part)
   }
-  deleteStock(part: Parts){
+  deleteStock(part: any){
     return this.http.delete<Parts>(`${this._deleteStockPartsUrl}/${part._id}`);
   }
   purchase(purchase) : Observable<Purchase>
   {
     return this.http.post<Purchase>(this._purchaseUrl, purchase)
   }
-  deletePurchase(purchase: Purchase){
+  deletePurchase(purchase: any){
     return this.http.delete<Purchase>(`${this._deletePurchaseUrl}/${purchase._id}`);
   }
 
