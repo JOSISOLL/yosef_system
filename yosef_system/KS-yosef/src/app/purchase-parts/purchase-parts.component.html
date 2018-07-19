@@ -1,24 +1,94 @@
-<form [formGroup]="partsForm" (ngSubmit)="onSubmit()" novalidate >
 <section class="content">
   <!-- Full Width boxes (Stat box) -->
   <div class="row">
     <div class="col-md-12">
       <div class="box box-success" id="box_model">
+        <div class="box-header">
+          <h3 class="box-title">Purchase Parts Form</h3>
+        </div>
         <div class="box-body">
           <div class="form-group col-md-12" style="padding-top:10px;">
             <div class="pull-left">
               <label class="label label-danger" style="font-size:15px;">INVOICE ID - {{invoice_id}}</label>
-              <input type="hidden" [ngModel]="invoice_id" formControlName="invoiceId" class="form-control"/>
+              <!-- <label class="label label-danger" style="font-size:15px;">GRAND TOTAL - {{grandTotal}}</label> -->
+              <!-- <input type="hidden" [ngModel]="invoice_id" formControlName="invoiceId" class="form-control"/> -->
             </div>
             <div class="pull-right">
-              <button type="submit"  class="btn btn-success"><i class="fa fa-save"></i><br/></button>
-              <a class="btn btn-warning" data-toggle="tooltip" routerLink="/parts/purchase" data-original-title="Back"><i class="fa fa-reply"></i><br/></a> 
-            </div>
+                <button type="submit" (click)=Submit(parts)  class="btn btn-success" [disabled]="saved"><i class="fa fa-save"></i><br/></button>
+                <a class="btn btn-warning" data-toggle="tooltip" routerLink="/parts/purchase" data-original-title="Back"><i class="fa fa-reply"></i><br/></a> 
+              </div>
           </div>
           <div class="clearfix" style="color:red;font-weight:bold;text-align:center;">** After submit information will save automatically and go to INVOICE page directly.</div>
         </div>
       </div>
-      <!-- <div class="box box-success" id="box_model">
+
+      <!-- <div id="fab" >
+        <button class="btn btn-info" (click)="addItem($event)" [disabled]="editing"><i class="fa fa-plus"></i></button>
+      </div> -->
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-success">
+          <div class="box-body">
+            <table class="table sakotable table-bordered table-striped dt-responsive" id="print-section">
+              <thead>
+                <tr>
+                  <th>Part Number</th>
+                  <th>Stamp</th>
+                  <th>Description</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Supplier</th>
+                  <th>Shelf</th>
+                  <!-- <th>Date</th> -->
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let part of parts" class="list-part">
+                      <td><span *ngIf="part.partNumber != 'null'; else elseBlock1" class="label label-default">{{ part.partNumber }}</span></td>
+                      <td><span *ngIf="part.stamp != 'null'; else elseBlock2" class="label label-default">{{ part.stamp }}</span></td>
+                      <td><span *ngIf="part.description != 'null'; else elseBlock4" class="label label-default">{{ part.description }}</span></td>
+                      <td><span *ngIf="part.quantity != -1; else elseBlock3" class="label label-default">{{ part.quantity }}</span></td>
+                      <td><span *ngIf="part.price != -1; else elseBlock6" class="label label-default">{{ part.price }}</span></td>
+                      <td><span *ngIf="part.supplier != ''; else elseBlock5" class="label label-default">{{ part.supplier }}</span></td>
+                      <td><span *ngIf="part.shelfNumber != 'null'; else elseBlock7" class="label label-default">{{ part.shelfNumber }}</span></td>
+                      <!-- <td><span *ngIf="part.purchaseDate != 'null'; else elseBlock8" class="label label-default">{{ part.purchaseDate | date }}</span></td> -->
+                      <td>
+                        <span *ngIf="part.partNumber != 'null'; else elseBlock1">
+                          <a class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                        </span>
+                      </td>
+              </tbody>
+              <tr>
+                <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <!-- <td></td> -->
+                  <td>Total : </td>
+                  <td>{{ grandTotal | number : '1.2-2'}} ETB</td>
+                </tr>
+              </table>
+            </div>
+            <button type="button" (click)="addItem($event)" [disabled]="editing" class="btn btn-primary pull-left">Add item</button>
+            <span *ngIf="!editing && parts.length >= 1" class="pull-right">
+              <a class="btn btn-primary pull-right" href="javascript:window.print();" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></a>
+            </span>
+            </div>
+          </div>
+          <div *ngFor="let part of parts" class="list-part">
+              <span hidden *ngIf="part.partNumber != 'null'; else elseBlock1" class="partNumber col-md-2">{{ part.partNumber }}</span>
+              <span hidden *ngIf="part.stamp != 'null'; else elseBlock2" class="stamp col-md-2">{{ part.stamp }}</span>
+              <span hidden *ngIf="part.quantity != -1; else elseBlock3" class="quantity col-md-1">{{ part.quantity }}</span>
+              <span hidden *ngIf="part.description != 'null'; else elseBlock4" class="description col-md-2">{{ part.description }}</span>
+              <span hidden *ngIf="part.supplier != ''; else elseBlock5" class="supplier col-md-1">{{ part.supplier }}</span>
+              <span hidden *ngIf="part.price != -1; else elseBlock6" class="price col-md-1">{{ part.price }}</span>
+              <span hidden *ngIf="part.shelfNumber != 'null'; else elseBlock7" class="shelfNumber col-md-1">{{ part.shelfNumber }}</span>
+              <span hidden *ngIf="part.purchaseDate != 'null'; else elseBlock8" class="purchaseDate col-md-2">{{ part.purchaseDate }}</span>
+
+            <!-- <div class="box box-success" id="box_model">
         <div class="box-header">
           <h3 class="box-title"><i class="fa fa-cart-plus"></i> Purchase for Exisiting Parts ?</h3>
         </div>
@@ -38,95 +108,130 @@
           </div>
 		          </div>
       </div> -->
-      <div class="box box-success">
-        <div class="box-header">
-          <h3 class="box-title">Purchase Parts Form</h3>
+            <!-- <form [formGroup]="partsForm" (ngSubmit)="onSubmit()" novalidate > -->
+            <div class="col-xs-12">
+            <form #partsForm="ngForm" (ngSubmit)="onSubmit(partsForm)" novalidate >
+            <!-- <div class="box box-success">
+              <div class="box-body"> -->
+                <!-- <ng-template class="form-group col-md-4" #elseBlock1>
+                  <label for="part_number"><span style="color:red;">*</span> Part Number :</label>
+                  <input type="text" formControlName="partNumber" value="" name="partNumber" class="form-control" required/>
+                </ng-template>
+                <ng-template class="form-group col-md-4" #elseBlock2>
+                  <label for="stamp"><span style="color:red;">*</span> Stamp :</label>
+                  <input type="text" formControlName="stamp" value="" name="stamp" class="form-control" required/>
+                </ng-template>
+                <ng-template class="form-group col-md-4" #elseBlock3>
+                    <label for="parts_quantity"><span style="color:red;">*</span> Quantity :</label>
+                    <input type="text" formControlName="quantity" value="" name="quantity" class="form-control ppcal allownumberonly" required/>
+                </ng-template>
+                <ng-template class="form-group col-md-12" #elseBlock4>
+                  <label for="description"><span style="color:red;">*</span> Description :</label>
+                  <textarea  formControlName="description" name="description" class="form-control" rows="5" required></textarea>
+                </ng-template>
+                <ng-template class="form-group col-md-3" #elseBlock5>
+                    <label for="supplier"><span style="color:red;">*</span> Supplier </label>
+                    <select class='form-control' formControlName="supplier" name="supplier">
+                        <option value="">--Select Supplier--</option>
+                        <option  *ngFor="let suplier of supliers" value="{{suplier.name}}">{{suplier.name}}</option>
+                      </select>
+                </ng-template>
+                <ng-template class="form-group col-md-3" #elseBlock6>
+                    <label for="price"><span style="color:red;">*</span> Buy Price(Per pcs) :</label>
+                    <div class="input-group"> <span class="input-group-addon">$</span>
+                      <input type="text" placeholder="Buying Price" value="" formControlName="price" name="price" class="form-control allownumberonly ppcal" required/>
+                    </div>
+                </ng-template>
+                <ng-template class="form-group col-md-3" #elseBlock7> 
+                  <label for="shelfNumber"><span style="color:red;">*</span> Shelf Number :</label>
+                  <input type="text" formControlName="shelfNumber" value="" name="shelfNumber" class="form-control" required/>
+                </ng-template>
+                <ng-template class="form-group col-md-3" #elseBlock8>
+                  <label for="parts_add_date">Purchase Date :</label>
+                  <input type="date" formControlName="purchaseDate" [ngModel]="date" name="purchaseDate" class="form-control" />
+                </ng-template> -->
+                <div class="btn pull-right">
+                    <button *ngIf="editing && part.itemPId === count" type="submit" class="btn btn-success"><i class="fa fa-plus"></i><br/></button>
+                    <button *ngIf="editing && part.itemPId === count" (click)="revert()" class="btn btn-danger"><i class="fa fa-ban"></i><br/></button>
+                </div>
+                <ng-template class="form-group col-md-4" #elseBlock1>
+                    <label for="part_number"><span style="color:red;">*</span> Part Number :</label>
+                    <input type="text" [(ngModel)]="partNumber" value="" name="partNumber" class="form-control" required/>
+                  </ng-template>
+                  <ng-template class="form-group col-md-4" #elseBlock2>
+                    <label for="stamp"><span style="color:red;">*</span> Stamp :</label>
+                    <input type="text" [(ngModel)]="stamp" value="" name="stamp" class="form-control" required/>
+                  </ng-template>
+                  <ng-template class="form-group col-md-4" #elseBlock3>
+                      <label for="parts_quantity"><span style="color:red;">*</span> Quantity :</label>
+                      <input type="text" [(ngModel)]="quantity" value="" name="quantity" class="form-control ppcal allownumberonly" required/>
+                  </ng-template>
+                  <ng-template class="form-group col-md-12" #elseBlock4>
+                    <label for="description"><span style="color:red;">*</span> Description :</label>
+                    <textarea  [(ngModel)]="description" name="description" class="form-control" rows="5" required></textarea>
+                  </ng-template>
+                  <ng-template class="form-group col-md-3" #elseBlock5>
+                      <label for="supplier"><span style="color:red;">*</span> Supplier </label>
+                      <select class='form-control' [(ngModel)]="supplier" name="supplier">
+                          <option value="">--Select Supplier--</option>
+                          <option  *ngFor="let suplier of supliers" value="{{suplier.name}}" required>{{suplier.name}}</option>
+                        </select>
+                  </ng-template>
+                  <ng-template class="form-group col-md-3" #elseBlock6>
+                      <label for="price"><span style="color:red;">*</span> Buy Price(Per pcs) :</label>
+                      <div class="input-group"> <span class="input-group-addon">$</span>
+                        <input type="text" placeholder="Buying Price" value="" [(ngModel)]="price" name="price" class="form-control allownumberonly ppcal" required/>
+                      </div>
+                  </ng-template>
+                  <ng-template class="form-group col-md-3" #elseBlock7> 
+                    <label for="shelfNumber"><span style="color:red;">*</span> Shelf Number :</label>
+                    <input type="text" [(ngModel)]="shelfNumber" value="" name="shelfNumber" class="form-control" required/>
+                  </ng-template>
+                  <ng-template class="form-group col-md-3" #elseBlock8>
+                    <label for="parts_add_date">Purchase Date :</label>
+                    <input type="date" [ngModel]="date" name="purchaseDate" class="form-control" />
+                  </ng-template>
+
+
+                <!-- <div class="form-group col-md-4">
+                  <label for="parts_warranty">Parts Warranty :</label>
+                  <input type="text" name="parts_warranty" placeholder="5 Years or 6 Months" value="" id="parts_warranty" class="form-control" />
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="total_amount"><span style="color:red;">*</span> Total Amount :</label>
+                  <div class="input-group"> <span class="input-group-addon">$</span>
+                    <input type="text" readonly="" style="color:red;font-weight:bold;" placeholder="Total Price" value="0.00" name="total_amount" id="total_amount" class="form-control allownumberonly" required/>
+                  </div>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="total_amount"><span style="color:red;">*</span> Given Amount :</label>
+                  <div class="input-group"> <span class="input-group-addon">$</span>
+                    <input type="text" placeholder="Given Amount" value="0.00" name="given_amount" id="given_amount" class="form-control allownumberonly ppcal" required/>
+                  </div>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="total_amount"><span style="color:red;">*</span> Pending Amount :</label>
+                  <div class="input-group"> <span class="input-group-addon">$</span>
+                    <input type="text" readonly="" style="color:red;font-weight:bold;" placeholder="Pending Amount" value="0.00" name="pending_amount" id="pending_amount" class="form-control allownumberonly" required/>
+                  </div>
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="Prsnttxtarea">Parts Image (500x500px) :</label>
+                  <img class="form-control" src="http://sakosys.com/temp/garage-management-system/img/no_image.jpg" style="height:250px;width:250px;" id="output"/>
+                  <input type="hidden" name="img_exist" value="" />
+                </div>
+                <div class="form-group col-md-12"> <span class="btn btn-file btn btn-primary">Upload Image
+                  <input type="file" name="uploaded_file" onchange="loadFile(event)" />
+                  </span> </div> -->
+
+                  
+                
+              <!-- </div> -->
+              <!-- /.box-body -->
+            <!-- </div> -->
+          </form>
         </div>
-        <div class="box-body">
-          <div class="form-group col-md-4">
-            <label for="part_number"><span style="color:red;">*</span> Part Number :</label>
-            <input type="text" formControlName="partNumber" value="" id="part_number" class="form-control" required/>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="stamp"><span style="color:red;">*</span> Stamp :</label>
-            <input type="text" formControlName="stamp" value="" id="stamp" class="form-control" required/>
-          </div>
-          <div class="form-group col-md-4">
-              <label for="parts_quantity"><span style="color:red;">*</span> Quantity :</label>
-              <input type="text" formControlName="quantity" value="" id="quantity" class="form-control ppcal allownumberonly" required/>
-          </div>
-          <div class="form-group col-md-12">
-            <label for="description"><span style="color:red;">*</span> Description :</label>
-            <textarea  formControlName="description" id="description" class="form-control" rows="5" required></textarea>
-          </div>
-          <div class="form-group col-md-3">
-              <label for="supplier"><span style="color:red;">*</span> Supplier </label>
-              <select class='form-control' formControlName="supplier" id="supplierList" name="supplierList">
-                  <option value="">--Select Supplier--</option>
-                  <option  *ngFor="let suplier of supliers" value="{{suplier.name}}">{{suplier.name}}</option>
-                </select>
-              <!-- <input type="text" placeholder="Supplier Name" value="" formControlName="suplier" id="supplier" class="form-control" required/> -->
-          </div>
-          <div class="form-group col-md-3">
-              <label for="buy_prie"><span style="color:red;">*</span> Buy Price(Per pcs) :</label>
-              <div class="input-group"> <span class="input-group-addon">$</span>
-                <input type="text" placeholder="Buying Price" value="" formControlName="buyPrice" id="buyPrice" class="form-control allownumberonly ppcal" required/>
-              </div>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="parts_sell_price"><span style="color:red;">*</span> Sell Price (Per pcs) :</label>
-            <div class="input-group"> <span class="input-group-addon">$</span>
-              <input type="text" placeholder="Selling Price" value="0.00" formControlName="sellPrice" id="sellPrice" class="form-control allownumberonly" required/>
-            </div>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="remark"><span style="color:red;">*</span> Remark :</label>
-            <input type="text" formControlName="remark" value="" id="remark" class="form-control" required/>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="make"><span style="color:red;">*</span> Make :</label>
-            <input type="text" formControlName="make" value="" id="make" class="form-control" required/>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="shelfNumber"><span style="color:red;">*</span> Shelf Number :</label>
-            <input type="text" formControlName="shelfNumber" value="" id="shelfNumber" class="form-control" required/>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="parts_add_date">Purchase Date :</label>
-            <input type="date" formControlName="purchaseDate" [ngModel]="date" id="purchaseDate" class="form-control" />
-          </div>
-          <!-- <div class="form-group col-md-4">
-            <label for="parts_warranty">Parts Warranty :</label>
-            <input type="text" name="parts_warranty" placeholder="5 Years or 6 Months" value="" id="parts_warranty" class="form-control" />
-          </div>
-          <div class="form-group col-md-4">
-            <label for="total_amount"><span style="color:red;">*</span> Total Amount :</label>
-            <div class="input-group"> <span class="input-group-addon">$</span>
-              <input type="text" readonly="" style="color:red;font-weight:bold;" placeholder="Total Price" value="0.00" name="total_amount" id="total_amount" class="form-control allownumberonly" required/>
-            </div>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="total_amount"><span style="color:red;">*</span> Given Amount :</label>
-            <div class="input-group"> <span class="input-group-addon">$</span>
-              <input type="text" placeholder="Given Amount" value="0.00" name="given_amount" id="given_amount" class="form-control allownumberonly ppcal" required/>
-            </div>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="total_amount"><span style="color:red;">*</span> Pending Amount :</label>
-            <div class="input-group"> <span class="input-group-addon">$</span>
-              <input type="text" readonly="" style="color:red;font-weight:bold;" placeholder="Pending Amount" value="0.00" name="pending_amount" id="pending_amount" class="form-control allownumberonly" required/>
-            </div>
-          </div>
-          <div class="form-group col-md-12">
-            <label for="Prsnttxtarea">Parts Image (500x500px) :</label>
-            <img class="form-control" src="http://sakosys.com/temp/garage-management-system/img/no_image.jpg" style="height:250px;width:250px;" id="output"/>
-            <input type="hidden" name="img_exist" value="" />
-          </div>
-          <div class="form-group col-md-12"> <span class="btn btn-file btn btn-primary">Upload Image
-            <input type="file" name="uploaded_file" onchange="loadFile(event)" />
-            </span> </div> -->
         </div>
-        <!-- /.box-body -->
       </div>
       <!-- /.box -->
       <!-- <div class="box box-success" id="box_model">
@@ -156,5 +261,4 @@
       </div> -->
     </div>
   </div>
-  </section>
-</form>
+</section>

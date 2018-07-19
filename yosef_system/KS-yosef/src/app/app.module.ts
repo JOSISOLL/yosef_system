@@ -48,6 +48,8 @@ import { PartsService } from './services/parts.service';
 
 import { PurchaseInvoiceComponent } from './purchase-invoice/purchase-invoice.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { SellPartsComponent } from './sell-parts/sell-parts.component';
+import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { InvoiceComponent } from './invoice/invoice.component';
     SellPartsListComponent,
     PurchaseInvoiceComponent,
     SellPartsListComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    SellPartsComponent,
+    AddToCartComponent
 
   ],
   imports: [

@@ -3,6 +3,8 @@ import { ClientService } from '../client.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Customer } from '../models/customer';
+import { RepairService } from '../repair.service';
+import { Repair } from '../models/repair';
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 declare var  jquery: any; 
@@ -34,10 +36,21 @@ export class CustomerMainComponent implements OnInit {
   address: FormControl; 
 
 
-  constructor(private _clientService: ClientService, private _router: Router) { }
+  repairForm: FormGroup;
+  customer: FormControl; 
+  plateNumber: FormControl; 
+  reportedProblem: FormControl; 
+  carType: FormControl; 
+  remark: FormControl; 
+  personInCharge: FormControl; 
+  date: FormControl;
+
+  constructor(private _clientService: ClientService, private _router: Router, private _repairService: RepairService) { }
   ngOnInit() {
     this.createControls(); 
     this.createEditForm();
+    this.createRepairControl()
+    this.createRepairForm()
     this._clientService.getClients()
       .subscribe(
         res => this.clients = res,
@@ -89,6 +102,30 @@ export class CustomerMainComponent implements OnInit {
     $('#modal-delete').modal('show');
     console.log("show delete client clicked"); 
   }
+  btn_addRepariClick(client){
+    this.selectedClient = client;
+    console.log(client)
+    this.repairForm.setValue({
+      customer: client.name,
+      plateNumber:"",
+      reportedProblem:"",
+      carType:"",
+      remark: "",
+      personInCharge: "",
+      date: ""
+    });
+    // this.selectedClientId = client._id;
+    // this.selectedClientName = client.name; 
+    // this.selectedClientEmail = client.email; 
+    // this.selectedClientMobileTel = client.telMobile; 
+    // this.selectedClientHomeTel = client.telHome; 
+    // this.selectedClientWorkTel = client.telWork; 
+    // this.selectedClientAddress = client.address;
+
+    $('#modal-add-repair').modal('show'); 
+    console.log("add repair for client clicked");
+  }
+
   deleteCustomer(){
     this._clientService.deleteCustomer(this.selectedClient)
     .subscribe(result => {
@@ -99,6 +136,7 @@ export class CustomerMainComponent implements OnInit {
       $('#modal-delete').modal('hide');
     });
   }
+
   saveUpdates(){
     console.log("submit clicked..");
     if(this.myForm.valid){
@@ -150,6 +188,49 @@ export class CustomerMainComponent implements OnInit {
     });
   }
 
+createRepairControl(){
+  this.customer = new FormControl('', Validators.required);
+  this.plateNumber = new FormControl();
+  this.reportedProblem = new FormControl();
+  this.carType = new FormControl();
+  this.remark = new FormControl();
+  this.personInCharge = new FormControl();
+  this.date = new FormControl();
+}
+createRepairForm(){
+  this.repairForm = new FormGroup({
+    customer: this.customer, 
+    plateNumber: this.plateNumber, 
+    reportedProblem: this.reportedProblem, 
+    carType: this.carType, 
+    remark: this.remark, 
+    personInCharge: this.personInCharge,
+    date: this.date
+  })
+
+}
+repairAdd(){
+  console.log("submit clicked..");
+  if(this.repairForm.valid){
+
+    // console.log("Form is VALID")
+    var data = <Repair>this.repairForm.value;
+    console.log("FORM IS VALID");
+    // console.log(this.repairForm.value);
+    this._repairService.addRepair(data)
+    .subscribe(
+      res => {
+        console.log(res)
+        // this._router.navigate(['/repair'])
+        $("#modal-add-repair").modal('hide');
+      },
+      err => console.log(err)
+    )
+  }
+  else{
+    console.log("FROM IS INVALID");
+  }
+  }
   
 
 

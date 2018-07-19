@@ -5,12 +5,13 @@ const User = require('../models/user')
 const Customer = require('../models/customer')
 const Suplier = require('../models/suplier');
 const Repair = require('../models/repair')
+const Parts = require('../models/parts')
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
 const keypair = require('keypair')
 const RSA_PRIVATE_KEY = "secret-key"
-const Purchase = require('../models/parts')
+const Purchase = require('../models/purchase')
 const api_imp = require('./api_imp');
 mongoose.connect(db2, err => {
     if(err){
@@ -259,7 +260,11 @@ router.put('/repair/update', (req, res) => {
 // TODO: set the appropriate response code for unknown record.
 router.delete('/repair/delete/:id', (req, res) => {
     console.log("id: " + req.params.id);
+<<<<<<< HEAD
      Repair.findByIdAndRemove(req.params.id, function(err, res){
+=======
+    Repair.findByIdAndRemove(req.params.id, function(err, res){
+>>>>>>> 8830188e0b4ba4dc9e8e104ddb7f648e832a740e
         if(err){
             return res.status(404).send({status: false});
         }
@@ -270,14 +275,18 @@ router.delete('/repair/delete/:id', (req, res) => {
     res.status(200).send({status: true});
 });
 
-router.post("/parts/purchase", verifyToken, (req, res) => {
-    let purchaseData = req.body
+router.post("/parts/purchase", (req, res) => {
+    let purchaseData = req.body;
+    console.log("Attempting to add purchase data");
+    console.log(purchaseData);
     let purchase = new Purchase(purchaseData)
-    purchase.save((error, partPurchased) =>{
+    // res.status(200).send("Works fine");
+    purchase.save((error, purchasedData) =>{
         if(error){
-        console.log(error)
+            // res.json({status: 500, error: err});
+            console.log(error)
         } else {
-            res.status(200).send(partPurchased)
+            res.status(200).send(purchasedData)
         }
     })
 })
@@ -285,14 +294,135 @@ router.post("/parts/purchase", verifyToken, (req, res) => {
 router.get("/purchases", (req, res)=>{
     Purchase.find(function (error, purchases){
         if(error){
-            console.log(error)
+            console.log(error);
         } else {
-            res.json(purchases)
-            console.log("purchases fetched from database")
+            res.json(purchases);
+            console.log("purchases fetched from database");
         }
     })
 });
+router.get("/parts/stock", (req, res)=>{
+    Parts.find(function (error, stock){
+        if(error){
+            console.log(error);
+        } else {
+            res.json(stock);
+            console.log("Parts stock fetched from database");
+        }
+    })
+})
+router.post("/parts/stock", (req, res) => {
+    let partsData = req.body;
+    Parts.findOne({partNumber: partsData.partNumber}, (error, part) => {
+        if (error){
+            console.log(error);
+        } else {
+            if(!part){
+                let parts = new Parts(partsData)
+                parts.save((err, addedPart) =>{
+                    if(err){
+                        console.log(err)
+                    } else {
+                        console.log("New part added with new PART NUMBER");
+                        res.status(200).send(addedPart);
+                    }
+                })
+            } else {
+                if(part.stamp !== partsData.stamp){
+                    let parts = new Parts(partsData)
+                    parts.save((err, addedPart) =>{
+                        if(err){
+                            console.log(err);
+                        } else {
+                            console.log("Already existing part added with a new STAMP.");
+                            res.status(200).send(addedPart);
+                        }
+                    })
+                } else {
+                    let parts = new Parts(partsData)
+                    let availableQty = part.quantity;
+                    let totalQuantity = availableQty + partsData.quantity
+                    Parts.findByIdAndUpdate(part.id,{
+                        quantity : totalQuantity
+                    },{new: true}, function(err, updatedPart){
+                        if(err){
+                            console.log(err);
+                        } else {
+                            console.log("Quantity for existing part updated!")
+                            console.log(updatedPart)
+                            res.status(200).send(updatedPart)
+                        }
+                    })
 
+                }
+            }
+
+        }
+    })
+})
+router.put('/stock/update', (req, res) => {
+    console.log("attempting to update Stock");
+    let partData = req.body; 
+    // console.log("Part_id  " + partData.id);
+    Parts.findByIdAndUpdate(partData.id, 
+        {
+            itemPId : partData.itemPId,
+            partNumber : partData.partNumber,
+            stamp : partData.stamp,
+            description : partData.description,
+            supplier : partData.supplier,
+            price : partData.price,
+            quantity : partData.quantity,
+            shelfNumber : partData.shelfNumber,
+            purchaseDate : partData.purchaseDate
+        }, {new: true}, function(err, model){
+            if(err){
+                console.log(err)
+            } else{
+            console.log("Part information updated successfully");
+            console.log(model);}
+        });
+    res.status(200).send({"success": true}); 
+});
+router.delete('/stock/delete/:id', (req, res) => {
+    Parts.findOneAndRemove({_id : req.params.id}, function (err,data){
+        if(err){
+            console.log(err)
+        } else {
+            if(!data){
+                status = "This part doesn't exist in the stock."
+                res.status(401).send({status: status})
+
+            }else{
+                console.log(data)
+                res.status(200).send({status : true})
+            }
+            
+        }
+    } )
+    
+
+})
+router.delete('/purchase/delete/:id', (req, res) => {
+    Purchase.findOneAndRemove({_id : req.params.id}, function (err,data){
+        if(err){
+            console.log(err)
+        } else {
+            if(!data){
+                status = "This purchase doesn't exist in the stock."
+                res.status(401).send({status: status})
+
+            }else{
+                console.log("Delete successfull!")
+                console.log(data)
+                res.status(200).send({status : true})
+            }
+            
+        }
+    } )
+    
+
+})
 
 
 module.exports = router

@@ -62,7 +62,7 @@
     </div>
     <!-- /.row -->
   </section>
-<div id="modal-view-suplier" class="modal" tabindex="-1" role="dialog">
+<!-- <div id="modal-view-suplier" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -96,6 +96,64 @@
       </div>
     </div>
   </div>
+</div> -->
+<div class="modal modal-success fade" id="modal-view-suplier">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Repair Detail</h4>
+      </div>
+       
+      <div class="modal-body">
+        <div class="col-sm-12">
+            <table class="table table-user-information">
+              <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td>{{selectedSuplier?.name}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{selectedSuplier?.email}}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>{{selectedSuplier?.address}}</td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>{{selectedSuplier?.country}}</td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>{{selectedSuplier?.phone}}</td>
+                </tr>
+                <tr>
+                    <td>Fax</td>
+                    <td>{{selectedSuplier?.fax}}</td>
+                </tr>
+                <tr>
+                  <td>Manufactures</td>
+                  <td>{{selectedSuplier?.manufacturer}}</td>
+                </tr>
+                <tr>
+                  <td>Website</td>
+                  <td>{{selectedSuplier?.website}}</td>
+                </tr>
+
+              </tbody>
+            </table>  
+        </div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
   <div class="modal modal-danger fade" id="modal-danger">
     <div class="modal-dialog">

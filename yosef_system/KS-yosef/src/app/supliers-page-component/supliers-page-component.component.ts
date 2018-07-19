@@ -16,7 +16,7 @@ declare var $ :any;
 })
 export class SupliersPageComponentComponent implements OnInit {
   supliers: Suplier[];
-  viewSelectedSuplier : Suplier; 
+  selectedSuplier : Suplier; 
   mock_data: any[] = [
     "SAMPLE-1", 
     "SAMPLE-2", 
@@ -43,13 +43,13 @@ export class SupliersPageComponentComponent implements OnInit {
   }
 
   setViewContent(data: Suplier){
-    this.viewSelectedSuplier = data;
+    this.selectedSuplier = data;
 
     $("#modal-view-suplier").modal("show");
-    console.log(this.viewSelectedSuplier);
+    console.log(this.selectedSuplier);
   }
   setEditContent(data: Suplier){
-    this.viewSelectedSuplier = data; 
+    this.selectedSuplier = data; 
     $("#modal-edit-suplier").modal("show"); 
   }
 

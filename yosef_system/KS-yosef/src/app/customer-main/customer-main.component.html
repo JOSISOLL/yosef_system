@@ -37,7 +37,7 @@
               <td>{{ client.telWork }}</td>
               <td>{{ client.address }}</td>
               <td>
-                <a class="btn btn-warning" data-toggle="tooltip" data-original-title="Add your Car"><i class="fa fa-car"></i></a> 
+                <a class="btn btn-warning" data-toggle="tooltip" (click)="btn_addRepariClick(client)" data-original-title="Add your Car"><i class="fa fa-car"></i></a> 
                 <a class="btn btn-success" data-toggle="tooltip" (click)="btn_showClientInfoClick(client)" data-original-title="View"><i class="fa fa-eye"></i></a> 
                 <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editClientClick(client)" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
                 <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deleteClientClick(client)"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
@@ -101,6 +101,7 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+<!-- Working Edit Modal -->
 <div class="modal modal-info fade" id="modal-edit">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -166,7 +167,8 @@
       <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
-  </div><div class="modal modal-info fade" id="modal-edit">
+  </div>
+  <div class="modal modal-info fade" id="modal-edit">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -186,23 +188,88 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
-  <div class="modal modal-danger fade" id="modal-delete">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Delete Record?</h4>
-          </div>
-          <div class="modal-body">
-            <p>Are you sure you want to remove this record?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-            <button type="button" (click)="deleteCustomer()" class="btn btn-outline">Delete</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
+<div class="modal modal-danger fade" id="modal-delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete Record?</h4>
       </div>
-      <!-- /.modal-dialog -->
+      <div class="modal-body">
+        <p>Are you sure you want to remove this record?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button type="button" (click)="deleteCustomer()" class="btn btn-outline">Delete</button>
+      </div>
     </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+    <!-- Modal Add Repair -->
+<div class="modal modal-warning fade" id="modal-add-repair">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add Repair for {{selectedClient.name}}</h4>
+      </div>
+      <form [formGroup]="repairForm" (ngSubmit)="repairAdd()" novalidate>
+          <div class="modal-body">
+            <!-- Full Width boxes (Stat box) -->
+          <div class="row">
+            <div class="col-md-12"> 
+            
+              <div class="form-group">
+                <label for="ddlCustomerList"><span style="color:red;">*</span> Select Customer :</label>
+                <select class='form-control' formControlName="customer" id="customerList" name="customerList">
+                  <option value="">--Select Customer--</option>
+                  <option  *ngFor="let client of clients" value="{{client.name}}">{{client.name}}</option>
+                </select>
+                <label *ngIf="customer.invalid" style="color:red;"> This is field is required</label>
+              </div>
+              <div class="form-group">
+                <label for="plateNumber"><span style="color:red;">*</span> Plate Number :</label>
+                <input formControlName="plateNumber" type="text"   value="" id="plateNumber" class="form-control" required />
+              </div>
+              <div class="form-group">
+              <label for="reportedProblem"><span style="color:red;">*</span> Reported Problem :</label>
+              <input formControlName="reportedProblem" type="text"   value="" id="reportedProblem" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="carType"><span style="color:red;">*</span> Car Type :</label>
+                <input formControlName="carType" type="text"   value="" id="carType" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="remark"><span style="color:red;">*</span> Remark :</label>
+                <input formControlName="remark" type="text"   value="" id="remark" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="personInCharge"><span style="color:red;">*</span> Person In Charge :</label>
+                <input formControlName="personInCharge" type="text"   value="" id="personInCharge" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="date"><span style="color:red;">*</span> Date :</label>
+                <input formControlName="date" type="text"   value="" id="date" class="form-control" required />
+              </div>
+              </div>
+              <!-- <input type="hidden" value="0" name="repair_car"/>
+              <input type="hidden" name="hfInvoiceId" value="221875" /> -->
+            </div>
+            <!-- /.row -->
+      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button type="submit"  class="btn btn-outline">Save changes</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
