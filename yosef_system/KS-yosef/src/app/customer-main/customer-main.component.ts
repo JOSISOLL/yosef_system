@@ -90,8 +90,6 @@ export class CustomerMainComponent implements OnInit {
     console.log("show delete client clicked"); 
   }
   deleteCustomer(){
-    
-
     this._clientService.deleteCustomer(this.selectedClient)
     .subscribe(result => {
       console.log("successfully deleted!");
