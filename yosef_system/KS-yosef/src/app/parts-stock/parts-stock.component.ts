@@ -3,6 +3,7 @@ import { PartsService } from '../services/parts.service';
 import { HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Parts } from '../models/parts';
+import { CartAction } from "../store/actions/cart.actions"
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 declare var  jquery: any; 
@@ -15,7 +16,9 @@ declare var $:any;
 })
 export class PartsStockComponent implements OnInit {
 
-  parts = []
+  parts :Parts []
+  addQuantity : number
+  available : boolean = true
   selectedPart : Parts
   
   myForm : FormGroup;
@@ -31,7 +34,7 @@ export class PartsStockComponent implements OnInit {
   purchaseDate : FormControl;
 
 
-  constructor(private _partsService : PartsService, private _router : Router) {
+  constructor(private _partsService : PartsService, private _router : Router, private _cartStore : CartAction) {
     
    }
 
@@ -57,6 +60,7 @@ export class PartsStockComponent implements OnInit {
       }
     )
   }
+  
   btn_showPartInfoClick(part: Parts){
     console.log("show repair button clicked...");
     this.selectedPart =part;
@@ -133,7 +137,27 @@ export class PartsStockComponent implements OnInit {
   btn_addToCartClick(part: Parts){
     this.selectedPart = part;
     console.log("Add to cart clicked...")
+    $("#modal-addToCart").modal('show');
     
+  }
+  addTo_cart(){
+    console.log(this.addQuantity)
+    console.log(this.selectedPart)
+    if(this.addQuantity){
+      if(this.addQuantity > this.selectedPart.quantity){
+        this.available = false;
+      } 
+      else{
+        this.available = true;
+        this._cartStore.addToCart(this.selectedPart, this.addQuantity || 1)
+        this.selectedPart.quantity = this.selectedPart.quantity - this.addQuantity
+        console.log(this.selectedPart)
+        $('#modal-addToCart').modal('hide');
+      }
+    }
+    // console.log(this.selectedPart)
+
+    // console.log(this.selectedPart)
   }
   btn_deletePartClick(part: Parts){
     this.selectedPart = part;

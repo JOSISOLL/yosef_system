@@ -260,15 +260,23 @@ router.put('/repair/update', (req, res) => {
 // TODO: set the appropriate response code for unknown record.
 router.delete('/repair/delete/:id', (req, res) => {
     console.log("id: " + req.params.id);
-    Repair.findByIdAndRemove(req.params.id, function(err, res){
+    console.log("Attemptin to delete repair data.")
+    Repair.findOneAndRemove({_id : req.params.id}, function (err,data){
         if(err){
-            return res.status(404).send({status: false});
+            console.log(err)
+        } else {
+            if(!data){
+                status = "This repair doesn't exist in the stock."
+                res.status(401).send({status: status})
+
+            }else{
+                console.log(data)
+                console.log("Repair data successfully deleted.")
+                res.status(200).send({status : true})
+            }
+            
         }
-        else{
-            return res.status(200).send({status: true});    
-        }
-    });
-    res.status(200).send({status: true});
+    } )
 });
 
 router.post("/parts/purchase", (req, res) => {

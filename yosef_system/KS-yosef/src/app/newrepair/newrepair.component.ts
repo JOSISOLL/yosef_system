@@ -41,6 +41,10 @@ export class NewrepairComponent implements OnInit {
   ngOnInit() {
     this.createControls(); 
     this.createEditForm(); 
+    this.getRepair();
+    
+  }
+  getRepair(){
     this._historyService.getRepairs()
       .subscribe(
         res => {
@@ -146,9 +150,10 @@ export class NewrepairComponent implements OnInit {
   }
   deleteRepair(){
     this._historyService.deleteRepair(this.selectedRepair)
-    .subscribe(result => {
+    .subscribe(res => {
       console.log("successfully deleted!");
       $('#modal-delete').modal('hide');
+      this.getRepair();
     });
   }
   

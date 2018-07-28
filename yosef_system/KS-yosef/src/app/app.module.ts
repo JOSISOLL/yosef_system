@@ -50,7 +50,11 @@ import { PurchaseInvoiceComponent } from './purchase-invoice/purchase-invoice.co
 import { InvoiceComponent } from './invoice/invoice.component';
 import { SellPartsComponent } from './sell-parts/sell-parts.component';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
-
+import { ACTIONS } from './store/actions';
+import { reducers, metaReducers } from './store/reducers';
+import { AllEffects } from './store/effects'
+import { StoreModule } from '@ngrx/store';
+import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,8 +97,16 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule, 
+    HttpModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    StoreModule.forRoot(reducers,
+      // { metaReducers }
+    ),
+    // StoreDevtoolsModule.instrument({
+    //   maxAge: 25 //  Retains last 25 states
+    // }),
+    AllEffects,
   ],
   providers: [
     AuthService,
@@ -111,7 +123,8 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
     RepairService,
     SuplierService,
     ManufaturerService,
-    PartsService
+    PartsService,
+    ACTIONS
   ],
   bootstrap: [AppComponent]
 })

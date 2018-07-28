@@ -71,7 +71,7 @@
                 <td><span class="label label-primary">{{part.shelfNumber}}</span></td>
                 <td><span class="label label-success">{{part.supplier}}</span></td>
               <td>
-                <a class="btn btn-info" data-toggle="tooltip" data-original-title="Purchase or Load Parts Quantity"><i class="fa fa-cart-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip"  (click)="btn_showPartInfoClick(part)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editPartClick(part)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePartClick(part)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                <a class="btn btn-info" data-toggle="tooltip" (click)="btn_addToCartClick(part)" data-original-title="Purchase or Load Parts Quantity"><i class="fa fa-cart-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip"  (click)="btn_showPartInfoClick(part)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editPartClick(part)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePartClick(part)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>
               
             </tbody>
@@ -246,3 +246,28 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
+
+  <!-- Add to Cart Modal -->
+<div class="modal modal-info fade" id="modal-addToCart">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add Part to Cart</h4>
+      </div>
+      <div class="modal-body">
+        <p>Part Number: {{selectedPart?.partNumber}}</p>
+        <p>Stamp : {{selectedPart?.stamp}}</p>
+        <label *ngIf="!available" style="color:red;">Not enough quantity available in stock.</label>
+        <input placeholder="Quantity" [(ngModel)]="addQuantity" name="addQuantity" type="number" class="form-control rounded-0" min="1" max="100" required>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button (click)="addTo_cart()" type="button" class="btn btn-outline">Add To Cart</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
