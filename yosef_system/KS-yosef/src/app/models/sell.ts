@@ -4,6 +4,8 @@ export class Sell{
     buyerName ? : String
     buyerPhoneNumber ? : String
     buyerTinNumber ? : String
+    personInCharge ? : String
     parts ? : Parts[]
+    quantity ? : Number
     grandTotal ? : Number
 }

@@ -28,7 +28,86 @@
       <td><h4></h4></td>
       <td><h4>Total Items: {{totalQuantity}}</h4></td>
       <td><h4>Total: ETB {{totalPrice}}</h4></td>
-      <td><button (click)="checkout()" class="btn btn-md btn-success">Checkout</button></td>
+      <td><button *ngIf="totalPrice > 0" (click)="buy(cart)" class="btn btn-md btn-success">Checkout</button></td>
     </tr>
   </tbody>
 </table>
+
+
+
+<!--Checkout modal-->
+<div class="modal modal-warning fade" id="modal-checkout">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Please enter Buyer Information</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table">
+              <thead>
+                  <tr>
+                  <th>Part Number</th>
+                  <th>Stamp</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  </tr>
+              </thead>
+            
+              <tbody>
+                <tr *ngFor="let product of cart; let i = index">
+                  <td><h4>{{product.partNumber}}</h4></td>
+                  <td><h4>{{product.stamp}}</h4></td>
+                  <td><h4>{{product.quantity}}</h4></td>
+                  <td><h4>ETB {{product.price}}</h4></td>
+                </tr>
+            
+                <tr>
+                  <td><h4>Total Items: {{totalQuantity}}</h4></td>
+                  <td><h4>Total: ETB {{totalPrice}}</h4><td>
+                </tr>
+              </tbody>
+            </table>
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(cart)" novalidate>
+          <div class="modal-body">
+            <!-- Full Width boxes (Stat box) -->
+          <div class="row">
+            <div class="col-md-12"> 
+              <div class="form-group"> 
+                <label for="buyerName"><span style="color:red;">*</span> Buyer Name :</label>
+                <input formControlName="buyerName" type="text"   value="" id="buyerName" class="form-control" required />
+              </div>
+              <div class="form-group">
+              <label for="buyerPhoneNumber"><span style="color:red;">*</span> Buyer Phone Number :</label>
+              <input formControlName="buyerPhoneNumber" type="text"   value="" id="buyerPhoneNumber" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="buyerTinNumber"><span style="color:red;">*</span> TIN Number :</label>
+                <input formControlName="buyerTinNumber" type="text"   value="" id="buyerTinNumber" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label for="personInCharge"><span style="color:red;">*</span> Person In Charge :</label>
+                <input formControlName="personInCharge" type="text"   value="" id="personInCharge" class="form-control" required />
+              </div>
+              <!-- <div class="form-group">
+                <label for="date"><span style="color:red;">*</span> Date :</label>
+                <input formControlName="date" type="text"   value="" id="date" class="form-control" required />
+              </div> -->
+              </div>
+              <!-- <input type="hidden" value="0" name="repair_car"/>
+              <input type="hidden" name="hfInvoiceId" value="221875" /> -->
+            </div>
+            <!-- /.row -->
+      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button type="submit"  class="btn btn-outline">Save changes</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
