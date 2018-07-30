@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Parts } from '../models/parts';
 import { Purchase } from '../models/purchase';
-
+import { Sell } from '../models/sell';
 @Injectable()
 export class PartsService {
 
@@ -13,6 +13,7 @@ export class PartsService {
    _updateStockPartsUrl = "http://localhost:3000/api/stock/update"
    _deleteStockPartsUrl = "http://localhost:3000/api/stock/delete"
    _deletePurchaseUrl = "http://localhost:3000/api/purchase/delete"
+   _partsSellUrl = "http://localhost:3000/api/parts/sell"
   constructor(private http: HttpClient) { }
   
   // purchase(part): Observable<Parts>
@@ -41,6 +42,10 @@ export class PartsService {
   }
   deletePurchase(purchase: any){
     return this.http.delete<Purchase>(`${this._deletePurchaseUrl}/${purchase._id}`);
+  }
+  sell(sell) : Observable<Sell>
+  {
+    return this.http.post<Sell>(this._partsSellUrl,sell)
   }
 
 }

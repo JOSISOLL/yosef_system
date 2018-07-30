@@ -6,6 +6,7 @@ const Customer = require('../models/customer')
 const Suplier = require('../models/suplier');
 const Repair = require('../models/repair')
 const Parts = require('../models/parts')
+const Sell = require('../models/sell') 
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
@@ -293,6 +294,27 @@ router.post("/parts/purchase", (req, res) => {
             res.status(200).send(purchasedData)
         }
     })
+})
+router.post("/parts/sell", (req, res) =>{
+    let sellData = req.body;
+    
+    if (!sellData) {
+        res.status(400).send('Invalid request body.');
+    } else{
+    console.log("Attempting to sell parts.");
+    // let sell = new Sell(sellData);
+
+    // Parts.find({partNumber : sellData.parts.partNumber}, (error, part) => {
+    //     res.status(200).send(part);
+    // })
+    for(var i = 0; i < req.body.parts.length;i++){
+        console.log(req.body.parts[i]);
+  }
+    console.log(req.body.parts.length);
+    // console.log(sellData.parts);
+
+    res.status(200).send("SUCCESS!");
+    }
 })
 
 router.get("/purchases", (req, res)=>{

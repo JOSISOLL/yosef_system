@@ -65,7 +65,7 @@ export class AddToCartComponent implements OnInit {
     if(this.checkoutForm.valid){
       var data = this.checkoutForm.value;
       console.log("Form is VALID")
-      console.log(data, cart)
+      // console.log(data, cart)
       this.sell.buyerName = data.buyerName;
       this.sell.buyerPhoneNumber = data.buyerPhoneNumber
       this.sell.buyerTinNumber = data.buyerTinNumber;
@@ -73,8 +73,19 @@ export class AddToCartComponent implements OnInit {
       this.sell.quantity = this.totalQuantity;
       this.sell.personInCharge = data.personInCharge;
       this.sell.parts = cart
-      console.log(this.sell)
-      this.cartSubscription.unsubscribe()    
+      // console.log(this.sell)
+      // this.cartSubscription.unsubscribe() 
+      this._partService.sell(this.sell) 
+      .subscribe(
+        res => {
+          console.log("Response from server...")
+          console.log(res);
+          console.log("Items successfully sold!")
+        },
+        err => {
+          console.log(err);
+        }
+      )
     }
 
   }

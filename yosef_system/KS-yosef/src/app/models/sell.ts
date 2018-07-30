@@ -1,6 +1,6 @@
 import { Parts } from "./parts"
 export class Sell{
-    sellItemId ? : Number
+    sellId ? : Number
     buyerName ? : String
     buyerPhoneNumber ? : String
     buyerTinNumber ? : String
