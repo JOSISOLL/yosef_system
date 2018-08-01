@@ -297,23 +297,64 @@ router.post("/parts/purchase", (req, res) => {
 })
 router.post("/parts/sell", (req, res) =>{
     let sellData = req.body;
-    
+    var parts = [];
     if (!sellData) {
         res.status(400).send('Invalid request body.');
     } else{
     console.log("Attempting to sell parts.");
-    // let sell = new Sell(sellData);
-
-    // Parts.find({partNumber : sellData.parts.partNumber}, (error, part) => {
-    //     res.status(200).send(part);
-    // })
+    
     for(var i = 0; i < req.body.parts.length;i++){
-        console.log(req.body.parts[i]);
-  }
-    console.log(req.body.parts.length);
-    // console.log(sellData.parts);
-
-    res.status(200).send("SUCCESS!");
+        // console.log(req.body.parts[i].quantity);
+        let soldQty = req.body.parts[i].quantity;
+        let sellPart = req.body.parts[i];
+        Parts.findOne({partNumber : req.body.parts[i].partNumber}, (error, part) => {
+            if(error){
+                console.log(error)
+            } else {
+                if (!part){
+                    console.log("This item is not available in stock.");
+                    res.status(400).send("Item not found");
+                } else {
+                    // console.log(part.stamp + " " + part.partNumber);
+                    // console.log(sellPart);
+                    
+                    if( part.stamp !== sellPart.stamp){
+                        console.log("Stamp for part number " + req.body.parts[i].partNumber + " doesn't match!")
+                        res.status(400).send("Stamp number doesn't match!")
+                    } else {
+                        var availableQty = part.quantity;
+                        var remQty = Number(availableQty) - sellPart.quantity;
+                        console.log("Item ID  : " + part.partNumber + " " + part.stamp);
+                        console.log("Avai QTY : " + part.quantity);
+                        console.log("Sold QTY : " + sellPart.quantity); 
+                        console.log("Rema Qty : " + remQty);
+                        Parts.findByIdAndUpdate(part._id,{
+                            quantity : remQty
+                        },{new: true}, function(err, updatedPart){
+                            if(err){
+                                console.log(err);
+                            } else {
+                                console.log("Quantity for sold item " + part._id + " " + part.partNumber + " updated!");
+                                console.log(updatedPart);
+                                // parts.push(updatedPart);
+                                // res.status(200).send(updatedPart)
+                            }
+                        })
+                    }
+                }
+            }   
+            
+        })
+    }
+    let sell = new Sell(sellData);
+    sell.save((error, soldItems) =>{
+        if(error){
+            // res.json({status: 500, error: err});
+            console.log(error)
+        } else {
+            res.status(200).send(soldItems)
+        }
+    })
     }
 })
 
@@ -354,6 +395,7 @@ router.post("/parts/stock", (req, res) => {
                     }
                 })
             } else {
+                
                 if(part.stamp !== partsData.stamp){
                     let parts = new Parts(partsData)
                     parts.save((err, addedPart) =>{
@@ -366,8 +408,9 @@ router.post("/parts/stock", (req, res) => {
                     })
                 } else {
                     let parts = new Parts(partsData)
-                    let availableQty = part.quantity;
-                    let totalQuantity = availableQty + partsData.quantity
+                    console.log(part.quantity);
+                    var availableQty = part.quantity;
+                    var totalQuantity = Number(availableQty) + Number(partsData.quantity);
                     Parts.findByIdAndUpdate(part.id,{
                         quantity : totalQuantity
                     },{new: true}, function(err, updatedPart){
@@ -375,7 +418,7 @@ router.post("/parts/stock", (req, res) => {
                             console.log(err);
                         } else {
                             console.log("Quantity for existing part updated!")
-                            console.log(updatedPart)
+                            // console.log(updatedPart)
                             res.status(200).send(updatedPart)
                         }
                     })

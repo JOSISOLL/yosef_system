@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PartsService } from '../services/parts.service';
 import { CartAction } from '../store/actions/cart.actions'
 import { Subscription } from 'rxjs/Subscription';
-import { Sell } from '../models/sell'
+import { Sell } from '../models/sell';
+import { Router } from "@angular/router";
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
 
 declare var  jquery: any; 
@@ -19,7 +20,7 @@ export class AddToCartComponent implements OnInit {
   public totalPrice: number;
   public totalQuantity: number;
   public cartSubscription: Subscription;
-  sell : Sell = {}; 
+  public sell : Sell = {}; 
 
   //Checkout customer information
 
@@ -33,7 +34,7 @@ export class AddToCartComponent implements OnInit {
 
 
 
-  constructor(private _partService : PartsService, private _cartStore : CartAction ) { }
+  constructor(private _partService : PartsService, private _cartStore : CartAction, private _router: Router ) { }
   
   createControls(){
     this.buyerName = new FormControl();
@@ -73,14 +74,21 @@ export class AddToCartComponent implements OnInit {
       this.sell.quantity = this.totalQuantity;
       this.sell.personInCharge = data.personInCharge;
       this.sell.parts = cart
-      // console.log(this.sell)
-      // this.cartSubscription.unsubscribe() 
+      console.log(this.sell)
+      
       this._partService.sell(this.sell) 
       .subscribe(
         res => {
-          console.log("Response from server...")
+          // console.log("Response from server...");
           console.log(res);
-          console.log("Items successfully sold!")
+          // console.log("Items successfully sold!")
+          // this.cartSubscription.unsubscribe(); 
+          alert('Items sold successfully!');
+          this.cart.length = 0;
+          this.ngOnDestroy();
+          this.ngOnInit();
+          this._router.navigate(['/parts/stock'])
+          $("#modal-checkout").modal('hide');
         },
         err => {
           console.log(err);

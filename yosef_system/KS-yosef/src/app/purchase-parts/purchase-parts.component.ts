@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, 
 import { Parts } from "../models/parts";
 import { Purchase } from "../models/purchase";
 import { PartsService } from "../services/parts.service";
-import { Router } from "@angular/router"
+import { Router } from "@angular/router";
 import { Suplier } from '../models/suplier';
 import { SuplierService } from '../services/suplier.service';
 import { HttpErrorResponse} from '@angular/common/http';
