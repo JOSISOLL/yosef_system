@@ -14,6 +14,7 @@ export class PartsService {
    _deleteStockPartsUrl = "http://localhost:3000/api/stock/delete"
    _deletePurchaseUrl = "http://localhost:3000/api/purchase/delete"
    _partsSellUrl = "http://localhost:3000/api/parts/sell"
+   _partsSoldUrl = "http://localhost:3000/api/parts/sold"
   constructor(private http: HttpClient) { }
   
   // purchase(part): Observable<Parts>
@@ -46,6 +47,9 @@ export class PartsService {
   sell(sell) : Observable<Sell>
   {
     return this.http.post<Sell>(this._partsSellUrl,sell)
+  }
+  getPartsSold(){
+    return this.http.get<any>(this._partsSoldUrl);
   }
 
 }

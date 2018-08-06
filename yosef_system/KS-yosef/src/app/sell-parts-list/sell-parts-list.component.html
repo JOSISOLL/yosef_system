@@ -1,97 +1,203 @@
 <section class="content">
-  <!-- Full Width boxes (Stat box) -->
-  <div class="row">
-    <div class="col-xs-12">
-      <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
-        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
-        <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
-         </div>
-      <div id="you" class="alert alert-success alert-dismissable" style="display:none">
-        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
-        <h4><i class="icon fa fa-check"></i> Success!</h4>
-         </div>
-      <div class="box box-success">
-        <div class="box-header">
-          <h3 class="box-title">Sold Parts List</h3>
+    <!-- Full Width boxes (Stat box) -->
+    
+    <!-- Sold Items List -->
+  
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box box-success">
+          <div class="box-header">
+            <h3 class="box-title">Sold Items List</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <table class="table sakotable table-bordered table-striped dt-responsive">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Buyer Name</th>
+                  <th>Buyer Phone</th>
+                  <th>Buyer TIN</th>
+                  <th>Items Sold</th>
+                  <th>Total Quantity</th>
+                  <th>Grand Total</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sell of sold">
+                  <td><span class="label label-default">{{sell.purchaseDate | date}}</span></td>
+                  <td>{{sell.buyerName}}</td>
+                  <td>{{sell.buyerPhoneNumber}}</td>
+                  <td>{{sell.buyerTinNumber}}</td>
+                  <td>{{ sell.parts.length}}</td>
+                  <td>{{sell.quantity}}</td>
+                  <td>{{sell.grandTotal | number : '1.2-2'}} ETB</td>
+                <td>
+                  <a class="btn btn-info" data-toggle="tooltip"  data-original-title="Purchase or Load Parts Quantity"><i class="fa fa-cart-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" (click)="btn_showSoldInfoClick(sell)"  data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editSellClick(sell)"  data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                </td>
+                
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
         </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <table class="table sakotable table-bordered table-striped dt-responsive">
-            <thead>
-              <tr>
-                <th>Invoice No</th>
-          <th>Buyer Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Quantity</th>
-          <th>Total Price</th>
-                <th>Date</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-                          <tr>
-                <td><span class="label label-success">127471</span></td>
-                <td>John</td>
-                <td>jooo@yahoo.com</td>
-                <td>1212121</td>
-          <td><span class="label label-danger">2</span></td>
-          <td><span class="label label-info">$5512.00</span></td>
-          <td><span class="label label-primary">22/03/2018</span></td>                     
-                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=127471" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=17" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(17);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-                  </td>
-              </tr>
-                          <tr>
-                <td><span class="label label-success">240506</span></td>
-                <td>Spider Man</td>
-                <td>eliza@yahoo.com</td>
-                <td>01911762147</td>
-          <td><span class="label label-danger">1</span></td>
-          <td><span class="label label-info">$100.00</span></td>
-          <td><span class="label label-primary">20/03/2018</span></td>                     
-                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=240506" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=15" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(15);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-                  </td>
-              </tr>
-                          <tr>
-                <td><span class="label label-success">861052</span></td>
-                <td>Elizia</td>
-                <td>eliza@yahoo.com</td>
-                <td>01911762147</td>
-          <td><span class="label label-danger">2</span></td>
-          <td><span class="label label-info">$555.75</span></td>
-          <td><span class="label label-primary">18/06/2017</span></td>                     
-                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=861052" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=13" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(13);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-                  </td>
-              </tr>
-                          <tr>
-                <td><span class="label label-success">226865</span></td>
-                <td>Elizia</td>
-                <td>eliza@yahoo.com</td>
-                <td>01911762147</td>
-          <td><span class="label label-danger">2</span></td>
-          <td><span class="label label-info">$564.52</span></td>
-          <td><span class="label label-primary">18/06/2017</span></td>                     
-                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=226865" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=14" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(14);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-                  </td>
-              </tr>
-                          <tr>
-                <td><span class="label label-success">262363</span></td>
-                <td>John Rambo</td>
-                <td>john@yahoo.com</td>
-                <td>01111111112</td>
-          <td><span class="label label-danger">1</span></td>
-          <td><span class="label label-info">$35.00</span></td>
-          <td><span class="label label-primary">18/04/2017</span></td>                     
-                <td><a class="btn btn-info" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/invoice/invoice_parts_sell.php?invoice_id=262363" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-success" data-toggle="tooltip" href="http://sakosys.com/temp/garage-management-system/parts_stock/partsselledit.php?sold_id=16" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" onClick="deleteSoldItem(16);" href="javascript:;" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
-                  </td>
-              </tr>
-                        </tbody>
-          </table>
-        </div>
-        <!-- /.box-body -->
+        <!-- /.box -->
       </div>
-      <!-- /.box -->
+      <!-- /.col -->
     </div>
-    <!-- /.col -->
+  
+    
+  
+  </section>
+  
+  <div class="modal modal-success fade" id="modal-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Parts in Stock Detail</h4>
+          </div>
+           
+          <div class="modal-body">
+            <div class="col-sm-12">
+                <table class="table table-user-information">
+                  <tbody>
+                    <tr>
+                        <td>Buyer Name</td>
+                        <td>{{selected?.buyerName}}</td>
+                        <td>Phone Number</td>
+                        <td>{{selected?.buyerPhoneNumber}}</td>
+                        <td>TIN Number</td>
+                        <td>{{selected?.buyerTinNumber}}</td>
+                    </tr>
+                    <tr *ngFor= "let part of parts">
+                        <td>Part Number</td>
+                        <td>{{part?.partNumber}}</td>
+                        <td>Stamp</td>
+                        <td>{{part?.stamp}}</td>
+                        <td>Quantity</td>
+                        <td>{{part?.quantity}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Quantity</td>
+                        <td>{{selected?.quantity}}</td>
+                        <td>Grand Total</td>
+                        <td>{{selected?.grandTotal | number : '1.0-0'}}</td>
+                    </tr>
+                  </tbody>
+                </table>  
+               
+            </div>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  
+    <!-- Edit Modal -->
+   <div class="modal modal-info fade" id="modal-edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Edit table-user-information</h4>
+        </div>
+        <form [formGroup]="myForm" (ngSubmit)="saveUpdates()" novalidate>
+          <input type="hidden" formControlName="id"/>
+          <!-- <input type="hidden" formControlName="sellId"/> -->
+          <div class="modal-body">
+            <div class="col-sm-12">
+              <table>
+                  <tbody>
+
+                    <tr>
+                        <td>Buyer Name</td>
+                        <td>
+                          <input class="form-control" formControlName="buyerName" type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td>
+                          <input class="form-control" formControlName="buyerPhoneNumber" type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TIN Number</td>
+                        <td>
+                          <input class="form-control" formControlName="buyerTinNumber"  type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Person In Charge</td>
+                        <td>
+                          <input class="form-control" formControlName="personInCharge"  type="text"/>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-outline">Save changes</button>
+          </div>
+      </form> 
   </div>
+  </div>
+  </div>
+  
+  <!-- Delete Modal -->
+  <!-- <div class="modal modal-danger fade" id="modal-delete">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Delete Part</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure to delete this record?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            <button (click)="deletePart()" type="button" class="btn btn-outline">Delete</button>
+          </div>
+        </div>
+      
+      </div>
+      
+    </div> -->
+  
+    <!-- Add to Cart Modal -->
+  <!-- <div class="modal modal-info fade" id="modal-addToCart">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Add Part to Cart</h4>
+        </div>
+        <div class="modal-body">
+          <p>Part Number: {{selectedPart?.partNumber}}</p>
+          <p>Stamp : {{selectedPart?.stamp}}</p>
+          <label *ngIf="!available" style="color:red;">Not enough quantity available in stock.</label>
+          <input placeholder="Quantity" [(ngModel)]="addQuantity" name="addQuantity" type="number" class="form-control rounded-0" min="1" max="100" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button (click)="addTo_cart()" type="button" class="btn btn-outline">Add To Cart</button>
+        </div>
+      </div>
+    
+    </div>
+    
+  </div> -->
   

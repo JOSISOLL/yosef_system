@@ -378,6 +378,16 @@ router.get("/parts/stock", (req, res)=>{
         }
     })
 })
+router.get("/parts/sold", (req, res)=>{
+    Sell.find(function (error, parts){
+        if(error){
+            console.log(error);
+        } else {
+            res.json(parts);
+            console.log("Sold parts fetched from database!");
+        }
+    })
+})
 router.post("/parts/stock", (req, res) => {
     let partsData = req.body;
     Parts.findOne({partNumber: partsData.partNumber}, (error, part) => {
