@@ -340,21 +340,23 @@ router.post("/parts/sell", (req, res) =>{
                                 // res.status(200).send(updatedPart)
                             }
                         })
+                        let sell = new Sell(sellData);
+                        sell.save((error, soldItems) =>{
+                        if(error){
+                         // res.json({status: 500, error: err});
+                            console.log(error)
+                         } else {
+                            res.status(200).send(soldItems)
+                            }
+                        })
+
                     }
                 }
             }   
             
         })
     }
-    let sell = new Sell(sellData);
-    sell.save((error, soldItems) =>{
-        if(error){
-            // res.json({status: 500, error: err});
-            console.log(error)
-        } else {
-            res.status(200).send(soldItems)
-        }
-    })
+    
     }
 })
 

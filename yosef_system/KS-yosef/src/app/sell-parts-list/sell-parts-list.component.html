@@ -26,7 +26,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let sell of sold">
-                  <td><span class="label label-default">{{sell.purchaseDate | date}}</span></td>
+                  <td><span class="label label-default">{{sell.date | date}}</span></td>
                   <td>{{sell.buyerName}}</td>
                   <td>{{sell.buyerPhoneNumber}}</td>
                   <td>{{sell.buyerTinNumber}}</td>
@@ -34,7 +34,8 @@
                   <td>{{sell.quantity}}</td>
                   <td>{{sell.grandTotal | number : '1.2-2'}} ETB</td>
                 <td>
-                  <a class="btn btn-info" data-toggle="tooltip"  data-original-title="Purchase or Load Parts Quantity"><i class="fa fa-cart-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" (click)="btn_showSoldInfoClick(sell)"  data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editSellClick(sell)"  data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                  <a class="btn btn-info" data-toggle="tooltip"  data-original-title="Purchase or Load Parts Quantity"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" (click)="btn_showSoldInfoClick(sell)"  data-original-title="View"><i class="fa fa-eye"></i></a> 
+                  <!-- <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editSellClick(sell)"  data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a> -->
                 </td>
                 
               </tbody>
@@ -65,26 +66,26 @@
                 <table class="table table-user-information">
                   <tbody>
                     <tr>
-                        <td>Buyer Name</td>
-                        <td>{{selected?.buyerName}}</td>
-                        <td>Phone Number</td>
-                        <td>{{selected?.buyerPhoneNumber}}</td>
-                        <td>TIN Number</td>
-                        <td>{{selected?.buyerTinNumber}}</td>
+                        <td>Buyer Name :</td>
+                        <td><span class="label label-default">{{selected?.buyerName}}</span></td>
+                        <td>Phone Number :</td>
+                        <td><span class="label label-default">{{selected?.buyerPhoneNumber}}</span></td>
+                        <td>TIN Number : </td>
+                        <td><span class="label label-default">{{selected?.buyerTinNumber}}</span></td>
                     </tr>
                     <tr *ngFor= "let part of parts">
-                        <td>Part Number</td>
-                        <td>{{part?.partNumber}}</td>
-                        <td>Stamp</td>
-                        <td>{{part?.stamp}}</td>
-                        <td>Quantity</td>
-                        <td>{{part?.quantity}}</td>
+                        <td>Part Number : </td>
+                        <td><span class="label label-danger">{{part?.partNumber}}</span></td>
+                        <td>Stamp : </td>
+                        <td><span class="label label-danger">{{part?.stamp}}</span></td>
+                        <td>Quantity : </td>
+                        <td><span class="label label-danger">{{part?.quantity}}</span></td>
                     </tr>
                     <tr>
-                        <td>Total Quantity</td>
-                        <td>{{selected?.quantity}}</td>
-                        <td>Grand Total</td>
-                        <td>{{selected?.grandTotal | number : '1.0-0'}}</td>
+                        <td>Total Quantity : </td>
+                        <td><span class="label label-primary">{{selected?.quantity}}</span></td>
+                        <td>Grand Total : </td>
+                        <td><span class="label label-primary">{{selected?.grandTotal | number : '1.0-0'}}</span></td>
                     </tr>
                   </tbody>
                 </table>  
@@ -201,3 +202,112 @@
     
   </div> -->
   
+  
+
+
+
+  <!--Print Section Modal-->
+ <div id="printSectionId" class="md-dialog"> 
+  <div class="md-dialog-content" style="min-width:600px;"> 
+    <div class="md-content" flex="" layout-padding=""> 
+      <div class="invoice-box">   
+        <table cellpadding="0" cellspacing="0">  
+        <tr class="top">  
+          <td colspan="2">  
+            <table>  
+              <tr>  
+                <td class="title">  
+                <img src="../../assets/images/favicon.ico" style="width:100%; max-width:300px;">  
+                </td>  
+                <td>  
+                  Invoice #: 123<br>  
+                  Created: January 1, 2015<br>  
+                  Due: February 1, 2015  
+                </td>  
+              </tr>  
+            </table>  
+          </td>  
+        </tr>  
+        <tr class="information">  
+          <td colspan="2">  
+            <table>  
+              <tr>  
+                <td>  
+                  Next Step Webs, Inc.<br>  
+                  12345 Sunny Road<br>  
+                  Sunnyville, TX 12345  
+                </td>  
+                <td>  
+                  Acme Corp.<br>  
+                  John Doe<br>  
+                  john@example.com  
+                </td>  
+              </tr>  
+            </table>  
+            </td>  
+          </tr>  
+          <tr class="heading">  
+            <td>  
+              Payment Method  
+            </td>  
+            <td>  
+              Check #  
+            </td>  
+          </tr>  
+          <tr class="details">  
+            <td>  
+              Check  
+            </td>  
+            <td>  
+              1000  
+            </td>  
+          </tr>  
+          <tr class="heading">  
+            <td>  
+              Item  
+            </td>  
+            <td>  
+              Price  
+            </td>  
+          </tr>  
+          <tr class="item">  
+            <td>  
+            Website design  
+            </td>  
+            <td>  
+            300  
+            </td>  
+          </tr>  
+          <tr class="item">  
+            <td>  
+            Hosting (3 months)  
+            </td>  
+            <td>  
+            75  
+            </td>  
+          </tr>  
+          <tr class="item last">  
+            <td>  
+            Domain name (1 year)  
+            </td>  
+            <td>  
+            10  
+            </td>  
+          </tr>  
+          <tr class="total">  
+            <td></td>  
+            <td>  
+            Total: $385.00  
+            </td>  
+          </tr>  
+        </table>  
+      </div>   
+    
+    </div> 
+  </div> 
+  <div class="md-dialog-actions" layout="row"> 
+
+    <button class="btn-raised btn-primary" (click)="closeDialog()">Close</button> 
+    <button class="btn-raised btn-primary" (click)="print(printSectionId)">Print</button> 
+    </div> 
+  </div>

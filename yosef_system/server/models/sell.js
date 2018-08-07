@@ -24,7 +24,8 @@ const sellSchema = new Schema(
         personInCharge : String,
         parts : [partsSchema],
         quantity : Number,
-        grandTotal : Number
+        grandTotal : Number,
+        date : Date
     })
         
 module.exports = mongoose.model('sell', sellSchema, 'sell')
