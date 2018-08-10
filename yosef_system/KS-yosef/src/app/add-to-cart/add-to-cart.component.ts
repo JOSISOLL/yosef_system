@@ -21,6 +21,7 @@ export class AddToCartComponent implements OnInit {
   public totalQuantity: number;
   public cartSubscription: Subscription;
   public sell : Sell = {}; 
+  public sellDate : String;
 
   //Checkout customer information
 
@@ -30,6 +31,7 @@ export class AddToCartComponent implements OnInit {
   buyerPhoneNumber : FormControl
   buyerTinNumber : FormControl
   personInCharge : FormControl
+  date : FormControl
 
 
 
@@ -41,6 +43,7 @@ export class AddToCartComponent implements OnInit {
     this.buyerPhoneNumber = new FormControl();
     this.buyerTinNumber = new FormControl();
     this.personInCharge = new FormControl();
+    this.date = new FormControl();
 
   }
   createForm(){
@@ -48,7 +51,8 @@ export class AddToCartComponent implements OnInit {
       buyerName : this.buyerName,
       buyerPhoneNumber : this.buyerPhoneNumber,
       buyerTinNumber: this.buyerTinNumber,
-      personInCharge : this.personInCharge
+      personInCharge : this.personInCharge,
+      date : this.date
     })
   }
   
@@ -66,21 +70,22 @@ export class AddToCartComponent implements OnInit {
     if(this.checkoutForm.valid){
       var data = this.checkoutForm.value;
       console.log("Form is VALID")
-      // console.log(data, cart)
+      console.log(data, cart)
       this.sell.buyerName = data.buyerName;
       this.sell.buyerPhoneNumber = data.buyerPhoneNumber
       this.sell.buyerTinNumber = data.buyerTinNumber;
       this.sell.grandTotal = this.totalPrice;
       this.sell.quantity = this.totalQuantity;
       this.sell.personInCharge = data.personInCharge;
-      this.sell.parts = cart
+      this.sell.parts = cart;
+      this.sell.date = data.date;
       console.log(this.sell)
       
       this._partService.sell(this.sell) 
       .subscribe(
         res => {
           // console.log("Response from server...");
-          console.log(res);
+          // console.log(res);
           // console.log("Items successfully sold!")
           // this.cartSubscription.unsubscribe(); 
           alert('Items sold successfully!');
@@ -104,11 +109,13 @@ export class AddToCartComponent implements OnInit {
     let intPrice: number
     let intQuantity: number
     this.cart.forEach((item, i) => {
-      intPrice = parseInt(item.price)
+      // console.log(item)
+      intPrice = parseFloat(item.price)
+      // console.log(intPrice, item.price);
       intQuantity = parseInt(item.quantity)
       totalCost.push(intPrice)
       quantity.push(intQuantity)
-      // console.log(item)
+      // console.log(totalCost)
     })
 
     this.totalPrice = totalCost.reduce((acc, item) => {
@@ -121,10 +128,12 @@ export class AddToCartComponent implements OnInit {
   ngOnInit() {
     this.cartSubscription = this._cartStore.getState().subscribe(res => {
       this.cart = res.products
+      console.log(res.products)
       this.getTotalPrice()
     })
     this.createControls(); 
     this.createForm();
+    this.sellDate= new Date().toLocaleString();
   }
   ngOnDestroy() {
     this.cartSubscription.unsubscribe()

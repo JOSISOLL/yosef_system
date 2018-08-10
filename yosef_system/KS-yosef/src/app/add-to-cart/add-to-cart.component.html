@@ -20,7 +20,7 @@
       <td><h4>{{product.partNumber}}</h4></td>
       <td><h4>{{product.stamp}}</h4></td>
       <td><h4>{{product.quantity}}</h4></td>
-      <td><h4>ETB {{product.price}}</h4></td>
+      <td><h4>ETB {{product.price | number : '1.2-2'}}</h4></td>
       <td><button (click)="removeProduct(product)" class="btn btn-xs btn-danger">Remove Product</button></td>
     </tr>
 
@@ -28,7 +28,7 @@
       <td><h4></h4></td>
       <td><h4></h4></td>
       <td><h4>Total Items: {{totalQuantity}}</h4></td>
-      <td><h4>Total: ETB {{totalPrice}}</h4></td>
+      <td><h4>Total: ETB {{totalPrice | number : '1.2-2'}}</h4></td>
       <td><button *ngIf="totalPrice > 0" (click)="buy(cart)" class="btn btn-md btn-success">Checkout</button></td>
     </tr>
   </tbody>
@@ -61,12 +61,12 @@
                   <td><h4>{{product.partNumber}}</h4></td>
                   <td><h4>{{product.stamp}}</h4></td>
                   <td><h4>{{product.quantity}}</h4></td>
-                  <td><h4>ETB {{product.price}}</h4></td>
+                  <td><h4>ETB {{product.price | number : '1.1-2'}}</h4></td>
                 </tr>
             
                 <tr>
                   <td><h4>Total Items: {{totalQuantity}}</h4></td>
-                  <td><h4>Total: ETB {{totalPrice}}</h4><td>
+                  <td><h4>Total: ETB {{totalPrice | number : '1.1-2'}}</h4><td>
                 </tr>
               </tbody>
             </table>
@@ -75,6 +75,7 @@
             <!-- Full Width boxes (Stat box) -->
           <div class="row">
             <div class="col-md-12"> 
+              <input type="hidden" [ngModel]="sellDate" formControlName="date"/>
               <div class="form-group"> 
                 <label for="buyerName"><span style="color:red;">*</span> Buyer Name :</label>
                 <input formControlName="buyerName" type="text"   value="" id="buyerName" class="form-control" required />

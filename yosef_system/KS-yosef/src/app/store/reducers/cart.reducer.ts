@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
     case ActionTypes.ADD_TO_CART: {
       const addProduct = Object.assign({}, action.payload.product);
       addProduct.quantity = action.payload.quantity;
-      addProduct.price = (parseInt(addProduct.price) * parseInt(addProduct.quantity)).toFixed(2);
+      addProduct.price = (parseFloat(addProduct.price) * parseInt(addProduct.quantity)).toFixed(2);
       return {
         ...state,
         products: [

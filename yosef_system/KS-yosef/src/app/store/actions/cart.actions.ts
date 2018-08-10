@@ -24,7 +24,7 @@ export class CartAction {
         return this.store.select('cart');
     }
     addToCart(product, quantity) {
-        console.log('add,', product)
+        console.log('add,', product.price, quantity)
         this.store.dispatch({
             type: ActionTypes.ADD_TO_CART,
             payload: {

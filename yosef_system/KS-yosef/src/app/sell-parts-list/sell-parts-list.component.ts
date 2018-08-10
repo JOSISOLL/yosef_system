@@ -26,6 +26,7 @@ export class SellPartsListComponent implements OnInit {
   // sellId : FormControl;
   buyerTinNumber : FormControl;
   personInCharge : FormControl;
+  
 
   constructor(private _partsService : PartsService, private _router : Router) { }
 
@@ -58,6 +59,12 @@ export class SellPartsListComponent implements OnInit {
     this.parts = sold.parts;
     console.log(this.selected);
     $("#modal-view").modal('show');
+  }
+  btn_invoiceClick(sold : Sell){
+    this.selected = sold;
+    this.parts = sold.parts;
+    console.log(this.selected);
+    $("#modal-invoice").modal('show');
   }
   btn_editSellClick(sold : any){
     this.selected = sold;
@@ -130,7 +137,7 @@ export class SellPartsListComponent implements OnInit {
             vertical-align:top
           }
           .invoice-box table tr td:nth-child(2){
-            text-align:right
+            text-align:left
           }
           .invoice-box table tr.top table td{
             padding-bottom:20px
@@ -158,14 +165,25 @@ export class SellPartsListComponent implements OnInit {
             border-bottom:none
           }
           .invoice-box table tr.total td:nth-child(2){
-            border-top:2px solid #eee;
-            font-weight:700
+            border-top:1px solid #eee;
+            font-weight:700;
+            text-align: right
           } 
+          .main-footer {
+            background: #fff;
+            padding: 15px;
+            color: #444;
+            border-top: 1px solid #d2d6de;
+          }
           
           </style>
         </head>
-    <body onload="window.print();window.close()">${printContents}</body>
-      </html>`
+        
+      <body onload="window.print();window.close()">${printContents}</body>
+      <footer class="main-footer">
+        <strong>Copyright &copy; 2018-2020 ቀላል TECHNOLOGIES.</strong> All rights reserved.
+      </footer>
+    </html>`
     );
     popupWin.document.close();
 }

@@ -64,13 +64,13 @@ export class PartsStockComponent implements OnInit {
   btn_showPartInfoClick(part: Parts){
     console.log("show repair button clicked...");
     this.selectedPart =part;
-    console.log(this.selectedPart)
+    // console.log(this.selectedPart)
     $("#modal-view").modal('show'); 
     
   }
   btn_editPartClick(part: any){
     this.selectedPart = part;
-    console.log(this.selectedPart) 
+    // console.log(this.selectedPart) 
     this.myForm.setValue({
       id: part._id,
       itemPId : part.itemPId,
@@ -119,7 +119,7 @@ export class PartsStockComponent implements OnInit {
     if(this.myForm.valid){
       var data = <Parts> this.myForm.value; 
       console.log('form data..');
-      console.log(data);
+      // console.log(data);
       this._partsService.updateStock(data)
       .subscribe(res =>{
         this.selectedPart.partNumber = data.partNumber;
@@ -151,7 +151,7 @@ export class PartsStockComponent implements OnInit {
         this.available = true;
         this._cartStore.addToCart(this.selectedPart, this.addQuantity || 1)
         this.selectedPart.quantity = this.selectedPart.quantity - this.addQuantity
-        console.log(this.selectedPart)
+        // console.log(this.selectedPart)
         $('#modal-addToCart').modal('hide');
       }
     }
