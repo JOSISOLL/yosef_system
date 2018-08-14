@@ -3,7 +3,7 @@
     <!-- small box -->
     <div class="small-box bg-aqua">
       <div class="inner">
-        <h3>150</h3>
+        <h3>{{partsInStock}}</h3>
 
         <p>PARTS IN STOCK</p>
       </div>
@@ -11,7 +11,7 @@
         <!-- <i class="ion ion-bag"></i> -->
         <img height="80" width="80" src="assets/images/car_parts.png">
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      <a routerLink="/parts/stock" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <!-- ./col -->
@@ -19,7 +19,7 @@
     <!-- small box -->
     <div class="small-box bg-green">
       <div class="inner">
-        <h3>53<sup style="font-size: 20px">%</sup></h3>
+        <h3>{{clients}}</h3>
 
         <p>CUSTOMERS</p>
       </div>
@@ -27,7 +27,7 @@
         <!-- <i class="ion ion-stats-bars"></i> -->
         <img height="80" width="80" src="assets/images/customer.png">
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      <a routerLink="/customer" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <!-- ./col -->
@@ -35,7 +35,7 @@
     <!-- small box -->
     <div class="small-box bg-yellow">
       <div class="inner">
-        <h3>44</h3>
+        <h3>{{carsInRepair}}</h3>
 
         <p>CARS IN STOCK</p>
       </div>
@@ -43,7 +43,7 @@
         <!-- <i class="ion ion-person-add"></i> -->
         <img height="80" width="80" src="assets/images/car.png">
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      <a routerLink="/repair" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <!-- ./col -->
@@ -51,15 +51,15 @@
     <!-- small box -->
     <div class="small-box bg-red">
       <div class="inner">
-        <h3>65</h3>
+        <h3>{{supliers}}</h3>
 
-        <p>MECHANICS</p>
+        <p>SUPPLIERS</p>
       </div>
       <div class="icon">
         <!-- <i class="ion ion-pie-graph"></i> -->
         <img height="80" width="80" src="assets/images/mechanic.png">
       </div>
-      <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      <a routerLink="/supliers" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <!-- ./col -->
@@ -194,7 +194,7 @@
         <!-- /.table-responsive -->
       </div>
       <!-- /.box-body -->
-      <div class="box-footer clearfix"><a href="http://sakosys.com/temp/garage-management-system/delivery/deliverylist.php" class="btn btn-sm btn-success btn-flat pull-right"><b><i class="fa fa-list"></i> &nbsp;View All List</b></a> </div>
+      <div class="box-footer clearfix"><a routerLink="/repair" class="btn btn-sm btn-success btn-flat pull-right"><b><i class="fa fa-list"></i> &nbsp;View All List</b></a> </div>
       <!-- /.box-footer -->
     </div>
   </div>
