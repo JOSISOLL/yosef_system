@@ -56,7 +56,7 @@
                       <!-- <td><span *ngIf="part.purchaseDate != 'null'; else elseBlock8" class="label label-default">{{ part.purchaseDate | date }}</span></td> -->
                       <td>
                         <span *ngIf="part.partNumber != 'null'; else elseBlock1">
-                          <a class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                          <a class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger btn-sm" data-toggle="tooltip" (click)="revert()" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
                         </span>
                       </td>
               </tbody>
@@ -73,9 +73,9 @@
               </table>
             </div>
             <button type="button" (click)="addItem($event)" [disabled]="editing" class="btn btn-primary pull-left">Add item</button>
-            <span *ngIf="!editing && parts.length >= 1" class="pull-right">
+            <!-- <span *ngIf="!editing && parts.length >= 1" class="pull-right">
               <a class="btn btn-primary pull-right" href="javascript:window.print();" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></a>
-            </span>
+            </span> -->
             </div>
           </div>
           <div *ngFor="let part of parts" class="list-part">
@@ -87,69 +87,8 @@
               <span hidden *ngIf="part.price != -1; else elseBlock6" class="price col-md-1">{{ part.price }}</span>
               <span hidden *ngIf="part.shelfNumber != 'null'; else elseBlock7" class="shelfNumber col-md-1">{{ part.shelfNumber }}</span>
               <span hidden *ngIf="part.purchaseDate != 'null'; else elseBlock8" class="purchaseDate col-md-2">{{ part.purchaseDate }}</span>
-
-            <!-- <div class="box box-success" id="box_model">
-        <div class="box-header">
-          <h3 class="box-title"><i class="fa fa-cart-plus"></i> Purchase for Exisiting Parts ?</h3>
-        </div>
-        <div class="box-body">
-          <div class="form-group col-md-12" style="padding-top:10px;">
-            <label for="ddl_e_parts"> Select Parts :</label>
-			<select onchange="loadExistingParts(this.value);" class="form-control js-example-basic-single" name="ddl_e_parts" id="ddl_e_parts">
-              <option value="">--Select Parts--</option>
-                            <option  value="7">Audi Engine 2014</option>
-                            <option  value="6">BMW Oil Filter</option>
-                            <option  value="10">Engine Oil Filter</option>
-                            <option  value="9">Toyota 20" Rim Fits Dodge</option>
-                            <option  value="5">Toyota Ac Compresser</option>
-                            <option  value="8">Toyota Brake Rotors Disc</option>
-                            <option  value="4">Toyota Front Headlight</option>
-                          </select>
-          </div>
-		          </div>
-      </div> -->
-            <!-- <form [formGroup]="partsForm" (ngSubmit)="onSubmit()" novalidate > -->
             <div class="col-xs-12">
             <form #partsForm="ngForm" (ngSubmit)="onSubmit(partsForm)" novalidate >
-            <!-- <div class="box box-success">
-              <div class="box-body"> -->
-                <!-- <ng-template class="form-group col-md-4" #elseBlock1>
-                  <label for="part_number"><span style="color:red;">*</span> Part Number :</label>
-                  <input type="text" formControlName="partNumber" value="" name="partNumber" class="form-control" required/>
-                </ng-template>
-                <ng-template class="form-group col-md-4" #elseBlock2>
-                  <label for="stamp"><span style="color:red;">*</span> Stamp :</label>
-                  <input type="text" formControlName="stamp" value="" name="stamp" class="form-control" required/>
-                </ng-template>
-                <ng-template class="form-group col-md-4" #elseBlock3>
-                    <label for="parts_quantity"><span style="color:red;">*</span> Quantity :</label>
-                    <input type="text" formControlName="quantity" value="" name="quantity" class="form-control ppcal allownumberonly" required/>
-                </ng-template>
-                <ng-template class="form-group col-md-12" #elseBlock4>
-                  <label for="description"><span style="color:red;">*</span> Description :</label>
-                  <textarea  formControlName="description" name="description" class="form-control" rows="5" required></textarea>
-                </ng-template>
-                <ng-template class="form-group col-md-3" #elseBlock5>
-                    <label for="supplier"><span style="color:red;">*</span> Supplier </label>
-                    <select class='form-control' formControlName="supplier" name="supplier">
-                        <option value="">--Select Supplier--</option>
-                        <option  *ngFor="let suplier of supliers" value="{{suplier.name}}">{{suplier.name}}</option>
-                      </select>
-                </ng-template>
-                <ng-template class="form-group col-md-3" #elseBlock6>
-                    <label for="price"><span style="color:red;">*</span> Buy Price(Per pcs) :</label>
-                    <div class="input-group"> <span class="input-group-addon">$</span>
-                      <input type="text" placeholder="Buying Price" value="" formControlName="price" name="price" class="form-control allownumberonly ppcal" required/>
-                    </div>
-                </ng-template>
-                <ng-template class="form-group col-md-3" #elseBlock7> 
-                  <label for="shelfNumber"><span style="color:red;">*</span> Shelf Number :</label>
-                  <input type="text" formControlName="shelfNumber" value="" name="shelfNumber" class="form-control" required/>
-                </ng-template>
-                <ng-template class="form-group col-md-3" #elseBlock8>
-                  <label for="parts_add_date">Purchase Date :</label>
-                  <input type="date" formControlName="purchaseDate" [ngModel]="date" name="purchaseDate" class="form-control" />
-                </ng-template> -->
                 <div class="btn pull-right">
                     <button *ngIf="editing && part.itemPId === count" type="submit" class="btn btn-success"><i class="fa fa-plus"></i><br/></button>
                     <button *ngIf="editing && part.itemPId === count" (click)="revert()" class="btn btn-danger"><i class="fa fa-ban"></i><br/></button>
@@ -191,74 +130,10 @@
                     <label for="parts_add_date">Purchase Date :</label>
                     <input type="date" [ngModel]="date" name="purchaseDate" class="form-control" />
                   </ng-template>
-
-
-                <!-- <div class="form-group col-md-4">
-                  <label for="parts_warranty">Parts Warranty :</label>
-                  <input type="text" name="parts_warranty" placeholder="5 Years or 6 Months" value="" id="parts_warranty" class="form-control" />
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="total_amount"><span style="color:red;">*</span> Total Amount :</label>
-                  <div class="input-group"> <span class="input-group-addon">$</span>
-                    <input type="text" readonly="" style="color:red;font-weight:bold;" placeholder="Total Price" value="0.00" name="total_amount" id="total_amount" class="form-control allownumberonly" required/>
-                  </div>
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="total_amount"><span style="color:red;">*</span> Given Amount :</label>
-                  <div class="input-group"> <span class="input-group-addon">$</span>
-                    <input type="text" placeholder="Given Amount" value="0.00" name="given_amount" id="given_amount" class="form-control allownumberonly ppcal" required/>
-                  </div>
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="total_amount"><span style="color:red;">*</span> Pending Amount :</label>
-                  <div class="input-group"> <span class="input-group-addon">$</span>
-                    <input type="text" readonly="" style="color:red;font-weight:bold;" placeholder="Pending Amount" value="0.00" name="pending_amount" id="pending_amount" class="form-control allownumberonly" required/>
-                  </div>
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="Prsnttxtarea">Parts Image (500x500px) :</label>
-                  <img class="form-control" src="http://sakosys.com/temp/garage-management-system/img/no_image.jpg" style="height:250px;width:250px;" id="output"/>
-                  <input type="hidden" name="img_exist" value="" />
-                </div>
-                <div class="form-group col-md-12"> <span class="btn btn-file btn btn-primary">Upload Image
-                  <input type="file" name="uploaded_file" onchange="loadFile(event)" />
-                  </span> </div> -->
-
-                  
-                
-              <!-- </div> -->
-              <!-- /.box-body -->
-            <!-- </div> -->
           </form>
         </div>
         </div>
       </div>
-      <!-- /.box -->
-      <!-- <div class="box box-success" id="box_model">
-        <div class="box-header">
-          <h3 class="box-title"><i class="fa fa-list"></i> Parts Fits With...</h3>
-        </div>
-        <div class="box-body">
-          <div class="form-group col-md-12" style="padding-top:10px;">
-            <table id="partsdata" class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <td class="left"><u><b>Make</b></u></td>
-                  <td class="left"><u><b>Model</b></u></td>
-                  <td class="left"><u><b>Year</b></u></td>
-                  <td></td>
-                </tr>
-              </thead>
-                            <tfoot>
-                <tr>
-                  <td colspan="4"></td>
-                  <td class="left"><button class="btn btn-primary" title="" data-toggle="tooltip" onclick="addPartsData();" type="button" data-original-title="Add Car Parts Information"><i class="fa fa-plus-circle"></i></button></td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </section>

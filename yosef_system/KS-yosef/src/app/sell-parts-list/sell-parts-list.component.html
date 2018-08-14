@@ -250,7 +250,7 @@
                         </td>  
                         <td>  
                           <strong>Bill To :</strong> {{selected?.buyerName}}<br>  
-                          <strong>Number :</strong> {{selected?.buyerTinNumber}}<br>  
+                          <strong>TIN Number :</strong> {{selected?.buyerTinNumber}}<br>  
                         </td>  
                       </tr>  
                     </table>  
@@ -274,8 +274,11 @@
                 </tr>   -->
                 <tr class="heading">  
                   <td>  
-                    Item  
+                    Part Number  
                   </td> 
+                  <td>
+                    Stamp
+                  </td>
                   <td>  
                       Unit Price  
                     </td> 
@@ -289,6 +292,9 @@
                 <tr *ngFor= "let part of parts" class="item">  
                   <td>  
                     {{part?.partNumber}}  
+                  </td>
+                  <td>
+                    {{part?.stamp}}
                   </td>  
                   <td>  
                     {{part?.price / part?.quantity | number : '1.2-2'}}  
