@@ -88,6 +88,11 @@ export class NewrepairComponent implements OnInit {
     console.log("delete repair clicked...");
     $("#modal-delete").modal('show'); 
   }
+  btn_checkoutCar(repair: Repair){
+    this.selectedRepair = repair; 
+    console.log("repair checkout selected...");
+    $("#modal-checkout").modal('show'); 
+  }
   // open(content) {
   //   this.modalService.open(content).result.then((result) => {
   //     this.closeResult = `Closed with: ${result}`;
