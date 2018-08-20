@@ -34,7 +34,7 @@
                 <td><span class="label label-success">{{ purchase.parts.length}}</span></td>
                 <td><span class="label label-primary">{{ purchase.grandTotal | number : '1.2-2' }} ETB</span></td>
                 <td>
-                <a class="btn btn-info" data-toggle="tooltip" href="" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(purchase)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePurchaseClick(purchase)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(purchase)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(purchase)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePurchaseClick(purchase)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>
               </tr>          
             </tbody>
@@ -122,4 +122,152 @@
       <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+  </div>
+
+  <!--Print Section Modal -->
+  <div class="modal modal-info fade" id="modal-invoice">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Purchase Invoice</h4>
+        </div>
+        <div class="modal-body">
+          <div id="printSectionId" class="md-dialog">
+            <div class="md-dialog-content" style="min-width:600px;"> 
+              <div class="md-content" flex="" layout-padding="">
+                <div class="invoice-box">
+                    <table cellpadding="0" cellspacing="0">  
+                      <tr class="top">  
+                        <td colspan="2">  
+                          <table>  
+                            <tr>  
+                              <td class="title">  
+                                <img src="../../assets/images/favicon.ico" style="width:100%; max-width:80px;">  
+                              </td>  
+                              <td>  
+                                Invoice #: {{selectedPurchase?.purchaseId}}<br>  
+                                Date : {{selectedPurchase?.date | date}} <br>  
+                              </td>  
+                            </tr>  
+                          </table>  
+                        </td>  
+                        </tr>  
+                        <tr class="information">  
+                              <td colspan="2">  
+                            <table>  
+                              <tr>  
+                                <!-- <td>  
+                                  Yoseph Koufalis Fuel Injection Pump<br>  
+                                  And Nozzle Operation<br>  
+                                  Gofa Gabriel, Addis Ababa  
+                                </td>   -->
+                                <td>  
+                                  <strong>Bill To :</strong> Yoseph Koufalis Fuel Injection Pump<br>  
+                                  And Nozzle Operation<br>  
+                                  Gofa Gabriel, Addis Ababa<br>  
+                                  <strong>TIN Number:</strong> TIN NUMBER<br>  
+                                </td>  
+                              </tr>  
+                            </table>  
+                          </td>  
+                        </tr>  
+                        <!-- <tr class="heading">  
+                          <td>  
+                            Payment Method  
+                          </td>  
+                          <td>  
+                            Cash  
+                          </td>  
+                        </tr>  
+                        <tr class="details">  
+                          <td>  
+                            Check  
+                          </td>  
+                          <td>  
+                            1000  
+                          </td>  
+                        </tr>   -->
+                        <tr class="heading">  
+                          <td>  
+                            Part Number  
+                          </td> 
+                          <td>
+                            Stamp
+                          </td>
+                          <td>
+                            Description
+                          </td>
+                          <td>  
+                              Unit Price  
+                            </td> 
+                          <td>
+                            Quantity
+                          </td> 
+                          <td>
+                            Price
+                          </td>
+                        </tr>  
+                        <tr *ngFor= "let part of selectedPart" class="item">  
+                          <td>  
+                            {{part?.partNumber}}  
+                          </td>
+                          <td>
+                            {{part?.stamp}}
+                          </td>
+                          <td>
+                            {{part?.description}}
+                          </td>   
+                          <td>  
+                            {{part?.price | number : '1.2-2'}}  
+                          </td> 
+                          <td>
+                            {{part?.quantity}}
+                          </td>
+                          <td>
+                            {{part?.price * part?.quantity | number : '1.2-2'}}
+                          </td>
+                        </tr>  
+                        <!-- <tr class="item">  
+                          <td>  
+                          Hosting  
+                          </td>  
+                          <td>
+                            3
+                          </td>
+                          <td>  
+                          75  
+                          </td>  
+                        </tr>  
+                        <tr class="item last">  
+                          <td>  
+                          Domain name  
+                          </td> 
+                          <td>
+                            1
+                          </td> 
+                          <td>  
+                          10  
+                          </td>  
+                        </tr>   -->
+                        <tr class="total">  
+                          <td></td>  
+                          <td>  
+                          Total: {{selectedPurchase?.grandTotal | number : '1.2-2'}} ETB 
+                          </td>  
+                        </tr>  
+                        </table> 
+
+                </div>
+              </div>   
+            </div> 
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline" (click)="print(printSectionId)">Print</button>
+        </div>
+      </div>
+    </div>
   </div>

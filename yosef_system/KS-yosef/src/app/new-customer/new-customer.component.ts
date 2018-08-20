@@ -7,6 +7,7 @@ import { CustomerService } from '../services/customer.service';
 import { Customer } from '../models/customer';
 
 
+
 @Component({
   selector: 'app-new-customer',
   templateUrl: './new-customer.component.html',
@@ -23,7 +24,7 @@ export class NewCustomerComponent implements OnInit {
   address: FormControl; 
   
   
-  constructor(private _customerService: CustomerService) {
+  constructor(private _customerService: CustomerService, private _router: Router) {
   }
 
   createControls(){
@@ -57,6 +58,8 @@ export class NewCustomerComponent implements OnInit {
       this._customerService.add(data)
       .subscribe(customer => {
         console.log("saved data");
+        this._router.navigate(['/customer'])
+
       });
     }
     else{

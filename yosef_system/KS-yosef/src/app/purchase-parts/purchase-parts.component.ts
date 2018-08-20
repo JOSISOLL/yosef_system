@@ -25,6 +25,7 @@ export class PurchasePartsComponent implements OnInit {
   count: number;
   saved : boolean; 
   grandTotal: number;
+  today : String;
 
   // partsForm: FormGroup;
   
@@ -75,7 +76,7 @@ export class PurchasePartsComponent implements OnInit {
     this.count = 0;
     this.grandTotal = 0;
     this.saved = false
-
+    this.today = new Date().toLocaleString();
     // this.createControls();
     // this.createForm();
     this.getAllSupliers();
@@ -130,6 +131,7 @@ Submit(parts : Parts[]){
   this.purchase.purchaseId = this.invoice_id;
   this.purchase.parts = parts
   this.purchase.grandTotal = this.grandTotal
+  this.purchase.date = this.today;
   
   // console.log(this.purchase)
   for(let data of this.purchase.parts){

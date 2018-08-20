@@ -143,10 +143,22 @@ router.put('/garage/client/update', (req, res) => {
 
 router.delete('/garage/client/delete/:id', (req, res) => {
     console.log("id: " + req.params.id);
-    Customer.findByIdAndRemove(req.params.id, function(err, res){
-        res.status(200).send({status: true}); 
-    });
-    //res.status(404).send({status: false, response: "REQUESTED RECORD NOT FOUND!"});
+    Customer.findOneAndRemove({_id : req.params.id}, function (err,data){
+        if(err){
+            console.log(err)
+        } else {
+            if(!data){
+                status = "Customer not found."
+                res.status(401).send({status: status})
+
+            }else{
+                console.log(data)
+                console.log("Customer data successfully deleted.")
+                res.status(200).send({status : true})
+            }
+            
+        }
+    } )
 });
 router.get('/clients_get',  (req, res) => {
     Customer.find(function (error, customers){

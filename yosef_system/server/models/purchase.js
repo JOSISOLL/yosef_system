@@ -23,7 +23,8 @@ const purchaseSchema = new Schema(
         purchaseId : Number,
         // parts : [{type: mongoose.Schema.Types.ObjectId,  ref: 'parts'}],
         parts : [partsSchema],
-        grandTotal : Number
+        grandTotal : Number,
+        date : String
     })
         
 module.exports = mongoose.model('purchase', purchaseSchema, 'purchase')
