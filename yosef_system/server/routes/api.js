@@ -1,6 +1,7 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const router = express.Router()
+const Imports = require('../models/import')
 const User = require('../models/user')
 const Customer = require('../models/customer')
 const Suplier = require('../models/suplier');
@@ -225,7 +226,28 @@ router.post("/suplier/add",  (req, res) => {
     
 
 })
-
+router.post("/import/add", (req, res) =>{
+    let importFData = req.body;
+    console.log("Attempting to add new imports...")
+    let imports = new Imports(importFData)
+    imports.save((error, newImport) =>{
+        if(error){
+            console.log(error)
+        } else {
+            res.status(200).send(newImport)
+        }
+    })
+})
+router.get("/imports", (req,res)=>{
+    Imports.find(function (error, imports){
+        if(error){
+            console.log(error)
+        } else {
+            res.jsonp(imports)
+            console.log("Imports fetched from database")
+        }
+    })
+})
 router.get("/supliers", (req, res)=>{
     Suplier.find(function (error, supliers){
         if(error){

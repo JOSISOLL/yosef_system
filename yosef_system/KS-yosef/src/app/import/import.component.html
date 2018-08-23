@@ -29,10 +29,10 @@
             </thead>
             <tbody>
               <tr *ngFor="let import of imports">
-                <td><span class="label label-default">{{ import.parts[0].purchaseDate | date }}</span></td>
-                <td><span class="label label-success">{{import.purchaseId}}</span></td>
-                <td><span class="label label-success">{{ import.parts.length}}</span></td>
-                <td><span class="label label-primary">{{ import.grandTotal | number : '1.2-2' }} ETB</span></td>
+                <td><span class="label label-default">{{ import.import_date | date }}</span></td>
+                <td><span class="label label-success">ID</span></td>
+                <td><span class="label label-success">{{ import.items.length}}</span></td>
+                <td><span class="label label-primary">ETB</span></td>
                 <td>
                 <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(purchase)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(purchase)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePurchaseClick(purchase)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>

@@ -6,6 +6,7 @@ export interface Imported_Items{
     part_number : String;
     stamp : String;
     description : String;
+    remark : String;
     imported_quantity : Number;
     foreign_unit_cost : Number;
     foreign_total : Number;

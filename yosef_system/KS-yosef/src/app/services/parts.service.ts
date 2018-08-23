@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Parts } from '../models/parts';
 import { Purchase } from '../models/purchase';
 import { Sell } from '../models/sell';
+import { Import } from '../models/import';
 @Injectable()
 export class PartsService {
 
@@ -15,12 +16,20 @@ export class PartsService {
    _deletePurchaseUrl = "http://localhost:3000/api/purchase/delete"
    _partsSellUrl = "http://localhost:3000/api/parts/sell"
    _partsSoldUrl = "http://localhost:3000/api/parts/sold"
+   _importsAddUrl = "http://localhost:3000/api/import/add"
+   _importsGetUrl = "http://localhost:3000/api/imports"
   constructor(private http: HttpClient) { }
   
   // purchase(part): Observable<Parts>
   // {
   //   return this.http.post<Parts>(this._purchaseUrl, part)
   // }
+  addImport(data){
+    return this.http.post<Import>(this._importsAddUrl, data)
+  }
+  getImport(){
+    return this.http.get<Import>(this._importsGetUrl)
+  }
   getPurchase(){
     return this.http.get<any>(this._purchasesUrl)
   }

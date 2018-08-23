@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { Import } from "../models/import";
+import { PartsService } from "../services/parts.service";
 
 @Component({
   selector: 'app-add-import',
@@ -11,12 +12,12 @@ export class AddImportComponent implements OnInit {
 
   public myForm : FormGroup;
 
-  constructor(private _fb : FormBuilder) { }
+  constructor(private _fb : FormBuilder, private _partService : PartsService) { }
 
   ngOnInit() {
     // we will initialize our form here
     this.myForm = this._fb.group({
-            date: ['', [Validators.required]],
+      import_date: ['', [Validators.required]],
             items: this._fb.array([
                 this.initAddress(),
             ])
@@ -29,6 +30,7 @@ initAddress() {
           part_number : ['', Validators.required],
           stamp : ['', Validators.required],
           description : [''],
+          remark : [''],
           imported_quantity : ['', Validators.required],
           foreign_unit_cost : ['', Validators.required],
           foreign_total : ['', Validators.required],
@@ -52,8 +54,17 @@ removeAddress(i: number) {
     control.removeAt(i);
 }
 save(model) {
-  // call API to save customer
-  console.log(model.value);
+  console.log(model);
+  this._partService.addImport(model.value)
+  .subscribe(
+    res =>{
+      console.log(res);
+    },
+    err =>{
+      console.log(err);
+    }
+
+  )
 }
 
 }
