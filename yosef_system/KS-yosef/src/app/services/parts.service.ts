@@ -18,6 +18,7 @@ export class PartsService {
    _partsSoldUrl = "http://localhost:3000/api/parts/sold"
    _importsAddUrl = "http://localhost:3000/api/import/add"
    _importsGetUrl = "http://localhost:3000/api/imports"
+   _importDeleteUrl = "http://localhost:3000/api/import/delete"
   constructor(private http: HttpClient) { }
   
   // purchase(part): Observable<Parts>
@@ -29,6 +30,9 @@ export class PartsService {
   }
   getImport(){
     return this.http.get<Import>(this._importsGetUrl)
+  }
+  deleteImport(data){
+    return this.http.delete<Import>(`${this._importDeleteUrl}/${data._id}`)
   }
   getPurchase(){
     return this.http.get<any>(this._purchasesUrl)

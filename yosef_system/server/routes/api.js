@@ -536,6 +536,22 @@ router.delete('/purchase/delete/:id', (req, res) => {
     
 
 })
+router.delete('/import/delete/:id', (req, res) => {
+    Imports.findOneAndRemove({_id : req.params.id}, function (err,data){
+        if(err){
+            console.log(err)
+        } else {
+            if(!data){
+                status = "This import doesn't exist in the database."
+                res.status(401).send({status: status})
 
+            }else{
+                console.log("Delete successfull!")
+                console.log(data)
+                res.status(200).send({status : true})
+            }     
+        }
+    })
+})
 
 module.exports = router

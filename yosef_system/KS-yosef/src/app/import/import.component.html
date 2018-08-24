@@ -34,7 +34,7 @@
                 <td><span class="label label-success">{{ import.items.length}}</span></td>
                 <td><span class="label label-primary">ETB</span></td>
                 <td>
-                <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(purchase)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(purchase)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePurchaseClick(purchase)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(purchase)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(import)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deleteImportClick(import)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>
               </tr>          
             </tbody>
@@ -47,3 +47,82 @@
     <!-- /.col -->
   </div>
 </section> 
+
+
+<div class="modal modal-success fade" id="modal-view">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Imported Parts Detail</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-sm-12">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6"><b>Import Date : {{selected?.import_date | date}}</b></div>
+            </div>
+            <hr>
+            <h4>Parts Imported</h4>
+            <table class="table dt-responsive table-bordered">
+              <thead>
+                <tr>
+                  <th>Part Number</th>
+                  <th>Stamp</th>
+                  <th>Description</th>
+                  <th>Remark</th>
+                  <th>Quantity</th>
+                  <th>Origin</th>
+                  <th>Foreign Un. Cost</th>
+                  <th>Local Un. Cost</th>
+                  <th>Factory Cost</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor= "let part of selected?.items">
+                  <td>{{part.part_number}}</td>
+                  <td>{{part.stamp}}</td>
+                  <td>{{part.description}}</td>
+                  <td>{{part.remark}}</td>
+                  <td>{{part.imported_quantity}}</td>
+                  <td>{{part.origin}}</td>
+                  <td>{{part.foreign_unit_cost | number : '1.2-2'}}</td>
+                  <td>{{part.local_cost | number : '1.2-2'}}</td>
+                  <td>{{part.factory_cost | number : '1.2-2'}}</td>
+                  <td>{{part.price | number : '1.2-2'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Delete --> 
+<div class="modal modal-danger fade" id="modal-delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete Import</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to delete this record?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button (click)="deleteImport()" type="button" class="btn btn-outline">Delete</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
