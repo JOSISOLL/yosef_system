@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { Import } from "../models/import";
 import { PartsService } from "../services/parts.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-import',
@@ -12,7 +13,7 @@ export class AddImportComponent implements OnInit {
 
   public myForm : FormGroup;
 
-  constructor(private _fb : FormBuilder, private _partService : PartsService) { }
+  constructor(private _fb : FormBuilder, private _partService : PartsService, private _router : Router) { }
 
   ngOnInit() {
     // we will initialize our form here
@@ -59,6 +60,7 @@ save(model) {
   .subscribe(
     res =>{
       console.log(res);
+      this._router.navigate(['/import']);
     },
     err =>{
       console.log(err);

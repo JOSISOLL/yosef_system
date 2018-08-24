@@ -58,6 +58,7 @@ import { HttpModule } from '@angular/http';
 import { ImportComponent } from './import/import.component';
 import { AddImportComponent } from './add-import/add-import.component';
 import { DistributeComponent } from './distribute/distribute.component';
+import { ImportedPartsComponent } from './imported-parts/imported-parts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,7 +96,8 @@ import { DistributeComponent } from './distribute/distribute.component';
     AddToCartComponent,
     ImportComponent,
     AddImportComponent,
-    DistributeComponent
+    DistributeComponent,
+    ImportedPartsComponent
 
   ],
   imports: [

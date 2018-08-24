@@ -451,21 +451,35 @@ router.post("/parts/stock", (req, res) => {
                         }
                     })
                 } else {
-                    let parts = new Parts(partsData)
-                    console.log(part.quantity);
-                    var availableQty = part.quantity;
-                    var totalQuantity = Number(availableQty) + Number(partsData.quantity);
-                    Parts.findByIdAndUpdate(part.id,{
-                        quantity : totalQuantity
-                    },{new: true}, function(err, updatedPart){
-                        if(err){
-                            console.log(err);
-                        } else {
-                            console.log("Quantity for existing part updated!")
-                            // console.log(updatedPart)
-                            res.status(200).send(updatedPart)
-                        }
-                    })
+                    if(part.price !== partsData.price){
+                        let parts = new Parts(partsData)
+                        parts.save((err, addedPart) =>{
+                            if(err){
+                                console.log(err)
+                            } else {
+                                console.log("Already existing part added with a new Price.");
+                                res.status(200).send(addedPart);
+                            }
+                        })
+                        
+
+                    } else {
+                        let parts = new Parts(partsData)
+                        console.log(part.quantity);
+                        var availableQty = part.quantity;
+                        var totalQuantity = Number(availableQty) + Number(partsData.quantity);
+                        Parts.findByIdAndUpdate(part.id,{
+                            quantity : totalQuantity
+                        },{new: true}, function(err, updatedPart){
+                            if(err){
+                                console.log(err);
+                            } else {
+                                console.log("Quantity for existing part updated!")
+                                // console.log(updatedPart)
+                                res.status(200).send(updatedPart)
+                            }
+                        })
+                    }
 
                 }
             }

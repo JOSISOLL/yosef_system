@@ -28,6 +28,7 @@ import { SellPartsComponent } from './sell-parts/sell-parts.component';
 import { ImportComponent } from './import/import.component';
 import { AddImportComponent } from './add-import/add-import.component';
 import { DistributeComponent} from './distribute/distribute.component';
+import { ImportedPartsComponent } from './imported-parts/imported-parts.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path : 'import',
     component : ImportComponent
+  },
+  {
+    path : 'imported/parts',
+    component : ImportedPartsComponent
   },
   {
     path : 'import/add',

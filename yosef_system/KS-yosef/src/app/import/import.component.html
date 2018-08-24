@@ -34,7 +34,7 @@
                 <td><span class="label label-success">{{ import.items.length}}</span></td>
                 <td><span class="label label-primary">ETB</span></td>
                 <td>
-                <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(purchase)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(import)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deleteImportClick(import)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(import)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(import)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deleteImportClick(import)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>
               </tr>          
             </tbody>
@@ -126,3 +126,155 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+
+
+<div class="modal modal-info fade" id="modal-invoice">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Purchase Invoice</h4>
+        </div>
+        <div class="modal-body">
+          <div id="printSectionId" class="md-dialog">
+            <div class="md-dialog-content" style="min-width:600px;"> 
+              <div class="md-content" flex="" layout-padding="">
+                <div class="invoice-box">
+                    <table cellpadding="0" cellspacing="0">  
+                      <tr class="top">  
+                        <td colspan="2">  
+                          <table>  
+                            <tr>  
+                              <td class="title">  
+                                <img src="../../assets/images/favicon.ico" style="width:100%; max-width:80px;">  
+                              </td>  
+                              <td>  
+                                <!-- Invoice #: {{selected?.purchaseId}}<br>   -->
+                                Date : {{selected?.import_date | date}} <br>  
+                              </td>  
+                            </tr>  
+                          </table>  
+                        </td>  
+                        </tr>  
+                        <tr class="information">  
+                              <td colspan="2">  
+                            <table>  
+                              <tr>  
+                                <!-- <td>  
+                                  Yoseph Koufalis Fuel Injection Pump<br>  
+                                  And Nozzle Operation<br>  
+                                  Gofa Gabriel, Addis Ababa  
+                                </td>   -->
+                                <td>  
+                                  <strong>Import Attachment :</strong> Yoseph Koufalis Fuel Injection Pump<br>  
+                                  And Nozzle Operation<br>  
+                                  Gofa Gabriel, Addis Ababa<br>  
+                                  <!-- <strong>TIN Number:</strong> TIN NUMBER<br>   -->
+                                </td>  
+                              </tr>  
+                            </table>  
+                          </td>  
+                        </tr>  
+                        <!-- <tr class="heading">  
+                          <td>  
+                            Payment Method  
+                          </td>  
+                          <td>  
+                            Cash  
+                          </td>  
+                        </tr>  
+                        <tr class="details">  
+                          <td>  
+                            Check  
+                          </td>  
+                          <td>  
+                            1000  
+                          </td>  
+                        </tr>   -->
+                        <tr class="heading">  
+                          <td>  
+                            Part Number  
+                          </td> 
+                          <td>
+                            Stamp
+                          </td>
+                          <td>
+                            Description
+                          </td>
+                          <td>Origin</td>
+                          <td>Foreign Un. Price</td>
+                          <td>  
+                            Local Un. Price  
+                          </td> 
+                          <td>
+                            Quantity
+                          </td> 
+                          <td>
+                            Price
+                          </td>
+                        </tr>  
+                        <tr *ngFor= "let item of selected?.items" class="item">  
+                          <td>  
+                            {{item?.part_number}}  
+                          </td>
+                          <td>
+                            {{item?.stamp}}
+                          </td>
+                          <td>
+                            {{item?.description}}
+                          </td>   
+                          <td>{{item?.origin}}</td>
+                          <td>  
+                            {{item?.foreign_unit_cost | number : '1.2-2'}}  
+                          </td> 
+                          <td>
+                            {{item?.local_cost}}
+                          </td>
+                          <td>{{item?.imported_quantity}}</td>
+                          <td>
+                            {{item?.price | number : '1.2-2'}}
+                          </td>
+                        </tr>  
+                        <!-- <tr class="item">  
+                          <td>  
+                          Hosting  
+                          </td>  
+                          <td>
+                            3
+                          </td>
+                          <td>  
+                          75  
+                          </td>  
+                        </tr>  
+                        <tr class="item last">  
+                          <td>  
+                          Domain name  
+                          </td> 
+                          <td>
+                            1
+                          </td> 
+                          <td>  
+                          10  
+                          </td>  
+                        </tr>   -->
+                        <!-- <tr class="total">  
+                          <td></td>  
+                          <td>  
+                          Total: {{selectedPurchase?.grandTotal | number : '1.2-2'}} ETB 
+                          </td>  
+                        </tr>   -->
+                        </table> 
+
+                </div>
+              </div>   
+            </div> 
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-outline" (click)="print(printSectionId)">Print</button>
+        </div>
+      </div>
+    </div>
+  </div>
