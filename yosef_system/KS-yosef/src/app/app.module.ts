@@ -55,6 +55,10 @@ import { reducers, metaReducers } from './store/reducers';
 import { AllEffects } from './store/effects'
 import { StoreModule } from '@ngrx/store';
 import { HttpModule } from '@angular/http';
+import { ImportComponent } from './import/import.component';
+import { AddImportComponent } from './add-import/add-import.component';
+import { DistributeComponent } from './distribute/distribute.component';
+import { ImportedPartsComponent } from './imported-parts/imported-parts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +93,11 @@ import { HttpModule } from '@angular/http';
     SellPartsListComponent,
     InvoiceComponent,
     SellPartsComponent,
-    AddToCartComponent
+    AddToCartComponent,
+    ImportComponent,
+    AddImportComponent,
+    DistributeComponent,
+    ImportedPartsComponent
 
   ],
   imports: [

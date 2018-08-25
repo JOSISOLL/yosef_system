@@ -10,10 +10,10 @@
         <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
         <h4><i class="icon fa fa-check"></i> Success!</h4>
          </div>
-      <div align="right" style="margin-bottom:1%;"> <a class="btn btn-success" data-toggle="tooltip" routerLink="/purchase" data-original-title="Add Buy Parts"><i class="fa fa-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
+      <div align="right" style="margin-bottom:1%;"> <a class="btn btn-success" data-toggle="tooltip" routerLink="/import/add" data-original-title="Add Buy Parts"><i class="fa fa-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
       <div class="box box-success">
         <div class="box-header">
-          <h3 class="box-title">Purchase Parts List</h3>
+          <h3 class="box-title">Imported Parts List</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -21,20 +21,20 @@
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Purchase ID</th>
-                <th>Item Purchased</th>
+                <th>Import ID</th>
+                <th>Parts Imported</th>
                 <th>Grand Total</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let purchase of purchases">
-                <td><span class="label label-default">{{ purchase.parts[0].purchaseDate | date }}</span></td>
-                <td><span class="label label-success">{{purchase.purchaseId}}</span></td>
-                <td><span class="label label-success">{{ purchase.parts.length}}</span></td>
-                <td><span class="label label-primary">{{ purchase.grandTotal | number : '1.2-2' }} ETB</span></td>
+              <tr *ngFor="let import of imports">
+                <td><span class="label label-default">{{ import.import_date | date }}</span></td>
+                <td><span class="label label-success">ID</span></td>
+                <td><span class="label label-success">{{ import.items.length}}</span></td>
+                <td><span class="label label-primary">ETB</span></td>
                 <td>
-                <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(purchase)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(purchase)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePurchaseClick(purchase)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(import)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(import)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deleteImportClick(import)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>
               </tr>          
             </tbody>
@@ -48,84 +48,87 @@
   </div>
 </section> 
 
-<!-- View Modal-->
-<div class="modal modal-success fade" id="modal-view">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Purchase Details</h4>
-        </div>
-        <div class="modal-body"> 
-          <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-6"><b>Purchase ID : {{ selectedPurchase?.purchaseId }}</b></div>
-          </div>
-          <hr>
-          <h4>Parts Purchased</h4>
-          <table class="table dt-responsive table-bordered">
-            <thead>
-              <tr>
-                <th>Part Number</th>
-                <th>Stamp</th>
-                <th>Description</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Shelf Number</th>
-                <th>Supplier</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let part of selectedPart">
-                <td>{{part.partNumber}}</td>
-                <td>{{part.stamp}}</td>
-                <td>{{part.description}}</td>
-                <td>{{part.quantity}}</td>
-                <td>{{ part.price | number : '1.2-2'}} ETB</td>
-                <td>{{part.shelfNumber}}</td>
-                <td>{{part.supplier}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="row">
-              <div class="col-md-12 pull-right"><b>Grand Total : {{ selectedPurchase?.grandTotal | number : '1.2-2' }} ETB</b></div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  
-  <!-- Delete Modal -->
-<div class="modal modal-danger fade" id="modal-delete">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Delete Part</h4>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure to delete this record?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-          <button (click)="deletePart()" type="button" class="btn btn-outline">Delete</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
 
-  <!--Print Section Modal -->
-  <div class="modal modal-info fade" id="modal-invoice">
+<div class="modal modal-success fade" id="modal-view">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Imported Parts Detail</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-sm-12">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6"><b>Import Date : {{selected?.import_date | date}}</b></div>
+            </div>
+            <hr>
+            <h4>Parts Imported</h4>
+            <table class="table dt-responsive table-bordered">
+              <thead>
+                <tr>
+                  <th>Part Number</th>
+                  <th>Stamp</th>
+                  <th>Description</th>
+                  <th>Remark</th>
+                  <th>Quantity</th>
+                  <th>Origin</th>
+                  <th>Foreign Un. Cost</th>
+                  <th>Local Un. Cost</th>
+                  <th>Factory Cost</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor= "let part of selected?.items">
+                  <td>{{part.part_number}}</td>
+                  <td>{{part.stamp}}</td>
+                  <td>{{part.description}}</td>
+                  <td>{{part.remark}}</td>
+                  <td>{{part.imported_quantity}}</td>
+                  <td>{{part.origin}}</td>
+                  <td>{{part.foreign_unit_cost | number : '1.2-2'}}</td>
+                  <td>{{part.local_cost | number : '1.2-2'}}</td>
+                  <td>{{part.factory_cost | number : '1.2-2'}}</td>
+                  <td>{{part.price | number : '1.2-2'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Delete --> 
+<div class="modal modal-danger fade" id="modal-delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete Import</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to delete this record?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        <button (click)="deleteImport()" type="button" class="btn btn-outline">Delete</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal modal-info fade" id="modal-invoice">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -147,8 +150,8 @@
                                 <img src="../../assets/images/favicon.ico" style="width:100%; max-width:80px;">  
                               </td>  
                               <td>  
-                                Invoice #: {{selectedPurchase?.purchaseId}}<br>  
-                                Date : {{selectedPurchase?.date | date}} <br>  
+                                <!-- Invoice #: {{selected?.purchaseId}}<br>   -->
+                                Date : {{selected?.import_date | date}} <br>  
                               </td>  
                             </tr>  
                           </table>  
@@ -164,10 +167,10 @@
                                   Gofa Gabriel, Addis Ababa  
                                 </td>   -->
                                 <td>  
-                                  <strong>Bill To :</strong> Yoseph Koufalis Fuel Injection Pump<br>  
+                                  <strong>Import Attachment :</strong> Yoseph Koufalis Fuel Injection Pump<br>  
                                   And Nozzle Operation<br>  
                                   Gofa Gabriel, Addis Ababa<br>  
-                                  <strong>TIN Number:</strong> TIN NUMBER<br>  
+                                  <!-- <strong>TIN Number:</strong> TIN NUMBER<br>   -->
                                 </td>  
                               </tr>  
                             </table>  
@@ -199,9 +202,11 @@
                           <td>
                             Description
                           </td>
+                          <td>Origin</td>
+                          <td>Foreign Un. Price</td>
                           <td>  
-                              Unit Price  
-                            </td> 
+                            Local Un. Price  
+                          </td> 
                           <td>
                             Quantity
                           </td> 
@@ -209,24 +214,26 @@
                             Price
                           </td>
                         </tr>  
-                        <tr *ngFor= "let part of selectedPart" class="item">  
+                        <tr *ngFor= "let item of selected?.items" class="item">  
                           <td>  
-                            {{part?.partNumber}}  
+                            {{item?.part_number}}  
                           </td>
                           <td>
-                            {{part?.stamp}}
+                            {{item?.stamp}}
                           </td>
                           <td>
-                            {{part?.description}}
+                            {{item?.description}}
                           </td>   
+                          <td>{{item?.origin}}</td>
                           <td>  
-                            {{part?.price | number : '1.2-2'}}  
+                            {{item?.foreign_unit_cost | number : '1.2-2'}}  
                           </td> 
                           <td>
-                            {{part?.quantity}}
+                            {{item?.local_cost}}
                           </td>
+                          <td>{{item?.imported_quantity}}</td>
                           <td>
-                            {{part?.price * part?.quantity | number : '1.2-2'}}
+                            {{item?.price | number : '1.2-2'}}
                           </td>
                         </tr>  
                         <!-- <tr class="item">  
@@ -251,12 +258,12 @@
                           10  
                           </td>  
                         </tr>   -->
-                        <tr class="total">  
+                        <!-- <tr class="total">  
                           <td></td>  
                           <td>  
                           Total: {{selectedPurchase?.grandTotal | number : '1.2-2'}} ETB 
                           </td>  
-                        </tr>  
+                        </tr>   -->
                         </table> 
 
                 </div>

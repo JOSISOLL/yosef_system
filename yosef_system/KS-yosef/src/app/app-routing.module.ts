@@ -25,6 +25,10 @@ import { SellPartsListComponent } from './sell-parts-list/sell-parts-list.compon
 import { PurchaseInvoiceComponent } from './purchase-invoice/purchase-invoice.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { SellPartsComponent } from './sell-parts/sell-parts.component';
+import { ImportComponent } from './import/import.component';
+import { AddImportComponent } from './add-import/add-import.component';
+import { DistributeComponent} from './distribute/distribute.component';
+import { ImportedPartsComponent } from './imported-parts/imported-parts.component';
 
 const routes: Routes = [
   {
@@ -35,6 +39,21 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
     // canActivate: [LoginGuard]
+  },
+  {
+    path : 'import',
+    component : ImportComponent
+  },
+  {
+    path : 'imported/parts',
+    component : ImportedPartsComponent
+  },
+  {
+    path : 'import/add',
+    component : AddImportComponent
+  },
+  { path : 'distribute',
+    component : DistributeComponent  
   },
   {
     path: 'register',

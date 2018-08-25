@@ -1,6 +1,7 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const router = express.Router()
+const Imports = require('../models/import')
 const User = require('../models/user')
 const Customer = require('../models/customer')
 const Suplier = require('../models/suplier');
@@ -143,10 +144,22 @@ router.put('/garage/client/update', (req, res) => {
 
 router.delete('/garage/client/delete/:id', (req, res) => {
     console.log("id: " + req.params.id);
-    Customer.findByIdAndRemove(req.params.id, function(err, res){
-        res.status(200).send({status: true}); 
-    });
-    //res.status(404).send({status: false, response: "REQUESTED RECORD NOT FOUND!"});
+    Customer.findOneAndRemove({_id : req.params.id}, function (err,data){
+        if(err){
+            console.log(err)
+        } else {
+            if(!data){
+                status = "Customer not found."
+                res.status(401).send({status: status})
+
+            }else{
+                console.log(data)
+                console.log("Customer data successfully deleted.")
+                res.status(200).send({status : true})
+            }
+            
+        }
+    } )
 });
 router.get('/clients_get',  (req, res) => {
     Customer.find(function (error, customers){
@@ -213,7 +226,28 @@ router.post("/suplier/add",  (req, res) => {
     
 
 })
-
+router.post("/import/add", (req, res) =>{
+    let importFData = req.body;
+    console.log("Attempting to add new imports...")
+    let imports = new Imports(importFData)
+    imports.save((error, newImport) =>{
+        if(error){
+            console.log(error)
+        } else {
+            res.status(200).send(newImport)
+        }
+    })
+})
+router.get("/imports", (req,res)=>{
+    Imports.find(function (error, imports){
+        if(error){
+            console.log(error)
+        } else {
+            res.jsonp(imports)
+            console.log("Imports fetched from database")
+        }
+    })
+})
 router.get("/supliers", (req, res)=>{
     Suplier.find(function (error, supliers){
         if(error){
@@ -417,21 +451,35 @@ router.post("/parts/stock", (req, res) => {
                         }
                     })
                 } else {
-                    let parts = new Parts(partsData)
-                    console.log(part.quantity);
-                    var availableQty = part.quantity;
-                    var totalQuantity = Number(availableQty) + Number(partsData.quantity);
-                    Parts.findByIdAndUpdate(part.id,{
-                        quantity : totalQuantity
-                    },{new: true}, function(err, updatedPart){
-                        if(err){
-                            console.log(err);
-                        } else {
-                            console.log("Quantity for existing part updated!")
-                            // console.log(updatedPart)
-                            res.status(200).send(updatedPart)
-                        }
-                    })
+                    if(part.price !== partsData.price){
+                        let parts = new Parts(partsData)
+                        parts.save((err, addedPart) =>{
+                            if(err){
+                                console.log(err)
+                            } else {
+                                console.log("Already existing part added with a new Price.");
+                                res.status(200).send(addedPart);
+                            }
+                        })
+                        
+
+                    } else {
+                        let parts = new Parts(partsData)
+                        console.log(part.quantity);
+                        var availableQty = part.quantity;
+                        var totalQuantity = Number(availableQty) + Number(partsData.quantity);
+                        Parts.findByIdAndUpdate(part.id,{
+                            quantity : totalQuantity
+                        },{new: true}, function(err, updatedPart){
+                            if(err){
+                                console.log(err);
+                            } else {
+                                console.log("Quantity for existing part updated!")
+                                // console.log(updatedPart)
+                                res.status(200).send(updatedPart)
+                            }
+                        })
+                    }
 
                 }
             }
@@ -502,6 +550,22 @@ router.delete('/purchase/delete/:id', (req, res) => {
     
 
 })
+router.delete('/import/delete/:id', (req, res) => {
+    Imports.findOneAndRemove({_id : req.params.id}, function (err,data){
+        if(err){
+            console.log(err)
+        } else {
+            if(!data){
+                status = "This import doesn't exist in the database."
+                res.status(401).send({status: status})
 
+            }else{
+                console.log("Delete successfull!")
+                console.log(data)
+                res.status(200).send({status : true})
+            }     
+        }
+    })
+})
 
 module.exports = router

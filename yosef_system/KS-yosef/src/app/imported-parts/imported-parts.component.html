@@ -1,0 +1,274 @@
+<section class="content">
+    <!-- Full Width boxes (Stat box) -->
+    <!-- Add to cart -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+          <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
+           </div>
+        <div id="you" class="alert alert-success alert-dismissable" style="display:none">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+          <h4><i class="icon fa fa-check"></i> Success!</h4>
+           </div>
+        <div align="right" style="margin-bottom:1%;"><a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
+        <div class="box box-success">
+          <div class="box-header">
+            <h3 class="box-title">Cart Items <i class="fa fa-cart-plus"></i></h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <app-add-to-cart></app-add-to-cart>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+  
+    <!-- Parts Stock List -->
+  
+    <div class="row">
+      <div class="col-xs-12">
+        <!-- <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+          <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
+           </div>
+        <div id="you" class="alert alert-success alert-dismissable" style="display:none">
+          <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+          <h4><i class="icon fa fa-check"></i> Success!</h4>
+           </div>
+        <div align="right" style="margin-bottom:1%;"><a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div> -->
+        <div class="box box-success">
+          <div class="box-header">
+            <h3 class="box-title">Parts Stock List</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <table class="table sakotable table-bordered table-striped dt-responsive">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Part Number</th>
+                  <th>Stamp</th>
+                  <th>Description</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Shelf Number</th>
+                  <th>Supplier</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let part of parts">
+                  <td><span class="label label-default">{{part.purchaseDate | date}}</span></td>
+                  <td>{{part.partNumber}}</td>
+                  <td>{{part.stamp}}</td>
+                  <td><span class="label label-danger">{{part.description}}</span></td>
+                  <td><span class="label label-success">{{part.quantity}}</span></td>
+                  <td><span class="label label-default">{{ part.price | number : '1.2-2'}} ETB</span></td>
+                  <td><span class="label label-primary">{{part.shelfNumber}}</span></td>
+                  <td><span class="label label-success">{{part.supplier}}</span></td>
+                <td>
+                  <a class="btn btn-info" data-toggle="tooltip" (click)="btn_addToCartClick(part)" data-original-title="Purchase or Load Parts Quantity"><i class="fa fa-cart-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip"  (click)="btn_showPartInfoClick(part)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editPartClick(part)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePartClick(part)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+                </td>
+                
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+  
+    
+  
+  </section>
+  
+  <div class="modal modal-success fade" id="modal-view">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Parts in Stock Detail</h4>
+          </div>
+           
+          <div class="modal-body">
+            <div class="col-sm-12">
+                <table class="table table-user-information">
+                  <tbody>
+                    <tr>
+                        <td>Part Number</td>
+                        <td>{{selectedPart?.partNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td>Stamp</td>
+                        <td>{{selectedPart?.stamp}}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{{selectedPart?.description}}</td>
+                    </tr>
+                    <tr>
+                        <td>Supplier</td>
+                        <td>{{selectedPart?.supplier}}</td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td>{{selectedPart?.price | number : '1.2-2'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Available Quantity</td>
+                        <td>{{selectedPart?.quantity | number : '1.0-0'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Shelf Number</td>
+                        <td>{{selectedPart?.shelfNumber}}</td>
+                    </tr>
+                    <tr>
+                      <td>Last Purchased Date</td>
+                      <td>{{selectedPart?.purchaseDate | date}}</td>
+                    </tr>
+    
+                  </tbody>
+                </table>  
+            </div>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+  
+    <!-- Edit Modal -->
+  <div class="modal modal-info fade" id="modal-edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Edit Part</h4>
+        </div>
+        <form [formGroup]="myForm" (ngSubmit)="saveUpdates()" novalidate>
+          <input type="hidden" formControlName="id"/>
+          <input type="hidden" formControlName="itemPId"/>
+          <div class="modal-body">
+            <div class="col-sm-12">
+              <table>
+                  <tbody>
+                  
+                    <tr>
+                        <td>Part Number</td>
+                        <td>
+                          <input class="form-control" formControlName="partNumber" type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Stamp</td>
+                        <td>
+                          <input class="form-control" formControlName="stamp" type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                          <input class="form-control" formControlName="description"  type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Supplier</td>
+                        <td>
+                          <input class="form-control" formControlName="supplier"  type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Quantity</td>
+                        <td>
+                          <input class="form-control" formControlName="quantity"  type="number"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td>
+                          <input class="form-control" formControlName="price"  type="number"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Shelf Number</td>
+                        <td>
+                          <input class="form-control" formControlName="shelfNumber"  type="text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>Date</td>
+                      <td>
+                        <input class="form-control" formControlName="purchaseDate"  type="text"/>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-outline">Save changes</button>
+          </div>
+      </form> 
+  </div>
+  </div>
+  </div>
+  
+  <!-- Delete Modal -->
+  <div class="modal modal-danger fade" id="modal-delete">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Delete Part</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure to delete this record?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            <button (click)="deletePart()" type="button" class="btn btn-outline">Delete</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+  
+    <!-- Add to Cart Modal -->
+  <div class="modal modal-info fade" id="modal-addToCart">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Add Part to Cart</h4>
+        </div>
+        <div class="modal-body">
+          <p>Part Number: {{selectedPart?.partNumber}}</p>
+          <p>Stamp : {{selectedPart?.stamp}}</p>
+          <label *ngIf="!available" style="color:red;">Not enough quantity available in stock.</label>
+          <input placeholder="Quantity" [(ngModel)]="addQuantity" name="addQuantity" type="number" class="form-control rounded-0" min="1" max="100" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button (click)="addTo_cart()" type="button" class="btn btn-outline">Add To Cart</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  

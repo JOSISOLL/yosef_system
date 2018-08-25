@@ -1,0 +1,120 @@
+<section class="content">
+    <!-- Full Width boxes (Stat box) -->
+    <div class="row">
+      <div class="col-md-12">
+        
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+        <div class="box box-success" id="box_model">
+          <div class="box-body">
+            <div class="form-group col-md-12" style="padding-top:10px;">
+              <div align="right" style="margin-bottom:1%;"> <button class="btn btn-success" type="submit" [disabled]="!myForm.valid" ><i class="fa fa-save"></i></button>	&nbsp;<a class="btn btn-warning"  routerLink="/import" title="" data-toggle="tooltip" data-original-title="Back"><i class="fa fa-reply"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <!-- we will place our fields here -->
+        <div class="box box-success">
+          <div class="box-header">
+          <h3 class="box-title">Import Information</h3>
+        </div>
+            
+        <div class="box-body">
+        <!-- name -->
+        <div class="form-group">
+            <label>Imported Date : </label>
+            <input type="date" class="form-control" formControlName="import_date">
+            <!--display error message if name is not valid-->
+            <small *ngIf="!myForm.controls.import_date.valid" class="text-danger">
+                Date is required.
+            </small>
+        </div>
+        </div>
+        </div>
+        
+    
+        <!-- list of items -->
+        <div formArrayName="items">
+            <div *ngFor="let address of myForm.controls.items.controls; let i=index">
+              <div class="box box-success">
+                <div class="box-header">
+                  <h3 class="box-title"><span>Item {{i + 1}}</span></h3>
+                </div>  
+                <div class="box-body">
+              <div>
+                <div align="right" style="margin-bottom:1%;"><button class="btn-danger" *ngIf="myForm.controls.items.controls.length > 1" (click)="removeAddress(i)"><i class="fa fa-ban"></i></button></div>
+              </div>
+              <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+              <div [formGroupName]="i">
+                <div class="form-group col-md-6">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.part_number.valid">*</span>Part Number : </label>
+                    <input type="text" class="form-control" formControlName="part_number">
+                </div>
+                <div class="form-group col-md-6">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.stamp.valid">*</span>Stamp :</label>
+                    <input type="text" class="form-control" formControlName="stamp">
+                </div>
+                <div class="form-group col-md-12">
+                    <label for=""> Description :</label>
+                    <textarea class="form-control" formControlName="description"></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for=""> Remark :</label>
+                    <textarea class="form-control" formControlName="remark"></textarea>
+                </div>
+                <div class="form-group col-md-3">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.imported_quantity.valid">*</span>Imported Quantity : </label>
+                    <input type="number" class="form-control" formControlName="imported_quantity">
+                </div>
+                <div class="form-group col-md-3"> 
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.foreign_unit_cost.valid">*</span>Foreign Unit Cost : </label>
+                    <input type="number" class="form-control" formControlName="foreign_unit_cost">
+                </div>
+                <div class="form-group col-md-3">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.foreign_total.valid">*</span>Foreign Total : </label>
+                    <input type="number" class="form-control" formControlName="foreign_total">
+                </div>
+                <div class="form-group col-md-3">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.local_cost.valid">*</span>Local Cost : </label>
+                    <input type="number" class="form-control" formControlName="local_cost">
+                </div>
+                <div class="form-group col-md-3">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.local_total.valid">*</span>Local Total</label>
+                    <input type="number" class="form-control" formControlName="local_total">
+                </div>
+                <div class="form-group col-md-3">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.origin.valid">*</span>Origin</label>
+                    <input type="text" class="form-control" formControlName="origin">                        
+                </div>
+                <div class="form-group col-md-3">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.factory_cost.valid">*</span>Factory Cost</label>
+                    <input type="number" class="form-control" formControlName="factory_cost">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Price</label>
+                    <input type="number" class="form-control" formControlName="price">
+                </div> 
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="form-group col-md-6 pull-right" style="padding-top:10px;">
+          <div align="right" style="margin-bottom:1%;"> <button class="btn btn-success" (click)="addAddress()" [disabled]="!myForm.valid" ><i class="fa fa-plus"></i> Add Item</button></div>
+        </div>
+        <!-- <button type="submit" [disabled]="!myForm.valid">Submit</button> -->
+      </form>
+    <!-- <div class="box box-success">
+        <div class="box-header">
+          <h3 class="box-title">Supplier Entry Form</h3>
+        </div>
+        
+          <div class="box-body">
+              <div class="form-group col-md-6 pull-right" style="padding-top:10px;">
+                  <div align="right" style="margin-bottom:1%;"> <button class="btn btn-success" (click)="addAddress()" [disabled]="!myForm.valid" ><i class="fa fa-plus"></i></button>
+                  </div>
+                </div>
+        </div>
+      </div> -->
+      
+    </div>
+  </div>
+</section>

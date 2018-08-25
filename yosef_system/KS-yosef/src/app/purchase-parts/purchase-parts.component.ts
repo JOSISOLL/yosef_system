@@ -25,6 +25,7 @@ export class PurchasePartsComponent implements OnInit {
   count: number;
   saved : boolean; 
   grandTotal: number;
+  today : String;
 
   // partsForm: FormGroup;
   
@@ -42,32 +43,6 @@ export class PurchasePartsComponent implements OnInit {
 
   invoice_id : Number;
   date : String;
-  // createControls(){
-  //   this.invoiceId = new FormControl('', Validators.required);
-  //   this.partNumber = new FormControl('', Validators.required);
-  //   this.stamp = new FormControl('', Validators.required);
-  //   this.supplier = new FormControl('', Validators.required);
-  //   this.description = new FormControl();
-  //   this.price = new FormControl();
-  //   this.quantity = new FormControl('', Validators.required);
-  //   this.shelfNumber = new FormControl();
-  //   this.purchaseDate = new FormControl('', Validators.required);
-  // }
-
-  // createForm(){
-  //   this.partsForm = new FormGroup({
-  //     invoiceId: this.invoiceId,
-  //     partNumber: this.partNumber,
-  //     stamp: this.stamp,
-  //     description: this.description,
-  //     supplier: this.supplier,
-  //     price: this.price,
-  //     quantity: this.quantity,
-  //     shelfNumber: this.shelfNumber,
-  //     purchaseDate: this.purchaseDate
-
-  //   })
-  // }
   ngOnInit() {
     this.invoice_id = this.randomInt(10000,20000)
     this.date= new Date().toLocaleString();
@@ -75,7 +50,7 @@ export class PurchasePartsComponent implements OnInit {
     this.count = 0;
     this.grandTotal = 0;
     this.saved = false
-
+    this.today = new Date().toLocaleString();
     // this.createControls();
     // this.createForm();
     this.getAllSupliers();
@@ -130,6 +105,7 @@ Submit(parts : Parts[]){
   this.purchase.purchaseId = this.invoice_id;
   this.purchase.parts = parts
   this.purchase.grandTotal = this.grandTotal
+  this.purchase.date = this.today;
   
   // console.log(this.purchase)
   for(let data of this.purchase.parts){

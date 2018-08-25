@@ -51,6 +51,10 @@ export class CustomerMainComponent implements OnInit {
     this.createEditForm();
     this.createRepairControl()
     this.createRepairForm()
+    this.getCustomers();
+      
+  }
+  getCustomers(){
     this._clientService.getClients()
       .subscribe(
         res => this.clients = res,
@@ -62,7 +66,6 @@ export class CustomerMainComponent implements OnInit {
           }
         }
       )
-      
   }
 
   btn_showClientInfoClick(client){
@@ -132,7 +135,8 @@ export class CustomerMainComponent implements OnInit {
       console.log("successfully deleted!");
       let selectedIndex = this.clients.indexOf(this.selectedClient);
       console.log("selected index: " + selectedIndex);
-      delete this.clients[selectedIndex];
+      // delete this.clients[selectedIndex];
+      this.getCustomers();
       $('#modal-delete').modal('hide');
     });
   }

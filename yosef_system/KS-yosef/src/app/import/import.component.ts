@@ -1,79 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { PartsService } from '../services/parts.service';
-import { Parts } from '../models/parts';
-import { Purchase } from '../models/purchase';
-import { HttpErrorResponse} from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Import } from '../models/import';
 
-declare var jquery: any; 
-declare var $ :any;
+declare var $ : any;
 
 @Component({
-  selector: 'app-parts-purchase',
-  templateUrl: './parts-purchase.component.html',
-  styleUrls: ['./parts-purchase.component.css']
+  selector: 'app-import',
+  templateUrl: './import.component.html',
+  styleUrls: ['./import.component.css']
 })
-export class PartsPurchaseComponent implements OnInit {
+export class ImportComponent implements OnInit {
 
-  purchases : Purchase[]
-  selectedPurchase : Purchase;
-  selectedPart : Parts[]
-  constructor(private _partsService: PartsService, private _router:Router) { }
-
+  constructor(private _service : PartsService) { }
+  imports : Import;
+  selected : Import;
   ngOnInit() {
-    this.getPurchases()
+    this.getImports()
   }
-
-  getPurchases(){
-    this._partsService.getPurchase()
+  getImports(){
+    this._service.getImport()
     .subscribe(
-      res => this.purchases = res,
-      err => {
-        if (err instanceof HttpErrorResponse){
-          if (err.status === 401){
-            this._router.navigate(['/login']);
-          }
-        }
+      res =>{
+        this.imports = res;
+        // console.log(res);
+      },
+      err =>{
+        console.log(err)
       }
     )
   }
-
-  setViewContent(data : Purchase){
-    this.selectedPurchase = data;
-    this.selectedPart = this.selectedPurchase.parts;
-    console.log("View purchase clicked");
-    console.log(this.selectedPurchase);
+  setViewContent(data : Import){
+    this.selected = data;
+    console.log("view imports clicked...");
     $("#modal-view").modal('show');
-    
   }
-  editPurchase(data: Purchase) {
-    this.selectedPurchase = data;
-    console.log("Edit purchase clicked");
-    console.log(this.selectedPurchase);
-  }
-  btn_deletePurchaseClick(purchase: Purchase){
-    this.selectedPurchase = purchase;
-    console.log("delete part clicked...");
-    console.log(this.selectedPurchase);
+  btn_deleteImportClick(data : Import){
+    this.selected = data;
+    console.log("Delete import clicked...")
+    console.log(this.selected);
     $("#modal-delete").modal('show');
-    // $("#modal-delete").modal('show'); 
   }
-  deletePart(){
-    console.log("I'm about to delete " + this.selectedPurchase);
-    this._partsService.deletePurchase(this.selectedPurchase)
-    .subscribe(res => {
-      console.log("Delete Successful!");
+  deleteImport(){
+    console.log(this.selected);
+    this._service.deleteImport(this.selected)
+    .subscribe(res =>{
+      console.log(res);
+      console.log("Delete successful!");
       $('#modal-delete').modal('hide');
-      // this._router.navigate(['/parts/purchase'])
       this.ngOnInit()
     });
   }
-  btn_invoiceClick(data : Purchase){
-    this.selectedPurchase = data;
-    this.selectedPart = data.parts;
-    console.log(this.selectedPurchase);
-    $("#modal-invoice").modal('show');
-  }
+  
+  btn_invoiceClick(data : Import){
+      this.selected = data;
+      console.log("view imports clicked...");
+      $("#modal-invoice").modal('show');
+    }
 
   print(): void {
     let printContents, popupWin;
@@ -156,5 +138,5 @@ export class PartsPurchaseComponent implements OnInit {
     );
     popupWin.document.close();
 }
-  
+
 }
