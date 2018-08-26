@@ -24,6 +24,7 @@ const sellSchema = new Schema(
         personInCharge : String,
         parts : [partsSchema],
         quantity : Number,
+        subTotal : Number,
         grandTotal : Number,
         date : Date
     })

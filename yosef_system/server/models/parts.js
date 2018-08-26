@@ -7,6 +7,7 @@ const partsSchema = new Schema(
         partNumber: String, 
         stamp: String,
         price: Number,
+        remark : String,
         description: String,
         supplier: String,
         quantity: Number,

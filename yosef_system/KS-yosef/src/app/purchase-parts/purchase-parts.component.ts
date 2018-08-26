@@ -25,6 +25,9 @@ export class PurchasePartsComponent implements OnInit {
   count: number;
   saved : boolean; 
   grandTotal: number;
+  subTotal : number;
+  tax : number;
+  taxbl : number;
   today : String;
 
   // partsForm: FormGroup;
@@ -49,6 +52,9 @@ export class PurchasePartsComponent implements OnInit {
     this.editing = false;
     this.count = 0;
     this.grandTotal = 0;
+    this.subTotal = 0;
+    this.tax = 0.15;
+    this.taxbl = 0;
     this.saved = false
     this.today = new Date().toLocaleString();
     // this.createControls();
@@ -91,12 +97,15 @@ onSubmit(partsForm : NgForm){
         stamp: partsForm.value.stamp,
         quantity: partsForm.value.quantity,
         description: partsForm.value.description,
+        remark : partsForm.value.remark,
         supplier: partsForm.value.supplier,
         price: partsForm.value.price,
         shelfNumber: partsForm.value.shelfNumber,
         purchaseDate: partsForm.value.purchaseDate 
       }
-      this.grandTotal += partsForm.value.quantity * partsForm.value.price
+      this.subTotal += partsForm.value.quantity * partsForm.value.price
+      this.taxbl = this.subTotal * this.tax;
+      this.grandTotal = this.subTotal + this.taxbl;
       partsForm.reset()
     }
 }
@@ -157,6 +166,7 @@ addItem($event){
     stamp: "null",
     quantity: -1,
     description: "null",
+    remark : "null",
     supplier: "",
     price: -1,
     shelfNumber: "null",

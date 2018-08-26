@@ -59,6 +59,7 @@ import { ImportComponent } from './import/import.component';
 import { AddImportComponent } from './add-import/add-import.component';
 import { DistributeComponent } from './distribute/distribute.component';
 import { ImportedPartsComponent } from './imported-parts/imported-parts.component';
+import { SearchPipe } from './search.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +98,8 @@ import { ImportedPartsComponent } from './imported-parts/imported-parts.componen
     ImportComponent,
     AddImportComponent,
     DistributeComponent,
-    ImportedPartsComponent
+    ImportedPartsComponent,
+    SearchPipe
 
   ],
   imports: [

@@ -19,6 +19,8 @@ export class AddToCartComponent implements OnInit {
   public cart = [];
   public totalPrice: number;
   public totalQuantity: number;
+  public grandTotal : number;
+  public taxbl : number;
   public cartSubscription: Subscription;
   public sell : Sell = {}; 
   public sellDate : String;
@@ -74,7 +76,8 @@ export class AddToCartComponent implements OnInit {
       this.sell.buyerName = data.buyerName;
       this.sell.buyerPhoneNumber = data.buyerPhoneNumber
       this.sell.buyerTinNumber = data.buyerTinNumber;
-      this.sell.grandTotal = this.totalPrice;
+      this.sell.grandTotal = this.grandTotal;
+      this.sell.subTotal = this.totalPrice;
       this.sell.quantity = this.totalQuantity;
       this.sell.personInCharge = data.personInCharge;
       this.sell.parts = cart;
@@ -124,6 +127,9 @@ export class AddToCartComponent implements OnInit {
     this.totalQuantity = quantity.reduce((acc, item) => {
       return acc += item
     }, 0)
+
+    this.taxbl = this.totalPrice * 0.15;
+    this.grandTotal = this.totalPrice + this.taxbl;
   }
   ngOnInit() {
     this.cartSubscription = this._cartStore.getState().subscribe(res => {

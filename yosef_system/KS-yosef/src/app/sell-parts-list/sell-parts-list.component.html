@@ -87,6 +87,8 @@
                     <tr>
                         <td>Total Quantity : </td>
                         <td><span class="label label-primary">{{selected?.quantity}}</span></td>
+                        <td>Sub-Total : </td>
+                        <td><span class="label label-primary">{{selected?.subTotal | number : '1.2-2'}}</span></td>
                         <td>Grand Total : </td>
                         <td><span class="label label-primary">{{selected?.grandTotal | number : '1.2-2'}}</span></td>
                     </tr>
@@ -329,11 +331,32 @@
                   </td>  
                 </tr>   -->
                 <tr class="total">  
-                  <td></td>  
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                  <td>Sub Total:</td>
                   <td>  
-                  Total: {{selected?.grandTotal | number : '1.2-2'}} ETB 
+                  <strong>{{selected?.subTotal | number : '1.2-2'}}</strong>
                   </td>  
-                </tr>  
+                </tr> 
+                <tr class="total">  
+                    <td></td>  
+                    <td></td>
+                    <td></td>
+                    <td>Tax:</td>
+                    <td>  
+                    <strong>15 %</strong>
+                    </td>  
+                  </tr>  
+                <tr class="total">  
+                    <td></td>  
+                    <td></td>
+                    <td></td>
+                    <td>Grand Total:</td>
+                    <td>  
+                    <strong>{{selected?.grandTotal | number : '1.2-2'}}</strong>
+                    </td>  
+                  </tr>  
                 </table>  
               </div>   
             </div> 

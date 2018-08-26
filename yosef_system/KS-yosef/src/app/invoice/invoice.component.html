@@ -1,10 +1,15 @@
-<div class="invoice-wrap">
+<!-- Uncomment this section -->
+<!-- <div class="invoice-wrap">
   <div class="container" width="800px" id="invoice" >
     <div class="row">
       <div class="col-xs-12 heading">
         INVOICE
       </div>
-    </div>
+    </div> -->
+
+
+
+
     <!-- <div class="row branding">
       <div class="col-xs-6">
         <div class="invoice-number-container">
@@ -43,11 +48,14 @@
         <div class="input-container"><input type="text" ng-model="invoice.company_info.postal"/></div>
       </div>
     </div> -->
-    <div class="items-table">
+
+
+<!-- Uncomment this section -->
+    <!-- <div class="items-table">
       <div class="row header">
         <div class="col-xs-1">&nbsp;</div>
         <div class="col-xs-3">Part Number</div>
-        <!-- <div class="col-xs-3">Stamp</div> -->
+        <div class="col-xs-3">Stamp</div>
         <div class="col-xs-2">Quantity</div>
         <div class="col-xs-3">Cost {{currencySymbol}}</div>
         <div class="col-xs-3 text-right">Total</div>
@@ -57,8 +65,8 @@
           <a ng-hide="printMode" (click)="revert()" class="btn btn-danger">[X]</a>
         </div>
         <div *ngIf="count && item.id != count" class="col-xs-1 remove-item-container">
-            <a ng-hide="printMode" (click)="remove()" class="btn btn-danger">[X]</a>
-          </div>
+            <a ng-hide="printMode" (click)="revert()" class="btn btn-danger">[X]</a>
+          </div> -->
        
           <!-- <div *ngIf="item.name != 'null'; else elseBlock1" class="col-xs-5 input-container">
               {{ item.name }}
@@ -75,8 +83,8 @@
 
 
 
-
-        <span class="col-xs-3 input-container" *ngIf="item.name != 'null'; else elseBlock1" >{{ item.name }}</span>
+<!-- Uncomment this section -->
+        <!-- <span class="col-xs-3 input-container" *ngIf="item.name != 'null'; else elseBlock1" >{{ item.name }}</span>
         <span class="col-xs-2 input-container" *ngIf="item.quantity != -1; else elseBlock2" >{{ item.quantity }}</span>
         <span class="col-xs-3 input-container" *ngIf="item.rate != -1; else elseBlock3" >ETB {{ item.rate | number : '1.2-2' }}</span>
         <span class="col-xs-3 input-container" *ngIf="item.rate != -1 || item.quantity != -1; else elseBlock4" >ETB {{ item.quantity * item.rate | number : '1.2-2' }}</span>
@@ -84,9 +92,9 @@
           <ng-template #elseBlock1 class="col-xs-4 text-right input-container">
             <input [(ngModel)]="name" name="name"  placeholder="Part Number" value="Item" required>
           </ng-template>
-          <!-- <div class="col-xs-3 input-container">
-            <input [(ngModel)]="quantity" name="quantity"  placeholder="Quantity" value="0" required>
-          </div> -->
+          <div class="col-xs-3 input-container">
+            <input [(ngModel)]="stamp" name="stamp"  placeholder="Stamp" value="0" required>
+          </div>
           <ng-template #elseBlock2 class="col-xs-3 text-right input-container">
             <input [(ngModel)]="quantity" name="quantity"  placeholder="Quantity" value="0" required>
           </ng-template>
@@ -100,7 +108,7 @@
             
               <button *ngIf="editing && item.id === count" class="btn btn-primary float-right" >Add</button>
               
-              <!-- <button *ngIf="editing && item.id === count" (click)="revert()" class="float-right" >Cancel</button> -->
+              <button *ngIf="editing && item.id === count" (click)="revert()" class="float-right" >Cancel</button>
             </div>
       </form>
       </div>
@@ -121,7 +129,9 @@
         <div class="col-xs-10 text-right">Grand Total:</div>
         <div class="col-xs-2 text-right">{{(tax * subTotal) + subTotal | number : '1.2-2'}}</div>
       </div>
-    </div>
+    </div> -->
+
+
     <!-- <div class="row noPrint actions">
       <a href="javascript:window.print();" class="btn btn-primary" ng-show="printMode" ng-click="printInfo()">Print</a>
       <a href="#" class="btn btn-primary" ng-click="clearLocalStorage()">Reset</a>
@@ -130,8 +140,10 @@
       <button class="btn btn-submit" *ngIf="editing && item.id === count">Add</a>
       <button class="btn btn-danger" *ngIf="editing && item.id === count" (click)="revert()">Cancel</a>
     </div> -->
-  </div>
-</div>
+
+    <!-- Uncomment this section -->
+  <!-- </div>
+</div> -->
 
 
 
@@ -205,7 +217,39 @@
     </div>
   </div>
   </div> -->
-  
 
 
 
+
+
+  <!--Excel Import-->
+<input type="file" style="display: inline-block;" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+<button type="button" class="btn btn-info" (click)="Upload()" >Upload</button>
+<button [disabled]="!loaded" type="button" class="btn btn-primary pull-right" (click)="save()" >Add To Stock</button>
+
+<table [hidden]="!loaded" class="table sakotable table-bordered table-striped dt-responsive">
+    <thead>
+      <tr>
+        <th>Part Number</th>
+        <th>Stamp</th>
+        <th>Description</th>
+        <th>Remark</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of excel_data">
+        <td>{{ item.partNumber }}</td>
+        <td>{{item.stamp}}</td>
+        <td>{{ item.description}}</td>
+        <td>{{ item.remark}}</td>
+        <td>{{ item.quantity}}</td>
+        <td>{{ item.price}}</td>
+        <!-- <td><span class="label label-primary">{{ purchase.grandTotal | number : '1.2-2' }} ETB</span></td> -->
+        <!-- <td>
+        <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(purchase)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(purchase)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deletePurchaseClick(purchase)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
+      </td> -->
+      </tr>          
+    </tbody>
+  </table>

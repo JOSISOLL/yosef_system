@@ -37,6 +37,7 @@
                   <th>Part Number</th>
                   <th>Stamp</th>
                   <th>Description</th>
+                  <th>Remark</th>
                   <th>Quantity</th>
                   <th>Price</th>
                   <th>Supplier</th>
@@ -49,6 +50,7 @@
                       <td><span *ngIf="part.partNumber != 'null'; else elseBlock1" class="label label-default">{{ part.partNumber }}</span></td>
                       <td><span *ngIf="part.stamp != 'null'; else elseBlock2" class="label label-default">{{ part.stamp }}</span></td>
                       <td><span *ngIf="part.description != 'null'; else elseBlock4" class="label label-default">{{ part.description }}</span></td>
+                      <td><span *ngIf="part.remark != 'null'; else elseBlock9" class="label label-default">{{ part.remark }}</span></td>
                       <td><span *ngIf="part.quantity != -1; else elseBlock3" class="label label-default">{{ part.quantity }}</span></td>
                       <td><span *ngIf="part.price != -1; else elseBlock6" class="label label-default">{{ part.price }}</span></td>
                       <td><span *ngIf="part.supplier != ''; else elseBlock5" class="label label-default">{{ part.supplier }}</span></td>
@@ -67,9 +69,32 @@
                   <td></td>
                   <td></td>
                   <!-- <td></td> -->
-                  <td>Total : </td>
-                  <td>{{ grandTotal | number : '1.2-2'}} ETB</td>
+                  <td>Sub Total : </td>
+                  <td></td>
+                  <td><strong>{{ subTotal | number : '1.2-2'}} ETB</strong></td>
                 </tr>
+                <tr>
+                    <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <!-- <td></td> -->
+                      <td>Tax : </td>
+                      <td></td>
+                      <td><strong>{{ tax * 100| number : '1.2-2'}}%</strong></td>
+                    </tr>
+                <tr>
+                    <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <!-- <td></td> -->
+                      <td>Grand Total : </td>
+                      <td></td>
+                      <td><strong>{{ grandTotal | number : '1.2-2'}} ETB</strong></td>
+                    </tr>
               </table>
             </div>
             <button type="button" (click)="addItem($event)" [disabled]="editing" class="btn btn-primary pull-left">Add item</button>
@@ -83,6 +108,7 @@
               <span hidden *ngIf="part.stamp != 'null'; else elseBlock2" class="stamp col-md-2">{{ part.stamp }}</span>
               <span hidden *ngIf="part.quantity != -1; else elseBlock3" class="quantity col-md-1">{{ part.quantity }}</span>
               <span hidden *ngIf="part.description != 'null'; else elseBlock4" class="description col-md-2">{{ part.description }}</span>
+              <span hidden *ngIf="part.remark != 'null'; else elseBlock9" class="remark col-md-2">{{ part.remark }}</span>
               <span hidden *ngIf="part.supplier != ''; else elseBlock5" class="supplier col-md-1">{{ part.supplier }}</span>
               <span hidden *ngIf="part.price != -1; else elseBlock6" class="price col-md-1">{{ part.price }}</span>
               <span hidden *ngIf="part.shelfNumber != 'null'; else elseBlock7" class="shelfNumber col-md-1">{{ part.shelfNumber }}</span>
@@ -109,6 +135,10 @@
                     <label for="description"><span style="color:red;">*</span> Description :</label>
                     <textarea  [(ngModel)]="description" name="description" class="form-control" rows="5" required></textarea>
                   </ng-template>
+                  <ng-template class="form-group col-md-12" #elseBlock9>
+                      <label for="remark"><span style="color:red;">*</span> Remark :</label>
+                      <textarea  [(ngModel)]="remark" name="remark" class="form-control" rows="5" required></textarea>
+                    </ng-template>
                   <ng-template class="form-group col-md-3" #elseBlock5>
                       <label for="supplier"><span style="color:red;">*</span> Supplier </label>
                       <select class='form-control' [(ngModel)]="supplier" name="supplier">

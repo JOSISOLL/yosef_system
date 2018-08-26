@@ -7,6 +7,7 @@ export class Sell{
     personInCharge ? : String
     parts ? : Parts[]
     quantity ? : Number
+    subTotal ? : Number
     grandTotal ? : Number
     date ? : Date
 }

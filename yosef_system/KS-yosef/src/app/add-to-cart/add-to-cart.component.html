@@ -10,6 +10,7 @@
       <tr>
       <th>Part Number</th>
       <th>Stamp</th>
+      <th>Description</th>
       <th>Quantity</th>
       <th>Price</th>
       </tr>
@@ -19,6 +20,7 @@
     <tr *ngFor="let product of cart; let i = index">
       <td><h4>{{product.partNumber}}</h4></td>
       <td><h4>{{product.stamp}}</h4></td>
+      <table><h4>{{product.description}}</h4></table>
       <td><h4>{{product.quantity}}</h4></td>
       <td><h4>ETB {{product.price | number : '1.2-2'}}</h4></td>
       <td><button (click)="removeProduct(product)" class="btn btn-xs btn-danger">Remove Product</button></td>
@@ -27,10 +29,20 @@
     <tr class="warning">
       <td><h4></h4></td>
       <td><h4></h4></td>
-      <td><h4>Total Items: {{totalQuantity}}</h4></td>
-      <td><h4>Total: ETB {{totalPrice | number : '1.2-2'}}</h4></td>
-      <td><button *ngIf="totalPrice > 0" (click)="buy(cart)" class="btn btn-md btn-success">Checkout</button></td>
+      <td></td>
+      <td>Total Items :<strong>{{totalQuantity}}</strong></td>
+      <td>Sub Total : <strong>{{totalPrice | number : '1.2-2'}} ETB</strong></td>
+      <td></td>
+      <!-- <td><button *ngIf="totalPrice > 0" (click)="buy(cart)" class="btn btn-md btn-success">Checkout</button></td> -->
     </tr>
+    <tr class="warning">
+        <td><h4></h4></td>
+        <td><h4></h4></td>
+        <td><h4></h4></td>
+        <td>Tax : <strong>15%</strong></td>
+        <td>Grand Total: <strong>{{grandTotal | number : '1.2-2'}}</strong></td>
+        <td><button *ngIf="totalPrice > 0" (click)="buy(cart)" class="btn btn-md btn-success">Checkout</button></td>
+      </tr>
   </tbody>
 </table>
 
