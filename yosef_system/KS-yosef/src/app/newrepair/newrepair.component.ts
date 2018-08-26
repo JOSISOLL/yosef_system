@@ -23,8 +23,6 @@ export class NewrepairComponent implements OnInit {
   
   closeResult: string;
   selectedRepair: Repair;
-
-
   myForm: FormGroup; 
   id: FormControl; 
   customer: FormControl; 
@@ -49,8 +47,6 @@ export class NewrepairComponent implements OnInit {
       .subscribe(
         res => {
           this.repairs = res
-          console.log(res)
-        
         },
         err => {
           if (err instanceof HttpErrorResponse){
@@ -87,6 +83,11 @@ export class NewrepairComponent implements OnInit {
     this.selectedRepair = repair;
     console.log("delete repair clicked...");
     $("#modal-delete").modal('show'); 
+  }
+  btn_checkoutCar(repair: Repair){
+    this.selectedRepair = repair; 
+    console.log("repair checkout selected...");
+    $("#modal-checkout").modal('show'); 
   }
   // open(content) {
   //   this.modalService.open(content).result.then((result) => {

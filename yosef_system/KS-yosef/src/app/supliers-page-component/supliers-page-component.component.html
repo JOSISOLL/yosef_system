@@ -27,6 +27,10 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
+              <div class="search-bar">
+                  <label>Search:</label>
+                  <input type="text" [(ngModel)]="filter">
+              </div>
             <table class="table sakotable table-bordered table-striped dt-responsive">
               <thead>
                 <tr>
@@ -39,7 +43,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let suplier of supliers">
+                <tr *ngFor="let suplier of supliers | filter:filter">
                   
                   <td> {{ suplier.name }} </td>
                   <td> {{ suplier.email}} </td>
