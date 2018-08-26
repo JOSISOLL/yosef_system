@@ -23,8 +23,6 @@ export class NewrepairComponent implements OnInit {
   
   closeResult: string;
   selectedRepair: Repair;
-
-
   myForm: FormGroup; 
   id: FormControl; 
   customer: FormControl; 
@@ -49,8 +47,6 @@ export class NewrepairComponent implements OnInit {
       .subscribe(
         res => {
           this.repairs = res
-          console.log(res)
-        
         },
         err => {
           if (err instanceof HttpErrorResponse){

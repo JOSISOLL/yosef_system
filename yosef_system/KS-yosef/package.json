@@ -32,6 +32,7 @@
     "hydrogen": "^0.2.0",
     "moment": "^2.22.0",
     "ng-http-interceptor": "^4.0.0",
+    "ng2-search-filter": "^0.4.7",
     "ngrx-store-logger": "^0.2.2",
     "npm": "^5.10.0",
     "rxjs": "^5.5.10",

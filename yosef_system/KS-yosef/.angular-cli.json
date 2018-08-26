@@ -29,7 +29,8 @@
         "../new_imports/bower_components/jvectormap/jquery-jvectormap.css", 
         "../new_imports/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css", 
         "../new_imports/bower_components/bootstrap-daterangepicker/daterangepicker.css", 
-        "../new_imports/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"
+        "../new_imports/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css", 
+        "../new_imports/plugins/DataTables/DataTables-1.10.18/css/dataTables.bootstrap.css"
       ],
       "scripts": [
         "../new_imports/js/script.js", 

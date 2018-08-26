@@ -59,6 +59,8 @@ import { ImportComponent } from './import/import.component';
 import { AddImportComponent } from './add-import/add-import.component';
 import { DistributeComponent } from './distribute/distribute.component';
 import { ImportedPartsComponent } from './imported-parts/imported-parts.component';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,6 +117,7 @@ import { ImportedPartsComponent } from './imported-parts/imported-parts.componen
     //   maxAge: 25 //  Retains last 25 states
     // }),
     AllEffects,
+    Ng2SearchPipeModule
   ],
   providers: [
     AuthService,
