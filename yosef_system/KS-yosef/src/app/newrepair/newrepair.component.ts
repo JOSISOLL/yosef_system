@@ -33,6 +33,21 @@ export class NewrepairComponent implements OnInit {
   personInCharge: FormControl; 
   date: FormControl;
 
+  partsChanged = []
+  partNumber : string;
+  stamp : string;
+  quantity : number;
+  price : string; 
+  invalid : boolean;
+
+  name : string
+  menInCharge = []
+  
+  tinNumber : string
+  problemsFixed : string;
+  serviceCharge : number
+  checkoutDate : string
+
 
   constructor(private _historyService: HistoryService, private _router: Router, private modalService: NgbModal) { }
 
@@ -88,25 +103,7 @@ export class NewrepairComponent implements OnInit {
     this.selectedRepair = repair; 
     console.log("repair checkout selected...");
     $("#modal-checkout").modal('show'); 
-  }
-  // open(content) {
-  //   this.modalService.open(content).result.then((result) => {
-  //     this.closeResult = `Closed with: ${result}`;
-  //   }, (reason) => {
-  //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  //   });
-  // }
-
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return  `with: ${reason}`;
-  //   }
-  // }
-  //TODO: setup validation
+  } 
   createControls(){
     this.id = new FormControl(); 
     this.customer = new FormControl();
@@ -158,6 +155,33 @@ export class NewrepairComponent implements OnInit {
     });
   }
   
-
-
+addChangedParts(){
+  
+  if(this.partNumber != null && this.stamp != null && this.quantity != null && this.price != null){
+    this.partsChanged.push({
+      partNumber : this.partNumber,
+      stamp : this.stamp,
+      quantity : this.quantity,
+      price : this.price
+    })
+    console.log(this.partsChanged)
+    this.partNumber = '';
+    this.stamp = '';
+    this.quantity = null;
+    this.price = '';
+    this.invalid = true;
+    }
+    else {
+        this.invalid = false;
+        console.log("Add changed parts invalid"); 
+    }
+  }
+  addPersonInCharge(){
+    if(this.name != null){
+      this.menInCharge.push({
+        name : this.name
+      })
+      this.name = ''
+    }
+  }
 }

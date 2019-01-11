@@ -1,281 +1,372 @@
 <section class="content">
-        <!-- Full Width boxes (Stat box) -->
-        <div class="row">
-          <div class="col-xs-12">
-            <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
-              <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
-              <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
-               </div>
-            <div id="you" class="alert alert-success alert-dismissable" style="display:none">
-              <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
-              <h4><i class="icon fa fa-check"></i> Success!</h4>
-               </div>
-            <div align="right" style="margin-bottom:1%;"> <a class="btn btn-success" data-toggle="tooltip" routerLink="/repair/add" data-original-title="Add Repair Car"><i class="fa fa-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
-            <div class="box box-success">
-              <div class="box-header">
-                <h3 class="box-title"><i class="fa fa-list"></i> Repair Car List</h3>
-              </div>
-
-              <!-- /.box-header -->
-              <div class="box-body">
-                <div class="search-bar">
-                    <label>Search:</label>
-                    <input type="text" [(ngModel)]="filter">
-                </div>
-                
-                <table id="tbl_repairs" class="table sakotable table-bordered table-striped dt-responsive">
-                  <thead>
-                    <tr>
-                        <th>Customer Name</th>
-                        <th>Plate Number</th>
-                        <th>Problem</th>
-                        <th>Person In Charge</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let repair of repairs | filter:filter">
-                            <td data-title="customer">{{ repair.customer }}</td>
-                            <td data-title="plateNumber">{{ repair.plateNumber }}</td>
-                            <td data-title="reportedProblem">{{ repair.reportedProblem }} </td>
-                            <td data-title="personInCharge" >{{ repair.personInCharge }}</td>
-                            <td data-title="personInCharge" >{{ repair.date }}</td>
-                            <td>
-                              <button class="btn btn-success" (click)="btn_showRepairInfoClick(repair)" data-toggle="tooltip"  data-original-title="View"><i class="fa fa-eye"></i></button>  
-                              <button class="btn btn-primary" (click)="btn_editRepairClick(repair)" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></button> 
-                              <button class="btn btn-danger" (click)="btn_deleteRepairClick(repair)" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
-                              <button class="btn btn-warning" (click)="btn_checkoutCar(repair)" data-toggle="tooltip" data-original-title="Repair"> <i class="fa fa-shopping-cart"></i></button>
-                            </td>
-                    </tr>
-                    </tbody>
-                </table>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-          </div>
-          <!-- /.col -->
+  <!-- Full Width boxes (Stat box) -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="me" class="alert alert-danger alert-dismissable" style="display:none">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+        <h4><i class="icon fa fa-ban"></i> Deleted!</h4>
+         </div>
+      <div id="you" class="alert alert-success alert-dismissable" style="display:none">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button"><i class="fa fa-close"></i></button>
+        <h4><i class="icon fa fa-check"></i> Success!</h4>
+         </div>
+      <div align="right" style="margin-bottom:1%;"> <a class="btn btn-success" data-toggle="tooltip" routerLink="/repair/add" data-original-title="Add Repair Car"><i class="fa fa-plus"></i></a> <a class="btn btn-warning" data-toggle="tooltip" routerLink="/dashboard" data-original-title="Dashboard"><i class="fa fa-dashboard"></i></a> </div>
+      <div class="box box-success">
+        <div class="box-header">
+          <h3 class="box-title"><i class="fa fa-list"></i> Repair Car List</h3>
         </div>
-        
+
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="search-bar">
+              <label>Search:</label>
+              <input type="text" [(ngModel)]="filter">
+          </div>
+          
+          <table id="tbl_repairs" class="table sakotable table-bordered table-striped dt-responsive">
+            <thead>
+              <tr>
+                  <th>Customer Name</th>
+                  <th>Plate Number</th>
+                  <th>Problem</th>
+                  <th>Person In Charge</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let repair of repairs | filter:filter">
+                      <td data-title="customer">{{ repair.customer }}</td>
+                      <td data-title="plateNumber">{{ repair.plateNumber }}</td>
+                      <td data-title="reportedProblem">{{ repair.reportedProblem }} </td>
+                      <td data-title="personInCharge" >{{ repair.personInCharge }}</td>
+                      <td data-title="personInCharge" >{{ repair.date }}</td>
+                      <td>
+                        <button class="btn btn-success" (click)="btn_showRepairInfoClick(repair)" data-toggle="tooltip"  data-original-title="View"><i class="fa fa-eye"></i></button>  
+                        <button class="btn btn-primary" (click)="btn_editRepairClick(repair)" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></button> 
+                        <button class="btn btn-danger" (click)="btn_deleteRepairClick(repair)" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
+                        <button class="btn btn-warning" (click)="btn_checkoutCar(repair)" data-toggle="tooltip" data-original-title="Repair"> <i class="fa fa-shopping-cart"></i></button>
+                      </td>
+              </tr>
+              </tbody>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div>
+  
 </section>
 <div class="modal modal-warning fade" id="modal-checkout">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Repair Checkout</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row" style="padding:15px"> 
-            <div class="form-group">
-              <label for="field_tinNumber">TIN number</label>
-              <input type="text" name="field_tinNumber" placeholder="TIN number" class="form-control" id="field_tinNumber">
-            </div>
-            <div class="form-group">
-                <label for="field_serviceCharge">Service charge</label>
-                <input type="text" name="field_serviceCharge" placeholder="Service charge" class="form-control" id="field_serviceCharge">
-            </div>
-            <div class="form-group">
-                <label for="field_problemsFixed">Problems fixed</label>
-                <input type="text" name="field_problemsFixed" placeholder="Service charge" class="form-control" id="field_problemsFixed">
-            </div>
-        </div>
-        <label>Reparied Parts</label>
-        <table i>
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">Repair Checkout</h4>
+</div>
+<div class="modal-body">
+    <table class="table table-user-information">
+        <tbody>
           <tr>
-            <th>Part name</th>
-            <th>Part number</th>
-            <th>stamp number</th>
-            <th>Quantity</th>
-            <th>price</th>
+              <td>Customer Name</td>
+              <td>{{selectedRepair?.customer}}</td>
           </tr>
           <tr>
-            <td>Spark plug</td>
-            <td>PA-123-123</td>
-            <td>123-1231-123</td>
-            <td>1</td>
-            <td>200</td>
+              <td>Plate Number</td>
+              <td>{{selectedRepair?.plateNumber}}</td>
+          </tr>
+          <tr>
+              <td>Reported Problem</td>
+              <td>{{selectedRepair?.reportedProblem}}</td>
+          </tr>
+          <tr>
+              <td>Car Type</td>
+              <td>{{selectedRepair?.carType}}</td>
+          </tr>
+          <tr>
+              <td>Remark</td>
+              <td>{{selectedRepair?.remark}}</td>
+          </tr>
+          <tr>
+              <td>Person In Charge</td>
+              <td>{{selectedRepair?.personInCharge}}</td>
+          </tr>
+          <tr>
+            <td>Date Received</td>
+            <td>{{selectedRepair?.date}}</td>
           </tr>
 
-
-        </table>
-
-
+        </tbody>
+      </table>  
+  <div class="row" style="padding:15px"> 
+      <div class="form-group">
+        <label for="field_tinNumber">TIN number</label>
+        <input type="text" name="tinNumber" placeholder="TIN number" class="form-control" id="tinNumber" [(ngModel)]="tinNumber"/>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+      <div class="form-group">
+          <label for="field_problemsFixed">Problems fixed</label>
+          <input type="text" name="problemsFixed" placeholder="Problem Fixed" class="form-control" id="problemsFixed" [(ngModel)]="problemsFixed"/>
       </div>
+      <div class="form-group">
+          <label for="field_serviceCharge">Service charge</label>
+          <input type="text" name="serviceCharge" placeholder="Service charge" class="form-control" id="serviceCharge" [(ngModel)]="serviceCharge"/>
+      </div>
+      <div class="form-group">
+          <label for="field_serviceCharge">Checkout Date</label>
+          <input type="text" name="checkoutDate" placeholder="yyyy/mm/dd" class="form-control" id="checkoutDate" [(ngModel)]="checkoutDate"/>
+      </div>
+
+    <div *ngIf="partsChanged.length <= 0">
+        <h3 class="text-center">Add changed parts!</h3>
     </div>
-    <!-- /.modal-content -->
+    <div *ngIf="partsChanged.length > 0">
+        <h3 class="text-center">Parts Changed</h3>
+    </div>
+    <table *ngIf="partsChanged.length > 0"  class="table sakotable table-bordered dt-responsive">
+        <thead>
+          <tr>
+            <!-- <th>Image</th> -->
+            <th>Part Number</th>
+            <th>Stamp</th>
+            <th>Quantity Tel</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr *ngFor="let parts of partsChanged">
+            <td>{{ parts.partNumber }}</td>
+            <td>{{ parts.stamp }}</td>
+            <td>{{ parts.quantity }}</td>
+            <td>{{ parts.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="menInCharge.length > 0">
+          <h4 class="text-center">Mechanics on the job</h4>
+          <ul *ngIf='menInCharge.length > 0'>
+              <li *ngFor="let names of menInCharge"> {{names.name}}</li>
+            </ul>
+      </div>
+      <h4>Changed Parts</h4>
+      <label *ngIf="!invalid" style="color:red;">Please input all the values below.</label>
+      <div class="row">
+          <div class="col-xs-6 col-md-3">
+              <div class="input-group">
+                  <input type="text" name="partNumber" class="form-control" placeholder="Part Number" id="partNumber" [(ngModel)]="partNumber" />
+              </div>
+          </div>
+          <div class="col-xs-6 col-md-3">
+              <div class="input-group">
+                  <input type="text" name="stamp" class="form-control" placeholder="Stamp" id="stamp" [(ngModel)]="stamp"/>
+              </div>
+          </div>
+          <div class="col-xs-6 col-md-2">
+              <div class="input-group">
+                  <input type="text" name="quantity" class="form-control" placeholder="Qty" id="quantity"  [(ngModel)]="quantity"/>
+              </div>
+          </div>
+          <div class="col-xs-6 col-md-2">
+              <div class="input-group">
+                  <input type="text" name="price" class="form-control" placeholder="Price" id="price" [(ngModel)]="price" />
+              </div>
+          </div>
+          <div class="input-group-btn" style="float: left; padding-right: 20px">
+              <button (click) = "addChangedParts()"  class="btn btn-primary" type="button">
+              <span class="glyphicon glyphicon-plus"></span>
+              </button>
+          </div>
+      </div>
+      <h4>People in Charge</h4>
+      <div class="row">
+        <div class="col-xs-6 mol-md-3">
+          <div class="input-group">
+              <input type="text" name="name" class="form-control" placeholder="Name" id="name" [(ngModel)]="name" />
+          </div>
+        </div>
+        <div class="input-group-btn" style="float: left; padding-right: 20px">
+            <button (click) = "addPersonInCharge()"  class="btn btn-primary" type="button">
+            <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+      </div>
   </div>
-  <!-- /.modal-dialog -->
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+</div>
+</div>
+<!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
 </div>      
 <div class="modal modal-success fade" id="modal-view">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Repair Detail</h4>
-      </div>
-       
-      <div class="modal-body">
-        <div class="col-sm-12">
-            <table class="table table-user-information">
-              <tbody>
-                <tr>
-                    <td>Customer Name</td>
-                    <td>{{selectedRepair?.customer}}</td>
-                </tr>
-                <tr>
-                    <td>Plate Number</td>
-                    <td>{{selectedRepair?.plateNumber}}</td>
-                </tr>
-                <tr>
-                    <td>Reported Problem</td>
-                    <td>{{selectedRepair?.reportedProblem}}</td>
-                </tr>
-                <tr>
-                    <td>Car Type</td>
-                    <td>{{selectedRepair?.carType}}</td>
-                </tr>
-                <tr>
-                    <td>Remark</td>
-                    <td>{{selectedRepair?.remark}}</td>
-                </tr>
-                <tr>
-                    <td>Person In Charge</td>
-                    <td>{{selectedRepair?.personInCharge}}</td>
-                </tr>
-                <tr>
-                  <td>Date</td>
-                  <td>{{selectedRepair?.date}}</td>
-                </tr>
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">Repair Detail</h4>
+</div>
+ 
+<div class="modal-body">
+  <div class="col-sm-12">
+      <table class="table table-user-information">
+        <tbody>
+          <tr>
+              <td>Customer Name</td>
+              <td>{{selectedRepair?.customer}}</td>
+          </tr>
+          <tr>
+              <td>Plate Number</td>
+              <td>{{selectedRepair?.plateNumber}}</td>
+          </tr>
+          <tr>
+              <td>Reported Problem</td>
+              <td>{{selectedRepair?.reportedProblem}}</td>
+          </tr>
+          <tr>
+              <td>Car Type</td>
+              <td>{{selectedRepair?.carType}}</td>
+          </tr>
+          <tr>
+              <td>Remark</td>
+              <td>{{selectedRepair?.remark}}</td>
+          </tr>
+          <tr>
+              <td>Person In Charge</td>
+              <td>{{selectedRepair?.personInCharge}}</td>
+          </tr>
+          <tr>
+            <td>Date</td>
+            <td>{{selectedRepair?.date}}</td>
+          </tr>
 
-              </tbody>
-            </table>  
-        </div>  
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
+        </tbody>
+      </table>  
+  </div>  
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+</div>
+</div>
+<!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
 </div>
 <div class="modal modal-info fade" id="modal-edit">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Info Modal</h4>
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">Info Modal</h4>
+</div>
+<form [formGroup]="myForm" (ngSubmit)="saveUpdates()" novalidate>
+  <input type="hidden" formControlName="id"/>
+  <div class="modal-body">
+    <div class="col-sm-12">
+      <table>
+          <tbody>
+          
+            <tr>
+                <td>Customer</td>
+                <td>
+                  <input class="form-control" formControlName="customer" type="text" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Plate Number</td>
+                <td>
+                  <input class="form-control" formControlName="plateNumber" type="text" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>Reported Problem</td>
+                <td>
+                  <input class="form-control" formControlName="reportedProblem"  type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Car Type</td>
+                <td>
+                  <input class="form-control" formControlName="carType"  type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Remark</td>
+                <td>
+                  <input class="form-control" formControlName="remark"  type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Person In Charge</td>
+                <td>
+                  <input class="form-control" formControlName="personInCharge"  type="text"/>
+                </td>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td>
+                <input class="form-control" formControlName="date"  type="text"/>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-outline">Save changes</button>
+  </div>
+</form> 
+</div>
+
+
+<!-- /.modal-content -->
+</div>
+</div>
+<div class="modal modal-danger fade" id="modal-delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Delete Repair?</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure to delete this record?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button (click)="deleteRepair()" type="button" class="btn btn-outline">Delete</button>
+        </div>
       </div>
-      <form [formGroup]="myForm" (ngSubmit)="saveUpdates()" novalidate>
-        <input type="hidden" formControlName="id"/>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <div class="modal modal-warning fade" id="modal-checkout">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Check out repair</h4>
+        </div>
         <div class="modal-body">
           <div class="col-sm-12">
-            <table>
-                <tbody>
-                
-                  <tr>
-                      <td>Customer</td>
-                      <td>
-                        <input class="form-control" formControlName="customer" type="text" required/>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>Plate Number</td>
-                      <td>
-                        <input class="form-control" formControlName="plateNumber" type="text" required/>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>Reported Problem</td>
-                      <td>
-                        <input class="form-control" formControlName="reportedProblem"  type="text"/>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>Car Type</td>
-                      <td>
-                        <input class="form-control" formControlName="carType"  type="text"/>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>Remark</td>
-                      <td>
-                        <input class="form-control" formControlName="remark"  type="text"/>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>Person In Charge</td>
-                      <td>
-                        <input class="form-control" formControlName="personInCharge"  type="text"/>
-                      </td>
-                  </tr>
-                  <tr>
-                    <td>Date</td>
-                    <td>
-                      <input class="form-control" formControlName="date"  type="text"/>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-outline">Save changes</button>
+          <button type="button" class="btn btn-outline">Save changes</button>
         </div>
-      </form> 
+      </div>
+      <!-- /.modal-content -->
     </div>
-
-    
-    <!-- /.modal-content -->
+    <!-- /.modal-dialog -->
   </div>
-  </div>
-  <div class="modal modal-danger fade" id="modal-delete">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Delete Repair?</h4>
-              </div>
-              <div class="modal-body">
-                <p>Are you sure to delete this record?</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                <button (click)="deleteRepair()" type="button" class="btn btn-outline">Delete</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <div class="modal modal-warning fade" id="modal-checkout">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Check out repair</h4>
-              </div>
-              <div class="modal-body">
-                <div class="col-sm-12">
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline">Save changes</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
