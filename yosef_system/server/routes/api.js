@@ -8,6 +8,7 @@ const Suplier = require('../models/suplier');
 const Repair = require('../models/repair')
 const Parts = require('../models/parts')
 const Sell = require('../models/sell') 
+const Checkout = require('../models/checkout')
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
 const db2 = "mongodb://localhost:27017/ks_yosefdb"
@@ -313,6 +314,22 @@ router.delete('/repair/delete/:id', (req, res) => {
         }
     } )
 });
+
+// Add checkout to database
+
+router.post("/repiar/checkout", (req, res) =>{
+    let checkoutData = req.body;
+    console.log("Attempting to checkout repair")
+    let checkout = new Checkout(checkoutData)
+    checkout.save((error, checkout) =>{
+        if(error){
+            console.log(error)
+        } else {
+            res.status(200).send(checkoutData)
+        }
+    })
+})
+
 
 router.post("/parts/purchase", (req, res) => {
     let purchaseData = req.body;

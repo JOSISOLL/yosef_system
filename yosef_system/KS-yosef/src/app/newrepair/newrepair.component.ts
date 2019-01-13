@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Repair } from '../models/repair';
+import { Checkout } from '../models/checkout';
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 // declare var  jquery: any; 
@@ -20,6 +21,9 @@ declare var $:any;
 
 export class NewrepairComponent implements OnInit {
   repairs = []
+
+  // checkout : Checkout;
+  checkout : Checkout = {};
   
   closeResult: string;
   selectedRepair: Repair;
@@ -183,5 +187,24 @@ addChangedParts(){
       })
       this.name = ''
     }
+  }
+  checkOut(){
+    console.log("Checkout modal button clicked");
+    this.checkout.changedParts = this.partsChanged;
+    this.checkout.menInCharge = this.menInCharge;
+    this.checkout.problemsFixed = this.problemsFixed;
+    this.checkout.repair = this.selectedRepair;
+    this.checkout.serviceCharge = this.serviceCharge;
+    this.checkout.tinNumber = this.tinNumber;
+    this.checkout.checkoutDate = this.checkoutDate;
+    console.log(this.checkout)
+    this._historyService.checkoutRepair(this.checkout)
+    .subscribe(res =>{
+      console.log("Repair checked out successfully");
+      this.deleteRepair();
+      $('#modal-checkout').modal('hide');
+    })
+    // console.log(this.selectedRepair)
+    
   }
 }
