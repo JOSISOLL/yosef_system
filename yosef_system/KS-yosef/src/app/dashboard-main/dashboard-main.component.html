@@ -35,9 +35,9 @@
     <!-- small box -->
     <div class="small-box bg-yellow">
       <div class="inner">
-        <h3>{{carsInRepair}}</h3>
+        <h3>{{repairs.length}}</h3>
 
-        <p>CARS IN STOCK</p>
+        <p>CARS IN REPAIR</p>
       </div>
       <div class="icon">
         <!-- <i class="ion ion-person-add"></i> -->
@@ -76,16 +76,18 @@
       <div class="box-body">
         <div class="row">
           <div class="col-md-12">
-            <p class="text-center"> <strong>Car Repair: 1 Jan, 2018 - 31 December, 2018</strong> </p>
-            <div class="chart">
-              <canvas id="salesChart" style="height: 180px;"></canvas>
+            <!-- <p class="text-center"> <strong>Car Repair: 1 Jan, 2018 - 31 December, 2018</strong> </p> -->
+            <div *ngIf="chart" class="chart">
+
+                <canvas id="canvas">{{ chart }}</canvas>
+              <!-- <canvas id="canvas" style="height: 180px;">{{ chart }}</canvas> -->
             </div>
           </div>
         </div>
       </div>
       <div class="box-footer no-padding">
         <ul class="nav nav-pills nav-stacked">
-          <li><a><b>Total Car Repair Year 2018</b><span class="pull-right label label-success" style="font-size:12px;"><b>1</b></span></a></li>
+          <li><a><b>Total Car Repair Year 2018</b><span class="pull-right label label-success" style="font-size:12px;"><b>{{repairs.length}}</b></span></a></li>
         </ul>
       </div>
     </div>
@@ -133,7 +135,7 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div *ngIf="repairs.length > 0" class="row">
   <div class="col-md-12">
     <div class="box box-success">
       <div class="box-header with-border">
@@ -146,49 +148,21 @@
             <thead>
               <tr>
                 <th>Car ID</th>
-                <th>Estimate No</th>
                 <th>Customer Name</th>
-                <th>Car Name</th>
+                <th>Problem</th>
+                <th>Mechanic</th>
                 <th>Delivered</th>
               </tr>
             </thead>
             <tbody>
-                                              <tr>
-                <td><label class="label label-success">157378</label></td>
-                <td><label class="label label-success">464210</label></td>
-                <td>Jamal Uddin</td>
-                <td>Toyota Allion</td>
-                <td><label class="label label-danger">26/02/2017</label></td>
+              <tr *ngFor="let repair of repairs | filter:filter">
+                <td data-title="plateNumber"><label class="label label-success">{{ repair.plateNumber }}</label></td>
+                <td data-title="customer">{{ repair.customer }}</td>
+                <td data-title="reportedProblem">{{ repair.reportedProblem }} </td>
+                <td data-title="personInCharge" >{{ repair.personInCharge }}</td>
+                <td data-title="date" > <label class="label label-danger">{{ repair.date }}</label></td>
               </tr>
-                                              <tr>
-                <td><label class="label label-success">157378</label></td>
-                <td><label class="label label-success">330521</label></td>
-                <td>Jamal Uddin</td>
-                <td>Toyota Allion</td>
-                <td><label class="label label-danger">29/01/2017</label></td>
-              </tr>
-                                              <tr>
-                <td><label class="label label-success">148627</label></td>
-                <td><label class="label label-success">403493</label></td>
-                <td>Taraq Sarker</td>
-                <td>Toyota Allion</td>
-                <td><label class="label label-danger">25/01/2017</label></td>
-              </tr>
-                                              <tr>
-                <td><label class="label label-success">148627</label></td>
-                <td><label class="label label-success">128650</label></td>
-                <td>Taraq Sarker</td>
-                <td>Toyota Allion</td>
-                <td><label class="label label-danger">19/06/2017</label></td>
-              </tr>
-                                              <tr>
-                <td><label class="label label-success">148627</label></td>
-                <td><label class="label label-success">255198</label></td>
-                <td>Taraq Sarker</td>
-                <td>Toyota Allion</td>
-                <td><label class="label label-danger">22/03/2018</label></td>
-              </tr>
-                                            </tbody>
+            </tbody>
           </table>
         </div>
         <!-- /.table-responsive -->

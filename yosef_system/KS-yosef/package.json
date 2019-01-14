@@ -28,6 +28,7 @@
     "@ngrx/effects": "^4.0.2",
     "@ngrx/store": "^4.0.2",
     "@supply-chain-ventures.com/angular-pdfmake": "0.0.4",
+    "chart.js": "^2.7.3",
     "core-js": "^2.4.1",
     "hydrogen": "^0.2.0",
     "moment": "^2.22.0",
