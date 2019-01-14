@@ -66,7 +66,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let part of parts | filter:filter">
-                <td><span class="label label-default">{{part.purchaseDate | date}}</span></td>
+                <td><span class="label label-default">{{part.purchaseDate}}</span></td>
                 <td>{{part.partNumber}}</td>
                 <td>{{part.stamp}}</td>
                 <td><span class="label label-danger">{{part.description}}</span></td>

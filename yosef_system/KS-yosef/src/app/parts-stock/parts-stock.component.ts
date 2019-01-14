@@ -49,6 +49,7 @@ export class PartsStockComponent implements OnInit {
       
       res => {
         this.parts = res;
+        console.log(this.parts)
       },
 
       err => {
