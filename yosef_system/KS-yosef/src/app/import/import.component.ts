@@ -1,66 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { PartsService } from '../services/parts.service';
-import { Import } from '../models/import';
+import { Component, OnInit } from "@angular/core";
+import { PartsService } from "../services/parts.service";
+import { Import } from "../models/import";
 
-declare var $ : any;
+declare var $: any;
 
 @Component({
-  selector: 'app-import',
-  templateUrl: './import.component.html',
-  styleUrls: ['./import.component.css']
+  selector: "app-import",
+  templateUrl: "./import.component.html",
+  styleUrls: ["./import.component.css"]
 })
 export class ImportComponent implements OnInit {
-
-  constructor(private _service : PartsService) { }
-  imports : Import;
-  selected : Import;
+  constructor(private _service: PartsService) {}
+  imports: Import;
+  selected: Import;
   ngOnInit() {
-    this.getImports()
+    this.getImports();
   }
-  getImports(){
-    this._service.getImport()
-    .subscribe(
-      res =>{
+  getImports() {
+    this._service.getImport().subscribe(
+      res => {
         this.imports = res;
-        // console.log(res);
       },
-      err =>{
-        console.log(err)
+      err => {
+        console.log(err);
       }
-    )
+    );
   }
-  setViewContent(data : Import){
+  setViewContent(data: Import) {
     this.selected = data;
-    console.log("view imports clicked...");
-    $("#modal-view").modal('show');
+    $("#modal-view").modal("show");
   }
-  btn_deleteImportClick(data : Import){
+  btn_deleteImportClick(data: Import) {
     this.selected = data;
-    console.log("Delete import clicked...")
-    console.log(this.selected);
-    $("#modal-delete").modal('show');
+    $("#modal-delete").modal("show");
   }
-  deleteImport(){
-    console.log(this.selected);
-    this._service.deleteImport(this.selected)
-    .subscribe(res =>{
-      console.log(res);
-      console.log("Delete successful!");
-      $('#modal-delete').modal('hide');
-      this.ngOnInit()
+  deleteImport() {
+    this._service.deleteImport(this.selected).subscribe(res => {
+      $("#modal-delete").modal("hide");
+      this.ngOnInit();
     });
   }
-  
-  btn_invoiceClick(data : Import){
-      this.selected = data;
-      console.log("view imports clicked...");
-      $("#modal-invoice").modal('show');
-    }
+
+  btn_invoiceClick(data: Import) {
+    this.selected = data;
+    $("#modal-invoice").modal("show");
+  }
 
   print(): void {
     let printContents, popupWin;
-    printContents = document.getElementById('printSectionId').innerHTML;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    printContents = document.getElementById("printSectionId").innerHTML;
+    popupWin = window.open("", "_blank", "top=0,left=0,height=100%,width=auto");
     popupWin.document.open();
     popupWin.document.write(`
       <html>
@@ -134,9 +123,7 @@ export class ImportComponent implements OnInit {
       <footer class="main-footer">
         <strong>Copyright &copy; 2018-2020 ቀላል TECHNOLOGIES.</strong> All rights reserved.
       </footer>
-    </html>`
-    );
+    </html>`);
     popupWin.document.close();
-}
-
+  }
 }

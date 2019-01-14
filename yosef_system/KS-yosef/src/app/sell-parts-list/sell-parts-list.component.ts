@@ -1,86 +1,82 @@
-import { Component, OnInit } from '@angular/core';
-import { PartsService } from '../services/parts.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Sell } from '../models/sell';
-import { Parts } from '../models/parts';
-import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { PartsService } from "../services/parts.service";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { Sell } from "../models/sell";
+import { Parts } from "../models/parts";
+import {
+  ReactiveFormsModule,
+  FormsModule,
+  FormControl,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from "@angular/forms";
 
-declare var $:any;
+declare var $: any;
 
- 
 @Component({
-  selector: 'app-sell-parts-list',
-  templateUrl: './sell-parts-list.component.html',
-  styleUrls: ['./sell-parts-list.component.css']
+  selector: "app-sell-parts-list",
+  templateUrl: "./sell-parts-list.component.html",
+  styleUrls: ["./sell-parts-list.component.css"]
 })
 export class SellPartsListComponent implements OnInit {
-
-  sold : Sell [];
-  parts : Parts [];
-  selected : Sell
-  myForm : FormGroup;
-  id : FormControl;
-  buyerName : FormControl;
-  buyerPhoneNumber : FormControl;
+  sold: Sell[];
+  parts: Parts[];
+  selected: Sell;
+  myForm: FormGroup;
+  id: FormControl;
+  buyerName: FormControl;
+  buyerPhoneNumber: FormControl;
   // sellId : FormControl;
-  buyerTinNumber : FormControl;
-  personInCharge : FormControl;
-  
+  buyerTinNumber: FormControl;
+  personInCharge: FormControl;
 
-  constructor(private _partsService : PartsService, private _router : Router) { }
+  constructor(private _partsService: PartsService, private _router: Router) {}
 
   ngOnInit() {
     this.getSoldItems();
     this.createControls();
     this.createEditForm();
-    
   }
-  getSoldItems(){
-    this._partsService.getPartsSold()
-    .subscribe(
-      res =>{
+  getSoldItems() {
+    this._partsService.getPartsSold().subscribe(
+      res => {
         this.sold = res;
-        console.log(this.sold);
       },
-      err =>{
-        if (err instanceof HttpErrorResponse){
-          if (err.status === 401){
-            this._router.navigate(['/login']);
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this._router.navigate(["/login"]);
           }
         }
       }
-    )
+    );
   }
 
-  btn_showSoldInfoClick(sold : Sell){
-    console.log("Show sold items button clicked...");
+  btn_showSoldInfoClick(sold: Sell) {
     this.selected = sold;
     this.parts = sold.parts;
-    console.log(this.selected);
-    $("#modal-view").modal('show');
+    $("#modal-view").modal("show");
   }
-  btn_invoiceClick(sold : Sell){
+  btn_invoiceClick(sold: Sell) {
     this.selected = sold;
     this.parts = sold.parts;
-    console.log(this.selected);
-    $("#modal-invoice").modal('show');
+    $("#modal-invoice").modal("show");
   }
-  btn_editSellClick(sold : any){
+  btn_editSellClick(sold: any) {
     this.selected = sold;
-    console.log(this.selected);
     this.myForm.setValue({
-      id : sold._id,
+      id: sold._id,
       // sellId : sold.sellId,
-      buyerName : sold.buyerName,
-      buyerPhoneNumber : sold.buyerPhoneNumber,
-      buyerTinNumber : sold.buyerTinNumber,
-      personInCharge : sold.personInCharge
+      buyerName: sold.buyerName,
+      buyerPhoneNumber: sold.buyerPhoneNumber,
+      buyerTinNumber: sold.buyerTinNumber,
+      personInCharge: sold.personInCharge
     });
-    $("#modal-edit").modal('show');
-    console.log("Edit button clicked....");
+    $("#modal-edit").modal("show");
   }
-  createControls(){
+  createControls() {
     this.id = new FormControl();
     // this.sellId = new FormControl();
     this.buyerName = new FormControl();
@@ -88,28 +84,25 @@ export class SellPartsListComponent implements OnInit {
     this.buyerTinNumber = new FormControl();
     this.personInCharge = new FormControl();
   }
-  createEditForm(){
+  createEditForm() {
     this.myForm = new FormGroup({
-      id : this.id,
+      id: this.id,
       // sellId : this.sellId,
-      buyerName : this.buyerName,
-      buyerPhoneNumber : this.buyerPhoneNumber,
-      buyerTinNumber : this.buyerTinNumber,
-      personInCharge : this.personInCharge
+      buyerName: this.buyerName,
+      buyerPhoneNumber: this.buyerPhoneNumber,
+      buyerTinNumber: this.buyerTinNumber,
+      personInCharge: this.personInCharge
     });
   }
-  saveUpdates(){
-    if(this.myForm.valid){
-      var data = <any> this.myForm.value;
-      console.log("Form update data...");
-      console.log(data);
-
+  saveUpdates() {
+    if (this.myForm.valid) {
+      var data = <any>this.myForm.value;
     }
   }
   print(): void {
     let printContents, popupWin;
-    printContents = document.getElementById('printSectionId').innerHTML;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    printContents = document.getElementById("printSectionId").innerHTML;
+    popupWin = window.open("", "_blank", "top=0,left=0,height=100%,width=auto");
     popupWin.document.open();
     popupWin.document.write(`
       <html>
@@ -183,12 +176,7 @@ export class SellPartsListComponent implements OnInit {
       <footer class="main-footer">
         <strong>Copyright &copy; 2018-2020 ቀላል TECHNOLOGIES.</strong> All rights reserved.
       </footer>
-    </html>`
-    );
+    </html>`);
     popupWin.document.close();
-}
-  
-  
-  
-
+  }
 }

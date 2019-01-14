@@ -45,26 +45,18 @@ export class PartsPurchaseComponent implements OnInit {
   setViewContent(data: Purchase) {
     this.selectedPurchase = data;
     this.selectedPart = this.selectedPurchase.parts;
-    console.log("View purchase clicked");
-    console.log(this.selectedPurchase);
     $("#modal-view").modal("show");
   }
   editPurchase(data: Purchase) {
     this.selectedPurchase = data;
-    console.log("Edit purchase clicked");
-    console.log(this.selectedPurchase);
   }
   btn_deletePurchaseClick(purchase: Purchase) {
     this.selectedPurchase = purchase;
-    console.log("delete part clicked...");
-    console.log(this.selectedPurchase);
     $("#modal-delete").modal("show");
     // $("#modal-delete").modal('show');
   }
   deletePart() {
-    console.log("I'm about to delete " + this.selectedPurchase);
     this._partsService.deletePurchase(this.selectedPurchase).subscribe(res => {
-      console.log("Delete Successful!");
       $("#modal-delete").modal("hide");
       // this._router.navigate(['/parts/purchase'])
       this.ngOnInit();
@@ -73,7 +65,6 @@ export class PartsPurchaseComponent implements OnInit {
   btn_invoiceClick(data: Purchase) {
     this.selectedPurchase = data;
     this.selectedPart = data.parts;
-    console.log(this.selectedPurchase);
     $("#modal-invoice").modal("show");
   }
 

@@ -4,7 +4,6 @@ import { SuplierService } from "../services/suplier.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import * as XLSX from "ts-xlsx";
-import { ConsoleReporter } from "jasmine";
 
 declare var jquery: any;
 declare var $: any;
@@ -45,7 +44,6 @@ export class SupliersPageComponentComponent implements OnInit {
     this.selectedSuplier = data;
 
     $("#modal-view-suplier").modal("show");
-    console.log(this.selectedSuplier);
   }
   setEditContent(data: Suplier) {
     this.selectedSuplier = data;
@@ -58,7 +56,7 @@ export class SupliersPageComponentComponent implements OnInit {
   incomingfile(event) {
     this.file = event.target.files[0];
   }
-  startImportClicked() {
+  async startImportClicked() {
     let fileReader = new FileReader();
     fileReader.onload = e => {
       this.arrayBuffer = fileReader.result;
@@ -73,11 +71,13 @@ export class SupliersPageComponentComponent implements OnInit {
       var worksheet = workbook.Sheets[firstSheetName];
       this.excel_data = XLSX.utils.sheet_to_json(worksheet, { raw: true });
       this.excel_data.forEach(element => {
-        this._suplerServie.add(element).subscribe(customer => {
-          console.log("saved data!");
-        });
+        this._suplerServie.add(element).subscribe(customer => {});
       });
+      this.getAllSupliers();
     };
     fileReader.readAsArrayBuffer(this.file);
+
+    $("#modal-import").modal("hide");
+    //this.getAllSupliers();
   }
 }

@@ -74,7 +74,6 @@ export class NewrepairComponent implements OnInit {
       )
   }
   btn_showRepairInfoClick(repair: Repair){
-    console.log("show repair button clicked...");
     this.selectedRepair =repair;
     $("#modal-view").modal('show'); 
     
@@ -92,16 +91,13 @@ export class NewrepairComponent implements OnInit {
       date: repair.date
     });
     $("#modal-edit").modal('show'); 
-    console.log("edit repair clicked...");
   }
   btn_deleteRepairClick(repair: Repair){
     this.selectedRepair = repair;
-    console.log("delete repair clicked...");
     $("#modal-delete").modal('show'); 
   }
   btn_checkoutCar(repair: Repair){
     this.selectedRepair = repair; 
-    console.log("repair checkout selected...");
     $("#modal-checkout").modal('show'); 
   } 
   createControls(){
@@ -130,8 +126,6 @@ export class NewrepairComponent implements OnInit {
   saveUpdates(){
     if(this.myForm.valid){
       var data = <Repair> this.myForm.value; 
-      console.log('form data..');
-      console.log(data);
       this._historyService.updateRepair(data)
       .subscribe(res =>{
         
@@ -149,7 +143,6 @@ export class NewrepairComponent implements OnInit {
   deleteRepair(){
     this._historyService.deleteRepair(this.selectedRepair)
     .subscribe(res => {
-      console.log("successfully deleted!");
       $('#modal-delete').modal('hide');
       this.getRepair();
     });
@@ -164,7 +157,6 @@ addChangedParts(){
       quantity : this.quantity,
       price : this.price
     })
-    console.log(this.partsChanged)
     this.partNumber = '';
     this.stamp = '';
     this.quantity = null;
@@ -173,7 +165,6 @@ addChangedParts(){
     }
     else {
         this.invalid = false;
-        console.log("Add changed parts invalid"); 
     }
   }
   addPersonInCharge(){

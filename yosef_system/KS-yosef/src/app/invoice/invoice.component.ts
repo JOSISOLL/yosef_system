@@ -19,13 +19,11 @@ export class InvoiceComponent implements OnInit {
 
   // }
   // add(){
-  // console.log(this.invoice)
   // }
   // heroes = [{"name" : 'Windstorm'}, {"name": 'Bombasto'}, {"name": 'Magneta'}, {"name" : 'Tornado'}];
   // addHero(newHero) {
   //   if (newHero) {
   //     this.heroes.push({"name" : newHero});
-  //     console.log(newHero)
   //   }
   // }
   // remove(hero : string){
@@ -71,8 +69,6 @@ export class InvoiceComponent implements OnInit {
   // }
 
   // onSubmit(f: NgForm) { // accept key of form
-  //   console.log(f.value);
-  //   console.log(f.valid);
   //   if (f.valid) {
   //     this.items[this.count - 1] = {id: this.count - 1, name: f.value.name, quantity: f.value.quantity, rate: f.value.rate};
   //     this.subTotal += f.value.quantity * f.value.rate;
@@ -81,7 +77,6 @@ export class InvoiceComponent implements OnInit {
   //   }
   //   f.reset();
   //   this.editing = false;
-  //   console.log(this.items)
   // }
 
   // revert() {  // reject key of form
@@ -95,8 +90,6 @@ export class InvoiceComponent implements OnInit {
   loaded: boolean = false;
   incomingfile(event) {
     this.file = event.target.files[0];
-    console.log("incoming file");
-    console.log(this.file);
   }
 
   Upload() {
@@ -113,17 +106,13 @@ export class InvoiceComponent implements OnInit {
       var first_sheet_name = workbook.SheetNames[0];
       var worksheet = workbook.Sheets[first_sheet_name];
       this.excel_data = XLSX.utils.sheet_to_json(worksheet, { raw: true });
-      // console.log(this.excel_data);
     };
     fileReader.readAsArrayBuffer(this.file);
   }
   save() {
     for (let data of this.excel_data) {
-      console.log(data);
       this._partsService.partsStock(data).subscribe(
-        res => {
-          console.log(res);
-        },
+        res => {},
         err => {
           console.log(err);
         }

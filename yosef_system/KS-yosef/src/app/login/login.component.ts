@@ -1,37 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../auth.service";
+import { Router } from "@angular/router";
 import * as moment from "moment";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
+  loginUserData = {};
 
-  loginUserData = {}
+  constructor(private _auth: AuthService, private _router: Router) {}
 
-  constructor(private _auth: AuthService,
-    private _router: Router) { }
-
-  ngOnInit() {
-  }
-  loginUser(){
-    this._auth.loginUser(this.loginUserData)
-    .subscribe(
+  ngOnInit() {}
+  loginUser() {
+    this._auth.loginUser(this.loginUserData).subscribe(
       res => {
-        console.log(res)
-        const expiresAt = moment().add(res.expiresIn, 'second')
+        const expiresAt = moment().add(res.expiresIn, "second");
 
-        localStorage.setItem('id_token', res.idToken)
-        localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()))
+        localStorage.setItem("id_token", res.idToken);
+        localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
         // localStorage.setItem('token', res.token)
-        this._router.navigate(['/dashboard'])
+        this._router.navigate(["/dashboard"]);
       },
       err => console.log(err)
-
-    )
+    );
   }
 
   // logout(){
@@ -50,5 +44,4 @@ export class LoginComponent implements OnInit {
   //   const expiresAt = JSON.parse(expiration)
   //   return moment(expiresAt)
   // }
-
 }
