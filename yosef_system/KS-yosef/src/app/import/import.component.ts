@@ -16,13 +16,14 @@ export class ImportComponent implements OnInit {
   selected : Import;
   ngOnInit() {
     this.getImports()
+    
   }
   getImports(){
     this._service.getImport()
     .subscribe(
       res =>{
         this.imports = res;
-        // console.log(res);
+        console.log(this.imports);
       },
       err =>{
         console.log(err)

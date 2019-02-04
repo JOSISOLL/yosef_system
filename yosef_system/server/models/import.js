@@ -21,7 +21,8 @@ const itemsSchema = new Schema(
 const importSchema = new Schema(
     {
         import_date : Date,
-        items : [itemsSchema]
+        items : [itemsSchema],
+        grandTotal : Number
     })
 module.exports = mongoose.model('import', importSchema, 'import')
 

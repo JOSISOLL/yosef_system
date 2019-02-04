@@ -1,6 +1,7 @@
 export interface Import{
     import_date : Date;
     items : Imported_Items[];
+    grandTotal : Number;
 }
 export interface Imported_Items{
     part_number : String;

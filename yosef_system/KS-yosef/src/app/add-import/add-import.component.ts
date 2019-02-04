@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class AddImportComponent implements OnInit {
 
   public myForm : FormGroup;
+  
 
   constructor(private _fb : FormBuilder, private _partService : PartsService, private _router : Router) { }
 
@@ -47,6 +48,8 @@ addAddress() {
     // add address to the list
     const control = <FormArray>this.myForm.controls['items'];
     control.push(this.initAddress());
+    
+    
 }
 
 removeAddress(i: number) {
@@ -55,12 +58,22 @@ removeAddress(i: number) {
     control.removeAt(i);
 }
 save(model) {
-  console.log(model);
+  let grandTotal = 0
+  model.value.items.forEach(item => {
+    console.log(item.local_cost)
+    
+    // this.grandTotal += item.local_total
+
+    grandTotal += item.local_cost 
+      
+  });
+  console.log(grandTotal)
+  model.value.grandTotal = grandTotal;
   this._partService.addImport(model.value)
   .subscribe(
     res =>{
-      console.log(res);
-      this._router.navigate(['/import']);
+      console.log("Import Added.");
+      // this._router.navigate(['/import']);
     },
     err =>{
       console.log(err);
