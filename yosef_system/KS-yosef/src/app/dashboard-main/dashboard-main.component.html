@@ -152,7 +152,7 @@
                 <td data-title="customer">{{ repair.customer }}</td>
                 <td data-title="reportedProblem">{{ repair.reportedProblem }} </td>
                 <td data-title="personInCharge" >{{ repair.personInCharge }}</td>
-                <td data-title="date" > <label class="label label-danger">{{ repair.date }}</label></td>
+                <td data-title="date" > <label class="label label-danger">{{ repair.date | date : 'yyyy/MM/dd' }}</label></td>
               </tr>
             </tbody>
           </table>

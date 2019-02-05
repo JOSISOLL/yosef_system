@@ -29,11 +29,11 @@ export class AddImportComponent implements OnInit {
 initAddress() {
         // initialize our address
         return this._fb.group({
-          part_number : ['', Validators.required],
+          partNumber : ['', Validators.required],
           stamp : ['', Validators.required],
           description : [''],
           remark : [''],
-          imported_quantity : ['', Validators.required],
+          quantity : ['', Validators.required],
           foreign_unit_cost : ['', Validators.required],
           foreign_total : ['', Validators.required],
           local_cost : ['', Validators.required],
@@ -60,11 +60,16 @@ removeAddress(i: number) {
 save(model) {
   let grandTotal = 0
   model.value.items.forEach(item => {
-    console.log(item.local_cost)
-    
-    // this.grandTotal += item.local_total
-
-    grandTotal += item.local_cost 
+    this._partService.addImportedParts(item)
+    .subscribe(
+      res =>{
+        console.log("Item added to imported parts")
+        console.log(res)
+      }, err => {
+        console.log(err)
+      }
+    )
+    grandTotal += item.local_total 
       
   });
   console.log(grandTotal)
@@ -73,7 +78,7 @@ save(model) {
   .subscribe(
     res =>{
       console.log("Import Added.");
-      // this._router.navigate(['/import']);
+      this._router.navigate(['/import']);
     },
     err =>{
       console.log(err);

@@ -40,7 +40,7 @@
                       <td data-title="plateNumber">{{ repair.plateNumber }}</td>
                       <td data-title="reportedProblem">{{ repair.reportedProblem }} </td>
                       <td data-title="personInCharge" >{{ repair.personInCharge }}</td>
-                      <td data-title="personInCharge" >{{ repair.date }}</td>
+                      <td data-title="personInCharge" >{{ repair.date | date : 'yyyy/MM/dd'}}</td>
                       <td>
                         <button class="btn btn-success" (click)="btn_showRepairInfoClick(repair)" data-toggle="tooltip"  data-original-title="View"><i class="fa fa-eye"></i></button>  
                         <button class="btn btn-primary" (click)="btn_editRepairClick(repair)" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i></button> 
@@ -96,7 +96,7 @@
           </tr>
           <tr>
             <td>Date Received</td>
-            <td>{{selectedRepair?.date}}</td>
+            <td>{{selectedRepair?.date | date : 'yyyy/MM/dd'}}</td>
           </tr>
 
         </tbody>
@@ -244,7 +244,7 @@
           </tr>
           <tr>
             <td>Date</td>
-            <td>{{selectedRepair?.date}}</td>
+            <td>{{selectedRepair?.date | date : 'yyyy/MM/dd'}}</td>
           </tr>
 
         </tbody>

@@ -5,6 +5,8 @@ import { Parts } from '../models/parts';
 import { Purchase } from '../models/purchase';
 import { Sell } from '../models/sell';
 import { Import } from '../models/import';
+import { Imported_Parts } from '../models/imported_parts'
+import { Distribute } from '../models/distribute'
 @Injectable()
 export class PartsService {
 
@@ -19,6 +21,11 @@ export class PartsService {
    _importsAddUrl = "http://localhost:3000/api/import/add"
    _importsGetUrl = "http://localhost:3000/api/imports"
    _importDeleteUrl = "http://localhost:3000/api/import/delete"
+   _importPartsUrl = "http://localhost:3000/api/import/parts"
+   _importedPartsUrl =  "http://localhost:3000/api/imported/parts"
+   _importedUpdateUrl = "http://localhost:3000/api/imported/update"
+   _importedDistUrl = "http://localhost:3000/api/imports/distribute"
+   _importedDistGetUrl = "http://localhost:3000/api/distributes"
   constructor(private http: HttpClient) { }
   
   // purchase(part): Observable<Parts>
@@ -63,6 +70,21 @@ export class PartsService {
   }
   getPartsSold(){
     return this.http.get<any>(this._partsSoldUrl);
+  }
+  addImportedParts(imported_parts) : Observable<Imported_Parts>{
+    return this.http.post<Imported_Parts>(this._importPartsUrl, imported_parts)
+  }
+  getImportedParts(){
+    return this.http.get<any>(this._importedPartsUrl)
+  }
+  updateImported(imported : Imported_Parts){
+    return this.http.put<Imported_Parts>(this._importedUpdateUrl, imported)
+  }
+  distribute(distribute) : Observable<Distribute>{
+    return this.http.post<Distribute>(this._importedDistUrl, distribute)
+  }
+  getDistributes(){
+    return this.http.get<Distribute>(this._importedDistGetUrl)
   }
 
 }

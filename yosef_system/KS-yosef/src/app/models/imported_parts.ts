@@ -1,14 +1,9 @@
-export interface Import{
-    import_date : Date;
-    items : Imported_Items[];
-    grandTotal : Number;
-}
-export interface Imported_Items{
+export interface Imported_Parts{
     partNumber : String;
     stamp : String;
     description : String;
     remark : String;
-    imported_quantity : Number;
+    quantity : Number;
     foreign_unit_cost : Number;
     foreign_total : Number;
     local_cost : Number;

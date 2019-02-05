@@ -45,8 +45,8 @@
               <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
               <div [formGroupName]="i">
                 <div class="form-group col-md-6">
-                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.part_number.valid">*</span>Part Number : </label>
-                    <input type="text" class="form-control" formControlName="part_number">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.partNumber.valid">*</span>Part Number : </label>
+                    <input type="text" class="form-control" formControlName="partNumber">
                 </div>
                 <div class="form-group col-md-6">
                     <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.stamp.valid">*</span>Stamp :</label>
@@ -61,8 +61,8 @@
                     <textarea class="form-control" formControlName="remark"></textarea>
                 </div>
                 <div class="form-group col-md-3">
-                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.imported_quantity.valid">*</span>Imported Quantity : </label>
-                    <input type="number" class="form-control" formControlName="imported_quantity">
+                    <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.quantity.valid">*</span>Imported Quantity : </label>
+                    <input type="number" class="form-control" formControlName="quantity">
                 </div>
                 <div class="form-group col-md-3"> 
                     <label><span style="color:red;" [hidden]="myForm.controls.items.controls[i].controls.foreign_unit_cost.valid">*</span>Foreign Unit Cost : </label>

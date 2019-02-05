@@ -60,6 +60,7 @@ import { AddImportComponent } from './add-import/add-import.component';
 import { DistributeComponent } from './distribute/distribute.component';
 import { ImportedPartsComponent } from './imported-parts/imported-parts.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { CheckoutComponent } from './checkout/checkout.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +99,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ImportComponent,
     AddImportComponent,
     DistributeComponent,
-    ImportedPartsComponent
+    ImportedPartsComponent,
+    CheckoutComponent
     
 
   ],

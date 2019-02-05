@@ -7,7 +7,9 @@ const Customer = require('../models/customer')
 const Suplier = require('../models/suplier');
 const Repair = require('../models/repair')
 const Parts = require('../models/parts')
+const ImportedParts = require('../models/imported_parts')
 const Sell = require('../models/sell') 
+const Distribute = require('../models/distribute')
 const Checkout = require('../models/checkout')
 const mongoose = require('mongoose')
 const db = "mongodb://root:root@ds135179.mlab.com:35179/ks_yosefdb"
@@ -274,6 +276,28 @@ router.post("/repair/add", verifyToken, (req, res) => {
 
     })
 }); 
+router.put('/imported/update', (req, res) =>{
+    console.log("Attempting to updated imported items")
+    let importedData = req.body;
+    ImportedParts.findByIdAndUpdate(importedData.id, {
+        part_number : importedData.part_number,
+        stamp : importedData.stamp,
+        description : importedData.description,
+        origin : importedData.origin,
+        remark : importedData.remark,
+        price : importedData.price,
+        local_cost : importedData.local_cost,
+        quantity : importedData.quantity
+    }, {new : true}, function (err, model){
+        if(err){
+            console.log(err)
+        } else {
+            console.log("Update excecuted....")
+            console.log(model)
+        }
+    }); 
+    res.status(200).send({"success": true});
+});
 router.put('/repair/update', (req, res) => {
     console.log("attempting to update repair");
     let repairData = req.body; 
@@ -315,6 +339,21 @@ router.delete('/repair/delete/:id', (req, res) => {
     } )
 });
 
+//Get checkout
+
+router.get("/checkouts", (req, res) =>{
+    Checkout.find(function (error, checkouts){
+        if(error){
+            console.log(error);
+        } else {
+            res.json(checkouts);
+            console.log("Checkouts fetched from database");
+        }
+    })
+
+})
+
+
 // Add checkout to database
 
 router.post("/repiar/checkout", (req, res) =>{
@@ -346,6 +385,70 @@ router.post("/parts/purchase", (req, res) => {
         }
     })
 })
+router.get("/distributes", (req, res) =>{
+    Distribute.find(function (error, distributes){
+        if(error){
+            console.log(error);
+        } else {
+            res.json(distributes);
+            console.log("Distributes fetched from database");
+        }
+    })
+})
+router.post("/imports/distribute", (req, res) =>{
+    let distData = req.body;
+    if(!distData){
+        res.status(400).send("Invalid request body.")
+    } else {
+        console.log("Attempting to distribute imported parts")
+        for(var i = 0; i < req.body.parts.length;i++){
+            let distPart = req.body.parts[i];
+            ImportedParts.findOne({partNumber : distPart.partNumber}, (error, part) =>{
+                if (error){
+                    console.log(error)
+                } else {
+                    if (!part){
+                        console.log("This item is not available in stock")
+                        res.status(400).send("Item not available in stock")
+                    } else {
+                        if( part.stamp !== distPart.stamp){
+                            console.log("Stamp for part number " + req.body.parts[i].partNumber + " doesn't match!")
+                            res.status(400).send("Stamp number doesn't match!")
+                        } else {
+                            var availableQty = part.quantity;
+                            var remQty = availableQty - distPart.quantity;
+                            console.log("Item ID  : " + part.partNumber + " " + part.stamp);
+                            console.log("Avai QTY : " + part.quantity);
+                            console.log("Dist QTY : " + distPart.quantity); 
+                            console.log("Rema Qty : " + remQty);
+                            ImportedParts.findByIdAndUpdate(part._id,{
+                                quantity : remQty
+                            },{new: true}, function(err, updatedPart){
+                                if(err){
+                                    console.log(err);
+                                } else {
+                                    console.log("Quantity for distributed item " + part._id + " " + part.partNumber + " updated!");
+                                    console.log(updatedPart);
+                                    
+                                    
+                                }
+                            })
+                        }
+
+                    }
+                }
+            })
+        }
+        let distribute = new Distribute(distData);
+        distribute.save((error, distItems) =>{
+        if(error){
+            console.log(error)
+        } else {
+            res.status(200).send(distItems)
+        }
+        })
+    }
+})
 router.post("/parts/sell", (req, res) =>{
     let sellData = req.body;
     var parts = [];
@@ -366,8 +469,6 @@ router.post("/parts/sell", (req, res) =>{
                     console.log("This item is not available in stock.");
                     res.status(400).send("Item not found");
                 } else {
-                    // console.log(part.stamp + " " + part.partNumber);
-                    // console.log(sellPart);
                     
                     if( part.stamp !== sellPart.stamp){
                         console.log("Stamp for part number " + req.body.parts[i].partNumber + " doesn't match!")
@@ -429,6 +530,16 @@ router.get("/parts/stock", (req, res)=>{
         }
     })
 })
+router.get("/imported/parts", (req, res) =>{
+    ImportedParts.find(function (error, importedParts){
+        if(error){
+            console.log(error);
+        } else {
+            res.json(importedParts);
+            console.log("Imported parts fetched from database!");
+        }
+    })
+})
 router.get("/parts/sold", (req, res)=>{
     Sell.find(function (error, parts){
         if(error){
@@ -436,6 +547,70 @@ router.get("/parts/sold", (req, res)=>{
         } else {
             res.json(parts);
             console.log("Sold parts fetched from database!");
+        }
+    })
+})
+
+router.post("/import/parts", (req, res) =>{
+    let partsData = req.body;
+    ImportedParts.findOne({part_number : partsData.part_number}, (error, part) =>{
+        if(error){
+            console.log(error)
+        } else{
+            if (!part){
+                let parts = new ImportedParts(partsData)
+                parts.save((err, addedImportedPart) =>{
+                    if (err){
+                        console.log(err)
+                    } else {
+                        console.log("New imported part added with new Part NUmber");
+                        res.status(200).send(addedImportedPart)
+                    }
+                })
+            } else {
+                if(part.stamp !== partsData.stamp){
+                    let parts = new ImportedParts(partsData)
+                    parts.save((err, addedImportedPart) =>{
+                        if(err){
+                            console.log(err);
+                        } else {
+                            console.log("Already existing imported part added with a new STAMP.");
+                            res.status(200).send(addedImportedPart);
+                        }
+                    })
+                } else {
+                    if(part.price !== partsData.price){
+                        console.log(part.price, partsData.price)
+                        let parts = new ImportedParts(partsData)
+                        parts.save((err, addedImportedPart) =>{
+                            if(err){
+                                console.log(err)
+                            } else {
+                                console.log("Already existing part added with a new Price.");
+                                res.status(200).send(addedImportedPart);
+                            }
+                        })
+                    } else{
+                        let parts = new ImportedParts(partsData)
+                        
+                        var availableQty = part.quantity;
+                        var totalQuantity = Number(availableQty) + Number(parts.quantity);
+                        
+                        ImportedParts.findByIdAndUpdate(part._id,{
+                            quantity : totalQuantity
+                        },{new: true}, function(err, updatedImportedPart){
+                            if(err){
+                                console.log(err);
+                            } else {
+                                console.log(updatedImportedPart)
+                                console.log("Quantity for existing imported part  with part number " + updatedImportedPart.part_number + " and stamp " + updatedImportedPart.stamp + " updated!")
+                                res.status(200).send(updatedImportedPart)
+                            }
+                        })
+
+                    }
+                } 
+            }
         }
     })
 })
@@ -456,7 +631,6 @@ router.post("/parts/stock", (req, res) => {
                     }
                 })
             } else {
-                
                 if(part.stamp !== partsData.stamp){
                     let parts = new Parts(partsData)
                     parts.save((err, addedPart) =>{

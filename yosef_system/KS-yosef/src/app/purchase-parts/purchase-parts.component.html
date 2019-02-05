@@ -112,7 +112,7 @@
               <span hidden *ngIf="part.supplier != ''; else elseBlock5" class="supplier col-md-1">{{ part.supplier }}</span>
               <span hidden *ngIf="part.price != -1; else elseBlock6" class="price col-md-1">{{ part.price }}</span>
               <span hidden *ngIf="part.shelfNumber != 'null'; else elseBlock7" class="shelfNumber col-md-1">{{ part.shelfNumber }}</span>
-              <span hidden *ngIf="part.purchaseDate != 'null'; else elseBlock8" class="purchaseDate col-md-2">{{ part.purchaseDate }}</span>
+              <span hidden *ngIf="part.purchaseDate != 'null'; else elseBlock8" class="purchaseDate col-md-2">{{ part.purchaseDate | date : 'yyyy/MM/dd' }}</span>
             <div class="col-xs-12">
             <form #partsForm="ngForm" (ngSubmit)="onSubmit(partsForm)" novalidate >
                 <div class="btn pull-right">

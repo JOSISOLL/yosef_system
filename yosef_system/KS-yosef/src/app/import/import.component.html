@@ -32,9 +32,9 @@
             </thead>
             <tbody>
               <tr *ngFor="let import of imports | filter:filter">
-                <td><span class="label label-default">{{ import.import_date | date }}</span></td>
+                <td><span class="label label-default">{{ import.import_date | date : 'yyyy/MM/dd'}}</span></td>
                 <td><span class="label label-success">{{ import.items.length}}</span></td>
-                <td><span class="label label-primary">{{ import.grandTotal }} ETB</span></td>
+                <td>{{ import.grandTotal | number : '1.2-2' }} ETB</td>
                 <td>
                 <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(import)" data-original-title="Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" data-original-title="View" (click)="setViewContent(import)" data-original-title="View"><i class="fa fa-eye"></i></a>  <a class="btn btn-primary" data-toggle="tooltip" (click)="editPurchase(purchase)" data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip" (click)="btn_deleteImportClick(import)" data-original-title="Delete"><i class="fa fa-trash-o"></i></a>
               </td>
@@ -83,7 +83,7 @@
               </thead>
               <tbody>
                 <tr *ngFor= "let part of selected?.items">
-                  <td>{{part.part_number}}</td>
+                  <td>{{part.partNumber}}</td>
                   <td>{{part.stamp}}</td>
                   <td>{{part.description}}</td>
                   <td>{{part.remark}}</td>
@@ -153,7 +153,7 @@
                               </td>  
                               <td>  
                                 <!-- Invoice #: {{selected?.purchaseId}}<br>   -->
-                                Date : {{selected?.import_date | date}} <br>  
+                                Date : {{selected?.import_date | date : 'yyyy/MM/dd'}} <br>  
                               </td>  
                             </tr>  
                           </table>  
@@ -218,7 +218,7 @@
                         </tr>  
                         <tr *ngFor= "let item of selected?.items" class="item">  
                           <td>  
-                            {{item?.part_number}}  
+                            {{item?.partNumber}}  
                           </td>
                           <td>
                             {{item?.stamp}}

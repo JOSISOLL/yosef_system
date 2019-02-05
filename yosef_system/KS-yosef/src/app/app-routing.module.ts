@@ -29,6 +29,7 @@ import { ImportComponent } from './import/import.component';
 import { AddImportComponent } from './add-import/add-import.component';
 import { DistributeComponent} from './distribute/distribute.component';
 import { ImportedPartsComponent } from './imported-parts/imported-parts.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -159,6 +160,11 @@ const routes: Routes = [
     path: 'sell/parts',
     component: SellPartsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path : 'repair/checkout',
+    component : CheckoutComponent,
+    canActivate : [AuthGuard]
   }
   
 ];

@@ -82,6 +82,8 @@
                 </tr>
               </tbody>
             </table>
+            <label>Distribute :  <input #distCheck id="distCheck" type="checkbox" [checked]="distCheck" 
+              (change)="onDistribute(distCheck.checked)" /></label><br/>
         <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(cart)" novalidate>
           <div class="modal-body">
             <!-- Full Width boxes (Stat box) -->

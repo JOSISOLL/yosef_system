@@ -18,6 +18,7 @@ export class HistoryService {
   private _urlUpdateRepair = "http://localhost:3000/api/repair/update";
   private _urlDeleteRepair = "http://localhost:3000/api/repair/delete";
   private _urlCheckoutRepair = "http://localhost:3000/api/repiar/checkout";
+  private _urlGetCheckout = "http://localhost:3000/api/checkouts"
   
   constructor(private http: HttpClient) { }
 
@@ -32,6 +33,9 @@ export class HistoryService {
   }
   checkoutRepair(checkout : Checkout){
     return this.http.post<Checkout>(this._urlCheckoutRepair, checkout, httpOptions);
+  }
+  getCheckouts(){
+    return this.http.get<Checkout>(this._urlGetCheckout)
   }
 
   

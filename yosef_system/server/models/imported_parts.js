@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const itemsSchema = new Schema(
+const importedPartsSchema = new Schema(
     {
         partNumber : String,
         stamp : String,
         description : String,
         remark : String,
-        imported_quantity : Number,
+        quantity : Number,
         foreign_unit_cost : Number,
         foreign_total : Number,
         local_cost : Number,
@@ -17,15 +17,5 @@ const itemsSchema = new Schema(
         price : Number
 
     })
-    
-const importSchema = new Schema(
-    {
-        import_date : Date,
-        items : [itemsSchema],
-        grandTotal : Number
-    })
-module.exports = mongoose.model('import', importSchema, 'import')
 
-
-
-
+    module.exports = mongoose.model('importedParts', importedPartsSchema, 'importedParts')

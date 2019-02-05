@@ -33,7 +33,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let purchase of purchases | filter:filter">
-                <td><span class="label label-default">{{ purchase.parts[0].purchaseDate | date }}</span></td>
+                <td><span class="label label-default">{{ purchase.parts[0].purchaseDate | date : 'yyyy/MM/dd' }}</span></td>
                 <td><span class="label label-success">{{purchase.purchaseId}}</span></td>
                 <td><span class="label label-success">{{ purchase.parts.length}}</span></td>
                 <td><span class="label label-primary">{{ purchase.grandTotal | number : '1.2-2' }} ETB</span></td>
@@ -152,7 +152,7 @@
                               </td>  
                               <td>  
                                 Invoice #: {{selectedPurchase?.purchaseId}}<br>  
-                                Date : {{selectedPurchase?.date | date}} <br>  
+                                Date : {{selectedPurchase?.date | date : 'yyyy/MM/dd'}} <br>  
                               </td>  
                             </tr>  
                           </table>  

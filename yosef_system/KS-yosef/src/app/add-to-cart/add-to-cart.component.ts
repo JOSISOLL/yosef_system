@@ -3,6 +3,7 @@ import { PartsService } from '../services/parts.service';
 import { CartAction } from '../store/actions/cart.actions'
 import { Subscription } from 'rxjs/Subscription';
 import { Sell } from '../models/sell';
+import { Distribute } from '../models/distribute'
 import { Router } from "@angular/router";
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
 
@@ -17,30 +18,37 @@ declare var $:any;
 export class AddToCartComponent implements OnInit {
 
   public cart = [];
+  public distCheck : boolean ;
   public totalPrice: number;
   public totalQuantity: number;
   public grandTotal : number;
   public taxbl : number;
   public cartSubscription: Subscription;
-  public sell : Sell = {}; 
+  public sell : Sell = {};
+  public distribute : Distribute = {} 
   public sellDate : String;
 
   //Checkout customer information
 
   checkoutForm : FormGroup
-
+  
   buyerName : FormControl
   buyerPhoneNumber : FormControl
   buyerTinNumber : FormControl
   personInCharge : FormControl
   date : FormControl
 
-
+  // Check if it's distribute or Sell
+  public onDistribute(value:boolean){
+    this.distCheck = value;
+    console.log(this.distCheck)
+  }
 
 
   constructor(private _partService : PartsService, private _cartStore : CartAction, private _router: Router ) { }
   
   createControls(){
+    
     this.buyerName = new FormControl();
     this.buyerPhoneNumber = new FormControl();
     this.buyerTinNumber = new FormControl();
@@ -73,37 +81,61 @@ export class AddToCartComponent implements OnInit {
       var data = this.checkoutForm.value;
       console.log("Form is VALID")
       console.log(data, cart)
-      this.sell.buyerName = data.buyerName;
-      this.sell.buyerPhoneNumber = data.buyerPhoneNumber
-      this.sell.buyerTinNumber = data.buyerTinNumber;
-      this.sell.grandTotal = this.grandTotal;
-      this.sell.subTotal = this.totalPrice;
-      this.sell.quantity = this.totalQuantity;
-      this.sell.personInCharge = data.personInCharge;
-      this.sell.parts = cart;
-      this.sell.date = data.date;
-      console.log(this.sell)
-      
-      this._partService.sell(this.sell) 
-      .subscribe(
-        res => {
-          // console.log("Response from server...");
-          // console.log(res);
-          // console.log("Items successfully sold!")
-          // this.cartSubscription.unsubscribe(); 
-          alert('Items sold successfully!');
-          this.cart.length = 0;
-          this.ngOnDestroy();
-          this.ngOnInit();
-          this._router.navigate(['/parts/stock'])
-          $("#modal-checkout").modal('hide');
-        },
-        err => {
-          console.log(err);
-        }
-      )
-    }
+      if(this.distCheck){
+        this.distribute.buyerName = data.buyerName;
+        this.distribute.buyerPhoneNumber = data.buyerPhoneNumber;
+        this.distribute.buyerTinNumber = data.buyerTinNumber;
+        this.distribute.grandTotal = this.grandTotal;
+        this.distribute.subTotal = this.totalPrice;
+        this.distribute.personInCharge = data.personInCharge;
+        this.distribute.parts = cart;
+        this.distribute.quantity = this.totalQuantity;
+        this.distribute.date = data.date;
+        console.log("Parts ready for distribute .....")
+        console.log(this.distribute)
 
+        this._partService.distribute(this.distribute) 
+        .subscribe(
+          res => {
+            alert('Items distributed successfully!');
+            this.cart.length = 0;
+            this.ngOnDestroy();
+            this.ngOnInit();
+            this._router.navigate(['/distribute'])
+            $("#modal-checkout").modal('hide');
+          },
+          err => {
+            console.log(err);
+          })
+      } 
+      else 
+      {
+        this.sell.buyerName = data.buyerName;
+        this.sell.buyerPhoneNumber = data.buyerPhoneNumber
+        this.sell.buyerTinNumber = data.buyerTinNumber;
+        this.sell.grandTotal = this.grandTotal;
+        this.sell.subTotal = this.totalPrice;
+        this.sell.quantity = this.totalQuantity;
+        this.sell.personInCharge = data.personInCharge;
+        this.sell.parts = cart;
+        this.sell.date = data.date;
+        console.log("Parts ready to be sold")
+        
+        this._partService.sell(this.sell) 
+        .subscribe(
+          res => {
+            alert('Items sold successfully!');
+            this.cart.length = 0;
+            this.ngOnDestroy();
+            this.ngOnInit();
+            this._router.navigate(['/parts/stock'])
+            $("#modal-checkout").modal('hide');
+          },
+          err => {
+            console.log(err);
+          })
+      }
+    }
   }
 
   getTotalPrice() {

@@ -33,7 +33,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let sell of sold | filter:filter">
-                  <td><span class="label label-default">{{sell.date | date}}</span></td>
+                  <td><span class="label label-default">{{sell.date | date : 'yyyy/MM/dd'}}</span></td>
                   <td>{{sell.buyerName}}</td>
                   <td>{{sell.buyerPhoneNumber}}</td>
                   <td>{{sell.buyerTinNumber}}</td>
@@ -238,8 +238,8 @@
                         <img src="../../assets/images/favicon.ico" style="width:100%; max-width:80px;">  
                         </td>  
                         <td>  
-                          Invoice #: 123<br>  
-                          Date : {{selected?.date | date}} <br>  
+                          Invoice #:{{ selected?.date | date : 'MMyydd' + selected?.buyerTinNumber }} <br>  
+                          Date : {{selected?.date | date : 'yyyy/MM/dd'}} <br>  
                         </td>  
                       </tr>  
                     </table>  
