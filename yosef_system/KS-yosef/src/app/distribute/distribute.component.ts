@@ -18,13 +18,6 @@ export class DistributeComponent implements OnInit {
   distribute : Distribute;
   imported_parts : Imported_Parts [];
   selected : Distribute;
-  // myForm : FormGroup;
-  // id : FormControl;
-  // buyerName : FormControl;
-  // buyerPhoneNumber : FormControl;
-  // buyerTinNumber : FormControl;
-  // personInCharge : FormControl;
-
   constructor( private _partsService : PartsService, private _router : Router) { }
 
   ngOnInit() {

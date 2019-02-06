@@ -1,6 +1,6 @@
 import { Repair } from "./repair"
 export class Checkout{
-    repair ? : Repair
+    repair ? : Repair 
     serviceCharge ? : Number
     problemsFixed ? : String
     tinNumber ? : String
