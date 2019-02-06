@@ -1,3 +1,348 @@
-<p>
-  distribute works!
-</p>
+<section class="content">
+  <!-- Full Width boxes (Stat box) -->
+  
+  <!-- Sold Items List -->
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box box-success">
+        <div class="box-header">
+          <h3 class="box-title">Distributed Parts List</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="search-bar">
+                <label>Search:</label>
+                <input type="text" [(ngModel)]="filter">
+            </div>
+            <!-- <div *ngIf="distribute.length = 0">
+                <h3 class="text-center">No items sold!</h3>
+            </div> -->
+          <table class="table sakotable table-bordered table-striped dt-responsive">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Buyer Name</th>
+                <th>Buyer Phone</th>
+                <th>Buyer TIN</th>
+                <th>Parts Distributed</th>
+                <th>Total Quantity</th>
+                <th>Grand Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dist of distribute | filter:filter">
+                <td><span class="label label-default">{{dist.date | date : 'yyyy/MM/dd'}}</span></td>
+                <td>{{dist.buyerName}}</td>
+                <td>{{dist.buyerPhoneNumber}}</td>
+                <td>{{dist.buyerTinNumber}}</td>
+                <td>{{dist.parts.length}}</td>
+                <td>{{dist.quantity}}</td>
+                <td>{{dist.grandTotal | number : '1.2-2'}} ETB</td>
+              <td>
+                <a class="btn btn-info" data-toggle="tooltip" (click)="btn_invoiceClick(dist)"  data-original-title="Print Invoice"><i class="fa fa-file-text-o"></i></a> <a class="btn btn-warning" data-toggle="tooltip" (click)="btn_showDistInfoClick(dist)"  data-original-title="View"><i class="fa fa-eye"></i></a> 
+                <!-- <a class="btn btn-primary" data-toggle="tooltip" (click)="btn_editSellClick(sell)"  data-original-title="Edit"><i class="fa fa-pencil"></i></a> <a class="btn btn-danger" data-toggle="tooltip"  data-original-title="Delete"><i class="fa fa-trash-o"></i></a> -->
+              </td>
+              
+            </tbody>
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col -->
+  </div>
+
+  
+
+</section>
+
+<div class="modal modal-success fade" id="modal-view">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Parts in Stock Detail</h4>
+        </div>
+         
+        <div class="modal-body">
+          <div class="col-sm-12">
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                      <td>Buyer Name :</td>
+                      <td><span class="label label-default">{{selected?.buyerName}}</span></td>
+                      <td>Phone Number :</td>
+                      <td><span class="label label-default">{{selected?.buyerPhoneNumber}}</span></td>
+                      <td>TIN Number : </td>
+                      <td><span class="label label-default">{{selected?.buyerTinNumber}}</span></td>
+                  </tr>
+                  <tr *ngFor= "let part of imported_parts">
+                      <td>Part Number: </td>
+                      <td>{{part?.partNumber}}</td>
+                      <td>Stamp: </td>
+                      <td>{{part?.stamp}}</td>
+                      <td>Quantity: </td>
+                      <td>{{part?.quantity}}</td>
+                  </tr>
+                  <tr>
+                      <td>Total Quantity : </td>
+                      <td><span class="label label-primary">{{selected?.quantity}}</span></td>
+                      <td>Sub-Total : </td>
+                      <td><span class="label label-primary">{{selected?.subTotal | number : '1.2-2'}}</span></td>
+                      <td>Grand Total : </td>
+                      <td><span class="label label-primary">{{selected?.grandTotal | number : '1.2-2'}}</span></td>
+                  </tr>
+                </tbody>
+              </table>  
+             
+          </div>  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <!-- Edit Modal -->
+ <!-- <div class="modal modal-info fade" id="modal-edit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit table-user-information</h4>
+      </div>
+      <form [formGroup]="myForm" (ngSubmit)="saveUpdates()" novalidate>
+        <input type="hidden" formControlName="id"/>
+        
+        <div class="modal-body">
+          <div class="col-sm-12">
+            <table>
+                <tbody>
+
+                  <tr>
+                      <td>Buyer Name</td>
+                      <td>
+                        <input class="form-control" formControlName="buyerName" type="text"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Phone Number</td>
+                      <td>
+                        <input class="form-control" formControlName="buyerPhoneNumber" type="text"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>TIN Number</td>
+                      <td>
+                        <input class="form-control" formControlName="buyerTinNumber"  type="text"/>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Person In Charge</td>
+                      <td>
+                        <input class="form-control" formControlName="personInCharge"  type="text"/>
+                      </td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-outline">Save changes</button>
+        </div>
+    </form> 
+</div>
+</div>
+</div> -->
+
+<!-- Delete Modal -->
+<!-- <div class="modal modal-danger fade" id="modal-delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Delete Part</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure to delete this record?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+          <button (click)="deletePart()" type="button" class="btn btn-outline">Delete</button>
+        </div>
+      </div>
+    
+    </div>
+    
+  </div> -->
+
+
+  <!--Print Section Modal-->
+<div class="modal modal-info fade" id="modal-invoice">
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Distribute Invoice</h4>
+      </div>
+    <div class="modal-body">
+      <div id="printSectionId" class="md-dialog"> 
+        <div class="md-dialog-content" style="min-width:600px;"> 
+          <div class="md-content" flex="" layout-padding=""> 
+            <div class="invoice-box">   
+              <table cellpadding="0" cellspacing="0">  
+              <tr class="top">  
+                <td colspan="2">  
+                  <table>  
+                    <tr>  
+                      <td class="title">  
+                      <img src="../../assets/images/favicon.ico" style="width:100%; max-width:80px;">  
+                      </td>  
+                      <td>  
+                        Invoice Number: {{ selected?.date | date : 'MMyydd' + selected?.buyerTinNumber }} <br>  
+                        Date : {{selected?.date | date : 'yyyy/MM/dd'}} <br>  
+                      </td>  
+                    </tr>  
+                  </table>  
+                </td>  
+              </tr>  
+              <tr class="information">  
+                <td colspan="2">  
+                  <table>  
+                    <tr>  
+                      <td>  
+                        Yoseph Koufalis Fuel Injection Pump<br>  
+                        And Nozzle Operation<br>  
+                        Gofa Gabriel, Addis Ababa  
+                      </td>  
+                      <td>  
+                        <strong>Bill To :</strong> {{selected?.buyerName}}<br>  
+                        <strong>TIN:</strong> {{selected?.buyerTinNumber}}<br>  
+                      </td>  
+                    </tr>  
+                  </table>  
+                </td>  
+              </tr>  
+              <!-- <tr class="heading">  
+                <td>  
+                  Payment Method  
+                </td>  
+                <td>  
+                  Cash  
+                </td>  
+              </tr>  
+              <tr class="details">  
+                <td>  
+                  Check  
+                </td>  
+                <td>  
+                  1000  
+                </td>  
+              </tr>   -->
+              <tr class="heading">  
+                <td>  
+                  Part Number  
+                </td> 
+                <td>
+                  Stamp
+                </td>
+                <td>  
+                    Unit Price  
+                  </td> 
+                <td>
+                  Quantity
+                </td> 
+                <td>
+                  Price
+                </td>
+              </tr>  
+              <tr *ngFor= "let part of imported_parts" class="item">  
+                <td>  
+                  {{part?.partNumber}}  
+                </td>
+                <td>
+                  {{part?.stamp}}
+                </td>  
+                <td>  
+                  {{part?.price / part?.quantity | number : '1.2-2'}}  
+                </td> 
+                <td>
+                  {{part?.quantity}}
+                </td>
+                <td>
+                  {{part?.price | number : '1.2-2'}}
+                </td>
+              </tr>  
+              <!-- <tr class="item">  
+                <td>  
+                Hosting  
+                </td>  
+                <td>
+                  3
+                </td>
+                <td>  
+                75  
+                </td>  
+              </tr>  
+              <tr class="item last">  
+                <td>  
+                Domain name  
+                </td> 
+                <td>
+                  1
+                </td> 
+                <td>  
+                10  
+                </td>  
+              </tr>   -->
+              <tr class="total">  
+                <td></td> 
+                <td></td> 
+                <td></td>
+                <td>Sub Total:</td>
+                <td>  
+                <strong>{{selected?.subTotal | number : '1.2-2'}}</strong>
+                </td>  
+              </tr> 
+              <tr class="total">  
+                  <td></td>  
+                  <td></td>
+                  <td></td>
+                  <td>Tax:</td>
+                  <td>  
+                  <strong>15 %</strong>
+                  </td>  
+                </tr>  
+              <tr class="total">  
+                  <td></td>  
+                  <td></td>
+                  <td></td>
+                  <td>Grand Total:</td>
+                  <td>  
+                  <strong>{{selected?.grandTotal | number : '1.2-2'}}</strong>
+                  </td>  
+                </tr>  
+              </table>  
+            </div>   
+          </div> 
+        </div> 
+      </div>
+    </div> 
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+      <button (click)="print(printSectionId)" type="button" class="btn btn-outline">Print</button>
+    </div> 
+  </div>
+</div>   
+</div>
