@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@ang
 import { Import } from "../models/import";
 import { PartsService } from "../services/parts.service";
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-import',
@@ -14,7 +15,7 @@ export class AddImportComponent implements OnInit {
   public myForm : FormGroup;
   
 
-  constructor(private _fb : FormBuilder, private _partService : PartsService, private _router : Router) { }
+  constructor(private _toast : ToastrService ,private _fb : FormBuilder, private _partService : PartsService, private _router : Router) { }
 
   ngOnInit() {
     // we will initialize our form here
@@ -77,11 +78,13 @@ save(model) {
   this._partService.addImport(model.value)
   .subscribe(
     res =>{
+      this._toast.success('Added', 'Items added successfully')
       console.log("Import Added.");
       this._router.navigate(['/import']);
     },
     err =>{
       console.log(err);
+      this._toast.error(err, 'Error')
     }
 
   )

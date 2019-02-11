@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Customer } from '../models/customer';
 import { RepairService } from '../repair.service';
 import { Repair } from '../models/repair';
+import { ToastrService } from 'ngx-toastr';
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 declare var  jquery: any; 
@@ -45,13 +46,16 @@ export class CustomerMainComponent implements OnInit {
   personInCharge: FormControl; 
   date: FormControl;
 
-  constructor(private _clientService: ClientService, private _router: Router, private _repairService: RepairService) { }
+  constructor(private _toast : ToastrService, private _clientService: ClientService, private _router: Router, private _repairService: RepairService) { 
+    
+  }
   ngOnInit() {
     this.createControls(); 
     this.createEditForm();
     this.createRepairControl()
     this.createRepairForm()
     this.getCustomers();
+    
       
   }
   getCustomers(){
@@ -132,6 +136,7 @@ export class CustomerMainComponent implements OnInit {
   deleteCustomer(){
     this._clientService.deleteCustomer(this.selectedClient)
     .subscribe(result => {
+      this._toast.error('Delete', "Successfully Deleted");
       console.log("successfully deleted!");
       let selectedIndex = this.clients.indexOf(this.selectedClient);
       console.log("selected index: " + selectedIndex);
@@ -155,6 +160,7 @@ export class CustomerMainComponent implements OnInit {
       console.log(data);
       this._clientService.updateClient(data)
       .subscribe(result => {
+        this._toast.success('Updated', "Customer Info Updated");
         console.log(result);
         $("#modal-edit").modal('hide');
       });
@@ -225,13 +231,18 @@ repairAdd(){
     .subscribe(
       res => {
         console.log(res)
-        // this._router.navigate(['/repair'])
+        this._toast.success("Repair added successfully", "Repair");
+        this._router.navigate(['/repair'])
         $("#modal-add-repair").modal('hide');
       },
-      err => console.log(err)
+      err => {
+        this._toast.error(err)
+        console.log(err)
+      }
     )
   }
   else{
+    this._toast.error("Form is Invalid", "Error")
     console.log("FROM IS INVALID");
   }
   }

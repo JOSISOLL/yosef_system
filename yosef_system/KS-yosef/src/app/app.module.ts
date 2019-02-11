@@ -61,6 +61,8 @@ import { DistributeComponent } from './distribute/distribute.component';
 import { ImportedPartsComponent } from './imported-parts/imported-parts.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ToastrModule } from 'ngx-toastr'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,12 +112,18 @@ import { CheckoutComponent } from './checkout/checkout.component';
     AppRoutingModule,
     HttpClientModule, 
     HttpModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
     StoreModule.forRoot(reducers,
     ),
     AllEffects,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     AuthService,

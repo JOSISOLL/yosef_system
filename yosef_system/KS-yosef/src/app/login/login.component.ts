@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import * as moment from "moment";
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginUserData = {}
 
   constructor(private _auth: AuthService,
-    private _router: Router) { }
+    private _router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -26,13 +27,19 @@ export class LoginComponent implements OnInit {
 
         localStorage.setItem('id_token', res.idToken)
         localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()))
-        // localStorage.setItem('token', res.token)
+        this.toastr.success('Success', "Logged In Successfully");
         this._router.navigate(['/dashboard'])
+			
+        
       },
-      err => console.log(err)
+      err => {
+        console.log(err)
+        this.toastr.error('Failed', "Invalid Credentials");
+      }
 
     )
   }
+  
 
   // logout(){
   //   localStorage.removeItem('id_token')

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Repair } from '../models/repair';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-repair',
@@ -24,7 +25,7 @@ export class AddRepairComponent implements OnInit {
   date: FormControl;
 
   clients = []
-  constructor(private _repairService: RepairService, private _clientService: ClientService, private _router: Router) { }
+  constructor(private _toast : ToastrService,private _repairService: RepairService, private _clientService: ClientService, private _router: Router) { }
 
   createControls(){
     this.customer = new FormControl('', Validators.required);
@@ -70,6 +71,7 @@ export class AddRepairComponent implements OnInit {
       this._repairService.addRepair(data)
       .subscribe(
         res => {
+          this._toast.success("Repair added successfully", 'Success')
           console.log(res)
           this._router.navigate(['/repair'])
         },
@@ -77,6 +79,7 @@ export class AddRepairComponent implements OnInit {
       )
     }
     else{
+      this._toast.error("Form is Invalid", 'Error')
       console.log("FROM IS INVALID");
     }
   }
