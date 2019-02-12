@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Imported_Parts } from '../models/imported_parts'
 import { FormControl, FormGroup } from '@angular/forms';
 import { CartAction } from '../store/actions/cart.actions';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $:any;
 
@@ -31,7 +32,7 @@ export class ImportedPartsComponent implements OnInit {
   quantity : FormControl;
   remark : FormControl;
   local_cost : FormControl;
-  constructor(private _partService : PartsService, private _router : Router, private _cartStore : CartAction) { }
+  constructor(private _toast : ToastrService, private _partService : PartsService, private _router : Router, private _cartStore : CartAction) { }
 
   ngOnInit() {
     this.createControls();
@@ -110,6 +111,7 @@ export class ImportedPartsComponent implements OnInit {
         this.selectedPart.remark = data.remark
         this.selectedPart.description = data.description
         this.selectedPart.local_cost = data.local_cost
+        this._toast.info("Update Successfull", "Updated")
         $('#modal-edit').modal('hide')
       });      
     }
@@ -125,11 +127,14 @@ export class ImportedPartsComponent implements OnInit {
     if (this.addQuantity){
       if(this.addQuantity > this.selectedPart.quantity){
         this.available = false;
+        this._toast.error("Not Enough Quantity Available", "Error")
+        this.addQuantity = null
       } else {
         this.available = true;
         this._cartStore.addToCart(this.selectedPart, this.addQuantity || 1)
         this.selectedPart.quantity = Number(this.selectedPart.quantity) - Number(this.addQuantity)
         this.addQuantity = null
+        this._toast.info("Item Added to Cart", "Added")
         $('#modal-addToCart').modal('hide');
       }
     }

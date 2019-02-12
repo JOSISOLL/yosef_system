@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Parts } from '../models/parts';
 import { CartAction } from "../store/actions/cart.actions"
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 declare var  jquery: any; 
 declare var $:any;
@@ -33,11 +34,7 @@ export class PartsStockComponent implements OnInit {
   shelfNumber : FormControl;
   purchaseDate : FormControl;
 
-
-  constructor(private _partsService : PartsService, private _router : Router, private _cartStore : CartAction) {
-    
-   }
-
+  constructor(private _toast : ToastrService, private _partsService : PartsService, private _router : Router, private _cartStore : CartAction) {}
   ngOnInit() {
     this.createControls(); 
     this.createEditForm(); 
@@ -46,12 +43,10 @@ export class PartsStockComponent implements OnInit {
   getStock(){
     this._partsService.getStock()
     .subscribe(
-      
       res => {
         this.parts = res;
         console.log(this.parts)
       },
-
       err => {
         if (err instanceof HttpErrorResponse){
           if (err.status === 401){
@@ -61,17 +56,13 @@ export class PartsStockComponent implements OnInit {
       }
     )
   }
-  
   btn_showPartInfoClick(part: Parts){
     console.log("show repair button clicked...");
     this.selectedPart =part;
-    // console.log(this.selectedPart)
     $("#modal-view").modal('show'); 
-    
   }
   btn_editPartClick(part: any){
     this.selectedPart = part;
-    // console.log(this.selectedPart) 
     this.myForm.setValue({
       id: part._id,
       itemPId : part.itemPId,
@@ -120,7 +111,6 @@ export class PartsStockComponent implements OnInit {
     if(this.myForm.valid){
       var data = <Parts> this.myForm.value; 
       console.log('form data..');
-      // console.log(data);
       this._partsService.updateStock(data)
       .subscribe(res =>{
         this.selectedPart.partNumber = data.partNumber;
@@ -147,23 +137,22 @@ export class PartsStockComponent implements OnInit {
     if(this.addQuantity){
       if(this.addQuantity > this.selectedPart.quantity){
         this.available = false;
+        this._toast.warning('Quantity not Available', 'Warning')
+        this.addQuantity = null
       } 
       else{
         this.available = true;
         this._cartStore.addToCart(this.selectedPart, this.addQuantity || 1)
         this.selectedPart.quantity = this.selectedPart.quantity - this.addQuantity
-        // console.log(this.selectedPart)
+        this._toast.info("Part Added to Cart", "Added!")
         $('#modal-addToCart').modal('hide');
+        this.addQuantity = null
       }
-    }
-    // console.log(this.selectedPart)
-
-    // console.log(this.selectedPart)
+    }  
   }
   btn_deletePartClick(part: Parts){
     this.selectedPart = part;
     console.log("delete part clicked...");
-    // $("#modal-delete").modal('show');
     $("#modal-delete").modal('show'); 
   }
   deletePart(){
@@ -172,8 +161,7 @@ export class PartsStockComponent implements OnInit {
     .subscribe(res => {
       console.log("Delete Successful!");
       $('#modal-delete').modal('hide');
-      // this._router.navigate(['/parts/stock'])
-      // location.reload()
+      this._toast.error("Delete Successful", "Deleted")
       this.ngOnInit()
     })
   }

@@ -4,6 +4,7 @@ import { Parts } from '../models/parts';
 import { Purchase } from '../models/purchase';
 import { HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr'
 
 declare var jquery: any; 
 declare var $ :any;
@@ -18,7 +19,7 @@ export class PartsPurchaseComponent implements OnInit {
   purchases : Purchase[]
   selectedPurchase : Purchase;
   selectedPart : Parts[]
-  constructor(private _partsService: PartsService, private _router:Router) { }
+  constructor(private _toast : ToastrService, private _partsService: PartsService, private _router:Router) { }
 
   ngOnInit() {
     this.getPurchases()
@@ -64,7 +65,7 @@ export class PartsPurchaseComponent implements OnInit {
     .subscribe(res => {
       console.log("Delete Successful!");
       $('#modal-delete').modal('hide');
-      // this._router.navigate(['/parts/purchase'])
+      this._toast.error('Delete Successful', 'Deleted')
       this.ngOnInit()
     });
   }

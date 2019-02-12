@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderNavComponent implements OnInit {
 
-  constructor( private _auth: AuthService, private _router: Router) { }
+  constructor(private _toast : ToastrService, private _auth: AuthService, private _router: Router) { }
 
   ngOnInit() {
   }
@@ -20,6 +21,7 @@ export class HeaderNavComponent implements OnInit {
   logout(){
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
+    this._toast.success("Logout Successful", "Logout")
     this._router.navigate(['/'])
   }
 }

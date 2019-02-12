@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Sell } from '../models/sell';
 import { Parts } from '../models/parts';
+import { ToastrService } from 'ngx-toastr';
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 declare var $:any;
@@ -28,7 +29,7 @@ export class SellPartsListComponent implements OnInit {
   personInCharge : FormControl;
   
 
-  constructor(private _partsService : PartsService, private _router : Router) { }
+  constructor(private _toast : ToastrService, private _partsService : PartsService, private _router : Router) { }
 
   ngOnInit() {
     this.getSoldItems();

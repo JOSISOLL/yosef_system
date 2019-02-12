@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PartsService } from '../services/parts.service';
 import { Import } from '../models/import';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $ : any;
 
@@ -11,7 +12,7 @@ declare var $ : any;
 })
 export class ImportComponent implements OnInit {
 
-  constructor(private _service : PartsService) { }
+  constructor(private _toast : ToastrService, private _service : PartsService) { }
   imports : Import;
   selected : Import;
   ngOnInit() {
@@ -46,7 +47,7 @@ export class ImportComponent implements OnInit {
     this._service.deleteImport(this.selected)
     .subscribe(res =>{
       console.log(res);
-      console.log("Delete successful!");
+      this._toast.error("Delete Successful", "Deleted")
       $('#modal-delete').modal('hide');
       this.ngOnInit()
     });
@@ -66,7 +67,7 @@ export class ImportComponent implements OnInit {
     popupWin.document.write(`
       <html>
         <head>
-          <title>Yosef Koufails Invoice Attachment</title>
+          <title>Yosef Koufails Import Attachment</title>
           <style>
           .md-dialog-actions{display:none}
           .invoice-box{

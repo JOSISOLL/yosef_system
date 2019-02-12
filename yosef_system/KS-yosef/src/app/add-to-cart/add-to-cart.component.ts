@@ -6,6 +6,7 @@ import { Sell } from '../models/sell';
 import { Distribute } from '../models/distribute'
 import { Router } from "@angular/router";
 import { FormGroup, FormControl } from '../../../node_modules/@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 declare var  jquery: any; 
 declare var $:any;
@@ -45,7 +46,7 @@ export class AddToCartComponent implements OnInit {
   }
 
 
-  constructor(private _partService : PartsService, private _cartStore : CartAction, private _router: Router ) { }
+  constructor(private _toast : ToastrService, private _partService : PartsService, private _cartStore : CartAction, private _router: Router ) { }
   
   createControls(){
     
@@ -68,6 +69,7 @@ export class AddToCartComponent implements OnInit {
   
   removeProduct(product) {
     this._cartStore.removeFromCart(product)
+    this._toast.warning("Item Removed from Cart", "Removed!");
   }
   checkout() {
     alert('Sorry! Checkout will be coming soon!')
@@ -94,10 +96,11 @@ export class AddToCartComponent implements OnInit {
         console.log("Parts ready for distribute .....")
         console.log(this.distribute)
 
-        this._partService.distribute(this.distribute) 
+        this._partService.distribute(this.distribute)
         .subscribe(
           res => {
-            alert('Items distributed successfully!');
+            // alert('Items distributed successfully!');
+            this._toast.success("Items Distributed Successfully", "Success")
             this.cart.length = 0;
             this.ngOnDestroy();
             this.ngOnInit();
@@ -106,6 +109,7 @@ export class AddToCartComponent implements OnInit {
           },
           err => {
             console.log(err);
+            this._toast.error(err)
           })
       } 
       else 
@@ -124,7 +128,8 @@ export class AddToCartComponent implements OnInit {
         this._partService.sell(this.sell) 
         .subscribe(
           res => {
-            alert('Items sold successfully!');
+            // alert('Items sold successfully!');
+            this._toast.success("Items Sold Successfully", "Success")
             this.cart.length = 0;
             this.ngOnDestroy();
             this.ngOnInit();
@@ -133,6 +138,7 @@ export class AddToCartComponent implements OnInit {
           },
           err => {
             console.log(err);
+            this._toast.error(err)
           })
       }
     }
@@ -146,11 +152,9 @@ export class AddToCartComponent implements OnInit {
     this.cart.forEach((item, i) => {
       // console.log(item)
       intPrice = parseFloat(item.price)
-      // console.log(intPrice, item.price);
       intQuantity = parseInt(item.quantity)
       totalCost.push(intPrice)
       quantity.push(intQuantity)
-      // console.log(totalCost)
     })
 
     this.totalPrice = totalCost.reduce((acc, item) => {

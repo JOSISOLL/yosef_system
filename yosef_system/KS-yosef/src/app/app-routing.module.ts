@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+// import { DashboardComponent } from './dashboard/dashboard.component';
+// import { LoginGuard } from './login.guard';
 import { AuthGuard } from './auth.guard';
-import { LoginGuard } from './login.guard';
 import { NewCustomerComponent } from './new-customer/new-customer.component';
 import {NewrepairComponent} from './newrepair/newrepair.component';
 import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
@@ -34,12 +34,13 @@ import { CheckoutComponent } from './checkout/checkout.component';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardMainComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
     component: LoginComponent
-    // canActivate: [LoginGuard]
+    
   },
   {
     path : 'import',
@@ -85,11 +86,11 @@ const routes: Routes = [
     component: CustomerMainComponent,
     canActivate: [AuthGuard]
   }, 
-  {
-    path:'estimate', 
-    component: EstimateComponent ,
-    canActivate: [AuthGuard]
-  }, 
+  // {
+  //   path:'estimate', 
+  //   component: EstimateComponent ,
+  //   canActivate: [AuthGuard]
+  // }, 
   {
     path:'settings/car', 
     component: SettingsCarComponent ,

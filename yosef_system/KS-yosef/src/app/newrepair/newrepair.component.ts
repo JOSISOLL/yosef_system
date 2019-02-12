@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Repair } from '../models/repair';
 import { Checkout } from '../models/checkout';
+import { ToastrService } from 'ngx-toastr';
 import { ReactiveFormsModule, FormsModule, FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 // declare var  jquery: any; 
@@ -53,7 +54,7 @@ export class NewrepairComponent implements OnInit {
   checkoutDate : string
 
 
-  constructor(private _historyService: HistoryService, private _router: Router, private modalService: NgbModal) { }
+  constructor(private _toast : ToastrService, private _historyService: HistoryService, private _router: Router) { }
 
   ngOnInit() {
     this.createControls(); 
@@ -146,6 +147,7 @@ export class NewrepairComponent implements OnInit {
         this.selectedRepair.remark = data.remark; 
         this.selectedRepair.personInCharge = data.personInCharge; 
         this.selectedRepair.date = data.date; 
+        this._toast.info('Repair updated successfully','Updated')
         $('#modal-edit').modal('hide'); 
       });
     }
@@ -155,6 +157,7 @@ export class NewrepairComponent implements OnInit {
     .subscribe(res => {
       console.log("successfully deleted!");
       $('#modal-delete').modal('hide');
+      this._toast.error('Delete Successful','Deleted')
       this.getRepair();
     });
   }
@@ -178,6 +181,7 @@ addChangedParts(){
     else {
         this.invalid = false;
         console.log("Add changed parts invalid"); 
+        this._toast.error("Invalid Format", 'Error')
     }
   }
   addPersonInCharge(){
@@ -201,6 +205,7 @@ addChangedParts(){
     this._historyService.checkoutRepair(this.checkout)
     .subscribe(res =>{
       console.log("Repair checked out successfully");
+      this._toast.success("Successful Checkout", "Checkout")
       this.deleteRepair();
       $('#modal-checkout').modal('hide');
     })
