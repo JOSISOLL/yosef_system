@@ -1,18 +1,26 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+=======
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../auth.service";
+import { Router } from "@angular/router";
+>>>>>>> add-excel-import
 import * as moment from "moment";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
+  loginUserData = {};
 
-  loginUserData = {}
+  constructor(private _auth: AuthService, private _router: Router) {}
 
+<<<<<<< HEAD
   constructor(private _auth: AuthService,
     private _router: Router, private toastr: ToastrService) { }
 
@@ -21,10 +29,15 @@ export class LoginComponent implements OnInit {
   loginUser(){
     this._auth.loginUser(this.loginUserData)
     .subscribe(
+=======
+  ngOnInit() {}
+  loginUser() {
+    this._auth.loginUser(this.loginUserData).subscribe(
+>>>>>>> add-excel-import
       res => {
-        console.log(res)
-        const expiresAt = moment().add(res.expiresIn, 'second')
+        const expiresAt = moment().add(res.expiresIn, "second");
 
+<<<<<<< HEAD
         localStorage.setItem('id_token', res.idToken)
         localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()))
         this.toastr.success('Success', "Logged In Successfully");
@@ -38,6 +51,15 @@ export class LoginComponent implements OnInit {
       }
 
     )
+=======
+        localStorage.setItem("id_token", res.idToken);
+        localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()));
+        // localStorage.setItem('token', res.token)
+        this._router.navigate(["/dashboard"]);
+      },
+      err => console.log(err)
+    );
+>>>>>>> add-excel-import
   }
   
 
@@ -57,5 +79,4 @@ export class LoginComponent implements OnInit {
   //   const expiresAt = JSON.parse(expiration)
   //   return moment(expiresAt)
   // }
-
 }

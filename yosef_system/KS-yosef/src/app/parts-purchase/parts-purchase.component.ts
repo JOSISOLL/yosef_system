@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { PartsService } from '../services/parts.service';
 import { Parts } from '../models/parts';
@@ -5,60 +6,74 @@ import { Purchase } from '../models/purchase';
 import { HttpErrorResponse} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr'
+=======
+import { Component, OnInit } from "@angular/core";
+import { PartsService } from "../services/parts.service";
+import { Parts } from "../models/parts";
+import { Purchase } from "../models/purchase";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Router } from "@angular/router";
+>>>>>>> add-excel-import
 
-declare var jquery: any; 
-declare var $ :any;
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+
+declare var jquery: any;
+declare var $: any;
 
 @Component({
-  selector: 'app-parts-purchase',
-  templateUrl: './parts-purchase.component.html',
-  styleUrls: ['./parts-purchase.component.css']
+  selector: "app-parts-purchase",
+  templateUrl: "./parts-purchase.component.html",
+  styleUrls: ["./parts-purchase.component.css"]
 })
 export class PartsPurchaseComponent implements OnInit {
+<<<<<<< HEAD
 
   purchases : Purchase[]
   selectedPurchase : Purchase;
   selectedPart : Parts[]
   constructor(private _toast : ToastrService, private _partsService: PartsService, private _router:Router) { }
+=======
+  purchases: Purchase[];
+  selectedPurchase: Purchase;
+  selectedPart: Parts[];
+  constructor(
+    private _partsService: PartsService,
+    private _router: Router,
+    private _modalService: NgbModal
+  ) {}
+>>>>>>> add-excel-import
 
   ngOnInit() {
-    this.getPurchases()
+    this.getPurchases();
   }
 
-  getPurchases(){
-    this._partsService.getPurchase()
-    .subscribe(
-      res => this.purchases = res,
+  getPurchases() {
+    this._partsService.getPurchase().subscribe(
+      res => (this.purchases = res),
       err => {
-        if (err instanceof HttpErrorResponse){
-          if (err.status === 401){
-            this._router.navigate(['/login']);
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this._router.navigate(["/login"]);
           }
         }
       }
-    )
+    );
   }
 
-  setViewContent(data : Purchase){
+  setViewContent(data: Purchase) {
     this.selectedPurchase = data;
     this.selectedPart = this.selectedPurchase.parts;
-    console.log("View purchase clicked");
-    console.log(this.selectedPurchase);
-    $("#modal-view").modal('show');
-    
+    $("#modal-view").modal("show");
   }
   editPurchase(data: Purchase) {
     this.selectedPurchase = data;
-    console.log("Edit purchase clicked");
-    console.log(this.selectedPurchase);
   }
-  btn_deletePurchaseClick(purchase: Purchase){
+  btn_deletePurchaseClick(purchase: Purchase) {
     this.selectedPurchase = purchase;
-    console.log("delete part clicked...");
-    console.log(this.selectedPurchase);
-    $("#modal-delete").modal('show');
-    // $("#modal-delete").modal('show'); 
+    $("#modal-delete").modal("show");
+    // $("#modal-delete").modal('show');
   }
+<<<<<<< HEAD
   deletePart(){
     console.log("I'm about to delete " + this.selectedPurchase);
     this._partsService.deletePurchase(this.selectedPurchase)
@@ -67,19 +82,25 @@ export class PartsPurchaseComponent implements OnInit {
       $('#modal-delete').modal('hide');
       this._toast.error('Delete Successful', 'Deleted')
       this.ngOnInit()
+=======
+  deletePart() {
+    this._partsService.deletePurchase(this.selectedPurchase).subscribe(res => {
+      $("#modal-delete").modal("hide");
+      // this._router.navigate(['/parts/purchase'])
+      this.ngOnInit();
+>>>>>>> add-excel-import
     });
   }
-  btn_invoiceClick(data : Purchase){
+  btn_invoiceClick(data: Purchase) {
     this.selectedPurchase = data;
     this.selectedPart = data.parts;
-    console.log(this.selectedPurchase);
-    $("#modal-invoice").modal('show');
+    $("#modal-invoice").modal("show");
   }
 
   print(): void {
     let printContents, popupWin;
-    printContents = document.getElementById('printSectionId').innerHTML;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    printContents = document.getElementById("printSectionId").innerHTML;
+    popupWin = window.open("", "_blank", "top=0,left=0,height=100%,width=auto");
     popupWin.document.open();
     popupWin.document.write(`
       <html>
@@ -153,9 +174,12 @@ export class PartsPurchaseComponent implements OnInit {
       <footer class="main-footer">
         <strong>Copyright &copy; 2018-2020 ቀላል TECHNOLOGIES.</strong> All rights reserved.
       </footer>
-    </html>`
-    );
+    </html>`);
     popupWin.document.close();
-}
-  
+  }
+
+  open() {
+    console.log("ATTEMPTING TO SHOW MODAL");
+    $("#modal-import").modal("show");
+  }
 }

@@ -1,16 +1,23 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { PartsService } from '../services/parts.service';
 import { Import } from '../models/import';
 import { ToastrService } from 'ngx-toastr';
+=======
+import { Component, OnInit } from "@angular/core";
+import { PartsService } from "../services/parts.service";
+import { Import } from "../models/import";
+>>>>>>> add-excel-import
 
-declare var $ : any;
+declare var $: any;
 
 @Component({
-  selector: 'app-import',
-  templateUrl: './import.component.html',
-  styleUrls: ['./import.component.css']
+  selector: "app-import",
+  templateUrl: "./import.component.html",
+  styleUrls: ["./import.component.css"]
 })
 export class ImportComponent implements OnInit {
+<<<<<<< HEAD
 
   constructor(private _toast : ToastrService, private _service : PartsService) { }
   imports : Import;
@@ -18,30 +25,37 @@ export class ImportComponent implements OnInit {
   ngOnInit() {
     this.getImports()
     
+=======
+  constructor(private _service: PartsService) {}
+  imports: Import;
+  selected: Import;
+  ngOnInit() {
+    this.getImports();
+>>>>>>> add-excel-import
   }
-  getImports(){
-    this._service.getImport()
-    .subscribe(
-      res =>{
+  getImports() {
+    this._service.getImport().subscribe(
+      res => {
         this.imports = res;
+<<<<<<< HEAD
         console.log(this.imports);
+=======
+>>>>>>> add-excel-import
       },
-      err =>{
-        console.log(err)
+      err => {
+        console.log(err);
       }
-    )
+    );
   }
-  setViewContent(data : Import){
+  setViewContent(data: Import) {
     this.selected = data;
-    console.log("view imports clicked...");
-    $("#modal-view").modal('show');
+    $("#modal-view").modal("show");
   }
-  btn_deleteImportClick(data : Import){
+  btn_deleteImportClick(data: Import) {
     this.selected = data;
-    console.log("Delete import clicked...")
-    console.log(this.selected);
-    $("#modal-delete").modal('show');
+    $("#modal-delete").modal("show");
   }
+<<<<<<< HEAD
   deleteImport(){
     console.log(this.selected);
     this._service.deleteImport(this.selected)
@@ -50,19 +64,24 @@ export class ImportComponent implements OnInit {
       this._toast.error("Delete Successful", "Deleted")
       $('#modal-delete').modal('hide');
       this.ngOnInit()
+=======
+  deleteImport() {
+    this._service.deleteImport(this.selected).subscribe(res => {
+      $("#modal-delete").modal("hide");
+      this.ngOnInit();
+>>>>>>> add-excel-import
     });
   }
-  
-  btn_invoiceClick(data : Import){
-      this.selected = data;
-      console.log("view imports clicked...");
-      $("#modal-invoice").modal('show');
-    }
+
+  btn_invoiceClick(data: Import) {
+    this.selected = data;
+    $("#modal-invoice").modal("show");
+  }
 
   print(): void {
     let printContents, popupWin;
-    printContents = document.getElementById('printSectionId').innerHTML;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    printContents = document.getElementById("printSectionId").innerHTML;
+    popupWin = window.open("", "_blank", "top=0,left=0,height=100%,width=auto");
     popupWin.document.open();
     popupWin.document.write(`
       <html>
@@ -136,9 +155,7 @@ export class ImportComponent implements OnInit {
       <footer class="main-footer">
         <strong>Copyright &copy; 2018-2020 ቀላል TECHNOLOGIES.</strong> All rights reserved.
       </footer>
-    </html>`
-    );
+    </html>`);
     popupWin.document.close();
-}
-
+  }
 }

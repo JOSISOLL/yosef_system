@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit} from '@angular/core';
 import { HistoryService } from '../history.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -14,13 +15,23 @@ import { ValueTransformer } from '@angular/compiler/src/util';
 
 
 declare var _ : any;
+=======
+import { Component, OnInit } from "@angular/core";
+import { HistoryService } from "../history.service";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { SuplierService } from "../services/suplier.service";
+import { PartsService } from "../services/parts.service";
+import { ClientService } from "../client.service";
+>>>>>>> add-excel-import
 
 @Component({
-  selector: 'app-dashboard-main',
-  templateUrl: './dashboard-main.component.html',
-  styleUrls: ['./dashboard-main.component.css']
+  selector: "app-dashboard-main",
+  templateUrl: "./dashboard-main.component.html",
+  styleUrls: ["./dashboard-main.component.css"]
 })
 export class DashboardMainComponent implements OnInit {
+<<<<<<< HEAD
   chart = []
   repairs  = []
   checkouts : any = []
@@ -33,6 +44,20 @@ export class DashboardMainComponent implements OnInit {
   clients : number
   supliers : number
   constructor(private toastr : ToastrService, private _historyService: HistoryService, private _router : Router,private _partsService : PartsService, private _clientService : ClientService, private _suplerService : SuplierService) { }
+=======
+  repairs = [];
+  carsInRepair: number;
+  partsInStock: number;
+  clients: number;
+  supliers: number;
+  constructor(
+    private _historyService: HistoryService,
+    private _router: Router,
+    private _partsService: PartsService,
+    private _clientService: ClientService,
+    private _suplerService: SuplierService
+  ) {}
+>>>>>>> add-excel-import
 
   ngOnInit() {
     
@@ -40,6 +65,7 @@ export class DashboardMainComponent implements OnInit {
     this.getCheckout();
     this.getStock();
     this.getCustomers();
+<<<<<<< HEAD
     this.getSupliers();  
   }
   getRepair(){
@@ -88,19 +114,23 @@ export class DashboardMainComponent implements OnInit {
       }]
     });      
     chart.render();
+=======
+    this.getSupliers();
+>>>>>>> add-excel-import
   }
-  getSupliers(){
+  getSupliers() {
     this._suplerService.getSupliers().subscribe(
-      res => this.supliers = res.length, 
-        err => {
-        if (err instanceof HttpErrorResponse){
-          if (err.status === 401){
-            this._router.navigate(['/login']);
+      res => (this.supliers = res.length),
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this._router.navigate(["/login"]);
           }
         }
       }
-    )
+    );
   }
+<<<<<<< HEAD
   getCustomers(){
     this._clientService.getClients()
       .subscribe(
@@ -113,26 +143,55 @@ export class DashboardMainComponent implements OnInit {
               this._router.navigate(['/login'])
 
             }
+=======
+  getCustomers() {
+    this._clientService.getClients().subscribe(
+      res => {
+        this.clients = res.length;
+      },
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this._router.navigate(["/login"]);
+>>>>>>> add-excel-import
           }
-      })
+        }
+      }
+    );
   }
-  getStock(){
-    this._partsService.getStock()
-    .subscribe(
-      
+  getStock() {
+    this._partsService.getStock().subscribe(
       res => {
         this.partsInStock = res.length;
       },
 
       err => {
-        if (err instanceof HttpErrorResponse){
-          if (err.status === 401){
-            this._router.navigate(['/login']);
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this._router.navigate(["/login"]);
           }
         }
       }
-    )
+    );
   }
+<<<<<<< HEAD
   
 
+=======
+  getRepair() {
+    this._historyService.getRepairs().subscribe(
+      res => {
+        this.repairs = res;
+        this.carsInRepair = res.length;
+      },
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this._router.navigate(["/login"]);
+          }
+        }
+      }
+    );
+  }
+>>>>>>> add-excel-import
 }
